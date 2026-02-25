@@ -184,6 +184,23 @@ body {
   display: none;
 }
 
+/* Horizontal Scroll Indicator Fade */
+.scroll-fade-right {
+  position: relative;
+}
+
+.scroll-fade-right::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  background: linear-gradient(to right, transparent, rgba(5, 5, 5, 0.8));
+  pointer-events: none;
+  z-index: 10;
+}
+
 .no-scrollbar {
   -ms-overflow-style: none;
   /* IE and Edge */

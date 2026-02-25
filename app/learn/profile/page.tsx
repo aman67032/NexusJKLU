@@ -49,7 +49,7 @@ export default function ProfilePage() {
 
                         {/* Sub Navigation */}
                         <div className="mb-0 z-20 relative">
-                            <div className="overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide no-scrollbar">
+                            <div className="overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide no-scrollbar scroll-fade-right">
                                 <div className="flex items-center gap-2 p-1.5 bg-white/[0.03] border border-white/[0.06] rounded-2xl w-max min-w-full lg:min-w-0 backdrop-blur-md">
                                     {subNav.map((item) => {
                                         const Icon = item.icon;
@@ -99,17 +99,22 @@ export default function ProfilePage() {
                             </form>
                         ) : (
                             <div className="space-y-4">
-                                {[
-                                    { icon: <User className="w-4 h-4" />, label: 'Name', value: profile?.name },
-                                    { icon: <Mail className="w-4 h-4" />, label: 'Email', value: profile?.email },
-                                    { icon: <IdCard className="w-4 h-4" />, label: 'Roll Number', value: profile?.roll_no || 'Not set' },
-                                    { icon: <IdCard className="w-4 h-4" />, label: 'Student ID', value: profile?.student_id || 'Not set' },
-                                ].map(field => (
-                                    <div key={field.label} className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/5">
-                                        <div className="p-2 rounded-lg bg-white/5 text-white/30">{field.icon}</div>
-                                        <div><p className="text-[10px] font-bold uppercase tracking-wider text-white/20">{field.label}</p><p className="font-semibold text-white/70">{field.value}</p></div>
-                                    </div>
-                                ))}
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    {[
+                                        { icon: <User className="w-4 h-4" />, label: 'Name', value: profile?.name },
+                                        { icon: <Mail className="w-4 h-4" />, label: 'Email', value: profile?.email },
+                                        { icon: <IdCard className="w-4 h-4" />, label: 'Roll Number', value: profile?.roll_no || 'Not set' },
+                                        { icon: <IdCard className="w-4 h-4" />, label: 'Student ID', value: profile?.student_id || 'Not set' },
+                                    ].map(field => (
+                                        <div key={field.label} className="flex items-center gap-3 p-3.5 rounded-xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.05] transition-colors">
+                                            <div className="p-2 rounded-lg bg-white/5 text-white/30 shrink-0">{field.icon}</div>
+                                            <div className="min-w-0">
+                                                <p className="text-[9px] font-bold uppercase tracking-wider text-white/20 mb-0.5">{field.label}</p>
+                                                <p className="font-semibold text-white/80 text-sm truncate">{field.value}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
 
                                 {profile?.id_verified && (
                                     <div className="flex items-center gap-2 p-4 rounded-xl bg-green-500/10 border border-green-500/20">

@@ -46,7 +46,7 @@ export default function CodingHourPage() {
 
                     {/* Sub Navigation */}
                     <div className="mb-0 z-20 relative">
-                        <div className="overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide no-scrollbar">
+                        <div className="overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide no-scrollbar scroll-fade-right">
                             <div className="flex items-center gap-2 p-1.5 bg-white/[0.03] border border-white/[0.06] rounded-2xl w-max min-w-full lg:min-w-0 backdrop-blur-md">
                                 {subNav.map((item) => {
                                     const Icon = item.icon;
@@ -83,12 +83,26 @@ export default function CodingHourPage() {
                                                 <Code className="w-6 h-6 text-emerald-400" />
                                             </div>
                                             <div className="min-w-0">
-                                                <h3 className="font-bold text-white group-hover:text-emerald-400 transition-colors truncate">{contest.title || `Challenge #${idx + 1}`}</h3>
-                                                <div className="flex items-center gap-3 text-xs text-white/30">
-                                                    <span className="flex items-center gap-1"><Calendar className="w-3 h-3" />{new Date(contest.date).toLocaleDateString()}</span>
-                                                    {contest.questions && <span className="flex items-center gap-1"><FileText className="w-3 h-3" />{contest.questions.length} questions</span>}
+                                                <h3 className="font-bold text-white group-hover:text-emerald-400 transition-colors truncate sm:whitespace-normal sm:line-clamp-2">{contest.title || `Challenge #${idx + 1}`}</h3>
+                                                <div className="flex items-center gap-3 text-xs text-white/30 mt-1">
+                                                    <span className="flex items-center gap-1.5 shrink-0">
+                                                        <Calendar className="w-3.5 h-3.5" />
+                                                        {(() => {
+                                                            try {
+                                                                const d = new Date(contest.date);
+                                                                if (isNaN(d.getTime())) return 'TBD';
+                                                                return d.toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
+                                                            } catch { return 'TBD'; }
+                                                        })()}
+                                                    </span>
+                                                    {contest.questions && (
+                                                        <span className="flex items-center gap-1.5 border-l border-white/10 pl-3">
+                                                            <FileText className="w-3.5 h-3.5" />
+                                                            {contest.questions.length} Qs
+                                                        </span>
+                                                    )}
                                                 </div>
-                                                {contest.description && <p className="text-xs text-white/20 mt-1 line-clamp-1">{contest.description}</p>}
+                                                {contest.description && <p className="text-[11px] text-white/20 mt-2 line-clamp-1 sm:line-clamp-2">{contest.description}</p>}
                                             </div>
                                         </div>
                                         <ChevronRight className="w-5 h-5 text-white/20 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all shrink-0 ml-4" />

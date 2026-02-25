@@ -54,7 +54,7 @@ export default function LearnPage() {
 
                     {/* Sub Navigation */}
                     <div className="mb-6">
-                        <div className="overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide no-scrollbar">
+                        <div className="overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide no-scrollbar scroll-fade-right">
                             <div className="flex items-center gap-2 p-1.5 bg-white/[0.03] border border-white/[0.06] rounded-2xl w-max min-w-full lg:min-w-0 backdrop-blur-md">
                                 {subNav.map((item) => {
                                     const Icon = item.icon;
@@ -81,14 +81,14 @@ export default function LearnPage() {
                 {/* Quick Links */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
                     {[
-                        { href: '/learn/papers', icon: <FileText className="w-6 h-6" />, label: 'Papers Dashboard', desc: 'Upload & download papers', color: 'from-indigo-500 to-purple-600' },
-                        { href: '/learn/coding-hour', icon: <Code className="w-6 h-6" />, label: 'Coding Hour', desc: 'Daily coding challenges', color: 'from-emerald-500 to-teal-600' },
-                        { href: '/learn/profile', icon: <BookOpen className="w-6 h-6" />, label: 'My Profile', desc: 'Manage your account', color: 'from-amber-500 to-orange-600' },
+                        { href: '/learn/papers', icon: <FileText className="w-5 h-5 sm:w-6 sm:h-6" />, label: 'Papers', desc: 'Exams & Notes', color: 'from-indigo-500 to-purple-600' },
+                        { href: '/learn/coding-hour', icon: <Code className="w-5 h-5 sm:w-6 sm:h-6" />, label: 'Coding', desc: 'Daily Challenges', color: 'from-emerald-500 to-teal-600' },
+                        { href: '/learn/profile', icon: <BookOpen className="w-5 h-5 sm:w-6 sm:h-6" />, label: 'Profile', desc: 'Account Settings', color: 'from-amber-500 to-orange-600' },
                     ].map(link => (
-                        <Link key={link.href} href={link.href} className="group glass-card p-5 flex items-center gap-4 hover:border-white/20 transition-all">
-                            <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${link.color} flex items-center justify-center text-white shrink-0 group-hover:scale-110 transition-transform`}>{link.icon}</div>
-                            <div className="flex-1 min-w-0"><h3 className="font-bold text-white group-hover:text-[var(--secondary)] transition-colors">{link.label}</h3><p className="text-xs text-white/30">{link.desc}</p></div>
-                            <ChevronRight className="w-5 h-5 text-white/20 group-hover:text-white/50 transition-colors" />
+                        <Link key={link.href} href={link.href} className="group glass-card p-4 sm:p-5 flex items-center gap-3 sm:gap-4 hover:border-white/20 transition-all">
+                            <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${link.color} flex items-center justify-center text-white shrink-0 group-hover:scale-110 transition-transform`}>{link.icon}</div>
+                            <div className="flex-1 min-w-0"><h3 className="font-bold text-white text-sm sm:text-base group-hover:text-[var(--secondary)] transition-colors">{link.label}</h3><p className="text-[10px] sm:text-xs text-white/30 truncate">{link.desc}</p></div>
+                            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-white/20 group-hover:text-white/50 transition-colors shrink-0" />
                         </Link>
                     ))}
                 </div>
@@ -130,15 +130,17 @@ export default function LearnPage() {
                 ) : filtered.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {filtered.map((paper, idx) => (
-                            <motion.div key={paper._id || paper.id || idx} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.03 }} className="glass-card p-5 group hover:border-[var(--secondary)]/30 transition-all">
-                                <div className="flex items-start justify-between gap-2 mb-3">
-                                    <h3 className="font-bold text-white text-sm line-clamp-2 group-hover:text-[var(--secondary)] transition-colors flex-1">{paper.title}</h3>
-                                    <span className="px-2 py-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-[10px] font-semibold rounded-full shrink-0">{paper.paper_type}</span>
+                            <motion.div key={paper._id || paper.id || idx} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.03 }} className="glass-card p-4 sm:p-5 group hover:border-[var(--secondary)]/30 transition-all flex flex-col h-full">
+                                <div className="flex items-start justify-between gap-3 mb-2">
+                                    <h3 className="font-bold text-white text-sm line-clamp-2 group-hover:text-[var(--secondary)] transition-colors flex-1 min-w-0 leading-tight">{paper.title}</h3>
+                                    <span className="px-2 py-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-[9px] font-bold rounded-full shrink-0 uppercase">{paper.paper_type}</span>
                                 </div>
-                                {paper.course_code && <p className="text-xs text-[var(--secondary)] font-semibold mb-2">{paper.course_code} {paper.course_name && `- ${paper.course_name}`}</p>}
-                                <div className="flex items-center justify-between pt-3 border-t border-white/5 text-xs text-white/30">
-                                    <span>{paper.year && `Year ${paper.year}`} {paper.semester && `• ${paper.semester}`}</span>
-                                    <span>{paper.uploader_name}</span>
+                                <div className="flex-1">
+                                    {paper.course_code && <p className="text-[11px] text-[var(--secondary)] font-bold mb-1 opacity-80">{paper.course_code}</p>}
+                                </div>
+                                <div className="flex items-center justify-between pt-3 border-t border-white/5 text-[10px] text-white/20 mt-auto">
+                                    <span className="truncate max-w-[100px]">{paper.year && `Year ${paper.year}`} {paper.semester && `• ${paper.semester}`}</span>
+                                    <span className="truncate max-w-[80px] text-right">{paper.uploader_name}</span>
                                 </div>
                             </motion.div>
                         ))}

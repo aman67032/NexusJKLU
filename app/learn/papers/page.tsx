@@ -49,7 +49,10 @@ export default function PapersPage() {
             setPapers(res.data.items || []);
             setTotalPages(res.data.pages || 1);
             setCurrentPage(res.data.page || 1);
-        } catch { } finally {
+        } catch (error) {
+            console.error('Fetch papers error:', error);
+            setPapers([]);
+        } finally {
             setLoading(false);
         }
     };
@@ -113,7 +116,7 @@ export default function PapersPage() {
 
                 {/* Sub Navigation */}
                 <div className="mb-10 z-20 relative">
-                    <div className="overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide no-scrollbar">
+                    <div className="overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide no-scrollbar scroll-fade-right">
                         <div className="flex items-center gap-2 p-1.5 bg-white/[0.03] border border-white/[0.06] rounded-2xl w-max min-w-full lg:min-w-0 backdrop-blur-md">
                             {subNav.map((item) => {
                                 const Icon = item.icon;
@@ -187,21 +190,40 @@ export default function PapersPage() {
                     </select>
                 </div>
 
-                {/* Papers Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                     {papers.map((p, idx) => (
-                        <motion.div key={p._id || p.id || idx} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.03 }} className="glass-card p-5 group hover:border-[var(--secondary)]/30 transition-all">
-                            <div className="flex items-start justify-between gap-2 mb-3">
-                                <h3 className="font-bold text-white text-sm line-clamp-2 group-hover:text-[var(--secondary)] transition-colors flex-1">{p.title}</h3>
-                                <span className="px-2 py-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-[10px] font-semibold rounded-full shrink-0">{p.paper_type}</span>
+                        <motion.div key={p._id || p.id || idx} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.03 }} className="glass-card p-4 sm:p-5 group hover:border-[var(--secondary)]/30 transition-all flex flex-col h-full">
+                            <div className="flex items-start justify-between gap-3 mb-2">
+                                <h3 className="font-bold text-white text-sm sm:text-base line-clamp-2 group-hover:text-[var(--secondary)] transition-colors flex-1 min-w-0 leading-tight">{p.title}</h3>
+                                <span className="px-2 py-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-[9px] sm:text-[10px] font-bold rounded-full shrink-0 uppercase tracking-tight">{p.paper_type}</span>
                             </div>
-                            {p.course_code && <p className="text-xs text-[var(--secondary)] font-semibold mb-1"><Shield className="w-3 h-3 inline mr-1" />{p.course_code} {p.course_name && `- ${p.course_name}`}</p>}
-                            <p className="text-xs text-white/20 flex items-center gap-1 mb-3"><User className="w-3 h-3" />{p.uploader_name} • {p.uploaded_at && new Date(p.uploaded_at).toLocaleDateString()}</p>
-                            <div className="flex items-center justify-between pt-3 border-t border-white/5">
-                                <span className="text-xs text-white/20">{p.year && `Year ${p.year}`}</span>
+
+                            <div className="flex-1">
+                                {p.course_code && (
+                                    <p className="text-xs text-[var(--secondary)] font-bold mb-1.5 flex items-center gap-1.5 opacity-90 group-hover:opacity-100 transition-opacity">
+                                        <Shield className="w-3 h-3 shrink-0" />
+                                        <span className="truncate">{p.course_code} {p.course_name && `- ${p.course_name}`}</span>
+                                    </p>
+                                )}
+                                <div className="flex items-center gap-2 text-[11px] text-white/40 mb-4 font-medium">
+                                    <div className="flex items-center gap-1 shrink-0 bg-white/5 px-2 py-0.5 rounded-md border border-white/5">
+                                        <User className="w-3 h-3 text-white/40" />
+                                        <span className="truncate max-w-[80px] sm:max-w-none">{p.uploader_name || 'Admin'}</span>
+                                    </div>
+                                    <span className="opacity-30">•</span>
+                                    <span className="shrink-0">{p.uploaded_at && new Date(p.uploaded_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</span>
+                                </div>
+                            </div>
+
+                            <div className="flex items-center justify-between pt-3 border-t border-white/5 mt-auto">
+                                <span className="text-[11px] font-bold text-white/40 bg-white/5 px-2 py-0.5 rounded-md">{p.year ? `FY ${p.year}` : 'N/A'}</span>
                                 <div className="flex items-center gap-2">
-                                    <button onClick={() => handlePreview(String(p._id || p.id))} className="p-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-lg hover:shadow-md hover:shadow-blue-500/20 active:scale-95 transition-all" title="Preview"><Eye className="w-4 h-4" /></button>
-                                    <button onClick={() => handleDownload(String(p._id || p.id), p.file_name)} className="p-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg hover:shadow-md hover:shadow-green-500/20 active:scale-95 transition-all" title="Download"><Download className="w-4 h-4" /></button>
+                                    <button onClick={() => handlePreview(String(p._id || p.id))} className="p-2 sm:p-2.5 bg-white/5 border border-white/10 text-white rounded-lg hover:bg-white/10 hover:border-[var(--secondary)]/30 active:scale-90 transition-all group/btn" title="Preview">
+                                        <Eye className="w-4 h-4 text-white/60 group-hover/btn:text-[var(--secondary)]" />
+                                    </button>
+                                    <button onClick={() => handleDownload(String(p._id || p.id), p.file_name)} className="p-2 sm:p-2.5 bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-lg hover:shadow-lg hover:shadow-indigo-500/20 active:scale-90 transition-all" title="Download">
+                                        <Download className="w-4 h-4" />
+                                    </button>
                                 </div>
                             </div>
                         </motion.div>
