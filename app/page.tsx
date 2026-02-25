@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { BookOpen, Building2, MessageSquare, Bus, FileText, PartyPopper, ArrowRight, Sparkles } from 'lucide-react';
+import AnimatedBackground from '@/components/AnimatedBackground';
 
 const modules = [
   {
@@ -84,10 +85,7 @@ export default function Home() {
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Background Effects */}
-      <div className="fixed inset-0 bg-grid pointer-events-none opacity-50" />
-      <div className="glow-orb w-[600px] h-[600px] -top-64 -right-64 bg-[var(--primary)]" style={{ opacity: 0.08 }} />
-      <div className="glow-orb w-[500px] h-[500px] -bottom-48 -left-48 bg-[var(--secondary)]" style={{ opacity: 0.06 }} />
-      <div className="glow-orb w-[400px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[var(--accent)]" style={{ opacity: 0.04 }} />
+      <AnimatedBackground />
 
       {/* Hero */}
       <section className="relative z-10 pt-20 pb-8 md:pt-28 md:pb-12">

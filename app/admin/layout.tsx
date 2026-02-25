@@ -13,12 +13,13 @@ import {
     LogOut,
     Menu,
     X,
-    Shield
+    Shield,
+    Terminal
 } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const ADMIN_ROLES = ['admin', 'council_admin', 'voice_admin', 'learn_admin'];
+const ADMIN_ROLES = ['admin', 'council_admin', 'voice_admin', 'learn_admin', 'coding_ta'];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
     const { user, loading, logout } = useAuth();
@@ -50,6 +51,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         { name: 'Learn (Papers)', href: '/admin/learn/papers', icon: BookOpen, roles: ['admin', 'learn_admin'] },
         { name: 'Council (Events)', href: '/admin/council/events', icon: Calendar, roles: ['admin', 'council_admin'] },
         { name: 'Voice (Complaints)', href: '/admin/voice/complaints', icon: MessageSquare, roles: ['admin', 'voice_admin'] },
+        { name: 'Learn (Coding Hour)', href: '/admin/learn/coding-hour', icon: Terminal, roles: ['admin', 'learn_admin', 'coding_ta'] },
     ];
 
     const authorizedNavigation = navigation.filter(item =>
@@ -77,8 +79,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                             href={item.href}
                             onClick={() => setIsMobileMenuOpen(false)}
                             className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${isActive
-                                    ? 'bg-indigo-500/15 text-indigo-400'
-                                    : 'text-white/60 hover:text-white hover:bg-white/5'
+                                ? 'bg-indigo-500/15 text-indigo-400'
+                                : 'text-white/60 hover:text-white hover:bg-white/5'
                                 }`}
                         >
                             <Icon className={`w-4 h-4 ${isActive ? 'text-indigo-400' : 'text-white/40'}`} />
