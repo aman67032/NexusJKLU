@@ -19,7 +19,11 @@ interface CodeSnippet {
     duration: number;
 }
 
-const MathPhysicsBackground: React.FC = () => {
+interface MathPhysicsBackgroundProps {
+    baseOpacity?: number;
+}
+
+const MathPhysicsBackground: React.FC<MathPhysicsBackgroundProps> = ({ baseOpacity = 0.15 }) => {
     const [mounted, setMounted] = useState(false);
     const [equations, setEquations] = useState<Equation[]>([]);
     const [codeSnippets, setCodeSnippets] = useState<CodeSnippet[]>([]);
@@ -208,7 +212,7 @@ const MathPhysicsBackground: React.FC = () => {
                         scale: 0.8 + Math.random() * 0.4,
                     }}
                     animate={{
-                        opacity: [0, 0.3, 0.3, 0],
+                        opacity: [0, baseOpacity * 2, baseOpacity * 2, 0],
                         y: [100, -100],
                         rotate: [-8 + Math.random() * 16, 8 + Math.random() * 16],
                         scale: [0.8 + Math.random() * 0.4, 1 + Math.random() * 0.2],
@@ -239,7 +243,7 @@ const MathPhysicsBackground: React.FC = () => {
                         rotate: -5,
                     }}
                     animate={{
-                        opacity: [0, 0.4, 0.4, 0],
+                        opacity: [0, baseOpacity * 2.5, baseOpacity * 2.5, 0],
                         x: [0, 50],
                         rotate: [-5, 5],
                     }}
@@ -273,7 +277,7 @@ const MathPhysicsBackground: React.FC = () => {
                         key={`line-${i}`}
                         className="absolute inset-0 w-full h-full"
                         initial={{ opacity: 0 }}
-                        animate={{ opacity: [0, 0.2, 0.2, 0] }}
+                        animate={{ opacity: [0, baseOpacity * 1.5, baseOpacity * 1.5, 0] }}
                         transition={{
                             duration: 8 + Math.random() * 4,
                             delay: Math.random() * 2,
@@ -314,11 +318,11 @@ const MathPhysicsBackground: React.FC = () => {
                             }}
                             initial={{
                                 rotate: -12 + (i % 5) * 6,
-                                opacity: 0.1,
+                                opacity: baseOpacity * 0.5,
                             }}
                             animate={{
                                 rotate: [-12 + (i % 5) * 6, 12 + (i % 5) * 6],
-                                opacity: [0.05, 0.15, 0.05],
+                                opacity: [baseOpacity * 0.25, baseOpacity, baseOpacity * 0.25],
                             }}
                             transition={{
                                 duration: 20 + (i % 3) * 5,
@@ -344,11 +348,11 @@ const MathPhysicsBackground: React.FC = () => {
                         }}
                         initial={{
                             rotate: -15 + i * 8,
-                            opacity: 0.02,
+                            opacity: baseOpacity * 0.1,
                         }}
                         animate={{
                             rotate: [-15 + i * 8, -10 + i * 8],
-                            opacity: [0.01, 0.04, 0.01],
+                            opacity: [baseOpacity * 0.05, baseOpacity * 0.2, baseOpacity * 0.05],
                         }}
                         transition={{
                             duration: 15 + i * 2,

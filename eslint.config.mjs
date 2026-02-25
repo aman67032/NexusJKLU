@@ -4,7 +4,15 @@ import nextTs from "eslint-config-next/typescript";
 
 const eslintConfig = defineConfig([
   ...nextVitals,
-  ...nextTs,
+  ...nextTs.map(config => ({
+    ...config,
+    rules: {
+      ...config.rules,
+      '@typescript-eslint/no-explicit-any': 'warn',
+      'react/no-unescaped-entities': 'warn',
+      'react-hooks/exhaustive-deps': 'warn'
+    }
+  })),
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:

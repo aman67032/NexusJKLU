@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import api from '@/lib/api';
 import { useAuth } from '@/contexts/AuthContext';
-import { MessageSquare, ShieldAlert, FileText, Check, Clock, ShieldCheck } from 'lucide-react';
+import { MessageSquare, ShieldAlert, FileText, Check, Clock, ShieldCheck, Eye, ArrowRightLeft } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
 export default function ReviewComplaints() {
@@ -15,6 +15,9 @@ export default function ReviewComplaints() {
     const [respondingId, setRespondingId] = useState<string | null>(null);
     const [responseText, setResponseText] = useState('');
     const [responseStatus, setResponseStatus] = useState('in_progress');
+
+    const [transferringId, setTransferringId] = useState<string | null>(null);
+    const [transferCategory, setTransferCategory] = useState('');
 
     const fetchComplaints = async () => {
         setLoading(true);
@@ -64,6 +67,32 @@ export default function ReviewComplaints() {
         }
     };
 
+    const handleMarkSeen = async (id: string, currentlySeen: boolean) => {
+        if (currentlySeen) return;
+        try {
+            await api.put(`/voice/admin/complaints/${id}/seen`, {}, { withCredentials: true });
+            fetchComplaints();
+        } catch (error) {
+            toast.error('Failed to mark as seen');
+        }
+    };
+
+    const handleTransfer = async (id: string) => {
+        if (!transferCategory) {
+            toast.error('Please select a category');
+            return;
+        }
+        try {
+            await api.put(`/voice/admin/complaints/${id}/transfer`, { category: transferCategory }, { withCredentials: true });
+            toast.success('Complaint transferred successfully');
+            setTransferringId(null);
+            setTransferCategory('');
+            fetchComplaints();
+        } catch (error) {
+            toast.error('Failed to transfer complaint');
+        }
+    };
+
     if (!user?.roles?.some((r: string) => ['admin', 'voice_admin'].includes(r))) {
         return (
             <div className="flex flex-col items-center justify-center p-8 min-h-screen">
@@ -92,8 +121,8 @@ export default function ReviewComplaints() {
                             key={status}
                             onClick={() => setStatusFilter(status)}
                             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors capitalize whitespace-nowrap ${statusFilter === status
-                                    ? 'bg-white/10 text-white'
-                                    : 'text-white/40 hover:text-white/80 hover:bg-white/5'
+                                ? 'bg-white/10 text-white'
+                                : 'text-white/40 hover:text-white/80 hover:bg-white/5'
                                 }`}
                         >
                             {status.replace('_', ' ')}
@@ -123,14 +152,14 @@ export default function ReviewComplaints() {
                                             <div className="flex items-center gap-3 mb-2">
                                                 <h3 className="text-lg font-bold text-white">{complaint.title}</h3>
                                                 <span className={`px-2.5 py-1 rounded-full text-xs font-medium capitalize border ${complaint.priority === 'high' ? 'bg-red-500/10 text-red-400 border-red-500/20' :
-                                                        complaint.priority === 'medium' ? 'bg-orange-500/10 text-orange-400 border-orange-500/20' :
-                                                            'bg-blue-500/10 text-blue-400 border-blue-500/20'
+                                                    complaint.priority === 'medium' ? 'bg-orange-500/10 text-orange-400 border-orange-500/20' :
+                                                        'bg-blue-500/10 text-blue-400 border-blue-500/20'
                                                     }`}>
                                                     {complaint.priority} Priority
                                                 </span>
                                                 <span className={`px-2.5 py-1 rounded-full text-xs font-medium capitalize border ${complaint.status === 'open' ? 'bg-rose-500/10 text-rose-400 border-rose-500/20' :
-                                                        complaint.status === 'in_progress' ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' :
-                                                            'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+                                                    complaint.status === 'in_progress' ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' :
+                                                        'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
                                                     }`}>
                                                     {complaint.status.replace('_', ' ')}
                                                 </span>
@@ -140,6 +169,7 @@ export default function ReviewComplaints() {
                                                 <span>• <strong>Cat:</strong> {complaint.category}</span>
                                                 <span>• <strong>By:</strong> {complaint.isAnonymous ? 'Anonymous' : complaint.userId?.name || 'Unknown'}</span>
                                                 <span>• {new Date(complaint.createdAt).toLocaleDateString()}</span>
+                                                {complaint.adminSeen && <span className="text-emerald-400 font-medium">• Seen by Admin</span>}
                                             </p>
                                         </div>
                                     </div>
@@ -198,13 +228,56 @@ export default function ReviewComplaints() {
                                             </div>
                                         </div>
                                     )}
+
+                                    {transferringId === complaint._id && (
+                                        <div className="flex flex-col gap-3 mt-4 p-4 border border-indigo-500/20 bg-indigo-500/5 rounded-xl animate-in fade-in zoom-in duration-200">
+                                            <p className="text-sm font-medium text-indigo-300">Transfer Complaint</p>
+                                            <div className="flex flex-col sm:flex-row gap-3 items-center justify-between">
+                                                <select
+                                                    value={transferCategory}
+                                                    onChange={(e) => setTransferCategory(e.target.value)}
+                                                    className="w-full sm:w-auto flex-1 bg-black/50 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500/50"
+                                                >
+                                                    <option value="">Select New Category</option>
+                                                    {['academic', 'infrastructure', 'hostel', 'food', 'transportation', 'administration', 'other']
+                                                        .filter(c => c !== complaint.category)
+                                                        .map(c => <option key={c} value={c}>{c}</option>)
+                                                    }
+                                                </select>
+                                                <div className="flex gap-2 w-full sm:w-auto">
+                                                    <button
+                                                        onClick={() => setTransferringId(null)}
+                                                        className="flex-1 sm:flex-none px-4 py-2 bg-white/5 hover:bg-white/10 text-white/70 text-sm font-medium rounded-lg transition-colors border border-white/10"
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                    <button
+                                                        onClick={() => handleTransfer(complaint._id)}
+                                                        className="flex-1 sm:flex-none px-4 py-2 bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-400 text-sm font-medium rounded-lg transition-colors border border-indigo-500/30"
+                                                    >
+                                                        Transfer
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
 
                                 <div className="shrink-0 flex flex-col gap-2 w-full md:w-auto md:min-w-[160px]">
+                                    {!complaint.adminSeen && (
+                                        <button
+                                            onClick={() => handleMarkSeen(complaint._id, complaint.adminSeen)}
+                                            className="w-full flex items-center justify-center gap-2 py-2.5 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 text-sm font-medium rounded-xl transition-colors border border-blue-500/20"
+                                        >
+                                            <Eye className="w-4 h-4" /> Mark as Seen
+                                        </button>
+                                    )}
+
                                     {['open', 'in_progress'].includes(complaint.status) && respondingId !== complaint._id && (
                                         <button
                                             onClick={() => {
                                                 setRespondingId(complaint._id);
+                                                setTransferringId(null);
                                                 setResponseText(complaint.response || '');
                                                 setResponseStatus(complaint.status === 'open' ? 'in_progress' : complaint.status);
                                             }}
@@ -229,6 +302,19 @@ export default function ReviewComplaints() {
                                             className="w-full flex items-center justify-center gap-2 py-2.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 text-sm font-medium rounded-xl transition-colors border border-emerald-500/20"
                                         >
                                             <Check className="w-4 h-4" /> Mark Resolved
+                                        </button>
+                                    )}
+
+                                    {['open', 'in_progress'].includes(complaint.status) && transferringId !== complaint._id && (
+                                        <button
+                                            onClick={() => {
+                                                setTransferringId(complaint._id);
+                                                setRespondingId(null);
+                                                setTransferCategory('');
+                                            }}
+                                            className="w-full flex items-center justify-center gap-2 py-2.5 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400 text-sm font-medium rounded-xl transition-colors border border-indigo-500/20"
+                                        >
+                                            <ArrowRightLeft className="w-4 h-4" /> Transfer
                                         </button>
                                     )}
                                 </div>

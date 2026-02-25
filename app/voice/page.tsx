@@ -31,10 +31,10 @@ export default function VoicePage() {
     const fetchData = async () => {
         try {
             const res = await api.get('/api/voice/complaints');
-            const data = res.data.complaints || res.data || [];
+            const data = res.data?.items || res.data?.complaints || (Array.isArray(res.data) ? res.data : []);
             setComplaints(data);
             const total = data.length;
-            const pending = data.filter((c: Complaint) => c.status === 'pending').length;
+            const pending = data.filter((c: Complaint) => c.status === 'open').length;
             const in_progress = data.filter((c: Complaint) => c.status === 'in_progress').length;
             const resolved = data.filter((c: Complaint) => c.status === 'resolved').length;
             setStats({ total, pending, in_progress, resolved });
@@ -44,14 +44,14 @@ export default function VoicePage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault(); setSubmitting(true);
         try {
-            await api.post('/api/voice/complaints', form);
+            await api.post('/voice/complaints', form);
             setForm({ title: '', description: '', category: 'general', priority: 'medium', anonymous: false });
             setShowNewComplaint(false); fetchData();
         } catch { } finally { setSubmitting(false); }
     };
 
     const handleUpvote = async (id: string) => {
-        try { await api.post(`/api/voice/complaints/${id}/upvote`); fetchData(); } catch { }
+        try { await api.post(`/voice/complaints/${id}/upvote`); fetchData(); } catch { }
     };
 
     const safeDate = (d?: string) => {
@@ -59,7 +59,7 @@ export default function VoicePage() {
     };
 
     const getStatusStyle = (s: string) => {
-        switch (s) { case 'pending': return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'; case 'in_progress': return 'bg-blue-500/20 text-blue-400 border-blue-500/30'; case 'resolved': return 'bg-green-500/20 text-green-400 border-green-500/30'; case 'rejected': return 'bg-red-500/20 text-red-400 border-red-500/30'; default: return 'bg-white/10 text-white/50 border-white/20'; }
+        switch (s) { case 'open': return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'; case 'in_progress': return 'bg-blue-500/20 text-blue-400 border-blue-500/30'; case 'resolved': return 'bg-green-500/20 text-green-400 border-green-500/30'; case 'rejected': return 'bg-red-500/20 text-red-400 border-red-500/30'; default: return 'bg-white/10 text-white/50 border-white/20'; }
     };
     const getPriorityStyle = (p: string) => {
         switch (p) { case 'high': return 'bg-red-500/20 text-red-400 border-red-500/30'; case 'medium': return 'bg-orange-500/20 text-orange-400 border-orange-500/30'; default: return 'bg-white/10 text-white/40 border-white/20'; }
@@ -135,10 +135,9 @@ export default function VoicePage() {
                     </div>
                 )}
 
-                {/* Filters */}
                 <div className="mb-4 flex flex-wrap items-center gap-2">
                     <span className="inline-flex items-center gap-2 text-sm text-white/50 font-semibold"><Filter className="w-4 h-4" />Filters:</span>
-                    {['all', 'pending', 'in_progress', 'rejected'].map(v => (
+                    {['all', 'open', 'in_progress', 'rejected'].map(v => (
                         <button key={v} onClick={() => setStatusFilter(v)} className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${statusFilter === v ? 'bg-green-500/20 text-white border-green-400/50' : 'bg-white/5 text-white/40 border-white/10 hover:bg-white/10'}`}>
                             {v === 'all' ? 'All' : v === 'in_progress' ? 'In Progress' : v.charAt(0).toUpperCase() + v.slice(1)}
                         </button>
@@ -179,8 +178,22 @@ function ComplaintCard({ complaint: c, safeDate, getStatusStyle, getPriorityStyl
     return (
         <div className={`glass-card p-5 ${isResolved ? 'border-green-500/20' : ''}`}>
             <div className="flex flex-col sm:flex-row justify-between items-start gap-3 mb-3">
-                <div><h4 className="text-lg font-bold text-white mb-1">{c.title}</h4><p className="text-xs text-white/30 flex items-center gap-2"><MessageSquare className="w-3 h-3" />{c.domainName || c.domain || c.category || 'General'}<span>•</span>{safeDate(c.createdAt || c.created_at)}</p></div>
-                <div className="flex gap-2"><span className={`px-2.5 py-1 rounded-full text-[10px] font-semibold border ${getStatusStyle(c.status)}`}>{c.status?.replace('_', ' ')}</span><span className={`px-2.5 py-1 rounded-full text-[10px] font-semibold border ${getPriorityStyle(c.priority)}`}>{c.priority}</span></div>
+                <div>
+                    <h4 className="text-lg font-bold text-white mb-1 flex items-center gap-2">
+                        {c.title}
+                        {c.adminSeen && <span title="Seen by Admin"><Eye className="w-4 h-4 text-emerald-400" /></span>}
+                    </h4>
+                    <p className="text-xs text-white/30 flex items-center gap-2">
+                        <MessageSquare className="w-3 h-3" />
+                        {c.domainName || c.domain || c.category || 'General'}
+                        <span>•</span>
+                        {safeDate(c.createdAt || c.created_at)}
+                    </p>
+                </div>
+                <div className="flex gap-2">
+                    <span className={`px-2.5 py-1 rounded-full text-[10px] font-semibold border ${getStatusStyle(c.status)}`}>{c.status?.replace('_', ' ')}</span>
+                    <span className={`px-2.5 py-1 rounded-full text-[10px] font-semibold border ${getPriorityStyle(c.priority)}`}>{c.priority}</span>
+                </div>
             </div>
             <div className="bg-white/[0.03] p-3 rounded-lg border border-white/5 mb-3"><p className="text-sm text-white/50 leading-relaxed">{c.description}</p></div>
             {isResolved && c.resolutionDetails && (

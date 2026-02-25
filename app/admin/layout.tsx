@@ -58,7 +58,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         item.roles.some(role => user.roles.includes(role))
     );
 
-    const Sidebar = () => (
+    const sidebarContent = (
         <div className="flex flex-col h-full bg-[#0f0f0f] border-r border-white/10 w-64 md:w-72">
             {/* Header */}
             <div className="h-16 flex items-center px-6 border-b border-white/10 shrink-0">
@@ -148,7 +148,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                             className="fixed inset-y-0 left-0 z-50 md:hidden"
                         >
-                            <Sidebar />
+                            {sidebarContent}
                         </motion.div>
                     </>
                 )}
@@ -156,7 +156,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
             {/* Desktop Sidebar */}
             <div className="hidden md:block sticky top-0 h-screen shrink-0">
-                <Sidebar />
+                {sidebarContent}
             </div>
 
             {/* Main Content */}

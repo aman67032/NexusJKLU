@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import api from '@/lib/api';
 import { motion } from 'framer-motion';
-import { Upload, FileText, Filter, Download, Eye, User, Shield, Search, X } from 'lucide-react';
+import { Upload, FileText, Filter, Download, Eye, User, Shield, Search, X, Maximize2 } from 'lucide-react';
+import { AnimatePresence } from 'framer-motion';
 
 interface Paper { _id?: string; id?: string; title: string; description?: string; paper_type: string; year?: number; semester?: string; file_name: string; file_size?: number; status: string; uploaded_at: string; course_code?: string; course_name?: string; uploader_name?: string; }
 interface Course { _id?: string; id?: string; code: string; name: string; }
@@ -20,6 +21,7 @@ export default function PapersPage() {
     const [uploading, setUploading] = useState(false);
     const [uploadForm, setUploadForm] = useState({ title: '', description: '', paper_type: 'exam', course_id: '', year: '', semester: '' });
     const [file, setFile] = useState<File | null>(null);
+    const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
     useEffect(() => {
         Promise.all([
@@ -52,7 +54,7 @@ export default function PapersPage() {
             const res = await api.get(`/api/learn/papers/${paperId}/download`, { responseType: 'blob' });
             const file = new Blob([res.data], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(file);
-            window.open(url, '_blank');
+            setPreviewUrl(url);
         } catch { }
     };
 
@@ -121,6 +123,55 @@ export default function PapersPage() {
                     <div className="text-center py-20"><FileText className="w-12 h-12 text-white/10 mx-auto mb-4" /><h3 className="text-xl font-bold text-white mb-2">No papers found</h3><p className="text-white/30">Try adjusting search or filters</p></div>
                 )}
             </div>
+
+            {/* PDF Preview Modal */}
+            <AnimatePresence>
+                {previewUrl && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-12 bg-black/80 backdrop-blur-sm"
+                        onClick={() => setPreviewUrl(null)}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.95, opacity: 0, y: 20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                            onClick={(e) => e.stopPropagation()}
+                            className="bg-[#111] border border-white/10 rounded-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl relative"
+                        >
+                            <div className="flex items-center justify-between p-4 border-b border-white/10 bg-white/5 shrink-0">
+                                <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                                    <FileText className="w-5 h-5 text-indigo-400" /> Document Preview
+                                </h3>
+                                <div className="flex items-center gap-2">
+                                    <button
+                                        onClick={() => window.open(previewUrl, '_blank')}
+                                        className="p-2 hover:bg-white/10 rounded-lg text-white/70 hover:text-white transition-colors"
+                                        title="Open in new tab"
+                                    >
+                                        <Maximize2 className="w-5 h-5" />
+                                    </button>
+                                    <button
+                                        onClick={() => setPreviewUrl(null)}
+                                        className="p-2 hover:bg-red-500/20 rounded-lg text-white/70 hover:text-red-400 transition-colors"
+                                    >
+                                        <X className="w-5 h-5" />
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="flex-1 bg-white relative">
+                                <iframe
+                                    src={`${previewUrl}#toolbar=0`}
+                                    className="absolute inset-0 w-full h-full border-0"
+                                    title="PDF Preview"
+                                />
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }

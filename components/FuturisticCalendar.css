@@ -1,0 +1,113 @@
+/* Futuristic Calendar Override */
+
+.react-calendar {
+    width: 100%;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    font-family: var(--font-sans);
+    line-height: 1.125em;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 255, 0.05);
+    /* Blue glow */
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Header */
+.react-calendar__navigation {
+    display: flex;
+    height: 60px;
+    margin-bottom: 0;
+    background: linear-gradient(to right, var(--card-bg), var(--background));
+    border-bottom: 1px solid var(--card-border);
+}
+
+.react-calendar__navigation button {
+    min-width: 44px;
+    background: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    transition: color 0.2s;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+    background-color: var(--background);
+    color: var(--primary);
+}
+
+/* Weekdays */
+.react-calendar__month-view__weekdays {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    padding: 1rem 0;
+}
+
+/* Days */
+.react-calendar__tile {
+    max-width: 100%;
+    padding: 1.25rem 0.5rem;
+    background: none;
+    text-align: center;
+    line-height: 16px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+    background-color: var(--background);
+    color: var(--primary);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 102, 0, 0.2);
+    z-index: 10;
+    border-radius: 0.5rem;
+}
+
+/* Today */
+.react-calendar__tile--now {
+    background: rgba(0, 0, 255, 0.05);
+    /* Blue tint */
+    color: var(--secondary);
+    font-weight: bold;
+    border-radius: 0.5rem;
+}
+
+/* Active Day (Selected) */
+.react-calendar__tile--active {
+    background: var(--primary) !important;
+    color: white !important;
+    box-shadow: 0 4px 14px rgba(255, 102, 0, 0.4);
+    border-radius: 0.5rem;
+    transform: scale(1.05);
+}
+
+/* Has Event Indicator (Custom Dot) */
+.react-calendar__tile.has-event::after {
+    content: '';
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 5px var(--primary);
+}
+
+/* Dark Mode Specific Tweaks */
+.dark .react-calendar {
+    box-shadow: 0 0 25px rgba(0, 0, 255, 0.15);
+}
+
+.dark .react-calendar__tile:enabled:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}

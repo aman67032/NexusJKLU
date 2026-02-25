@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react';
 import api from '@/lib/api';
 import { useAuth } from '@/contexts/AuthContext';
-import { BookOpen, Search, Check, X, ShieldAlert, FileText, Download, ExternalLink, Eye } from 'lucide-react';
+import { BookOpen, Search, Check, X, ShieldAlert, FileText, Download, ExternalLink, Eye, Maximize2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'react-hot-toast';
 
 export default function ReviewPapers() {
@@ -14,6 +15,7 @@ export default function ReviewPapers() {
 
     const [rejectingId, setRejectingId] = useState<string | null>(null);
     const [rejectionReason, setRejectionReason] = useState('');
+    const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
     const fetchPapers = async () => {
         setLoading(true);
@@ -81,7 +83,7 @@ export default function ReviewPapers() {
             });
             const file = new Blob([res.data], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(file);
-            window.open(url, '_blank');
+            setPreviewUrl(url);
         } catch {
             toast.error('Failed to preview file');
         }
@@ -245,6 +247,55 @@ export default function ReviewPapers() {
                     ))
                 )}
             </div>
+
+            {/* PDF Preview Modal */}
+            <AnimatePresence>
+                {previewUrl && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-12 bg-black/80 backdrop-blur-sm"
+                        onClick={() => setPreviewUrl(null)}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.95, opacity: 0, y: 20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                            onClick={(e) => e.stopPropagation()}
+                            className="bg-[#111] border border-white/10 rounded-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl relative"
+                        >
+                            <div className="flex items-center justify-between p-4 border-b border-white/10 bg-white/5 shrink-0">
+                                <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                                    <FileText className="w-5 h-5 text-indigo-400" /> Document Preview
+                                </h3>
+                                <div className="flex items-center gap-2">
+                                    <button
+                                        onClick={() => window.open(previewUrl, '_blank')}
+                                        className="p-2 hover:bg-white/10 rounded-lg text-white/70 hover:text-white transition-colors"
+                                        title="Open in new tab"
+                                    >
+                                        <Maximize2 className="w-5 h-5" />
+                                    </button>
+                                    <button
+                                        onClick={() => setPreviewUrl(null)}
+                                        className="p-2 hover:bg-red-500/20 rounded-lg text-white/70 hover:text-red-400 transition-colors"
+                                    >
+                                        <X className="w-5 h-5" />
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="flex-1 bg-white relative">
+                                <iframe
+                                    src={`${previewUrl}#toolbar=0`}
+                                    className="absolute inset-0 w-full h-full border-0"
+                                    title="PDF Preview"
+                                />
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }
