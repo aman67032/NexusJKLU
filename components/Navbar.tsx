@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -58,13 +59,18 @@ export default function Navbar() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16">
                         {/* Logo */}
-                        <Link href="/" className="flex items-center gap-2.5 group">
-                            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[var(--primary)] to-[var(--primary-dark)] flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-[var(--primary)]/20 group-hover:shadow-[var(--primary)]/40 transition-shadow">
-                                N
+                        <Link href="/" className="flex items-center gap-3 group">
+                            <div className="relative w-10 h-10 flex items-center justify-center transition-transform group-hover:scale-105">
+                                <Image
+                                    src="/white_jklu_logo.png"
+                                    alt="JKLU Logo"
+                                    fill
+                                    className="object-contain drop-shadow-lg"
+                                />
                             </div>
-                            <span className="text-lg font-bold tracking-tight">
-                                <span className="gradient-text-orange">Nexus</span>
-                                <span className="text-white/90">JKLU</span>
+                            <span className="text-xl font-bold tracking-tight">
+                                <span className="text-white">Nexus</span>
+                                <span className="text-orange-500">JKLU</span>
                             </span>
                         </Link>
 
@@ -87,16 +93,24 @@ export default function Navbar() {
                                                     window.location.href = link.href;
                                                 }
                                             }}
-                                            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${active
+                                            className={`relative flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 group overflow-hidden ${active
                                                 ? 'text-white'
-                                                : 'text-white/50 hover:text-white/80 hover:bg-white/[0.04]'
+                                                : 'text-white/60 hover:text-white hover:bg-white/[0.06]'
                                                 }`}
                                             style={active ? { background: `${link.color}15`, color: link.color } : {}}
                                         >
-                                            <Icon className="w-4 h-4" />
+                                            {/* Active background glow line */}
+                                            {active && (
+                                                <motion.div
+                                                    layoutId="navbar-active"
+                                                    className="absolute bottom-0 left-1/4 right-1/4 h-[2px] rounded-t-full opacity-80"
+                                                    style={{ background: link.color, filter: 'blur(1px)' }}
+                                                />
+                                            )}
+                                            <Icon className={`w-4 h-4 ${active ? '' : 'group-hover:scale-110 transition-transform'}`} />
                                             {link.label}
                                             {hasChildren && (
-                                                <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                                                <ChevronDown className={`w-3.5 h-3.5 opacity-60 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
                                             )}
                                         </button>
 
@@ -104,14 +118,14 @@ export default function Navbar() {
                                         <AnimatePresence>
                                             {hasChildren && isDropdownOpen && (
                                                 <motion.div
-                                                    initial={{ opacity: 0, y: -5, scale: 0.95 }}
+                                                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
                                                     animate={{ opacity: 1, y: 0, scale: 1 }}
-                                                    exit={{ opacity: 0, y: -5, scale: 0.95 }}
-                                                    transition={{ duration: 0.15 }}
-                                                    className="absolute top-full left-0 mt-2 w-52 rounded-xl border border-white/[0.08] shadow-2xl shadow-black/40 overflow-hidden"
-                                                    style={{ background: 'rgba(15, 15, 15, 0.95)', backdropFilter: 'blur(20px)' }}
+                                                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                                    transition={{ duration: 0.2, ease: "easeOut" }}
+                                                    className="absolute top-[calc(100%+8px)] left-0 w-56 rounded-2xl border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.5)] overflow-hidden"
+                                                    style={{ background: 'rgba(10, 10, 10, 0.85)', backdropFilter: 'blur(24px)' }}
                                                 >
-                                                    <div className="py-1.5">
+                                                    <div className="py-2 px-1.5 flex flex-col gap-0.5">
                                                         {link.children!.map((child) => {
                                                             const ChildIcon = child.icon;
                                                             const childActive = pathname === child.href;
@@ -120,14 +134,16 @@ export default function Navbar() {
                                                                     key={child.href}
                                                                     href={child.href}
                                                                     onClick={() => setOpenDropdown(null)}
-                                                                    className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-all ${childActive
-                                                                        ? 'text-white bg-white/[0.06]'
-                                                                        : 'text-white/50 hover:text-white/90 hover:bg-white/[0.04]'
+                                                                    className={`group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all duration-200 ${childActive
+                                                                        ? 'text-white bg-white/[0.08]'
+                                                                        : 'text-white/60 hover:text-white hover:bg-white/[0.04]'
                                                                         }`}
                                                                     style={childActive ? { color: link.color } : {}}
                                                                 >
-                                                                    <ChildIcon className="w-4 h-4" />
-                                                                    {child.label}
+                                                                    <div className={`p-1.5 rounded-lg transition-colors ${childActive ? 'bg-white/10' : 'bg-white/5 group-hover:bg-white/10'}`}>
+                                                                        <ChildIcon className="w-4 h-4" />
+                                                                    </div>
+                                                                    <span className="font-medium">{child.label}</span>
                                                                 </Link>
                                                             );
                                                         })}
