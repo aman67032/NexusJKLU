@@ -12,19 +12,23 @@ export default function ReviewPapers() {
     const [papers, setPapers] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [statusFilter, setStatusFilter] = useState('pending');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
 
     const [rejectingId, setRejectingId] = useState<string | null>(null);
     const [rejectionReason, setRejectionReason] = useState('');
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
-    const fetchPapers = async () => {
+    const fetchPapers = async (page = 1) => {
         setLoading(true);
         try {
             const { data } = await api.get('/learn/papers', {
-                params: { status: statusFilter, limit: 50 },
+                params: { status: statusFilter, limit: 20, page },
                 withCredentials: true
             });
-            setPapers(data.items);
+            setPapers(data.items || []);
+            setTotalPages(data.pages || 1);
+            setCurrentPage(data.page || 1);
         } catch (error) {
             toast.error('Failed to fetch papers');
         } finally {
@@ -33,8 +37,8 @@ export default function ReviewPapers() {
     };
 
     useEffect(() => {
-        fetchPapers();
-    }, [statusFilter]);
+        fetchPapers(currentPage);
+    }, [statusFilter, currentPage]);
 
     const handleAction = async (id: string, action: 'approved' | 'rejected') => {
         if (action === 'rejected' && !rejectionReason.trim()) {
@@ -51,7 +55,7 @@ export default function ReviewPapers() {
             toast.success(`Paper ${action} successfully`);
             setRejectingId(null);
             setRejectionReason('');
-            fetchPapers(); // refresh
+            fetchPapers(currentPage); // refresh
         } catch (error) {
             toast.error(`Failed to ${action} paper`);
         }
@@ -115,7 +119,7 @@ export default function ReviewPapers() {
                     {['pending', 'approved', 'rejected'].map(status => (
                         <button
                             key={status}
-                            onClick={() => setStatusFilter(status)}
+                            onClick={() => { setStatusFilter(status); setCurrentPage(1); }}
                             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors capitalize ${statusFilter === status
                                 ? 'bg-white/10 text-white'
                                 : 'text-white/40 hover:text-white/80 hover:bg-white/5'
@@ -245,6 +249,40 @@ export default function ReviewPapers() {
                             </div>
                         </div>
                     ))
+                )}
+
+                {/* Pagination Controls */}
+                {totalPages > 1 && !loading && papers.length > 0 && (
+                    <div className="flex items-center justify-center gap-2 mt-8">
+                        <button
+                            onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                            disabled={currentPage === 1}
+                            className="px-4 py-2 rounded-lg bg-white/5 text-white/70 font-semibold border border-white/10 disabled:opacity-30 hover:bg-white/10 transition-colors"
+                        >
+                            Previous
+                        </button>
+                        <div className="flex items-center gap-1">
+                            {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                                <button
+                                    key={page}
+                                    onClick={() => setCurrentPage(page)}
+                                    className={`w-10 h-10 rounded-lg text-sm font-bold flex items-center justify-center transition-colors ${currentPage === page
+                                            ? 'bg-gradient-to-tr from-emerald-500 to-teal-500 text-white shadow-lg'
+                                            : 'bg-[#111] text-white/50 border border-white/5 hover:bg-white/10'
+                                        }`}
+                                >
+                                    {page}
+                                </button>
+                            ))}
+                        </div>
+                        <button
+                            onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                            disabled={currentPage === totalPages}
+                            className="px-4 py-2 rounded-lg bg-white/5 text-white/70 font-semibold border border-white/10 disabled:opacity-30 hover:bg-white/10 transition-colors"
+                        >
+                            Next
+                        </button>
+                    </div>
                 )}
             </div>
 

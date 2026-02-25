@@ -53,24 +53,28 @@ export default function LearnPage() {
                     <p className="text-white/40 text-lg mb-6">Browse exam papers, join coding challenges, and access academic resources.</p>
 
                     {/* Sub Navigation */}
-                    <div className="flex flex-wrap gap-2 p-1.5 bg-white/[0.03] border border-white/[0.06] rounded-2xl w-fit">
-                        {subNav.map((item) => {
-                            const Icon = item.icon;
-                            const isActive = item.href === '/learn';
-                            return (
-                                <Link
-                                    key={item.href}
-                                    href={item.href}
-                                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${isActive
-                                        ? 'bg-[var(--learn-color)]/15 text-[var(--learn-color)]'
-                                        : 'text-white/40 hover:text-white/70 hover:bg-white/[0.04]'
-                                        }`}
-                                >
-                                    <Icon className="w-4 h-4" />
-                                    {item.label}
-                                </Link>
-                            );
-                        })}
+                    <div className="mb-6">
+                        <div className="overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide no-scrollbar">
+                            <div className="flex items-center gap-2 p-1.5 bg-white/[0.03] border border-white/[0.06] rounded-2xl w-max min-w-full lg:min-w-0 backdrop-blur-md">
+                                {subNav.map((item) => {
+                                    const Icon = item.icon;
+                                    const isActive = item.href === '/learn';
+                                    return (
+                                        <Link
+                                            key={item.href}
+                                            href={item.href}
+                                            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${isActive
+                                                ? 'bg-[var(--secondary)]/15 text-[var(--secondary)] font-bold'
+                                                : 'text-white/40 hover:text-white/60 hover:bg-white/[0.04]'
+                                                }`}
+                                        >
+                                            <Icon className="w-4 h-4" />
+                                            {item.label}
+                                        </Link>
+                                    );
+                                })}
+                            </div>
+                        </div>
                     </div>
                 </div>
 

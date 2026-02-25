@@ -3,8 +3,16 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import api from '@/lib/api';
-import { User, Mail, IdCard, CheckCircle2, Edit2, X, Save } from 'lucide-react';
+import { User, Mail, IdCard, CheckCircle2, Edit2, X, Save, BookOpen, FileText, Code, UserCircle } from 'lucide-react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
+
+const subNav = [
+    { href: '/learn', label: 'Overview', icon: BookOpen },
+    { href: '/learn/papers', label: 'Papers', icon: FileText },
+    { href: '/learn/coding-hour', label: 'Coding Hour', icon: Code },
+    { href: '/learn/profile', label: 'My Profile', icon: UserCircle },
+];
 
 export default function ProfilePage() {
     const { user, logout } = useAuth();
@@ -36,7 +44,34 @@ export default function ProfilePage() {
             <div className="glow-orb w-[500px] h-[500px] -top-48 -right-48 bg-indigo-500" style={{ opacity: 0.06 }} />
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-                    <h1 className="text-3xl font-extrabold text-white mb-8">My Profile</h1>
+                    <div className="mb-10">
+                        <h1 className="text-3xl font-extrabold text-white mb-6">My Profile</h1>
+
+                        {/* Sub Navigation */}
+                        <div className="mb-0 z-20 relative">
+                            <div className="overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide no-scrollbar">
+                                <div className="flex items-center gap-2 p-1.5 bg-white/[0.03] border border-white/[0.06] rounded-2xl w-max min-w-full lg:min-w-0 backdrop-blur-md">
+                                    {subNav.map((item) => {
+                                        const Icon = item.icon;
+                                        const isActive = item.href === '/learn/profile';
+                                        return (
+                                            <Link
+                                                key={item.href}
+                                                href={item.href}
+                                                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${isActive
+                                                    ? 'bg-[var(--secondary)]/15 text-[var(--secondary)] font-bold'
+                                                    : 'text-white/40 hover:text-white/60 hover:bg-white/[0.04]'
+                                                    }`}
+                                            >
+                                                <Icon className="w-4 h-4" />
+                                                {item.label}
+                                            </Link>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div className="glass-card p-8">
                         {/* Avatar */}

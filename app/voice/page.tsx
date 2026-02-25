@@ -84,16 +84,16 @@ export default function VoicePage() {
                 </div>
 
                 {/* Stats */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-10">
                     {[{ label: 'Total', value: stats.total, icon: <MessageSquare className="w-5 h-5 text-white/50" />, bg: 'bg-white/5' },
                     { label: 'Pending', value: stats.pending, icon: <Clock className="w-5 h-5 text-yellow-400" />, bg: 'bg-yellow-500/10' },
                     { label: 'In Progress', value: stats.in_progress, icon: <TrendingUp className="w-5 h-5 text-blue-400" />, bg: 'bg-blue-500/10' },
                     { label: 'Resolved', value: stats.resolved, icon: <CheckCircle className="w-5 h-5 text-green-400" />, bg: 'bg-green-500/10' },
                     ].map(s => (
-                        <div key={s.label} className="glass-card p-4">
+                        <div key={s.label} className="glass-card p-3 md:p-4">
                             <div className="flex items-center justify-between">
-                                <div><p className="text-xs font-semibold text-white/50 mb-1">{s.label}</p><p className="text-2xl font-bold text-white">{s.value}</p></div>
-                                <div className={`p-2.5 rounded-full ${s.bg}`}>{s.icon}</div>
+                                <div><p className="text-[10px] md:text-xs font-semibold text-white/50 mb-0.5 md:mb-1">{s.label}</p><p className="text-xl md:text-2xl font-bold text-white">{s.value}</p></div>
+                                <div className={`p-2 md:p-2.5 rounded-full ${s.bg}`}>{s.icon}</div>
                             </div>
                         </div>
                     ))}
@@ -101,9 +101,9 @@ export default function VoicePage() {
 
                 {/* New Complaint Button */}
                 {user && (
-                    <div className="mb-6 flex justify-between items-center">
+                    <div className="mb-6 flex justify-between items-center gap-4">
                         <h2 className="text-xl font-bold text-white">Complaints</h2>
-                        <button onClick={() => setShowNewComplaint(true)} className="px-5 py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-green-500/20 transition-all active:scale-95">
+                        <button onClick={() => setShowNewComplaint(true)} className="px-4 md:px-5 py-2 md:py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-green-500/20 transition-all active:scale-95 whitespace-nowrap text-sm">
                             <Plus className="w-4 h-4" /> New Complaint
                         </button>
                     </div>
@@ -111,7 +111,7 @@ export default function VoicePage() {
 
                 {/* New Complaint Form */}
                 {showNewComplaint && (
-                    <div className="glass-card p-6 mb-8">
+                    <div className="glass-card p-5 md:p-6 mb-8">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="text-xl font-bold text-white">Submit Complaint</h3>
                             <button onClick={() => setShowNewComplaint(false)} className="p-2 hover:bg-white/10 rounded-lg"><X className="w-5 h-5 text-white/50" /></button>
@@ -135,13 +135,20 @@ export default function VoicePage() {
                     </div>
                 )}
 
-                <div className="mb-4 flex flex-wrap items-center gap-2">
-                    <span className="inline-flex items-center gap-2 text-sm text-white/50 font-semibold"><Filter className="w-4 h-4" />Filters:</span>
-                    {['all', 'open', 'in_progress', 'rejected'].map(v => (
-                        <button key={v} onClick={() => setStatusFilter(v)} className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${statusFilter === v ? 'bg-green-500/20 text-white border-green-400/50' : 'bg-white/5 text-white/40 border-white/10 hover:bg-white/10'}`}>
-                            {v === 'all' ? 'All' : v === 'in_progress' ? 'In Progress' : v.charAt(0).toUpperCase() + v.slice(1)}
-                        </button>
-                    ))}
+                <div className="mb-6">
+                    <div className="flex items-center gap-2 mb-3">
+                        <Filter className="w-4 h-4 text-white/50" />
+                        <span className="text-sm text-white/50 font-semibold tracking-wide uppercase">Filters</span>
+                    </div>
+                    <div className="overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide no-scrollbar">
+                        <div className="flex items-center gap-2 whitespace-nowrap min-w-max">
+                            {['all', 'open', 'in_progress', 'rejected'].map(v => (
+                                <button key={v} onClick={() => setStatusFilter(v)} className={`px-4 py-2 rounded-xl text-xs font-bold border transition-all ${statusFilter === v ? 'bg-green-500/20 text-white border-green-400/50 shadow-[0_0_15px_rgba(34,197,94,0.1)]' : 'bg-white/5 text-white/40 border-white/10 hover:bg-white/10 hover:border-white/20'}`}>
+                                    {v === 'all' ? 'All' : v === 'in_progress' ? 'In Progress' : v.charAt(0).toUpperCase() + v.slice(1)}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
                 </div>
 
                 {/* Tabs */}

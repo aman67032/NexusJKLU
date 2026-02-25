@@ -12,7 +12,6 @@ import { Building2, Users, Calendar as CalendarIcon, Award, UserCircle, ChevronR
 import 'react-calendar/dist/Calendar.css';
 import '@/components/FuturisticCalendar.css';
 import CouncilLogo3D from '@/components/CouncilLogo3D';
-import LaserFlow from '@/components/LaserFlow';
 
 const FloatingLines = dynamic(() => import('@/components/homebgfile'), {
     ssr: false,
@@ -135,32 +134,119 @@ export default function CouncilPage() {
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.2, duration: 0.8 }}
-                        className="mt-2 w-full max-w-3xl mx-auto flex justify-center"
+                        className="mt-2 w-full max-w-3xl mx-auto flex justify-center h-[200px] md:h-auto"
                     >
                         <CouncilLogo3D />
                     </motion.div>
                 </div>
 
                 {/* Sub Navigation */}
-                <div className="flex flex-wrap gap-2 mb-10 p-1.5 bg-white/[0.03] border border-white/[0.06] rounded-2xl justify-center z-20 relative backdrop-blur-md">
-                    {subNav.map((item) => {
-                        const Icon = item.icon;
-                        const isActive = item.href === '/council';
-                        return (
-                            <Link
-                                key={item.href}
-                                href={item.href}
-                                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${isActive
-                                    ? 'bg-[var(--primary)]/15 text-[var(--primary)]'
-                                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/[0.04]'
-                                    }`}
-                            >
-                                <Icon className="w-4 h-4" />
-                                {item.label}
-                            </Link>
-                        );
-                    })}
+                <div className="mb-10 z-20 relative">
+                    <div className="overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide no-scrollbar">
+                        <div className="flex items-center gap-2 p-1.5 bg-white/[0.03] border border-white/[0.06] rounded-2xl w-max min-w-full md:min-w-0 md:justify-center backdrop-blur-md">
+                            {subNav.map((item) => {
+                                const Icon = item.icon;
+                                const isActive = item.href === '/council';
+                                return (
+                                    <Link
+                                        key={item.href}
+                                        href={item.href}
+                                        className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${isActive
+                                            ? 'bg-[var(--primary)]/15 text-[var(--primary)] font-bold'
+                                            : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/[0.04]'
+                                            }`}
+                                    >
+                                        <Icon className="w-4 h-4" />
+                                        {item.label}
+                                    </Link>
+                                );
+                            })}
+                        </div>
+                    </div>
                 </div>
+
+                {/* Student Leadership Section */}
+                <motion.section
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mb-24 relative z-20"
+                >
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-4">Student Leadership</h2>
+                        <div className="h-1.5 w-24 bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] mx-auto rounded-full"></div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 items-start">
+                        {/* Leader Card 1 - Deepak Sogani */}
+                        <motion.div
+                            whileHover={{ y: -5 }}
+                            className="group relative"
+                        >
+                            <div className="aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-3xl bg-white/5 backdrop-blur-xl shadow-2xl border border-white/20 relative transition-all duration-300 hover:shadow-[var(--primary)]/20">
+                                <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-br from-[var(--primary)]/20 via-transparent to-transparent opacity-50"></div>
+                                <img
+                                    src="/Council head/Deepak_Sogani_Head - Student Affairs (2).png"
+                                    alt="Deepak Sogani"
+                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
+
+                                <div className="absolute bottom-0 left-0 right-0 p-6 text-white translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                                    <h3 className="text-2xl font-bold mb-1 tracking-tight">Deepak Sogani</h3>
+                                    <p className="text-[var(--primary)] font-bold uppercase tracking-[0.2em] text-[10px] bg-white/10 backdrop-blur-md px-3 py-1 rounded-full w-fit border border-white/10">
+                                        Head - Student Affairs
+                                    </p>
+                                </div>
+                            </div>
+                        </motion.div>
+
+                        {/* Leader Card 2 - Anushka Pathak */}
+                        <motion.div
+                            whileHover={{ y: -5 }}
+                            className="group relative"
+                        >
+                            <div className="aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-3xl bg-white/5 backdrop-blur-xl shadow-2xl border border-white/20 relative transition-all duration-300 hover:shadow-[var(--primary)]/20">
+                                <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-bl from-[var(--primary)]/20 via-transparent to-transparent opacity-50"></div>
+                                <img
+                                    src="/Council head/Anushka_Pathak_Executive - Student Affairs (2).png"
+                                    alt="Anushka Pathak"
+                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
+
+                                <div className="absolute bottom-0 left-0 right-0 p-6 text-white translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                                    <h3 className="text-2xl font-bold mb-1 tracking-tight">Anushka Pathak</h3>
+                                    <p className="text-[var(--primary)] font-bold uppercase tracking-[0.2em] text-[10px] bg-white/10 backdrop-blur-md px-3 py-1 rounded-full w-fit border border-white/10">
+                                        Executive - Student Affairs
+                                    </p>
+                                </div>
+                            </div>
+                        </motion.div>
+
+                        {/* Leader Card 3 - Shubham Jain */}
+                        <motion.div
+                            whileHover={{ y: -5 }}
+                            className="group relative"
+                        >
+                            <div className="aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-3xl bg-white/5 backdrop-blur-xl shadow-2xl border border-white/20 relative transition-all duration-300 hover:shadow-[var(--primary)]/20">
+                                <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-br from-[var(--primary)]/20 via-transparent to-transparent opacity-50"></div>
+                                <img
+                                    src="/Council head/President_ShubhamJain.png"
+                                    alt="Shubham Jain"
+                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
+
+                                <div className="absolute bottom-0 left-0 right-0 p-6 text-white translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                                    <h3 className="text-2xl font-bold mb-1 tracking-tight">Shubham Jain</h3>
+                                    <p className="text-[var(--primary)] font-bold uppercase tracking-[0.2em] text-[10px] bg-white/10 backdrop-blur-md px-3 py-1 rounded-full w-fit border border-white/10">
+                                        President
+                                    </p>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                </motion.section>
 
                 {/* Stats Row */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 relative z-20">
@@ -204,17 +290,6 @@ export default function CouncilPage() {
                     }}
                 >
                     <div className="absolute top-[-400px] left-0 right-0 h-[calc(100%+300px)] z-0 pointer-events-none overflow-visible mix-blend-screen opacity-90">
-                        <LaserFlow
-                            color={'#ff6600'}
-                            fogIntensity={0.5}
-                            wispIntensity={7}
-                            wispDensity={1.5}
-                            horizontalBeamOffset={-0.22}
-                            verticalBeamOffset={-0.1}
-                            decay={1.2}
-                            falloffStart={1.6}
-                            horizontalSizing={0.7}
-                        />
                     </div>
 
                     <div className="relative z-20"

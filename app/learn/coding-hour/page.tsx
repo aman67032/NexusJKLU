@@ -4,10 +4,17 @@ import { useState, useEffect } from 'react';
 import api from '@/lib/api';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Code, Calendar, Sparkles, Clock, Megaphone, FileText, ChevronRight, Download } from 'lucide-react';
+import { Code, Calendar, Sparkles, Clock, Megaphone, FileText, ChevronRight, Download, BookOpen, UserCircle } from 'lucide-react';
 
 interface Contest { _id?: string; id?: string; course_id?: string; date: string; title?: string; description?: string; questions?: any[]; }
 interface Announcement { _id?: string; id?: string; title: string; content: string; attachment_url?: string; created_at: string; }
+
+const subNav = [
+    { href: '/learn', label: 'Overview', icon: BookOpen },
+    { href: '/learn/papers', label: 'Papers', icon: FileText },
+    { href: '/learn/coding-hour', label: 'Coding Hour', icon: Code },
+    { href: '/learn/profile', label: 'My Profile', icon: UserCircle },
+];
 
 export default function CodingHourPage() {
     const [contests, setContests] = useState<Contest[]>([]);
@@ -30,12 +37,37 @@ export default function CodingHourPage() {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
                 {/* Header */}
-                <div className="mb-10">
+                <div className="mb-8">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-bold mb-4">
                         <Sparkles className="w-3 h-3" /> Daily Coding Challenges
                     </div>
                     <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-2">Coding Hour</h1>
-                    <p className="text-white/40 text-lg">Challenge yourself with daily coding problems across multiple languages.</p>
+                    <p className="text-white/40 text-lg mb-6">Challenge yourself with daily coding problems across multiple languages.</p>
+
+                    {/* Sub Navigation */}
+                    <div className="mb-0 z-20 relative">
+                        <div className="overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide no-scrollbar">
+                            <div className="flex items-center gap-2 p-1.5 bg-white/[0.03] border border-white/[0.06] rounded-2xl w-max min-w-full lg:min-w-0 backdrop-blur-md">
+                                {subNav.map((item) => {
+                                    const Icon = item.icon;
+                                    const isActive = item.href === '/learn/coding-hour';
+                                    return (
+                                        <Link
+                                            key={item.href}
+                                            href={item.href}
+                                            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${isActive
+                                                ? 'bg-emerald-500/15 text-emerald-400 font-bold'
+                                                : 'text-white/40 hover:text-white/60 hover:bg-white/[0.04]'
+                                                }`}
+                                        >
+                                            <Icon className="w-4 h-4" />
+                                            {item.label}
+                                        </Link>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

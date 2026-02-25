@@ -72,24 +72,28 @@ export default function CouncilsPage() {
                         </p>
 
                         {/* Sub Navigation */}
-                        <div className="flex flex-wrap justify-center gap-2 mb-12 p-1.5 bg-white/[0.03] border border-white/[0.06] rounded-2xl max-w-fit mx-auto relative z-20">
-                            {subNav.map((item) => {
-                                const Icon = item.icon;
-                                const isActive = item.href === '/council/councils';
-                                return (
-                                    <Link
-                                        key={item.href}
-                                        href={item.href}
-                                        className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${isActive
-                                            ? 'bg-[var(--council-color)]/15 text-[var(--council-color)]'
-                                            : 'text-white/40 hover:text-white/70 hover:bg-white/[0.04]'
-                                            }`}
-                                    >
-                                        <Icon className="w-4 h-4" />
-                                        {item.label}
-                                    </Link>
-                                );
-                            })}
+                        <div className="mb-12 z-20 relative">
+                            <div className="overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide no-scrollbar">
+                                <div className="flex items-center gap-2 p-1.5 bg-white/[0.03] border border-white/[0.06] rounded-2xl w-max min-w-full md:min-w-0 md:justify-center mx-auto backdrop-blur-md">
+                                    {subNav.map((item) => {
+                                        const Icon = item.icon;
+                                        const isActive = item.href === '/council/councils';
+                                        return (
+                                            <Link
+                                                key={item.href}
+                                                href={item.href}
+                                                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${isActive
+                                                    ? 'bg-[var(--primary)]/15 text-[var(--primary)] font-bold'
+                                                    : 'text-white/40 hover:text-white/70 hover:bg-white/[0.04]'
+                                                    }`}
+                                            >
+                                                <Icon className="w-4 h-4" />
+                                                {item.label}
+                                            </Link>
+                                        );
+                                    })}
+                                </div>
+                            </div>
                         </div>
 
                         {/* President Card */}

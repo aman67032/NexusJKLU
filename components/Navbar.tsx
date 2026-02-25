@@ -193,9 +193,9 @@ export default function Navbar() {
 
                             <button
                                 onClick={() => setMobileOpen(!mobileOpen)}
-                                className="md:hidden p-2 rounded-lg text-white/60 hover:text-white hover:bg-white/[0.04]"
+                                className="md:hidden p-3 -mr-2 rounded-xl text-white/70 hover:text-white hover:bg-white/[0.06] active:bg-white/[0.1] transition-all"
                             >
-                                {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                                {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                             </button>
                         </div>
                     </div>

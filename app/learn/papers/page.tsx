@@ -4,11 +4,19 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import api from '@/lib/api';
 import { motion } from 'framer-motion';
-import { Upload, FileText, Filter, Download, Eye, User, Shield, Search, X, Maximize2 } from 'lucide-react';
+import { Upload, FileText, Filter, Download, Eye, User, Shield, Search, X, Maximize2, BookOpen, Code, UserCircle } from 'lucide-react';
+import Link from 'next/link';
 import { AnimatePresence } from 'framer-motion';
 
 interface Paper { _id?: string; id?: string; title: string; description?: string; paper_type: string; year?: number; semester?: string; file_name: string; file_size?: number; status: string; uploaded_at: string; course_code?: string; course_name?: string; uploader_name?: string; }
 interface Course { _id?: string; id?: string; code: string; name: string; }
+
+const subNav = [
+    { href: '/learn', label: 'Overview', icon: BookOpen },
+    { href: '/learn/papers', label: 'Papers', icon: FileText },
+    { href: '/learn/coding-hour', label: 'Coding Hour', icon: Code },
+    { href: '/learn/profile', label: 'My Profile', icon: UserCircle },
+];
 
 export default function PapersPage() {
     const { user } = useAuth();
@@ -17,18 +25,49 @@ export default function PapersPage() {
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [courseFilter, setCourseFilter] = useState('');
+    const [typeFilter, setTypeFilter] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
     const [showUpload, setShowUpload] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [uploadForm, setUploadForm] = useState({ title: '', description: '', paper_type: 'exam', course_id: '', year: '', semester: '' });
     const [file, setFile] = useState<File | null>(null);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
+    const fetchPapers = async (page = 1) => {
+        setLoading(true);
+        try {
+            const params = new URLSearchParams({
+                status: 'approved',
+                page: page.toString(),
+                limit: '12',
+                ...(courseFilter && { courseId: courses.find(c => c.code === courseFilter)?._id || '' }),
+                ...(typeFilter && { paperType: typeFilter }),
+                ...(searchTerm && { search: searchTerm })
+            });
+            const res = await api.get(`/api/learn/papers?${params}`);
+            setPapers(res.data.items || []);
+            setTotalPages(res.data.pages || 1);
+            setCurrentPage(res.data.page || 1);
+        } catch { } finally {
+            setLoading(false);
+        }
+    };
+
+    // Initial courses fetch
     useEffect(() => {
-        Promise.all([
-            api.get('/api/learn/papers?status=approved&limit=100').then(r => setPapers(r.data.items || [])).catch(() => { }),
-            api.get('/api/learn/courses').then(r => setCourses(r.data.courses || r.data || [])).catch(() => { }),
-        ]).finally(() => setLoading(false));
+        api.get('/api/learn/courses')
+            .then(r => setCourses(r.data.courses || r.data || []))
+            .catch(() => { });
     }, []);
+
+    // Fetch papers when filters or page change
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            fetchPapers(currentPage);
+        }, 300); // debounce search
+        return () => clearTimeout(timer);
+    }, [searchTerm, courseFilter, typeFilter, currentPage, courses.length]); // depend on courses length to ensure we map code to id after load
 
     const handleUpload = async (e: React.FormEvent) => {
         e.preventDefault(); if (!file) return; setUploading(true);
@@ -58,10 +97,8 @@ export default function PapersPage() {
         } catch { }
     };
 
-    const filtered = papers.filter(p => {
-        const s = p.title?.toLowerCase().includes(searchTerm.toLowerCase()) || p.course_code?.toLowerCase().includes(searchTerm.toLowerCase());
-        return s && (!courseFilter || p.course_code === courseFilter);
-    });
+    // Filtering is now handled by the backend API.
+    // We can just use 'papers' directly.
 
     if (loading) return <div className="min-h-screen flex items-center justify-center"><div className="w-12 h-12 border-4 border-white/10 border-t-[var(--secondary)] rounded-full animate-spin" /></div>;
 
@@ -69,9 +106,34 @@ export default function PapersPage() {
         <div className="min-h-screen relative">
             <div className="glow-orb w-[500px] h-[500px] -top-48 -right-48 bg-indigo-500" style={{ opacity: 0.06 }} />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
                     <div><h1 className="text-3xl font-extrabold text-white mb-1">Papers Dashboard</h1><p className="text-white/40">Browse, upload, and download exam papers</p></div>
                     {user && <button onClick={() => setShowUpload(true)} className="px-5 py-2.5 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-indigo-500/20 active:scale-95"><Upload className="w-4 h-4" />Upload Paper</button>}
+                </div>
+
+                {/* Sub Navigation */}
+                <div className="mb-10 z-20 relative">
+                    <div className="overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide no-scrollbar">
+                        <div className="flex items-center gap-2 p-1.5 bg-white/[0.03] border border-white/[0.06] rounded-2xl w-max min-w-full lg:min-w-0 backdrop-blur-md">
+                            {subNav.map((item) => {
+                                const Icon = item.icon;
+                                const isActive = item.href === '/learn/papers';
+                                return (
+                                    <Link
+                                        key={item.href}
+                                        href={item.href}
+                                        className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${isActive
+                                            ? 'bg-[var(--secondary)]/15 text-[var(--secondary)] font-bold'
+                                            : 'text-white/40 hover:text-white/60 hover:bg-white/[0.04]'
+                                            }`}
+                                    >
+                                        <Icon className="w-4 h-4" />
+                                        {item.label}
+                                    </Link>
+                                );
+                            })}
+                        </div>
+                    </div>
                 </div>
 
                 {/* Upload Form */}
@@ -94,13 +156,40 @@ export default function PapersPage() {
 
                 {/* Search & Filter */}
                 <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                    <div className="relative flex-1"><Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20" /><input type="text" placeholder="Search papers..." className="w-full pl-12 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 outline-none focus:border-[var(--secondary)]" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} /></div>
-                    <select value={courseFilter} onChange={e => setCourseFilter(e.target.value)} className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white outline-none"><option value="">All Courses</option>{courses.map(c => <option key={c.code} value={c.code}>{c.code}</option>)}</select>
+                    <div className="relative flex-[2]">
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20" />
+                        <input
+                            type="text"
+                            placeholder="Search papers by title or description..."
+                            className="w-full pl-12 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 outline-none focus:border-[var(--secondary)]"
+                            value={searchTerm}
+                            onChange={e => { setSearchTerm(e.target.value); setCurrentPage(1); }}
+                        />
+                    </div>
+                    <select
+                        value={courseFilter}
+                        onChange={e => { setCourseFilter(e.target.value); setCurrentPage(1); }}
+                        className="flex-1 px-4 py-3 rounded-xl bg-[#1a1a1a] border border-white/10 text-white outline-none focus:border-[var(--secondary)]"
+                    >
+                        <option value="">All Courses</option>
+                        {courses.map(c => <option key={c.code} value={c.code}>{c.code}</option>)}
+                    </select>
+                    <select
+                        value={typeFilter}
+                        onChange={e => { setTypeFilter(e.target.value); setCurrentPage(1); }}
+                        className="flex-1 px-4 py-3 rounded-xl bg-[#1a1a1a] border border-white/10 text-white outline-none focus:border-[var(--secondary)]"
+                    >
+                        <option value="">All Types</option>
+                        <option value="exam">Exam</option>
+                        <option value="quiz">Quiz</option>
+                        <option value="assignment">Assignment</option>
+                        <option value="notes">Notes</option>
+                    </select>
                 </div>
 
                 {/* Papers Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {filtered.map((p, idx) => (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                    {papers.map((p, idx) => (
                         <motion.div key={p._id || p.id || idx} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.03 }} className="glass-card p-5 group hover:border-[var(--secondary)]/30 transition-all">
                             <div className="flex items-start justify-between gap-2 mb-3">
                                 <h3 className="font-bold text-white text-sm line-clamp-2 group-hover:text-[var(--secondary)] transition-colors flex-1">{p.title}</h3>
@@ -119,7 +208,41 @@ export default function PapersPage() {
                     ))}
                 </div>
 
-                {filtered.length === 0 && !loading && (
+                {/* Pagination Controls */}
+                {totalPages > 1 && (
+                    <div className="flex items-center justify-center gap-2 mb-8">
+                        <button
+                            onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                            disabled={currentPage === 1}
+                            className="px-4 py-2 rounded-lg bg-white/5 text-white/70 font-semibold border border-white/10 disabled:opacity-30 hover:bg-white/10 transition-colors"
+                        >
+                            Previous
+                        </button>
+                        <div className="flex items-center gap-1">
+                            {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                                <button
+                                    key={page}
+                                    onClick={() => setCurrentPage(page)}
+                                    className={`w-10 h-10 rounded-lg text-sm font-bold flex items-center justify-center transition-colors ${currentPage === page
+                                        ? 'bg-gradient-to-tr from-indigo-500 to-purple-500 text-white shadow-lg'
+                                        : 'text-white/50 hover:bg-white/10'
+                                        }`}
+                                >
+                                    {page}
+                                </button>
+                            ))}
+                        </div>
+                        <button
+                            onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                            disabled={currentPage === totalPages}
+                            className="px-4 py-2 rounded-lg bg-white/5 text-white/70 font-semibold border border-white/10 disabled:opacity-30 hover:bg-white/10 transition-colors"
+                        >
+                            Next
+                        </button>
+                    </div>
+                )}
+
+                {papers.length === 0 && !loading && (
                     <div className="text-center py-20"><FileText className="w-12 h-12 text-white/10 mx-auto mb-4" /><h3 className="text-xl font-bold text-white mb-2">No papers found</h3><p className="text-white/30">Try adjusting search or filters</p></div>
                 )}
             </div>
