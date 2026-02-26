@@ -161,7 +161,7 @@ export default function Navbar() {
                             {user ? (
                                 <div className="hidden md:flex items-center gap-3">
                                     <Link
-                                        href="/dashboard"
+                                        href="/admin"
                                         className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm text-nexus-khaki hover:text-white/90 hover:bg-white/[0.04] transition-all"
                                     >
                                         <LayoutDashboard className="w-4 h-4" />
