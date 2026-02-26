@@ -48,7 +48,7 @@ export default function CDCPage() {
     if (!mounted) return null;
 
     return (
-        <div className="min-h-screen bg-[#F0FDF4] text-slate-800 font-sans selection:bg-green-500 selection:text-white overflow-x-hidden relative">
+        <div className="min-h-screen bg-[#F0FDF4] text-slate-800 font-sans selection:bg-green-500 selection:text-nexus-linen overflow-x-hidden relative">
             
             {/* --- HERO SECTION --- */}
             <div className="relative min-h-screen flex flex-col items-center justify-center pt-20 px-4 text-center overflow-hidden">
@@ -98,7 +98,7 @@ export default function CDCPage() {
                     <div className="flex justify-center gap-4">
                         <button
                             onClick={handleJoin}
-                            className={`px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 flex items-center gap-2 ${joined ? 'bg-slate-800 text-white' : 'bg-green-600 text-white hover:bg-green-700'}`}
+                            className={`px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 flex items-center gap-2 ${joined ? 'bg-slate-800 text-nexus-linen' : 'bg-green-600 text-nexus-linen hover:bg-green-700'}`}
                         >
                             {joined ? <Heart className="fill-white w-5 h-5" /> : <HandHeart className="w-5 h-5" />}
                             {joined ? 'Volunteer Registered' : 'Become a Volunteer'}
@@ -243,7 +243,7 @@ export default function CDCPage() {
             </section>
 
             {/* --- FOOTER --- */}
-            <footer className="py-12 bg-slate-900 text-white text-center">
+            <footer className="py-12 bg-slate-900 text-nexus-linen text-center">
                 <div className="flex items-center justify-center gap-2 mb-4">
                     <Globe className="w-5 h-5 text-green-400" />
                     <span className="font-bold tracking-widest uppercase">UDGAM CDC</span>

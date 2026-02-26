@@ -116,7 +116,7 @@ export default function CouncilPage() {
             </div>
 
             {/* Subtle overlay */}
-            <div className="fixed inset-0 z-[1] pointer-events-none bg-black/30"></div>
+            <div className="fixed inset-0 z-[1] pointer-events-none bg-nexus-black/30"></div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
                 <div className="flex flex-col items-center pt-8 pb-16">
@@ -182,7 +182,7 @@ export default function CouncilPage() {
                             whileHover={{ y: -5 }}
                             className="group relative"
                         >
-                            <div className="aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-3xl bg-white/5 backdrop-blur-xl shadow-2xl border border-white/20 relative transition-all duration-300 hover:shadow-[var(--primary)]/20">
+                            <div className="aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-3xl bg-white/5 backdrop-blur-xl shadow-2xl border border-nexus-camel/30 relative transition-all duration-300 hover:shadow-[var(--primary)]/20">
                                 <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-br from-[var(--primary)]/20 via-transparent to-transparent opacity-50"></div>
                                 <img
                                     src="/Council head/Deepak_Sogani_Head - Student Affairs (2).png"
@@ -191,9 +191,9 @@ export default function CouncilPage() {
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
 
-                                <div className="absolute bottom-0 left-0 right-0 p-6 text-white translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                                <div className="absolute bottom-0 left-0 right-0 p-6 text-nexus-linen translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                                     <h3 className="text-2xl font-bold mb-1 tracking-tight">Deepak Sogani</h3>
-                                    <p className="text-[var(--primary)] font-bold uppercase tracking-[0.2em] text-[10px] bg-white/10 backdrop-blur-md px-3 py-1 rounded-full w-fit border border-white/10">
+                                    <p className="text-[var(--primary)] font-bold uppercase tracking-[0.2em] text-[10px] bg-white/10 backdrop-blur-md px-3 py-1 rounded-full w-fit border border-nexus-camel/20">
                                         Head - Student Affairs
                                     </p>
                                 </div>
@@ -205,7 +205,7 @@ export default function CouncilPage() {
                             whileHover={{ y: -5 }}
                             className="group relative"
                         >
-                            <div className="aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-3xl bg-white/5 backdrop-blur-xl shadow-2xl border border-white/20 relative transition-all duration-300 hover:shadow-[var(--primary)]/20">
+                            <div className="aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-3xl bg-white/5 backdrop-blur-xl shadow-2xl border border-nexus-camel/30 relative transition-all duration-300 hover:shadow-[var(--primary)]/20">
                                 <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-bl from-[var(--primary)]/20 via-transparent to-transparent opacity-50"></div>
                                 <img
                                     src="/Council head/Anushka_Pathak_Executive - Student Affairs (2).png"
@@ -214,9 +214,9 @@ export default function CouncilPage() {
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
 
-                                <div className="absolute bottom-0 left-0 right-0 p-6 text-white translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                                <div className="absolute bottom-0 left-0 right-0 p-6 text-nexus-linen translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                                     <h3 className="text-2xl font-bold mb-1 tracking-tight">Anushka Pathak</h3>
-                                    <p className="text-[var(--primary)] font-bold uppercase tracking-[0.2em] text-[10px] bg-white/10 backdrop-blur-md px-3 py-1 rounded-full w-fit border border-white/10">
+                                    <p className="text-[var(--primary)] font-bold uppercase tracking-[0.2em] text-[10px] bg-white/10 backdrop-blur-md px-3 py-1 rounded-full w-fit border border-nexus-camel/20">
                                         Executive - Student Affairs
                                     </p>
                                 </div>
@@ -228,7 +228,7 @@ export default function CouncilPage() {
                             whileHover={{ y: -5 }}
                             className="group relative"
                         >
-                            <div className="aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-3xl bg-white/5 backdrop-blur-xl shadow-2xl border border-white/20 relative transition-all duration-300 hover:shadow-[var(--primary)]/20">
+                            <div className="aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-3xl bg-white/5 backdrop-blur-xl shadow-2xl border border-nexus-camel/30 relative transition-all duration-300 hover:shadow-[var(--primary)]/20">
                                 <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-br from-[var(--primary)]/20 via-transparent to-transparent opacity-50"></div>
                                 <img
                                     src="/Council head/President_ShubhamJain.png"
@@ -237,9 +237,9 @@ export default function CouncilPage() {
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
 
-                                <div className="absolute bottom-0 left-0 right-0 p-6 text-white translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                                <div className="absolute bottom-0 left-0 right-0 p-6 text-nexus-linen translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                                     <h3 className="text-2xl font-bold mb-1 tracking-tight">Shubham Jain</h3>
-                                    <p className="text-[var(--primary)] font-bold uppercase tracking-[0.2em] text-[10px] bg-white/10 backdrop-blur-md px-3 py-1 rounded-full w-fit border border-white/10">
+                                    <p className="text-[var(--primary)] font-bold uppercase tracking-[0.2em] text-[10px] bg-white/10 backdrop-blur-md px-3 py-1 rounded-full w-fit border border-nexus-camel/20">
                                         President
                                     </p>
                                 </div>
@@ -260,7 +260,7 @@ export default function CouncilPage() {
                         return (
                             <Link key={stat.label} href={stat.href}>
                                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 + (i * 0.05) }}
-                                    className="bg-white/10 dark:bg-black/20 backdrop-blur-xl border border-white/10 p-4 text-center rounded-[24px] group hover:border-[var(--primary)]/50 transition-all cursor-pointer shadow-lg hover:shadow-[var(--primary)]/20">
+                                    className="bg-white/10 dark:bg-nexus-black/20 backdrop-blur-xl border border-nexus-camel/20 p-4 text-center rounded-[24px] group hover:border-[var(--primary)]/50 transition-all cursor-pointer shadow-lg hover:shadow-[var(--primary)]/20">
                                     <Icon className="w-6 h-6 mx-auto mb-2 group-hover:scale-110 transition-transform" style={{ color: stat.color }} />
                                     <div className="text-3xl font-bold text-[var(--text-primary)]">{stat.value}</div>
                                     <div className="text-sm font-medium text-[var(--text-secondary)] uppercase tracking-wider">{stat.label}</div>
@@ -319,7 +319,7 @@ export default function CouncilPage() {
                             {/* Calendar */}
                             <div
                                 ref={revealRef}
-                                className="group relative bg-white/10 dark:bg-black/20 backdrop-blur-3xl p-8 rounded-[42px] shadow-2xl border-2 border-[var(--primary)] ring-4 ring-[var(--primary)]/20 shadow-[var(--primary)]/10 transition-all duration-500"
+                                className="group relative bg-white/10 dark:bg-nexus-black/20 backdrop-blur-3xl p-8 rounded-[42px] shadow-2xl border-2 border-[var(--primary)] ring-4 ring-[var(--primary)]/20 shadow-[var(--primary)]/10 transition-all duration-500"
                                 style={{
                                     '--mx': '-9999px',
                                     '--my': '-9999px'
@@ -344,8 +344,8 @@ export default function CouncilPage() {
                             </div>
 
                             {/* Event List Side */}
-                            <div className="bg-white/10 dark:bg-black/20 backdrop-blur-xl rounded-[38px] p-8 border border-white/20 shadow-xl h-full min-h-[500px]">
-                                <h3 className="text-2xl font-bold text-[var(--text-primary)] flex items-center border-b border-white/10 pb-6 mb-6">
+                            <div className="bg-white/10 dark:bg-nexus-black/20 backdrop-blur-xl rounded-[38px] p-8 border border-nexus-camel/30 shadow-xl h-full min-h-[500px]">
+                                <h3 className="text-2xl font-bold text-[var(--text-primary)] flex items-center border-b border-nexus-camel/20 pb-6 mb-6">
                                     {format(date as Date, 'MMMM d, yyyy')}
                                 </h3>
 
@@ -361,7 +361,7 @@ export default function CouncilPage() {
                                             <div
                                                 key={event.id}
                                                 onClick={() => router.push(`/council/events/${event.id}`)}
-                                                className="group bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:border-[var(--primary)] hover:bg-white/10 transition-all duration-300 cursor-pointer"
+                                                className="group bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-nexus-camel/20 hover:border-[var(--primary)] hover:bg-white/10 transition-all duration-300 cursor-pointer"
                                             >
                                                 <div className="flex justify-between items-start mb-4">
                                                     <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/20`}>
@@ -390,13 +390,13 @@ export default function CouncilPage() {
 
                                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-[var(--text-secondary)] font-medium">
                                                     <div className="flex items-center gap-2">
-                                                        <div className="w-8 h-8 rounded-lg bg-black/20 flex items-center justify-center">
+                                                        <div className="w-8 h-8 rounded-lg bg-nexus-black/20 flex items-center justify-center">
                                                             <CalendarIcon className="w-4 h-4 text-[var(--primary)]" />
                                                         </div>
                                                         <span>{format(new Date(event.start_date), 'h:mm a')}</span>
                                                     </div>
                                                     <div className="flex items-center gap-2">
-                                                        <div className="w-8 h-8 rounded-lg bg-black/20 flex items-center justify-center">
+                                                        <div className="w-8 h-8 rounded-lg bg-nexus-black/20 flex items-center justify-center">
                                                             <MapPin className="w-4 h-4 text-[var(--primary)]" />
                                                         </div>
                                                         <span className="truncate">{event.venue || 'TBA'}</span>
@@ -405,7 +405,7 @@ export default function CouncilPage() {
                                             </div>
                                         ))
                                     ) : (
-                                        <div className="flex flex-col items-center justify-center py-20 text-[var(--text-secondary)] bg-white/5 rounded-3xl border border-dashed border-white/10">
+                                        <div className="flex flex-col items-center justify-center py-20 text-[var(--text-secondary)] bg-white/5 rounded-3xl border border-dashed border-nexus-camel/20">
                                             <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4">
                                                 <CalendarIcon className="w-8 h-8 text-white/20" />
                                             </div>

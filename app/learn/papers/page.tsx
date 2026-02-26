@@ -103,15 +103,15 @@ export default function PapersPage() {
     // Filtering is now handled by the backend API.
     // We can just use 'papers' directly.
 
-    if (loading) return <div className="min-h-screen flex items-center justify-center"><div className="w-12 h-12 border-4 border-white/10 border-t-[var(--secondary)] rounded-full animate-spin" /></div>;
+    if (loading) return <div className="min-h-screen flex items-center justify-center"><div className="w-12 h-12 border-4 border-nexus-camel/20 border-t-[var(--secondary)] rounded-full animate-spin" /></div>;
 
     return (
         <div className="min-h-screen relative">
-            <div className="glow-orb w-[500px] h-[500px] -top-48 -right-48 bg-indigo-500" style={{ opacity: 0.06 }} />
+            <div className="glow-orb w-[500px] h-[500px] -top-48 -right-48 bg-nexus-coffee" style={{ opacity: 0.06 }} />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-                    <div><h1 className="text-3xl font-extrabold text-white mb-1">Papers Dashboard</h1><p className="text-white/40">Browse, upload, and download exam papers</p></div>
-                    {user && <button onClick={() => setShowUpload(true)} className="px-5 py-2.5 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-indigo-500/20 active:scale-95"><Upload className="w-4 h-4" />Upload Paper</button>}
+                    <div><h1 className="text-3xl font-extrabold text-nexus-linen mb-1">Papers Dashboard</h1><p className="text-nexus-camel">Browse, upload, and download exam papers</p></div>
+                    {user && <button onClick={() => setShowUpload(true)} className="px-5 py-2.5 bg-gradient-to-r from-nexus-coffee to-purple-600 text-nexus-linen rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-nexus-coffee/20 active:scale-95"><Upload className="w-4 h-4" />Upload Paper</button>}
                 </div>
 
                 {/* Sub Navigation */}
@@ -127,7 +127,7 @@ export default function PapersPage() {
                                         href={item.href}
                                         className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${isActive
                                             ? 'bg-[var(--secondary)]/15 text-[var(--secondary)] font-bold'
-                                            : 'text-white/40 hover:text-white/60 hover:bg-white/[0.04]'
+                                            : 'text-nexus-camel hover:text-nexus-khaki hover:bg-white/[0.04]'
                                             }`}
                                     >
                                         <Icon className="w-4 h-4" />
@@ -142,17 +142,17 @@ export default function PapersPage() {
                 {/* Upload Form */}
                 {showUpload && (
                     <div className="glass-card p-6 mb-8">
-                        <div className="flex justify-between items-center mb-4"><h3 className="text-xl font-bold text-white">Upload Paper</h3><button onClick={() => setShowUpload(false)} className="p-2 hover:bg-white/10 rounded-lg"><X className="w-5 h-5 text-white/50" /></button></div>
+                        <div className="flex justify-between items-center mb-4"><h3 className="text-xl font-bold text-nexus-linen">Upload Paper</h3><button onClick={() => setShowUpload(false)} className="p-2 hover:bg-white/10 rounded-lg"><X className="w-5 h-5 text-nexus-camel" /></button></div>
                         <form onSubmit={handleUpload} className="space-y-4">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div><label className="block text-xs font-semibold text-white/50 mb-2">Title *</label><input value={uploadForm.title} onChange={e => setUploadForm({ ...uploadForm, title: e.target.value })} required className="input-field" placeholder="Paper title" /></div>
-                                <div><label className="block text-xs font-semibold text-white/50 mb-2">Course</label><select value={uploadForm.course_id} onChange={e => setUploadForm({ ...uploadForm, course_id: e.target.value })} className="input-field"><option value="">Select Course</option>{courses.map(c => <option key={c._id || c.id} value={c._id || c.id}>{c.code} - {c.name}</option>)}</select></div>
-                                <div><label className="block text-xs font-semibold text-white/50 mb-2">Type</label><select value={uploadForm.paper_type} onChange={e => setUploadForm({ ...uploadForm, paper_type: e.target.value })} className="input-field"><option value="exam">Exam</option><option value="quiz">Quiz</option><option value="assignment">Assignment</option><option value="notes">Notes</option></select></div>
-                                <div><label className="block text-xs font-semibold text-white/50 mb-2">Year</label><input value={uploadForm.year} onChange={e => setUploadForm({ ...uploadForm, year: e.target.value })} className="input-field" placeholder="2024" type="number" /></div>
+                                <div><label className="block text-xs font-semibold text-nexus-camel mb-2">Title *</label><input value={uploadForm.title} onChange={e => setUploadForm({ ...uploadForm, title: e.target.value })} required className="input-field" placeholder="Paper title" /></div>
+                                <div><label className="block text-xs font-semibold text-nexus-camel mb-2">Course</label><select value={uploadForm.course_id} onChange={e => setUploadForm({ ...uploadForm, course_id: e.target.value })} className="input-field"><option value="">Select Course</option>{courses.map(c => <option key={c._id || c.id} value={c._id || c.id}>{c.code} - {c.name}</option>)}</select></div>
+                                <div><label className="block text-xs font-semibold text-nexus-camel mb-2">Type</label><select value={uploadForm.paper_type} onChange={e => setUploadForm({ ...uploadForm, paper_type: e.target.value })} className="input-field"><option value="exam">Exam</option><option value="quiz">Quiz</option><option value="assignment">Assignment</option><option value="notes">Notes</option></select></div>
+                                <div><label className="block text-xs font-semibold text-nexus-camel mb-2">Year</label><input value={uploadForm.year} onChange={e => setUploadForm({ ...uploadForm, year: e.target.value })} className="input-field" placeholder="2024" type="number" /></div>
                             </div>
-                            <div><label className="block text-xs font-semibold text-white/50 mb-2">Description</label><textarea value={uploadForm.description} onChange={e => setUploadForm({ ...uploadForm, description: e.target.value })} rows={3} className="input-field" placeholder="Optional description" /></div>
-                            <div><label className="block text-xs font-semibold text-white/50 mb-2">File *</label><input type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" onChange={e => setFile(e.target.files?.[0] || null)} required className="input-field file:mr-4 file:rounded-lg file:border-0 file:bg-white/10 file:px-4 file:py-2 file:text-white/60 file:font-semibold file:text-sm" /></div>
-                            <button type="submit" disabled={uploading} className="px-6 py-2.5 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl font-bold disabled:opacity-50">{uploading ? 'Uploading...' : 'Upload Paper'}</button>
+                            <div><label className="block text-xs font-semibold text-nexus-camel mb-2">Description</label><textarea value={uploadForm.description} onChange={e => setUploadForm({ ...uploadForm, description: e.target.value })} rows={3} className="input-field" placeholder="Optional description" /></div>
+                            <div><label className="block text-xs font-semibold text-nexus-camel mb-2">File *</label><input type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" onChange={e => setFile(e.target.files?.[0] || null)} required className="input-field file:mr-4 file:rounded-lg file:border-0 file:bg-white/10 file:px-4 file:py-2 file:text-nexus-khaki file:font-semibold file:text-sm" /></div>
+                            <button type="submit" disabled={uploading} className="px-6 py-2.5 bg-gradient-to-r from-nexus-coffee to-purple-600 text-nexus-linen rounded-xl font-bold disabled:opacity-50">{uploading ? 'Uploading...' : 'Upload Paper'}</button>
                         </form>
                     </div>
                 )}
@@ -164,7 +164,7 @@ export default function PapersPage() {
                         <input
                             type="text"
                             placeholder="Search papers by title or description..."
-                            className="w-full pl-12 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 outline-none focus:border-[var(--secondary)]"
+                            className="w-full pl-12 pr-4 py-3 rounded-xl bg-white/5 border border-nexus-camel/20 text-nexus-linen placeholder-white/30 outline-none focus:border-[var(--secondary)]"
                             value={searchTerm}
                             onChange={e => { setSearchTerm(e.target.value); setCurrentPage(1); }}
                         />
@@ -172,7 +172,7 @@ export default function PapersPage() {
                     <select
                         value={courseFilter}
                         onChange={e => { setCourseFilter(e.target.value); setCurrentPage(1); }}
-                        className="flex-1 px-4 py-3 rounded-xl bg-[#1a1a1a] border border-white/10 text-white outline-none focus:border-[var(--secondary)]"
+                        className="flex-1 px-4 py-3 rounded-xl bg-[#1a1a1a] border border-nexus-camel/20 text-nexus-linen outline-none focus:border-[var(--secondary)]"
                     >
                         <option value="">All Courses</option>
                         {courses.map(c => <option key={c.code} value={c.code}>{c.code}</option>)}
@@ -180,7 +180,7 @@ export default function PapersPage() {
                     <select
                         value={typeFilter}
                         onChange={e => { setTypeFilter(e.target.value); setCurrentPage(1); }}
-                        className="flex-1 px-4 py-3 rounded-xl bg-[#1a1a1a] border border-white/10 text-white outline-none focus:border-[var(--secondary)]"
+                        className="flex-1 px-4 py-3 rounded-xl bg-[#1a1a1a] border border-nexus-camel/20 text-nexus-linen outline-none focus:border-[var(--secondary)]"
                     >
                         <option value="">All Types</option>
                         <option value="exam">Exam</option>
@@ -194,8 +194,8 @@ export default function PapersPage() {
                     {papers.map((p, idx) => (
                         <motion.div key={p._id || p.id || idx} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.03 }} className="glass-card p-4 sm:p-5 group hover:border-[var(--secondary)]/30 transition-all flex flex-col h-full">
                             <div className="flex items-start justify-between gap-3 mb-2">
-                                <h3 className="font-bold text-white text-sm sm:text-base line-clamp-2 group-hover:text-[var(--secondary)] transition-colors flex-1 min-w-0 leading-tight">{p.title}</h3>
-                                <span className="px-2 py-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-[9px] sm:text-[10px] font-bold rounded-full shrink-0 uppercase tracking-tight">{p.paper_type}</span>
+                                <h3 className="font-bold text-nexus-linen text-sm sm:text-base line-clamp-2 group-hover:text-[var(--secondary)] transition-colors flex-1 min-w-0 leading-tight">{p.title}</h3>
+                                <span className="px-2 py-0.5 bg-gradient-to-r from-nexus-coffee to-nexus-cocoa text-nexus-linen text-[9px] sm:text-[10px] font-bold rounded-full shrink-0 uppercase tracking-tight">{p.paper_type}</span>
                             </div>
 
                             <div className="flex-1">
@@ -205,9 +205,9 @@ export default function PapersPage() {
                                         <span className="truncate">{p.course_code} {p.course_name && `- ${p.course_name}`}</span>
                                     </p>
                                 )}
-                                <div className="flex items-center gap-2 text-[11px] text-white/40 mb-4 font-medium">
-                                    <div className="flex items-center gap-1 shrink-0 bg-white/5 px-2 py-0.5 rounded-md border border-white/5">
-                                        <User className="w-3 h-3 text-white/40" />
+                                <div className="flex items-center gap-2 text-[11px] text-nexus-camel mb-4 font-medium">
+                                    <div className="flex items-center gap-1 shrink-0 bg-white/5 px-2 py-0.5 rounded-md border border-nexus-camel/10">
+                                        <User className="w-3 h-3 text-nexus-camel" />
                                         <span className="truncate max-w-[80px] sm:max-w-none">{p.uploader_name || 'Admin'}</span>
                                     </div>
                                     <span className="opacity-30">•</span>
@@ -215,13 +215,13 @@ export default function PapersPage() {
                                 </div>
                             </div>
 
-                            <div className="flex items-center justify-between pt-3 border-t border-white/5 mt-auto">
-                                <span className="text-[11px] font-bold text-white/40 bg-white/5 px-2 py-0.5 rounded-md">{p.year ? `FY ${p.year}` : 'N/A'}</span>
+                            <div className="flex items-center justify-between pt-3 border-t border-nexus-camel/10 mt-auto">
+                                <span className="text-[11px] font-bold text-nexus-camel bg-white/5 px-2 py-0.5 rounded-md">{p.year ? `FY ${p.year}` : 'N/A'}</span>
                                 <div className="flex items-center gap-2">
-                                    <button onClick={() => handlePreview(String(p._id || p.id))} className="p-2 sm:p-2.5 bg-white/5 border border-white/10 text-white rounded-lg hover:bg-white/10 hover:border-[var(--secondary)]/30 active:scale-90 transition-all group/btn" title="Preview">
-                                        <Eye className="w-4 h-4 text-white/60 group-hover/btn:text-[var(--secondary)]" />
+                                    <button onClick={() => handlePreview(String(p._id || p.id))} className="p-2 sm:p-2.5 bg-white/5 border border-nexus-camel/20 text-nexus-linen rounded-lg hover:bg-white/10 hover:border-[var(--secondary)]/30 active:scale-90 transition-all group/btn" title="Preview">
+                                        <Eye className="w-4 h-4 text-nexus-khaki group-hover/btn:text-[var(--secondary)]" />
                                     </button>
-                                    <button onClick={() => handleDownload(String(p._id || p.id), p.file_name)} className="p-2 sm:p-2.5 bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-lg hover:shadow-lg hover:shadow-indigo-500/20 active:scale-90 transition-all" title="Download">
+                                    <button onClick={() => handleDownload(String(p._id || p.id), p.file_name)} className="p-2 sm:p-2.5 bg-gradient-to-br from-nexus-coffee to-purple-600 text-nexus-linen rounded-lg hover:shadow-lg hover:shadow-nexus-coffee/20 active:scale-90 transition-all" title="Download">
                                         <Download className="w-4 h-4" />
                                     </button>
                                 </div>
@@ -236,7 +236,7 @@ export default function PapersPage() {
                         <button
                             onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                             disabled={currentPage === 1}
-                            className="px-4 py-2 rounded-lg bg-white/5 text-white/70 font-semibold border border-white/10 disabled:opacity-30 hover:bg-white/10 transition-colors"
+                            className="px-4 py-2 rounded-lg bg-white/5 text-nexus-khaki font-semibold border border-nexus-camel/20 disabled:opacity-30 hover:bg-white/10 transition-colors"
                         >
                             Previous
                         </button>
@@ -246,8 +246,8 @@ export default function PapersPage() {
                                     key={page}
                                     onClick={() => setCurrentPage(page)}
                                     className={`w-10 h-10 rounded-lg text-sm font-bold flex items-center justify-center transition-colors ${currentPage === page
-                                        ? 'bg-gradient-to-tr from-indigo-500 to-purple-500 text-white shadow-lg'
-                                        : 'text-white/50 hover:bg-white/10'
+                                        ? 'bg-gradient-to-tr from-nexus-coffee to-nexus-cocoa text-nexus-linen shadow-lg'
+                                        : 'text-nexus-camel hover:bg-white/10'
                                         }`}
                                 >
                                     {page}
@@ -257,7 +257,7 @@ export default function PapersPage() {
                         <button
                             onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                             disabled={currentPage === totalPages}
-                            className="px-4 py-2 rounded-lg bg-white/5 text-white/70 font-semibold border border-white/10 disabled:opacity-30 hover:bg-white/10 transition-colors"
+                            className="px-4 py-2 rounded-lg bg-white/5 text-nexus-khaki font-semibold border border-nexus-camel/20 disabled:opacity-30 hover:bg-white/10 transition-colors"
                         >
                             Next
                         </button>
@@ -265,7 +265,7 @@ export default function PapersPage() {
                 )}
 
                 {papers.length === 0 && !loading && (
-                    <div className="text-center py-20"><FileText className="w-12 h-12 text-white/10 mx-auto mb-4" /><h3 className="text-xl font-bold text-white mb-2">No papers found</h3><p className="text-white/30">Try adjusting search or filters</p></div>
+                    <div className="text-center py-20"><FileText className="w-12 h-12 text-white/10 mx-auto mb-4" /><h3 className="text-xl font-bold text-nexus-linen mb-2">No papers found</h3><p className="text-white/30">Try adjusting search or filters</p></div>
                 )}
             </div>
 
@@ -276,7 +276,7 @@ export default function PapersPage() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-12 bg-black/80 backdrop-blur-sm"
+                        className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-12 bg-nexus-black/80 backdrop-blur-sm"
                         onClick={() => setPreviewUrl(null)}
                     >
                         <motion.div
@@ -284,23 +284,23 @@ export default function PapersPage() {
                             animate={{ scale: 1, opacity: 1, y: 0 }}
                             exit={{ scale: 0.95, opacity: 0, y: 20 }}
                             onClick={(e) => e.stopPropagation()}
-                            className="bg-[#111] border border-white/10 rounded-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl relative"
+                            className="bg-nexus-green border border-nexus-camel/20 rounded-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl relative"
                         >
-                            <div className="flex items-center justify-between p-4 border-b border-white/10 bg-white/5 shrink-0">
-                                <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                                    <FileText className="w-5 h-5 text-indigo-400" /> Document Preview
+                            <div className="flex items-center justify-between p-4 border-b border-nexus-camel/20 bg-white/5 shrink-0">
+                                <h3 className="text-lg font-bold text-nexus-linen flex items-center gap-2">
+                                    <FileText className="w-5 h-5 text-nexus-brass" /> Document Preview
                                 </h3>
                                 <div className="flex items-center gap-2">
                                     <button
                                         onClick={() => window.open(previewUrl, '_blank')}
-                                        className="p-2 hover:bg-white/10 rounded-lg text-white/70 hover:text-white transition-colors"
+                                        className="p-2 hover:bg-white/10 rounded-lg text-nexus-khaki hover:text-nexus-linen transition-colors"
                                         title="Open in new tab"
                                     >
                                         <Maximize2 className="w-5 h-5" />
                                     </button>
                                     <button
                                         onClick={() => setPreviewUrl(null)}
-                                        className="p-2 hover:bg-red-500/20 rounded-lg text-white/70 hover:text-red-400 transition-colors"
+                                        className="p-2 hover:bg-red-500/20 rounded-lg text-nexus-khaki hover:text-red-400 transition-colors"
                                     >
                                         <X className="w-5 h-5" />
                                     </button>

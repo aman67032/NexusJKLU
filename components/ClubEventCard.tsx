@@ -21,7 +21,7 @@ interface ClubEventCardProps {
 export default function ClubEventCard({ id, title, date, venue, imageUrl, status, desc, is_enrolled }: ClubEventCardProps) {
     return (
         <Link href={`/council/events/${id}`}>
-            <div className="group relative rounded-2xl overflow-hidden cursor-pointer border border-white/5 bg-white/5 backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:border-[var(--primary)]/30 hover:shadow-xl hover:shadow-[var(--primary)]/5">
+            <div className="group relative rounded-2xl overflow-hidden cursor-pointer border border-nexus-camel/10 bg-white/5 backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:border-[var(--primary)]/30 hover:shadow-xl hover:shadow-[var(--primary)]/5">
                 {/* Image */}
                 <div className="h-36 w-full relative overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900">
                     {imageUrl && (
@@ -41,27 +41,27 @@ export default function ClubEventCard({ id, title, date, venue, imageUrl, status
                         </div>
                     )}
                     <div className="absolute bottom-3 left-3 right-3 z-10">
-                        <div className="flex items-center gap-1.5 text-[11px] text-white/80 mb-1">
+                        <div className="flex items-center gap-1.5 text-[11px] text-nexus-khaki mb-1">
                             <Calendar className="w-3 h-3" />
                             {format(new Date(date), 'MMM d, yyyy')}
                         </div>
-                        <h4 className="text-sm font-bold text-white line-clamp-2 drop-shadow-md">{title}</h4>
+                        <h4 className="text-sm font-bold text-nexus-linen line-clamp-2 drop-shadow-md">{title}</h4>
                     </div>
                 </div>
 
                 {/* Body */}
                 <div className="p-4 pt-3">
                     {venue && (
-                        <div className="flex items-center gap-1.5 text-xs text-white/40 mb-2">
+                        <div className="flex items-center gap-1.5 text-xs text-nexus-camel mb-2">
                             <MapPin className="w-3 h-3" />
                             {venue}
                         </div>
                     )}
                     {desc && <p className="text-xs text-white/30 line-clamp-2 mb-3">{desc}</p>}
-                    <div className="flex items-center justify-between pt-2 border-t border-white/5">
-                        <span className="text-[10px] font-bold text-white/30 uppercase tracking-wider group-hover:text-white/60 transition-colors">View Event</span>
+                    <div className="flex items-center justify-between pt-2 border-t border-nexus-camel/10">
+                        <span className="text-[10px] font-bold text-white/30 uppercase tracking-wider group-hover:text-nexus-khaki transition-colors">View Event</span>
                         <div className="w-6 h-6 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[var(--primary)] transition-all">
-                            <ChevronRight className="w-3 h-3 text-white/40 group-hover:text-white" />
+                            <ChevronRight className="w-3 h-3 text-nexus-camel group-hover:text-nexus-linen" />
                         </div>
                     </div>
                 </div>

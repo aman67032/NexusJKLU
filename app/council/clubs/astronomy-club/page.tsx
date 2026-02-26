@@ -53,7 +53,7 @@ export default function AstronomyClubPage() {
     if (!mounted) return null;
 
     return (
-        <div className="min-h-screen bg-[#050B14] text-slate-100 font-sans selection:bg-purple-500 selection:text-white overflow-x-hidden relative">
+        <div className="min-h-screen bg-[#050B14] text-slate-100 font-sans selection:bg-purple-500 selection:text-nexus-linen overflow-x-hidden relative">
             {/* Starfield Background */}
             {/* Starfield Background with Improved Galaxy Effect */}
             <div className="fixed inset-0 z-0 bg-[#020617]">
@@ -142,7 +142,7 @@ export default function AstronomyClubPage() {
                         NAKSHATRA
                     </h1>
                     <p className="text-xl md:text-2xl font-light text-slate-300 max-w-2xl mx-auto leading-relaxed mb-4">
-                        Unlock the <span className="text-purple-400 font-bold">Cosmos</span> with Us
+                        Unlock the <span className="text-nexus-brass font-bold">Cosmos</span> with Us
                     </p>
                 </motion.div>
 
@@ -154,7 +154,7 @@ export default function AstronomyClubPage() {
                 >
                     <button
                         onClick={handleJoin}
-                        className={`group relative px-8 py-3 rounded-full border border-purple-500/50 ${joined ? 'bg-purple-500/20 text-purple-300' : 'hover:bg-purple-500/10 text-white'} font-bold tracking-widest uppercase transition-all duration-300 backdrop-blur-sm`}
+                        className={`group relative px-8 py-3 rounded-full border border-purple-500/50 ${joined ? 'bg-purple-500/20 text-purple-300' : 'hover:bg-purple-500/10 text-nexus-linen'} font-bold tracking-widest uppercase transition-all duration-300 backdrop-blur-sm`}
                     >
                         {joined ? 'Mission Control Access' : 'Launch Journey'}
                     </button>
@@ -173,7 +173,7 @@ export default function AstronomyClubPage() {
             </div>
 
             {/* --- SECTION 1: THE OBSERVATORY (Vision) --- */}
-            <section className="relative z-10 py-24 border-t border-white/5 bg-[#050B14]/80 backdrop-blur-md">
+            <section className="relative z-10 py-24 border-t border-nexus-camel/10 bg-[#050B14]/80 backdrop-blur-md">
                 <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div>
                         <SectionHeader title="Our Mission" subtitle="The Observatory" />
@@ -193,7 +193,7 @@ export default function AstronomyClubPage() {
                         <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
                         <div className="relative p-8 bg-[#0a1120] ring-1 ring-gray-900/5 rounded-lg leading-none flex items-top justify-start space-x-6">
                             <div className="space-y-4">
-                                <h3 className="text-xl font-bold text-white mb-2">Technical Arsenal</h3>
+                                <h3 className="text-xl font-bold text-nexus-linen mb-2">Technical Arsenal</h3>
                                 <ul className="space-y-2 text-slate-400 text-sm">
                                     <li className="flex items-center gap-2"><ArrowUpRight className="w-4 h-4 text-purple-500" /> Celestron LCM 114 Telescope</li>
                                     <li className="flex items-center gap-2"><ArrowUpRight className="w-4 h-4 text-purple-500" /> High-Power Binoculars</li>
@@ -227,7 +227,7 @@ export default function AstronomyClubPage() {
                                     imageUrl={event.image_url}
                                     status={event.status}
                                     desc={event.description}
-                                    color="text-purple-400"
+                                    color="text-nexus-brass"
                                     bg="bg-purple-500/10"
                                     border="group-hover:border-purple-500/50"
                                     is_enrolled={event.is_enrolled}
@@ -235,7 +235,7 @@ export default function AstronomyClubPage() {
                             ))}
                         </div>
                     ) : (
-                        <div className="text-center py-12 bg-white/5 rounded-2xl border border-dotted border-white/10">
+                        <div className="text-center py-12 bg-white/5 rounded-2xl border border-dotted border-nexus-camel/20">
                             <Star className="w-12 h-12 text-slate-500 mx-auto mb-4" />
                             <p className="text-slate-400 font-medium">No celestial events currently scheduled.</p>
                         </div>
@@ -274,7 +274,7 @@ export default function AstronomyClubPage() {
             </section>
 
             {/* --- SECTION 3: THE ASTRONOMERS (Leadership) --- */}
-            <section className="relative z-10 py-24 bg-gradient-to-b from-[#050B14] to-indigo-950/20 border-t border-white/5">
+            <section className="relative z-10 py-24 bg-gradient-to-b from-[#050B14] to-indigo-950/20 border-t border-nexus-camel/10">
                 <div className="max-w-7xl mx-auto px-4">
                     <SectionHeader title="Mission Command" subtitle="Leadership" center />
 
@@ -333,7 +333,7 @@ export default function AstronomyClubPage() {
             </section>
 
             {/* Footer decoration */}
-            <div className="py-12 bg-[#050B14] border-t border-white/5 text-center relative z-10">
+            <div className="py-12 bg-[#050B14] border-t border-nexus-camel/10 text-center relative z-10">
                 <div className="flex justify-center gap-8 mb-6">
                     <SocialLink href="mailto:astroclub@jklu.edu.in" icon={<Send />} label="Frequency (Email)" />
                     <SocialLink href="https://www.instagram.com/nakshatra.jklu" icon={<Instagram />} label="Visuals (Insta)" />
@@ -353,18 +353,18 @@ function SectionHeader({ title, subtitle, center }: any) {
         <div className={`mb-10 ${center ? 'flex flex-col items-center' : ''}`}>
             <div className="flex items-center gap-3 mb-3">
                 <span className="w-8 h-[1px] bg-purple-500"></span>
-                <span className="text-purple-400 font-mono text-xs font-bold uppercase tracking-widest">{subtitle}</span>
+                <span className="text-nexus-brass font-mono text-xs font-bold uppercase tracking-widest">{subtitle}</span>
                 <span className="w-8 h-[1px] bg-purple-500"></span>
             </div>
-            <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight">{title}</h2>
+            <h2 className="text-3xl md:text-5xl font-black text-nexus-linen uppercase tracking-tight">{title}</h2>
         </div>
     );
 }
 
 function FeatureItem({ icon, text }: any) {
     return (
-        <div className="flex items-center gap-3 p-4 bg-white/5 rounded-lg border border-white/10 hover:border-purple-500/50 transition-colors">
-            <div className="text-purple-400">{icon}</div>
+        <div className="flex items-center gap-3 p-4 bg-white/5 rounded-lg border border-nexus-camel/20 hover:border-purple-500/50 transition-colors">
+            <div className="text-nexus-brass">{icon}</div>
             <span className="text-slate-200 font-bold text-sm tracking-wide">{text}</span>
         </div>
     );
@@ -375,12 +375,12 @@ function EventTimelineItem({ date, title, desc, icon, highlight }: any) {
         <div className="relative pl-8 md:pl-12 group">
             <div className={`absolute left-[-9px] top-0 w-4 h-4 rounded-full border-2 ${highlight ? 'bg-purple-500 border-purple-300' : 'bg-[#050B14] border-purple-500/50'} z-10`}></div>
 
-            <div className={`p-6 rounded-lg border ${highlight ? 'bg-purple-900/10 border-purple-500/50' : 'bg-white/5 border-white/10'} hover:border-purple-500/50 transition-all duration-300`}>
+            <div className={`p-6 rounded-lg border ${highlight ? 'bg-purple-900/10 border-purple-500/50' : 'bg-white/5 border-nexus-camel/20'} hover:border-purple-500/50 transition-all duration-300`}>
                 <div className="flex items-center gap-2 mb-2">
-                    <div className="text-purple-400">{icon}</div>
-                    <span className="text-purple-400 font-mono text-xs font-bold tracking-widest">{date}</span>
+                    <div className="text-nexus-brass">{icon}</div>
+                    <span className="text-nexus-brass font-mono text-xs font-bold tracking-widest">{date}</span>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">{title}</h3>
+                <h3 className="text-xl font-bold text-nexus-linen mb-2 group-hover:text-purple-300 transition-colors">{title}</h3>
                 <p className="text-slate-400 text-sm leading-relaxed">{desc}</p>
             </div>
         </div>
@@ -390,23 +390,23 @@ function EventTimelineItem({ date, title, desc, icon, highlight }: any) {
 function CommanderCard({ name, role, rank, image }: any) {
     return (
         <div className="flex flex-col items-center p-8 bg-[#0a1120] border border-purple-500/20 rounded-xl relative overflow-hidden group hover:-translate-y-2 transition-transform duration-500 w-80">
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-nexus-cocoa/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
 
             {/* Hexagon Shape for "Not Circle Not Cube" */}
             <div className="w-48 h-48 mb-6 relative z-10 group-hover:scale-105 transition-transform duration-500 drop-shadow-[0_0_15px_rgba(168,85,247,0.3)]">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500 to-blue-600 clip-path-polygon-[25%_0%,_75%_0%,_100%_50%,_75%_100%,_25%_100%,_0%_50%]"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-nexus-cocoa to-blue-600 clip-path-polygon-[25%_0%,_75%_0%,_100%_50%,_75%_100%,_25%_100%,_0%_50%]"></div>
                 <div className="absolute inset-[2px] bg-[#0a1120] clip-path-polygon-[25%_0%,_75%_0%,_100%_50%,_75%_100%,_25%_100%,_0%_50%] flex items-center justify-center overflow-hidden">
                     {image ? (
                         <img src={image} alt={name} className="w-full h-full object-cover" />
                     ) : (
-                        <Users className="w-16 h-16 text-slate-500 group-hover:text-white transition-colors" />
+                        <Users className="w-16 h-16 text-slate-500 group-hover:text-nexus-linen transition-colors" />
                     )}
                 </div>
             </div>
 
             <div className="relative z-10 text-center">
                 <div className="text-purple-500 text-xs font-bold uppercase tracking-widest mb-2">{rank}</div>
-                <h3 className="text-2xl font-bold text-white mb-1">{name}</h3>
+                <h3 className="text-2xl font-bold text-nexus-linen mb-1">{name}</h3>
                 <p className="text-slate-400 text-sm uppercase">{role}</p>
             </div>
         </div>
@@ -415,9 +415,9 @@ function CommanderCard({ name, role, rank, image }: any) {
 
 function OfficerCard({ name, role }: any) {
     return (
-        <div className="text-center p-4 border border-white/5 hover:bg-white/5 transition-colors rounded-lg">
-            <h4 className="font-bold text-white text-sm mb-1">{name}</h4>
-            <p className="text-purple-400 text-[10px] uppercase tracking-wide">{role}</p>
+        <div className="text-center p-4 border border-nexus-camel/10 hover:bg-white/5 transition-colors rounded-lg">
+            <h4 className="font-bold text-nexus-linen text-sm mb-1">{name}</h4>
+            <p className="text-nexus-brass text-[10px] uppercase tracking-wide">{role}</p>
         </div>
     );
 }
@@ -428,7 +428,7 @@ function SocialLink({ href, icon, label }: any) {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors font-mono text-xs uppercase tracking-wide"
+            className="flex items-center gap-2 text-slate-400 hover:text-nexus-linen transition-colors font-mono text-xs uppercase tracking-wide"
         >
             {icon} {label}
         </a>

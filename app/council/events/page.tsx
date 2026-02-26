@@ -52,13 +52,13 @@ export default function EventsPage() {
                 {/* Hero */}
                 <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
                     <div className="space-y-4">
-                        <div className="inline-block px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-sm font-medium text-white/50 mb-2">
+                        <div className="inline-block px-4 py-1.5 rounded-full border border-nexus-camel/20 bg-white/5 backdrop-blur-md text-sm font-medium text-nexus-camel mb-2">
                             What's Happening
                         </div>
                         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
                             <span className="gradient-text-orange">Campus Events</span>
                         </h1>
-                        <p className="text-lg max-w-2xl text-white/40 mb-6">
+                        <p className="text-lg max-w-2xl text-nexus-camel mb-6">
                             Discover screenings, workshops, competitions, and more happening at JKLU.
                         </p>
 
@@ -75,7 +75,7 @@ export default function EventsPage() {
                                                 href={item.href}
                                                 className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${isActive
                                                     ? 'bg-orange-500/15 text-orange-400 font-bold'
-                                                    : 'text-white/40 hover:text-white/70 hover:bg-white/[0.04]'
+                                                    : 'text-nexus-camel hover:text-nexus-khaki hover:bg-white/[0.04]'
                                                     }`}
                                             >
                                                 <Icon className="w-4 h-4" />
@@ -91,12 +91,12 @@ export default function EventsPage() {
                     <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
                         <div className="relative group">
                             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/30 group-hover:text-[var(--primary)] transition-colors" />
-                            <input type="text" placeholder="Search events..." className="w-full sm:w-72 pl-12 pr-4 py-3 rounded-2xl border-2 bg-white/5 border-white/10 focus:border-[var(--primary)] text-white placeholder-white/30 outline-none backdrop-blur-xl transition-all" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+                            <input type="text" placeholder="Search events..." className="w-full sm:w-72 pl-12 pr-4 py-3 rounded-2xl border-2 bg-white/5 border-nexus-camel/20 focus:border-[var(--primary)] text-nexus-linen placeholder-white/30 outline-none backdrop-blur-xl transition-all" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
                         </div>
 
-                        <div className="flex items-center p-1 rounded-2xl border bg-white/5 border-white/10 backdrop-blur-xl">
+                        <div className="flex items-center p-1 rounded-2xl border bg-white/5 border-nexus-camel/20 backdrop-blur-xl">
                             {['upcoming', 'all', 'past'].map((f) => (
-                                <button key={f} onClick={() => setFilter(f)} className={`px-5 py-2 rounded-xl text-sm font-semibold transition-all duration-300 capitalize ${filter === f ? 'bg-gradient-to-r from-[var(--primary)] to-orange-600 text-white shadow-lg shadow-orange-500/20' : 'text-white/40 hover:text-[var(--primary)]'}`}>
+                                <button key={f} onClick={() => setFilter(f)} className={`px-5 py-2 rounded-xl text-sm font-semibold transition-all duration-300 capitalize ${filter === f ? 'bg-gradient-to-r from-[var(--primary)] to-orange-600 text-nexus-linen shadow-lg shadow-orange-500/20' : 'text-nexus-camel hover:text-[var(--primary)]'}`}>
                                     {f}
                                 </button>
                             ))}
@@ -119,7 +119,7 @@ export default function EventsPage() {
                                 const eventDate = event.start_date || event.date;
                                 return (
                                     <motion.div key={event.id || event._id} variants={itemVariants} layout onClick={() => router.push(`/council/events/${event.id || event._id}`)}
-                                        className="group relative rounded-3xl overflow-hidden cursor-pointer border bg-white/5 border-white/10 hover:border-[var(--primary)]/50 hover:shadow-[var(--primary)]/10 backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+                                        className="group relative rounded-3xl overflow-hidden cursor-pointer border bg-white/5 border-nexus-camel/20 hover:border-[var(--primary)]/50 hover:shadow-[var(--primary)]/10 backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
                                         {/* Image */}
                                         <div className="h-48 w-full relative overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900">
                                             {event.image_url && (
@@ -130,7 +130,7 @@ export default function EventsPage() {
                                             )}
                                             <div className="absolute top-4 left-4 flex gap-2 z-10">
                                                 {event.council_name && (
-                                                    <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-black/40 text-white backdrop-blur-md rounded-full border border-white/10">{event.council_name}</span>
+                                                    <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-nexus-black/40 text-nexus-linen backdrop-blur-md rounded-full border border-nexus-camel/20">{event.council_name}</span>
                                                 )}
                                             </div>
                                             <div className="absolute bottom-4 left-4 right-4 z-10">
@@ -138,7 +138,7 @@ export default function EventsPage() {
                                                     <Calendar className="w-3.5 h-3.5" />
                                                     {eventDate && format(new Date(eventDate), 'MMM d, yyyy')}
                                                 </div>
-                                                <h3 className="text-xl font-bold line-clamp-2 leading-tight text-white drop-shadow-md">{event.title}</h3>
+                                                <h3 className="text-xl font-bold line-clamp-2 leading-tight text-nexus-linen drop-shadow-md">{event.title}</h3>
                                             </div>
                                         </div>
 
@@ -147,20 +147,20 @@ export default function EventsPage() {
                                             <div className="space-y-3 mb-4">
                                                 <div className="flex items-center gap-3 text-sm font-medium">
                                                     <div className="p-2 rounded-lg bg-white/5"><Clock className="w-4 h-4 text-[var(--primary)]" /></div>
-                                                    <span className="text-white/50">{eventDate && format(new Date(eventDate), 'h:mm a')}</span>
+                                                    <span className="text-nexus-camel">{eventDate && format(new Date(eventDate), 'h:mm a')}</span>
                                                 </div>
                                                 {event.venue && (
                                                     <div className="flex items-center gap-3 text-sm font-medium">
                                                         <div className="p-2 rounded-lg bg-white/5"><MapPin className="w-4 h-4 text-[var(--primary)]" /></div>
-                                                        <span className="text-white/50">{event.venue}</span>
+                                                        <span className="text-nexus-camel">{event.venue}</span>
                                                     </div>
                                                 )}
                                             </div>
                                             <p className="text-sm line-clamp-3 mb-4 text-white/30">{event.description}</p>
 
-                                            <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                                            <div className="pt-4 border-t border-nexus-camel/20 flex items-center justify-between">
                                                 <span className="text-xs font-bold uppercase tracking-wider text-white/20">{event.club_name || 'JKLU Event'}</span>
-                                                <div className="w-8 h-8 rounded-full flex items-center justify-center bg-white/10 text-white group-hover:bg-[var(--primary)] transition-all duration-300">
+                                                <div className="w-8 h-8 rounded-full flex items-center justify-center bg-white/10 text-nexus-linen group-hover:bg-[var(--primary)] transition-all duration-300">
                                                     <ChevronRight className="w-4 h-4" />
                                                 </div>
                                             </div>
@@ -177,7 +177,7 @@ export default function EventsPage() {
                         <div className="w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center bg-white/5">
                             <Calendar className="w-10 h-10 text-white/20" />
                         </div>
-                        <h3 className="text-xl font-bold text-white mb-2">No events found</h3>
+                        <h3 className="text-xl font-bold text-nexus-linen mb-2">No events found</h3>
                         <p className="text-white/30">Try adjusting your search or filters.</p>
                     </motion.div>
                 )}

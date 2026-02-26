@@ -44,13 +44,13 @@ export default function LearnPage() {
     return (
         <div className="min-h-screen relative">
             <div className="glow-orb w-[500px] h-[500px] -top-48 -right-48 bg-blue-500" style={{ opacity: 0.06 }} />
-            <div className="glow-orb w-[500px] h-[500px] -bottom-48 -left-48 bg-indigo-500" style={{ opacity: 0.04 }} />
+            <div className="glow-orb w-[500px] h-[500px] -bottom-48 -left-48 bg-nexus-coffee" style={{ opacity: 0.04 }} />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
                 {/* Header */}
                 <div className="mb-10">
                     <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-2"><span className="gradient-text-blue">Learning Portal</span></h1>
-                    <p className="text-white/40 text-lg mb-6">Browse exam papers, join coding challenges, and access academic resources.</p>
+                    <p className="text-nexus-camel text-lg mb-6">Browse exam papers, join coding challenges, and access academic resources.</p>
 
                     {/* Sub Navigation */}
                     <div className="mb-6">
@@ -65,7 +65,7 @@ export default function LearnPage() {
                                             href={item.href}
                                             className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${isActive
                                                 ? 'bg-[var(--secondary)]/15 text-[var(--secondary)] font-bold'
-                                                : 'text-white/40 hover:text-white/60 hover:bg-white/[0.04]'
+                                                : 'text-nexus-camel hover:text-nexus-khaki hover:bg-white/[0.04]'
                                                 }`}
                                         >
                                             <Icon className="w-4 h-4" />
@@ -81,14 +81,14 @@ export default function LearnPage() {
                 {/* Quick Links */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
                     {[
-                        { href: '/learn/papers', icon: <FileText className="w-5 h-5 sm:w-6 sm:h-6" />, label: 'Papers', desc: 'Exams & Notes', color: 'from-indigo-500 to-purple-600' },
+                        { href: '/learn/papers', icon: <FileText className="w-5 h-5 sm:w-6 sm:h-6" />, label: 'Papers', desc: 'Exams & Notes', color: 'from-nexus-coffee to-purple-600' },
                         { href: '/learn/coding-hour', icon: <Code className="w-5 h-5 sm:w-6 sm:h-6" />, label: 'Coding', desc: 'Daily Challenges', color: 'from-emerald-500 to-teal-600' },
                         { href: '/learn/profile', icon: <BookOpen className="w-5 h-5 sm:w-6 sm:h-6" />, label: 'Profile', desc: 'Account Settings', color: 'from-amber-500 to-orange-600' },
                     ].map(link => (
-                        <Link key={link.href} href={link.href} className="group glass-card p-4 sm:p-5 flex items-center gap-3 sm:gap-4 hover:border-white/20 transition-all">
-                            <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${link.color} flex items-center justify-center text-white shrink-0 group-hover:scale-110 transition-transform`}>{link.icon}</div>
-                            <div className="flex-1 min-w-0"><h3 className="font-bold text-white text-sm sm:text-base group-hover:text-[var(--secondary)] transition-colors">{link.label}</h3><p className="text-[10px] sm:text-xs text-white/30 truncate">{link.desc}</p></div>
-                            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-white/20 group-hover:text-white/50 transition-colors shrink-0" />
+                        <Link key={link.href} href={link.href} className="group glass-card p-4 sm:p-5 flex items-center gap-3 sm:gap-4 hover:border-nexus-camel/30 transition-all">
+                            <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${link.color} flex items-center justify-center text-nexus-linen shrink-0 group-hover:scale-110 transition-transform`}>{link.icon}</div>
+                            <div className="flex-1 min-w-0"><h3 className="font-bold text-nexus-linen text-sm sm:text-base group-hover:text-[var(--secondary)] transition-colors">{link.label}</h3><p className="text-[10px] sm:text-xs text-white/30 truncate">{link.desc}</p></div>
+                            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-white/20 group-hover:text-nexus-camel transition-colors shrink-0" />
                         </Link>
                     ))}
                 </div>
@@ -96,10 +96,10 @@ export default function LearnPage() {
                 {/* Course Folders */}
                 {courseFolders.length > 0 && (
                     <div className="mb-10">
-                        <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2"><FolderOpen className="w-5 h-5 text-[var(--secondary)]" /> Course Folders</h2>
+                        <h2 className="text-xl font-bold text-nexus-linen mb-4 flex items-center gap-2"><FolderOpen className="w-5 h-5 text-[var(--secondary)]" /> Course Folders</h2>
                         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
                             {courseFolders.map(c => (
-                                <button key={c.code} onClick={() => setSelectedCourse(selectedCourse === c.code ? '' : c.code)} className={`text-left p-4 rounded-xl border transition-all ${selectedCourse === c.code ? 'bg-[var(--secondary)]/10 border-[var(--secondary)]/30 text-white' : 'bg-white/[0.03] border-white/5 text-white/50 hover:bg-white/5 hover:text-white/80'}`}>
+                                <button key={c.code} onClick={() => setSelectedCourse(selectedCourse === c.code ? '' : c.code)} className={`text-left p-4 rounded-xl border transition-all ${selectedCourse === c.code ? 'bg-[var(--secondary)]/10 border-[var(--secondary)]/30 text-nexus-linen' : 'bg-white/[0.03] border-nexus-camel/10 text-nexus-camel hover:bg-white/5 hover:text-nexus-khaki'}`}>
                                     <FolderOpen className={`w-5 h-5 mb-2 ${selectedCourse === c.code ? 'text-[var(--secondary)]' : 'text-white/20'}`} />
                                     <p className="font-bold text-sm truncate">{c.code}</p>
                                     <p className="text-[10px] text-white/30 truncate">{c.name}</p>
@@ -114,10 +114,10 @@ export default function LearnPage() {
                 <div className="flex flex-col sm:flex-row gap-4 mb-8">
                     <div className="relative flex-1 group">
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20" />
-                        <input type="text" placeholder="Search papers..." className="w-full pl-12 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 outline-none focus:border-[var(--secondary)]" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
+                        <input type="text" placeholder="Search papers..." className="w-full pl-12 pr-4 py-3 rounded-xl bg-white/5 border border-nexus-camel/20 text-nexus-linen placeholder-white/30 outline-none focus:border-[var(--secondary)]" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
                     </div>
                     {paperTypes.length > 0 && (
-                        <select value={paperTypeFilter} onChange={e => setPaperTypeFilter(e.target.value)} className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white outline-none">
+                        <select value={paperTypeFilter} onChange={e => setPaperTypeFilter(e.target.value)} className="px-4 py-3 rounded-xl bg-white/5 border border-nexus-camel/20 text-nexus-linen outline-none">
                             <option value="">All Types</option>
                             {paperTypes.map(t => <option key={t} value={t}>{t}</option>)}
                         </select>
@@ -126,19 +126,19 @@ export default function LearnPage() {
 
                 {/* Papers List */}
                 {loading ? (
-                    <div className="flex justify-center py-20"><div className="w-12 h-12 border-4 border-white/10 border-t-[var(--secondary)] rounded-full animate-spin" /></div>
+                    <div className="flex justify-center py-20"><div className="w-12 h-12 border-4 border-nexus-camel/20 border-t-[var(--secondary)] rounded-full animate-spin" /></div>
                 ) : filtered.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {filtered.map((paper, idx) => (
                             <motion.div key={paper._id || paper.id || idx} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.03 }} className="glass-card p-4 sm:p-5 group hover:border-[var(--secondary)]/30 transition-all flex flex-col h-full">
                                 <div className="flex items-start justify-between gap-3 mb-2">
-                                    <h3 className="font-bold text-white text-sm line-clamp-2 group-hover:text-[var(--secondary)] transition-colors flex-1 min-w-0 leading-tight">{paper.title}</h3>
-                                    <span className="px-2 py-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-[9px] font-bold rounded-full shrink-0 uppercase">{paper.paper_type}</span>
+                                    <h3 className="font-bold text-nexus-linen text-sm line-clamp-2 group-hover:text-[var(--secondary)] transition-colors flex-1 min-w-0 leading-tight">{paper.title}</h3>
+                                    <span className="px-2 py-0.5 bg-gradient-to-r from-nexus-coffee to-nexus-cocoa text-nexus-linen text-[9px] font-bold rounded-full shrink-0 uppercase">{paper.paper_type}</span>
                                 </div>
                                 <div className="flex-1">
                                     {paper.course_code && <p className="text-[11px] text-[var(--secondary)] font-bold mb-1 opacity-80">{paper.course_code}</p>}
                                 </div>
-                                <div className="flex items-center justify-between pt-3 border-t border-white/5 text-[10px] text-white/20 mt-auto">
+                                <div className="flex items-center justify-between pt-3 border-t border-nexus-camel/10 text-[10px] text-white/20 mt-auto">
                                     <span className="truncate max-w-[100px]">{paper.year && `Year ${paper.year}`} {paper.semester && `• ${paper.semester}`}</span>
                                     <span className="truncate max-w-[80px] text-right">{paper.uploader_name}</span>
                                 </div>
@@ -146,7 +146,7 @@ export default function LearnPage() {
                         ))}
                     </div>
                 ) : (
-                    <div className="text-center py-20"><Search className="w-12 h-12 text-white/10 mx-auto mb-4" /><h3 className="text-xl font-bold text-white mb-2">No papers found</h3><p className="text-white/30">Try adjusting your search or filters</p></div>
+                    <div className="text-center py-20"><Search className="w-12 h-12 text-white/10 mx-auto mb-4" /><h3 className="text-xl font-bold text-nexus-linen mb-2">No papers found</h3><p className="text-white/30">Try adjusting your search or filters</p></div>
                 )}
             </div>
         </div>

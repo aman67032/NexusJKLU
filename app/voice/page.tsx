@@ -59,17 +59,17 @@ export default function VoicePage() {
     };
 
     const getStatusStyle = (s: string) => {
-        switch (s) { case 'open': return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'; case 'in_progress': return 'bg-blue-500/20 text-blue-400 border-blue-500/30'; case 'resolved': return 'bg-green-500/20 text-green-400 border-green-500/30'; case 'rejected': return 'bg-red-500/20 text-red-400 border-red-500/30'; default: return 'bg-white/10 text-white/50 border-white/20'; }
+        switch (s) { case 'open': return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'; case 'in_progress': return 'bg-blue-500/20 text-blue-400 border-blue-500/30'; case 'resolved': return 'bg-green-500/20 text-green-400 border-green-500/30'; case 'rejected': return 'bg-red-500/20 text-red-400 border-red-500/30'; default: return 'bg-white/10 text-nexus-camel border-nexus-camel/30'; }
     };
     const getPriorityStyle = (p: string) => {
-        switch (p) { case 'high': return 'bg-red-500/20 text-red-400 border-red-500/30'; case 'medium': return 'bg-orange-500/20 text-orange-400 border-orange-500/30'; default: return 'bg-white/10 text-white/40 border-white/20'; }
+        switch (p) { case 'high': return 'bg-red-500/20 text-red-400 border-red-500/30'; case 'medium': return 'bg-orange-500/20 text-orange-400 border-orange-500/30'; default: return 'bg-white/10 text-nexus-camel border-nexus-camel/30'; }
     };
 
     const resolved = complaints.filter(c => c.status === 'resolved');
     const active = complaints.filter(c => c.status !== 'resolved');
     const filteredActive = active.filter(c => statusFilter === 'all' || c.status === statusFilter);
 
-    if (loading) return <div className="min-h-screen flex items-center justify-center"><div className="w-12 h-12 border-4 border-white/10 border-t-green-500 rounded-full animate-spin" /></div>;
+    if (loading) return <div className="min-h-screen flex items-center justify-center"><div className="w-12 h-12 border-4 border-nexus-camel/20 border-t-green-500 rounded-full animate-spin" /></div>;
 
     return (
         <div className="min-h-screen relative">
@@ -80,19 +80,19 @@ export default function VoicePage() {
                 {/* Header */}
                 <div className="mb-10">
                     <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-2"><span className="gradient-text-green">CampusVoice</span></h1>
-                    <p className="text-white/40 text-lg">Submit and track campus complaints anonymously.</p>
+                    <p className="text-nexus-camel text-lg">Submit and track campus complaints anonymously.</p>
                 </div>
 
                 {/* Stats */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-10">
-                    {[{ label: 'Total', value: stats.total, icon: <MessageSquare className="w-5 h-5 text-white/50" />, bg: 'bg-white/5' },
+                    {[{ label: 'Total', value: stats.total, icon: <MessageSquare className="w-5 h-5 text-nexus-camel" />, bg: 'bg-white/5' },
                     { label: 'Pending', value: stats.pending, icon: <Clock className="w-5 h-5 text-yellow-400" />, bg: 'bg-yellow-500/10' },
                     { label: 'In Progress', value: stats.in_progress, icon: <TrendingUp className="w-5 h-5 text-blue-400" />, bg: 'bg-blue-500/10' },
                     { label: 'Resolved', value: stats.resolved, icon: <CheckCircle className="w-5 h-5 text-green-400" />, bg: 'bg-green-500/10' },
                     ].map(s => (
                         <div key={s.label} className="glass-card p-3 md:p-4">
                             <div className="flex items-center justify-between">
-                                <div><p className="text-[10px] md:text-xs font-semibold text-white/50 mb-0.5 md:mb-1">{s.label}</p><p className="text-xl md:text-2xl font-bold text-white">{s.value}</p></div>
+                                <div><p className="text-[10px] md:text-xs font-semibold text-nexus-camel mb-0.5 md:mb-1">{s.label}</p><p className="text-xl md:text-2xl font-bold text-nexus-linen">{s.value}</p></div>
                                 <div className={`p-2 md:p-2.5 rounded-full ${s.bg}`}>{s.icon}</div>
                             </div>
                         </div>
@@ -102,8 +102,8 @@ export default function VoicePage() {
                 {/* New Complaint Button */}
                 {user && (
                     <div className="mb-6 flex justify-between items-center gap-4">
-                        <h2 className="text-xl font-bold text-white">Complaints</h2>
-                        <button onClick={() => setShowNewComplaint(true)} className="px-4 md:px-5 py-2 md:py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-green-500/20 transition-all active:scale-95 whitespace-nowrap text-sm">
+                        <h2 className="text-xl font-bold text-nexus-linen">Complaints</h2>
+                        <button onClick={() => setShowNewComplaint(true)} className="px-4 md:px-5 py-2 md:py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 text-nexus-linen rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-green-500/20 transition-all active:scale-95 whitespace-nowrap text-sm">
                             <Plus className="w-4 h-4" /> New Complaint
                         </button>
                     </div>
@@ -113,23 +113,23 @@ export default function VoicePage() {
                 {showNewComplaint && (
                     <div className="glass-card p-5 md:p-6 mb-8">
                         <div className="flex justify-between items-center mb-4">
-                            <h3 className="text-xl font-bold text-white">Submit Complaint</h3>
-                            <button onClick={() => setShowNewComplaint(false)} className="p-2 hover:bg-white/10 rounded-lg"><X className="w-5 h-5 text-white/50" /></button>
+                            <h3 className="text-xl font-bold text-nexus-linen">Submit Complaint</h3>
+                            <button onClick={() => setShowNewComplaint(false)} className="p-2 hover:bg-white/10 rounded-lg"><X className="w-5 h-5 text-nexus-camel" /></button>
                         </div>
                         <div className="bg-orange-500/10 border-l-4 border-orange-400 p-4 rounded-lg mb-4">
-                            <p className="text-sm text-white/80"><strong>Note:</strong> Complaints can be submitted anonymously. Please be respectful.</p>
+                            <p className="text-sm text-nexus-khaki"><strong>Note:</strong> Complaints can be submitted anonymously. Please be respectful.</p>
                         </div>
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div><label className="block text-xs font-semibold text-white/50 mb-2">Title *</label><input value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} required minLength={5} className="input-field" placeholder="Complaint title" /></div>
-                                <div><label className="block text-xs font-semibold text-white/50 mb-2">Priority</label><select value={form.priority} onChange={e => setForm({ ...form, priority: e.target.value })} className="input-field"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div>
+                                <div><label className="block text-xs font-semibold text-nexus-camel mb-2">Title *</label><input value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} required minLength={5} className="input-field" placeholder="Complaint title" /></div>
+                                <div><label className="block text-xs font-semibold text-nexus-camel mb-2">Priority</label><select value={form.priority} onChange={e => setForm({ ...form, priority: e.target.value })} className="input-field"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div>
                             </div>
-                            <div><label className="block text-xs font-semibold text-white/50 mb-2">Category</label><select value={form.category} onChange={e => setForm({ ...form, category: e.target.value })} className="input-field"><option value="general">General</option><option value="academic">Academic</option><option value="hostel">Hostel</option><option value="mess">Mess</option><option value="transport">Transport</option><option value="infrastructure">Infrastructure</option></select></div>
-                            <div><label className="block text-xs font-semibold text-white/50 mb-2">Description *</label><textarea value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} required minLength={10} rows={4} className="input-field" placeholder="Describe your complaint..." /></div>
-                            <label className="flex items-center gap-2 cursor-pointer"><input type="checkbox" checked={form.anonymous} onChange={e => setForm({ ...form, anonymous: e.target.checked })} className="rounded border-white/20 bg-white/5 text-green-500" /><span className="text-sm text-white/50">Submit anonymously</span></label>
+                            <div><label className="block text-xs font-semibold text-nexus-camel mb-2">Category</label><select value={form.category} onChange={e => setForm({ ...form, category: e.target.value })} className="input-field"><option value="general">General</option><option value="academic">Academic</option><option value="hostel">Hostel</option><option value="mess">Mess</option><option value="transport">Transport</option><option value="infrastructure">Infrastructure</option></select></div>
+                            <div><label className="block text-xs font-semibold text-nexus-camel mb-2">Description *</label><textarea value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} required minLength={10} rows={4} className="input-field" placeholder="Describe your complaint..." /></div>
+                            <label className="flex items-center gap-2 cursor-pointer"><input type="checkbox" checked={form.anonymous} onChange={e => setForm({ ...form, anonymous: e.target.checked })} className="rounded border-nexus-camel/30 bg-white/5 text-green-500" /><span className="text-sm text-nexus-camel">Submit anonymously</span></label>
                             <div className="flex gap-3 pt-2">
-                                <button type="submit" disabled={submitting} className="px-6 py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-bold disabled:opacity-50 active:scale-95">{submitting ? 'Submitting...' : 'Submit'}</button>
-                                <button type="button" onClick={() => setShowNewComplaint(false)} className="px-6 py-2.5 border border-white/20 rounded-xl text-white/70 hover:bg-white/5 font-semibold">Cancel</button>
+                                <button type="submit" disabled={submitting} className="px-6 py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 text-nexus-linen rounded-xl font-bold disabled:opacity-50 active:scale-95">{submitting ? 'Submitting...' : 'Submit'}</button>
+                                <button type="button" onClick={() => setShowNewComplaint(false)} className="px-6 py-2.5 border border-nexus-camel/30 rounded-xl text-nexus-khaki hover:bg-white/5 font-semibold">Cancel</button>
                             </div>
                         </form>
                     </div>
@@ -137,13 +137,13 @@ export default function VoicePage() {
 
                 <div className="mb-6">
                     <div className="flex items-center gap-2 mb-3">
-                        <Filter className="w-4 h-4 text-white/50" />
-                        <span className="text-sm text-white/50 font-semibold tracking-wide uppercase">Filters</span>
+                        <Filter className="w-4 h-4 text-nexus-camel" />
+                        <span className="text-sm text-nexus-camel font-semibold tracking-wide uppercase">Filters</span>
                     </div>
                     <div className="overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide no-scrollbar">
                         <div className="flex items-center gap-2 whitespace-nowrap min-w-max">
                             {['all', 'open', 'in_progress', 'rejected'].map(v => (
-                                <button key={v} onClick={() => setStatusFilter(v)} className={`px-4 py-2 rounded-xl text-xs font-bold border transition-all ${statusFilter === v ? 'bg-green-500/20 text-white border-green-400/50 shadow-[0_0_15px_rgba(34,197,94,0.1)]' : 'bg-white/5 text-white/40 border-white/10 hover:bg-white/10 hover:border-white/20'}`}>
+                                <button key={v} onClick={() => setStatusFilter(v)} className={`px-4 py-2 rounded-xl text-xs font-bold border transition-all ${statusFilter === v ? 'bg-green-500/20 text-nexus-linen border-green-400/50 shadow-[0_0_15px_rgba(34,197,94,0.1)]' : 'bg-white/5 text-nexus-camel border-nexus-camel/20 hover:bg-white/10 hover:border-nexus-camel/30'}`}>
                                     {v === 'all' ? 'All' : v === 'in_progress' ? 'In Progress' : v.charAt(0).toUpperCase() + v.slice(1)}
                                 </button>
                             ))}
@@ -152,13 +152,13 @@ export default function VoicePage() {
                 </div>
 
                 {/* Tabs */}
-                <div className="flex gap-3 mb-6 border-b border-white/10 pb-2">
-                    <button onClick={() => setActiveTab('active')} className={`px-4 py-2 text-sm font-bold transition-colors relative ${activeTab === 'active' ? 'text-green-400' : 'text-white/40 hover:text-white/60'}`}>
+                <div className="flex gap-3 mb-6 border-b border-nexus-camel/20 pb-2">
+                    <button onClick={() => setActiveTab('active')} className={`px-4 py-2 text-sm font-bold transition-colors relative ${activeTab === 'active' ? 'text-green-400' : 'text-nexus-camel hover:text-nexus-khaki'}`}>
                         Active {active.length > 0 && <span className={`ml-2 px-2 py-0.5 rounded-full text-xs ${activeTab === 'active' ? 'bg-green-500/20' : 'bg-white/10'}`}>{active.length}</span>}
                         {activeTab === 'active' && <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-green-400 rounded-t" />}
                     </button>
                     {resolved.length > 0 && (
-                        <button onClick={() => setActiveTab('resolved')} className={`px-4 py-2 text-sm font-bold transition-colors relative ${activeTab === 'resolved' ? 'text-emerald-400' : 'text-white/40 hover:text-white/60'}`}>
+                        <button onClick={() => setActiveTab('resolved')} className={`px-4 py-2 text-sm font-bold transition-colors relative ${activeTab === 'resolved' ? 'text-emerald-400' : 'text-nexus-camel hover:text-nexus-khaki'}`}>
                             Resolved <span className={`ml-2 px-2 py-0.5 rounded-full text-xs ${activeTab === 'resolved' ? 'bg-emerald-500/20' : 'bg-white/10'}`}>{resolved.length}</span>
                             {activeTab === 'resolved' && <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-400 rounded-t" />}
                         </button>
@@ -168,7 +168,7 @@ export default function VoicePage() {
                 {/* Complaints */}
                 {activeTab === 'active' && (
                     filteredActive.length === 0 ? (
-                        <div className="glass-card text-center py-12"><FileText className="w-12 h-12 mx-auto mb-4 text-white/20" /><p className="text-white/40 font-semibold">{statusFilter === 'all' ? 'No active complaints.' : 'No complaints match filter.'}</p></div>
+                        <div className="glass-card text-center py-12"><FileText className="w-12 h-12 mx-auto mb-4 text-white/20" /><p className="text-nexus-camel font-semibold">{statusFilter === 'all' ? 'No active complaints.' : 'No complaints match filter.'}</p></div>
                     ) : (
                         <div className="space-y-4">{filteredActive.map(c => <ComplaintCard key={c.id || c._id} complaint={c} safeDate={safeDate} getStatusStyle={getStatusStyle} getPriorityStyle={getPriorityStyle} onUpvote={handleUpvote} />)}</div>
                     )
@@ -186,7 +186,7 @@ function ComplaintCard({ complaint: c, safeDate, getStatusStyle, getPriorityStyl
         <div className={`glass-card p-5 ${isResolved ? 'border-green-500/20' : ''}`}>
             <div className="flex flex-col sm:flex-row justify-between items-start gap-3 mb-3">
                 <div>
-                    <h4 className="text-lg font-bold text-white mb-1 flex items-center gap-2">
+                    <h4 className="text-lg font-bold text-nexus-linen mb-1 flex items-center gap-2">
                         {c.title}
                         {c.adminSeen && <span title="Seen by Admin"><Eye className="w-4 h-4 text-emerald-400" /></span>}
                     </h4>
@@ -202,15 +202,15 @@ function ComplaintCard({ complaint: c, safeDate, getStatusStyle, getPriorityStyl
                     <span className={`px-2.5 py-1 rounded-full text-[10px] font-semibold border ${getPriorityStyle(c.priority)}`}>{c.priority}</span>
                 </div>
             </div>
-            <div className="bg-white/[0.03] p-3 rounded-lg border border-white/5 mb-3"><p className="text-sm text-white/50 leading-relaxed">{c.description}</p></div>
+            <div className="bg-white/[0.03] p-3 rounded-lg border border-nexus-camel/10 mb-3"><p className="text-sm text-nexus-camel leading-relaxed">{c.description}</p></div>
             {isResolved && c.resolutionDetails && (
                 <div className="bg-green-500/10 p-3 rounded-lg border border-green-500/20 mb-3">
                     <h5 className="font-bold text-sm text-green-400 mb-1 flex items-center gap-2"><CheckCircle className="w-4 h-4" />Solution:</h5>
-                    <p className="text-sm text-white/60">{c.resolutionDetails}</p>
+                    <p className="text-sm text-nexus-khaki">{c.resolutionDetails}</p>
                 </div>
             )}
             <div className="flex items-center gap-3">
-                <button onClick={() => onUpvote(c.id || c._id)} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all active:scale-95 ${c.upvoted ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 'bg-white/5 text-white/30 border border-white/10 hover:bg-white/10'}`}>
+                <button onClick={() => onUpvote(c.id || c._id)} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all active:scale-95 ${c.upvoted ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 'bg-white/5 text-white/30 border border-nexus-camel/20 hover:bg-white/10'}`}>
                     <ThumbsUp className="w-3.5 h-3.5" />{c.upvotes || 0}
                 </button>
                 {c.anonymous && <span className="text-[10px] text-white/20 font-mono">Anonymous</span>}

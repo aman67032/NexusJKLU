@@ -54,20 +54,20 @@ export default function CouncilsPage() {
 
     return (
         <div className="min-h-screen relative">
-            <div className="glow-orb w-[800px] h-[800px] -top-96 -right-48 bg-indigo-500" style={{ opacity: 0.05 }} />
+            <div className="glow-orb w-[800px] h-[800px] -top-96 -right-48 bg-nexus-coffee" style={{ opacity: 0.05 }} />
             <div className="glow-orb w-[600px] h-[600px] -bottom-48 -left-48 bg-amber-500" style={{ opacity: 0.04 }} />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
                 {/* Hero */}
                 <div className="text-center mb-24">
                     <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-                        <div className="inline-block px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-sm font-bold tracking-widest uppercase text-[var(--primary)] mb-6">
+                        <div className="inline-block px-4 py-1.5 rounded-full border border-nexus-camel/20 bg-white/5 backdrop-blur-md text-sm font-bold tracking-widest uppercase text-[var(--primary)] mb-6">
                             Est. 2011 • Student Council 2025-26
                         </div>
                         <h1 className="text-5xl md:text-8xl font-black mb-6 tracking-tighter bg-clip-text text-transparent bg-gradient-to-br from-white via-white/80 to-white/40">
                             The Pillars of JKLU
                         </h1>
-                        <p className="max-w-2xl mx-auto text-lg text-white/40 leading-relaxed mb-10">
+                        <p className="max-w-2xl mx-auto text-lg text-nexus-camel leading-relaxed mb-10">
                             The governing bodies that drive innovation, culture, and student life.
                         </p>
 
@@ -84,7 +84,7 @@ export default function CouncilsPage() {
                                                 href={item.href}
                                                 className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${isActive
                                                     ? 'bg-[var(--primary)]/15 text-[var(--primary)] font-bold'
-                                                    : 'text-white/40 hover:text-white/70 hover:bg-white/[0.04]'
+                                                    : 'text-nexus-camel hover:text-nexus-khaki hover:bg-white/[0.04]'
                                                     }`}
                                             >
                                                 <Icon className="w-4 h-4" />
@@ -103,7 +103,7 @@ export default function CouncilsPage() {
                                 <div className="w-32 h-32 relative mb-4 group-hover:scale-105 transition-transform duration-500">
                                     <Image src="/logos/GreyPanel (With BG).png" alt="President Logo" fill className="object-contain drop-shadow-xl" />
                                 </div>
-                                <h2 className="text-2xl font-black text-white mb-1">Shubham Jain</h2>
+                                <h2 className="text-2xl font-black text-nexus-linen mb-1">Shubham Jain</h2>
                                 <div className="px-3 py-1 bg-[var(--primary)]/10 border border-[var(--primary)]/20 rounded-full text-[var(--primary)] text-xs font-bold uppercase tracking-widest">
                                     President
                                 </div>
@@ -130,7 +130,7 @@ export default function CouncilsPage() {
 
                             return (
                                 <motion.div key={council.id || council._id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: index * 0.1 }}>
-                                    <Link href={`/council/councils/${council.slug}`} className="group relative block h-full bg-white/[0.03] border border-white/5 rounded-3xl overflow-hidden hover:border-white/10 transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,255,255,0.03)]">
+                                    <Link href={`/council/councils/${council.slug}`} className="group relative block h-full bg-white/[0.03] border border-nexus-camel/10 rounded-3xl overflow-hidden hover:border-nexus-camel/20 transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,255,255,0.03)]">
                                         <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
 
                                         <div className="p-8 h-full flex flex-col relative z-10">
@@ -141,27 +141,27 @@ export default function CouncilsPage() {
                                                     </div>
                                                 ) : (
                                                     <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${gradient} p-0.5 shadow-lg group-hover:scale-110 transition-transform duration-500`}>
-                                                        <div className="w-full h-full bg-[var(--background)] rounded-[14px] flex items-center justify-center text-white">{icon}</div>
+                                                        <div className="w-full h-full bg-[var(--background)] rounded-[14px] flex items-center justify-center text-nexus-linen">{icon}</div>
                                                     </div>
                                                 )}
-                                                <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/30 group-hover:bg-white group-hover:text-black group-hover:border-transparent transition-all duration-300">
+                                                <div className="w-10 h-10 rounded-full border border-nexus-camel/20 flex items-center justify-center text-white/30 group-hover:bg-white group-hover:text-black group-hover:border-transparent transition-all duration-300">
                                                     <ChevronRight className="w-5 h-5" />
                                                 </div>
                                             </div>
 
-                                            <h3 className="text-2xl font-bold text-white mb-3 leading-tight">{council.name}</h3>
+                                            <h3 className="text-2xl font-bold text-nexus-linen mb-3 leading-tight">{council.name}</h3>
 
                                             {leaders && (
                                                 <div className="mb-6 space-y-2">
                                                     <div className="flex items-center gap-2 text-sm">
                                                         <span className="w-2 h-2 rounded-full bg-emerald-500" />
                                                         <span className="text-white/30">GS:</span>
-                                                        <span className="font-bold text-white">{leaders.genSec}</span>
+                                                        <span className="font-bold text-nexus-linen">{leaders.genSec}</span>
                                                     </div>
                                                     <div className="flex items-center gap-2 text-sm">
                                                         <span className="w-2 h-2 rounded-full bg-blue-500" />
                                                         <span className="text-white/30">Sec:</span>
-                                                        <span className="font-bold text-white">{leaders.sec}</span>
+                                                        <span className="font-bold text-nexus-linen">{leaders.sec}</span>
                                                     </div>
                                                 </div>
                                             )}
@@ -170,7 +170,7 @@ export default function CouncilsPage() {
                                                 {council.description || 'Dedicated to excellence in student governance and activities.'}
                                             </p>
 
-                                            <div className="mt-auto pt-6 border-t border-white/5 flex items-center gap-4">
+                                            <div className="mt-auto pt-6 border-t border-nexus-camel/10 flex items-center gap-4">
                                                 {council.club_count !== undefined && (
                                                     <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white/30">
                                                         <Activity className="w-4 h-4 text-emerald-500" />

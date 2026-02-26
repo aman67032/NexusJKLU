@@ -69,7 +69,7 @@ export default function Navbar() {
                                 />
                             </div>
                             <span className="text-xl font-bold tracking-tight">
-                                <span className="text-white">Nexus</span>
+                                <span className="text-nexus-linen">Nexus</span>
                                 <span className="text-orange-500">JKLU</span>
                             </span>
                         </Link>
@@ -94,8 +94,8 @@ export default function Navbar() {
                                                 }
                                             }}
                                             className={`relative flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 group overflow-hidden ${active
-                                                ? 'text-white'
-                                                : 'text-white/60 hover:text-white hover:bg-white/[0.06]'
+                                                ? 'text-nexus-linen'
+                                                : 'text-nexus-khaki hover:text-nexus-linen hover:bg-white/[0.06]'
                                                 }`}
                                             style={active ? { background: `${link.color}15`, color: link.color } : {}}
                                         >
@@ -135,8 +135,8 @@ export default function Navbar() {
                                                                     href={child.href}
                                                                     onClick={() => setOpenDropdown(null)}
                                                                     className={`group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all duration-200 ${childActive
-                                                                        ? 'text-white bg-white/[0.08]'
-                                                                        : 'text-white/60 hover:text-white hover:bg-white/[0.04]'
+                                                                        ? 'text-nexus-linen bg-white/[0.08]'
+                                                                        : 'text-nexus-khaki hover:text-nexus-linen hover:bg-white/[0.04]'
                                                                         }`}
                                                                     style={childActive ? { color: link.color } : {}}
                                                                 >
@@ -162,20 +162,20 @@ export default function Navbar() {
                                 <div className="hidden md:flex items-center gap-3">
                                     <Link
                                         href="/dashboard"
-                                        className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm text-white/60 hover:text-white/90 hover:bg-white/[0.04] transition-all"
+                                        className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm text-nexus-khaki hover:text-white/90 hover:bg-white/[0.04] transition-all"
                                     >
                                         <LayoutDashboard className="w-4 h-4" />
                                         Dashboard
                                     </Link>
                                     <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.04]">
-                                        <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[var(--primary)] to-[var(--secondary)] flex items-center justify-center text-[10px] font-bold text-white">
+                                        <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[var(--primary)] to-[var(--secondary)] flex items-center justify-center text-[10px] font-bold text-nexus-linen">
                                             {user.name.charAt(0).toUpperCase()}
                                         </div>
-                                        <span className="text-sm text-white/80 max-w-[100px] truncate">{user.name}</span>
+                                        <span className="text-sm text-nexus-khaki max-w-[100px] truncate">{user.name}</span>
                                     </div>
                                     <button
                                         onClick={logout}
-                                        className="p-2 rounded-lg text-white/40 hover:text-red-400 hover:bg-white/[0.04] transition-all"
+                                        className="p-2 rounded-lg text-nexus-camel hover:text-red-400 hover:bg-white/[0.04] transition-all"
                                         title="Logout"
                                     >
                                         <LogOut className="w-4 h-4" />
@@ -184,7 +184,7 @@ export default function Navbar() {
                             ) : (
                                 <Link
                                     href="/auth/login"
-                                    className="hidden md:flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium bg-gradient-to-r from-[var(--primary)] to-[var(--primary-dark)] text-white hover:shadow-lg hover:shadow-[var(--primary)]/25 transition-all"
+                                    className="hidden md:flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium bg-gradient-to-r from-[var(--primary)] to-[var(--primary-dark)] text-nexus-linen hover:shadow-lg hover:shadow-[var(--primary)]/25 transition-all"
                                 >
                                     <LogIn className="w-4 h-4" />
                                     Sign In
@@ -193,7 +193,7 @@ export default function Navbar() {
 
                             <button
                                 onClick={() => setMobileOpen(!mobileOpen)}
-                                className="md:hidden p-3 -mr-2 rounded-xl text-white/70 hover:text-white hover:bg-white/[0.06] active:bg-white/[0.1] transition-all"
+                                className="md:hidden p-3 -mr-2 rounded-xl text-nexus-khaki hover:text-nexus-linen hover:bg-white/[0.06] active:bg-white/[0.1] transition-all"
                             >
                                 {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                             </button>
@@ -222,7 +222,7 @@ export default function Navbar() {
                                         <Link
                                             href={link.href}
                                             onClick={() => setMobileOpen(false)}
-                                            className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${active ? 'text-white' : 'text-white/50 hover:text-white/80'
+                                            className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${active ? 'text-nexus-linen' : 'text-nexus-camel hover:text-nexus-khaki'
                                                 }`}
                                             style={active ? { background: `${link.color}15`, color: link.color } : {}}
                                         >
@@ -241,8 +241,8 @@ export default function Navbar() {
                                                             href={child.href}
                                                             onClick={() => setMobileOpen(false)}
                                                             className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-all ${childActive
-                                                                ? 'text-white bg-white/[0.06]'
-                                                                : 'text-white/35 hover:text-white/70'
+                                                                ? 'text-nexus-linen bg-white/[0.06]'
+                                                                : 'text-white/35 hover:text-nexus-khaki'
                                                                 }`}
                                                             style={childActive ? { color: link.color } : {}}
                                                         >
@@ -259,7 +259,7 @@ export default function Navbar() {
                             <div className="border-t border-white/[0.06] my-2 pt-2">
                                 {user ? (
                                     <>
-                                        <div className="flex items-center gap-3 px-4 py-3 text-sm text-white/60">
+                                        <div className="flex items-center gap-3 px-4 py-3 text-sm text-nexus-khaki">
                                             <User className="w-5 h-5" />
                                             {user.name}
                                         </div>

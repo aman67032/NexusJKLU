@@ -45,7 +45,7 @@ export default function DesignClubPage() {
     if (!mounted) return null;
 
     return (
-        <div className="min-h-screen bg-white text-black font-sans selection:bg-black selection:text-white overflow-x-hidden relative">
+        <div className="min-h-screen bg-white text-black font-sans selection:bg-nexus-black selection:text-nexus-linen overflow-x-hidden relative">
             {/* Grid Background */}
             <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
 
@@ -63,7 +63,7 @@ export default function DesignClubPage() {
                     transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                     className="mb-8 relative"
                 >
-                    <div className="w-24 h-24 mx-auto bg-black text-white flex items-center justify-center mb-6 rounded-full">
+                    <div className="w-24 h-24 mx-auto bg-nexus-black text-nexus-linen flex items-center justify-center mb-6 rounded-full">
                         <Palette className="w-10 h-10" />
                     </div>
                 </motion.div>
@@ -77,9 +77,9 @@ export default function DesignClubPage() {
                         White Space
                     </h1>
                     <div className="flex items-center justify-center gap-4 mb-8">
-                        <div className="h-[2px] w-12 bg-black"></div>
+                        <div className="h-[2px] w-12 bg-nexus-black"></div>
                         <p className="text-xl md:text-2xl font-medium tracking-widest uppercase">Space for Creative Clarity</p>
-                        <div className="h-[2px] w-12 bg-black"></div>
+                        <div className="h-[2px] w-12 bg-nexus-black"></div>
                     </div>
                 </motion.div>
 
@@ -87,7 +87,7 @@ export default function DesignClubPage() {
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.4, duration: 0.8 }}
-                    className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed mb-12 font-light"
+                    className="text-lg md:text-xl text-nexus-camel max-w-2xl mx-auto leading-relaxed mb-12 font-light"
                 >
                     "Brings together creative minds passionate about visual communication and design thinking."
                 </motion.p>
@@ -100,7 +100,7 @@ export default function DesignClubPage() {
                 >
                     <button
                         onClick={handleJoin}
-                        className={`group relative px-10 py-4 font-bold tracking-widest uppercase transition-all duration-300 ${joined ? 'bg-black text-white' : 'hover:bg-black hover:text-white'}`}
+                        className={`group relative px-10 py-4 font-bold tracking-widest uppercase transition-all duration-300 ${joined ? 'bg-nexus-black text-nexus-linen' : 'hover:bg-nexus-black hover:text-nexus-linen'}`}
                     >
                         {joined ? 'Design Team Joined' : 'Join the Studio'}
                     </button>
@@ -127,8 +127,8 @@ export default function DesignClubPage() {
                     </div>
 
                     <div className="bg-gray-100 p-10 flex flex-col justify-between relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-black/5 rounded-bl-full"></div>
-                        <div className="absolute bottom-0 left-0 w-32 h-32 bg-black/5 rounded-tr-full"></div>
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-nexus-black/5 rounded-bl-full"></div>
+                        <div className="absolute bottom-0 left-0 w-32 h-32 bg-nexus-black/5 rounded-tr-full"></div>
 
                         <div>
                             <h3 className="text-3xl font-black uppercase mb-8">Scope of Work</h3>
@@ -142,7 +142,7 @@ export default function DesignClubPage() {
 
                         <div className="mt-12 pt-8 border-t border-black/10 flex justify-between items-end">
                             <div>
-                                <h4 className="font-bold text-sm uppercase text-gray-500 mb-1">Associated Council</h4>
+                                <h4 className="font-bold text-sm uppercase text-nexus-camel mb-1">Associated Council</h4>
                                 <p className="font-black text-lg">Council of Technical Affairs</p>
                             </div>
                             <Box className="w-12 h-12 text-black stroke-1" />
@@ -152,14 +152,14 @@ export default function DesignClubPage() {
             </section>
 
             {/* --- SECTION 2: PORTFOLIO (Events) --- */}
-            <section className="relative z-10 py-24 bg-black text-white">
+            <section className="relative z-10 py-24 bg-nexus-black text-nexus-linen">
                 <div className="max-w-7xl mx-auto px-4">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-white/20 pb-8">
+                    <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-nexus-camel/30 pb-8">
                         <div>
-                            <span className="text-white/50 text-sm font-bold uppercase tracking-widest block mb-2">Portfolio</span>
+                            <span className="text-nexus-camel text-sm font-bold uppercase tracking-widest block mb-2">Portfolio</span>
                             <h2 className="text-5xl font-black uppercase">Projects</h2>
                         </div>
-                        <p className="text-white/60 max-w-sm text-right mt-6 md:mt-0">
+                        <p className="text-nexus-khaki max-w-sm text-right mt-6 md:mt-0">
                             Highlighting our collaborative efforts to actuate design in campus life.
                         </p>
                     </div>
@@ -169,7 +169,7 @@ export default function DesignClubPage() {
                             <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
                         </div>
                     ) : events.length > 0 ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 bg-white/20 border border-white/20 p-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 bg-white/20 border border-nexus-camel/30 p-8">
                             {events.map((event) => (
                                 <ClubEventCard
                                     key={event.id}
@@ -180,17 +180,17 @@ export default function DesignClubPage() {
                                     imageUrl={event.image_url}
                                     status={event.status}
                                     desc={event.description}
-                                    color="text-white"
+                                    color="text-nexus-linen"
                                     bg="bg-white/10"
-                                    border="group-hover:border-white/50"
+                                    border="group-hover:border-nexus-camel/100"
                                     is_enrolled={event.is_enrolled}
                                 />
                             ))}
                         </div>
                     ) : (
-                        <div className="text-center py-20 border border-white/20 border-dashed">
-                            <Box className="w-16 h-16 text-white/50 mx-auto mb-4" />
-                            <p className="text-white/60 font-medium">No projects currently in the portfolio.</p>
+                        <div className="text-center py-20 border border-nexus-camel/30 border-dashed">
+                            <Box className="w-16 h-16 text-nexus-camel mx-auto mb-4" />
+                            <p className="text-nexus-khaki font-medium">No projects currently in the portfolio.</p>
                         </div>
                     )}
                 </div>
@@ -225,7 +225,7 @@ export default function DesignClubPage() {
 
             {/* Footer decoration */}
             <div className="py-20 border-t border-black/10 text-center bg-gray-50">
-                <div className="w-16 h-16 mx-auto bg-black text-white flex items-center justify-center rounded-full mb-8">
+                <div className="w-16 h-16 mx-auto bg-nexus-black text-nexus-linen flex items-center justify-center rounded-full mb-8">
                     <Box className="w-8 h-8" />
                 </div>
                 <h2 className="text-3xl font-black uppercase mb-8">Space for Creative Clarity</h2>
@@ -243,7 +243,7 @@ export default function DesignClubPage() {
 function SectionHeader({ title, subtitle, center }: any) {
     return (
         <div className={`mb-8 ${center ? 'text-center' : ''}`}>
-            <h4 className="text-gray-400 font-bold text-xs uppercase tracking-[0.3em] mb-4">{subtitle}</h4>
+            <h4 className="text-nexus-khaki font-bold text-xs uppercase tracking-[0.3em] mb-4">{subtitle}</h4>
             <h2 className="text-4xl md:text-6xl font-black text-black uppercase tracking-tight">{title}</h2>
         </div>
     );
@@ -255,7 +255,7 @@ function CoreValue({ number, title, desc }: any) {
             <span className="text-4xl font-black text-gray-200 group-hover:text-black transition-colors">{number}</span>
             <div>
                 <h4 className="text-xl font-bold uppercase mb-1">{title}</h4>
-                <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
+                <p className="text-nexus-camel text-sm leading-relaxed">{desc}</p>
             </div>
         </div>
     );
@@ -274,7 +274,7 @@ function ScopeItem({ icon, text }: any) {
 
 function ProjectCard({ title, category, desc, status }: any) {
     return (
-        <div className="bg-black text-white p-12 hover:bg-white hover:text-black transition-colors duration-500 group border-b border-r border-white/10 hover:border-black/10">
+        <div className="bg-nexus-black text-nexus-linen p-12 hover:bg-white hover:text-black transition-colors duration-500 group border-b border-r border-nexus-camel/20 hover:border-black/10">
             <div className="flex justify-between items-start mb-6">
                 <span className="text-xs font-bold uppercase tracking-widest opacity-50">{category}</span>
                 <span className="px-3 py-1 border border-current text-[10px] uppercase font-bold">{status}</span>
@@ -293,12 +293,12 @@ function CleanProfile({ name, role, image }: any) {
                     {image ? (
                         <img src={image} alt={name} className="w-full h-full object-cover" />
                     ) : (
-                        <Users className="w-12 h-12 text-gray-400" />
+                        <Users className="w-12 h-12 text-nexus-khaki" />
                     )}
                 </div>
             </div>
             <h3 className="text-2xl font-bold uppercase mb-2">{name}</h3>
-            <p className="text-gray-500 text-xs font-bold tracking-[0.2em] uppercase">{role}</p>
+            <p className="text-nexus-camel text-xs font-bold tracking-[0.2em] uppercase">{role}</p>
         </div>
     );
 }
@@ -308,7 +308,7 @@ function TeamCell({ name, role, desc }: any) {
         <div className="p-8 border-b border-r border-black/10 hover:bg-gray-50 transition-colors">
             <h4 className="font-bold text-lg uppercase mb-1">{name}</h4>
             <div className="text-xs font-bold uppercase tracking-wider text-black/60 mb-3">{role}</div>
-            <p className="text-sm text-gray-500">{desc}</p>
+            <p className="text-sm text-nexus-camel">{desc}</p>
         </div>
     );
 }
@@ -319,7 +319,7 @@ function SocialLink({ href, icon, label }: any) {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-6 py-3 border border-black hover:bg-black hover:text-white transition-all font-bold text-sm uppercase tracking-wider"
+            className="flex items-center gap-2 px-6 py-3 border border-black hover:bg-nexus-black hover:text-nexus-linen transition-all font-bold text-sm uppercase tracking-wider"
         >
             {icon} {label}
         </a>

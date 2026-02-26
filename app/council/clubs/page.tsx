@@ -58,13 +58,13 @@ export default function ClubsPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
                 {/* Hero */}
                 <div className="text-center mb-16">
-                    <div className="inline-block mb-4 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-sm font-medium text-white/50">
+                    <div className="inline-block mb-4 px-4 py-1.5 rounded-full border border-nexus-camel/20 bg-white/5 backdrop-blur-md text-sm font-medium text-nexus-camel">
                         Explore Communities
                     </div>
-                    <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight text-white">
+                    <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight text-nexus-linen">
                         Student <span className="gradient-text-orange">Clubs</span>
                     </h1>
-                    <p className="max-w-2xl mx-auto text-lg text-white/40 leading-relaxed max-w-2xl mx-auto text-lg text-white/40 leading-relaxed mb-10">
+                    <p className="max-w-2xl mx-auto text-lg text-nexus-camel leading-relaxed max-w-2xl mx-auto text-lg text-nexus-camel leading-relaxed mb-10">
                         Join diverse communities, discover your passions, and attend exclusive events. Find your tribe at JKLU.
                     </p>
 
@@ -81,7 +81,7 @@ export default function ClubsPage() {
                                             href={item.href}
                                             className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${isActive
                                                 ? 'bg-orange-500/15 text-orange-400 font-bold'
-                                                : 'text-white/40 hover:text-white/60 hover:bg-white/[0.04]'
+                                                : 'text-nexus-camel hover:text-nexus-khaki hover:bg-white/[0.04]'
                                                 }`}
                                         >
                                             <Icon className="w-4 h-4" />
@@ -96,12 +96,12 @@ export default function ClubsPage() {
                     {/* Search */}
                     <div className="mt-10 max-w-xl mx-auto relative group">
                         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-orange-600/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <div className="relative flex items-center bg-white/5 border border-white/10 rounded-2xl p-2 backdrop-blur-xl transition-all duration-300 group-hover:border-white/20 focus-within:border-[var(--primary)]/50">
+                        <div className="relative flex items-center bg-white/5 border border-nexus-camel/20 rounded-2xl p-2 backdrop-blur-xl transition-all duration-300 group-hover:border-nexus-camel/30 focus-within:border-[var(--primary)]/50">
                             <Search className="ml-4 w-5 h-5 text-white/30" />
                             <input
                                 type="text"
                                 placeholder="Search for clubs..."
-                                className="w-full bg-transparent border-none focus:ring-0 focus:outline-none text-white placeholder-white/30 px-4 py-3 text-lg"
+                                className="w-full bg-transparent border-none focus:ring-0 focus:outline-none text-nexus-linen placeholder-white/30 px-4 py-3 text-lg"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                             />
@@ -112,7 +112,7 @@ export default function ClubsPage() {
                 {/* Loading */}
                 {loading ? (
                     <div className="flex justify-center py-20">
-                        <div className="w-12 h-12 border-4 border-white/10 border-t-[var(--primary)] rounded-full animate-spin" />
+                        <div className="w-12 h-12 border-4 border-nexus-camel/20 border-t-[var(--primary)] rounded-full animate-spin" />
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -122,7 +122,7 @@ export default function ClubsPage() {
                                 <Link
                                     href={`/council/clubs/${club.slug}`}
                                     key={club.slug + index}
-                                    className="group relative h-[420px] bg-white/[0.03] border border-white/5 rounded-3xl overflow-hidden hover:border-[var(--primary)]/30 transition-all duration-500 hover:shadow-2xl hover:shadow-[var(--primary)]/10 flex flex-col"
+                                    className="group relative h-[420px] bg-white/[0.03] border border-nexus-camel/10 rounded-3xl overflow-hidden hover:border-[var(--primary)]/30 transition-all duration-500 hover:shadow-2xl hover:shadow-[var(--primary)]/10 flex flex-col"
                                 >
                                     {/* Gradient BG */}
                                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -136,12 +136,12 @@ export default function ClubsPage() {
                                                 <Image src={getClubLogo(club.slug)!} alt={`${club.name} logo`} fill className="object-contain drop-shadow-lg" />
                                             </div>
                                         ) : (
-                                            <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${theme.gradient} flex items-center justify-center text-white shadow-lg mb-6 group-hover:scale-110 transition-transform duration-500`}>
+                                            <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${theme.gradient} flex items-center justify-center text-nexus-linen shadow-lg mb-6 group-hover:scale-110 transition-transform duration-500`}>
                                                 {theme.icon}
                                             </div>
                                         )}
                                         {club.council_name && (
-                                            <div className="absolute top-8 right-8 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold tracking-wider text-white/40 uppercase backdrop-blur-md">
+                                            <div className="absolute top-8 right-8 px-3 py-1 rounded-full bg-white/5 border border-nexus-camel/20 text-[10px] font-bold tracking-wider text-nexus-camel uppercase backdrop-blur-md">
                                                 {club.council_name}
                                             </div>
                                         )}
@@ -149,13 +149,13 @@ export default function ClubsPage() {
 
                                     {/* Content */}
                                     <div className="relative p-8 flex-1 flex flex-col">
-                                        <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[var(--primary)] transition-colors">{club.name}</h3>
+                                        <h3 className="text-2xl font-bold text-nexus-linen mb-3 group-hover:text-[var(--primary)] transition-colors">{club.name}</h3>
                                         <p className="text-white/30 text-sm leading-relaxed line-clamp-3 mb-6 flex-1">
                                             {club.description || 'A community for like-minded individuals to innovate, create, and grow together.'}
                                         </p>
-                                        <div className="pt-6 border-t border-white/5 flex items-center justify-between mt-auto">
-                                            <span className="text-xs font-bold text-white/20 uppercase tracking-widest group-hover:text-white/50 transition-colors">View Club</span>
-                                            <div className={`w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white bg-white/5 group-hover:bg-gradient-to-r ${theme.gradient} group-hover:border-transparent transition-all duration-300`}>
+                                        <div className="pt-6 border-t border-nexus-camel/10 flex items-center justify-between mt-auto">
+                                            <span className="text-xs font-bold text-white/20 uppercase tracking-widest group-hover:text-nexus-camel transition-colors">View Club</span>
+                                            <div className={`w-10 h-10 rounded-full border border-nexus-camel/20 flex items-center justify-center text-nexus-linen bg-white/5 group-hover:bg-gradient-to-r ${theme.gradient} group-hover:border-transparent transition-all duration-300`}>
                                                 <ChevronRight className="w-5 h-5" />
                                             </div>
                                         </div>
@@ -171,7 +171,7 @@ export default function ClubsPage() {
                 {!loading && uniqueFiltered.length === 0 && (
                     <div className="text-center py-20">
                         <Search className="w-12 h-12 text-white/10 mx-auto mb-4" />
-                        <h3 className="text-xl font-bold text-white mb-2">No clubs found</h3>
+                        <h3 className="text-xl font-bold text-nexus-linen mb-2">No clubs found</h3>
                         <p className="text-white/30">Try adjusting your search terms</p>
                     </div>
                 )}

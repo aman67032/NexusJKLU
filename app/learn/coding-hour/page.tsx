@@ -28,7 +28,7 @@ export default function CodingHourPage() {
         ]).finally(() => setLoading(false));
     }, []);
 
-    if (loading) return <div className="min-h-screen flex items-center justify-center"><div className="w-12 h-12 border-4 border-white/10 border-t-emerald-500 rounded-full animate-spin" /></div>;
+    if (loading) return <div className="min-h-screen flex items-center justify-center"><div className="w-12 h-12 border-4 border-nexus-camel/20 border-t-emerald-500 rounded-full animate-spin" /></div>;
 
     return (
         <div className="min-h-screen relative">
@@ -41,8 +41,8 @@ export default function CodingHourPage() {
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-bold mb-4">
                         <Sparkles className="w-3 h-3" /> Daily Coding Challenges
                     </div>
-                    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-2">Coding Hour</h1>
-                    <p className="text-white/40 text-lg mb-6">Challenge yourself with daily coding problems across multiple languages.</p>
+                    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-nexus-linen mb-2">Coding Hour</h1>
+                    <p className="text-nexus-camel text-lg mb-6">Challenge yourself with daily coding problems across multiple languages.</p>
 
                     {/* Sub Navigation */}
                     <div className="mb-0 z-20 relative">
@@ -57,7 +57,7 @@ export default function CodingHourPage() {
                                             href={item.href}
                                             className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${isActive
                                                 ? 'bg-emerald-500/15 text-emerald-400 font-bold'
-                                                : 'text-white/40 hover:text-white/60 hover:bg-white/[0.04]'
+                                                : 'text-nexus-camel hover:text-nexus-khaki hover:bg-white/[0.04]'
                                                 }`}
                                         >
                                             <Icon className="w-4 h-4" />
@@ -73,7 +73,7 @@ export default function CodingHourPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Contests */}
                     <div className="lg:col-span-2 space-y-4">
-                        <h2 className="text-xl font-bold text-white flex items-center gap-2"><Code className="w-5 h-5 text-emerald-400" /> Challenges</h2>
+                        <h2 className="text-xl font-bold text-nexus-linen flex items-center gap-2"><Code className="w-5 h-5 text-emerald-400" /> Challenges</h2>
                         {contests.length > 0 ? (
                             contests.map((contest, idx) => (
                                 <motion.div key={contest._id || contest.id || idx} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.08 }}>
@@ -83,7 +83,7 @@ export default function CodingHourPage() {
                                                 <Code className="w-6 h-6 text-emerald-400" />
                                             </div>
                                             <div className="min-w-0">
-                                                <h3 className="font-bold text-white group-hover:text-emerald-400 transition-colors truncate sm:whitespace-normal sm:line-clamp-2">{contest.title || `Challenge #${idx + 1}`}</h3>
+                                                <h3 className="font-bold text-nexus-linen group-hover:text-emerald-400 transition-colors truncate sm:whitespace-normal sm:line-clamp-2">{contest.title || `Challenge #${idx + 1}`}</h3>
                                                 <div className="flex items-center gap-3 text-xs text-white/30 mt-1">
                                                     <span className="flex items-center gap-1.5 shrink-0">
                                                         <Calendar className="w-3.5 h-3.5" />
@@ -96,7 +96,7 @@ export default function CodingHourPage() {
                                                         })()}
                                                     </span>
                                                     {contest.questions && (
-                                                        <span className="flex items-center gap-1.5 border-l border-white/10 pl-3">
+                                                        <span className="flex items-center gap-1.5 border-l border-nexus-camel/20 pl-3">
                                                             <FileText className="w-3.5 h-3.5" />
                                                             {contest.questions.length} Qs
                                                         </span>
@@ -110,17 +110,17 @@ export default function CodingHourPage() {
                                 </motion.div>
                             ))
                         ) : (
-                            <div className="glass-card text-center py-16"><Code className="w-12 h-12 text-white/10 mx-auto mb-4" /><h3 className="text-lg font-bold text-white mb-2">No challenges yet</h3><p className="text-white/30">Check back soon for new coding challenges!</p></div>
+                            <div className="glass-card text-center py-16"><Code className="w-12 h-12 text-white/10 mx-auto mb-4" /><h3 className="text-lg font-bold text-nexus-linen mb-2">No challenges yet</h3><p className="text-white/30">Check back soon for new coding challenges!</p></div>
                         )}
                     </div>
 
                     {/* Announcements Sidebar */}
                     <div>
-                        <h2 className="text-xl font-bold text-white flex items-center gap-2 mb-4"><Megaphone className="w-5 h-5 text-amber-400" /> Announcements</h2>
+                        <h2 className="text-xl font-bold text-nexus-linen flex items-center gap-2 mb-4"><Megaphone className="w-5 h-5 text-amber-400" /> Announcements</h2>
                         <div className="space-y-4">
                             {announcements.length > 0 ? announcements.map((a, idx) => (
                                 <div key={a._id || a.id || idx} className="glass-card p-4">
-                                    <h4 className="font-bold text-white text-sm mb-1">{a.title}</h4>
+                                    <h4 className="font-bold text-nexus-linen text-sm mb-1">{a.title}</h4>
                                     <p className="text-xs text-white/30 mb-2 line-clamp-3">{a.content}</p>
                                     <div className="flex items-center justify-between text-[10px] text-white/20">
                                         <span>{new Date(a.created_at).toLocaleDateString()}</span>

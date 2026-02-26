@@ -48,7 +48,7 @@ export default function BusinessClubPage() {
     if (!mounted) return null;
 
     return (
-        <div className="min-h-screen bg-[#0a192f] text-slate-100 font-sans selection:bg-amber-500 selection:text-white overflow-x-hidden relative">
+        <div className="min-h-screen bg-[#0a192f] text-slate-100 font-sans selection:bg-amber-500 selection:text-nexus-linen overflow-x-hidden relative">
             {/* Background Pattern - Financial Graph */}
             <div className="fixed inset-0 z-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '50px 50px' }}></div>
 
@@ -73,7 +73,7 @@ export default function BusinessClubPage() {
                     className="mb-8 relative"
                 >
                     <div className="w-24 h-24 mx-auto bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl flex items-center justify-center shadow-[0_0_40px_rgba(245,158,11,0.4)] mb-8 rotate-3 hover:rotate-0 transition-all duration-500">
-                        <TrendingUp className="w-12 h-12 text-white" />
+                        <TrendingUp className="w-12 h-12 text-nexus-linen" />
                     </div>
                 </motion.div>
 
@@ -83,7 +83,7 @@ export default function BusinessClubPage() {
                     transition={{ delay: 0.3, duration: 0.8 }}
                 >
                     <span className="text-amber-400 font-bold text-sm tracking-[0.3em] uppercase mb-4 block">Business & Finance Club</span>
-                    <h1 className="text-6xl md:text-8xl font-black tracking-tight mb-6 text-white drop-shadow-xl">
+                    <h1 className="text-6xl md:text-8xl font-black tracking-tight mb-6 text-nexus-linen drop-shadow-xl">
                         CORPOVA
                     </h1>
                     <div className="h-1 w-32 bg-amber-500 mx-auto mb-8"></div>
@@ -109,7 +109,7 @@ export default function BusinessClubPage() {
                 >
                     <button
                         onClick={handleJoin}
-                        className={`group relative px-8 py-4 rounded-sm border-2 ${joined ? 'bg-emerald-600 border-emerald-600 text-white' : 'border-amber-500 text-amber-400 hover:bg-amber-500 hover:text-white'} font-bold tracking-widest uppercase transition-all duration-300`}
+                        className={`group relative px-8 py-4 rounded-sm border-2 ${joined ? 'bg-emerald-600 border-emerald-600 text-nexus-linen' : 'border-amber-500 text-amber-400 hover:bg-amber-500 hover:text-nexus-linen'} font-bold tracking-widest uppercase transition-all duration-300`}
                     >
                         {joined ? 'Shareholder Verified' : 'Invest in Yourself'}
                     </button>
@@ -135,7 +135,7 @@ export default function BusinessClubPage() {
 
                     <div className="relative bg-[#0a192f] p-8 rounded-lg border border-[#233554] shadow-2xl">
                         <div className="flex items-center justify-between mb-8 border-b border-[#233554] pb-4">
-                            <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                            <h3 className="text-xl font-bold text-nexus-linen flex items-center gap-2">
                                 <BarChart3 className="text-emerald-400" /> Market Activity
                             </h3>
                             <span className="text-xs text-emerald-400 font-bold bg-emerald-400/10 px-2 py-1 rounded">+24.5% Growth</span>
@@ -261,7 +261,7 @@ function SectionHeader({ title, subtitle, center }: any) {
     return (
         <div className={`mb-10 ${center ? 'text-center' : ''}`}>
             <span className="text-amber-400 font-bold text-xs uppercase tracking-widest mb-2 block">{subtitle}</span>
-            <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight">{title}</h2>
+            <h2 className="text-3xl md:text-5xl font-black text-nexus-linen uppercase tracking-tight">{title}</h2>
             <div className={`h-1 w-20 bg-amber-500 mt-4 ${center ? 'mx-auto' : ''}`}></div>
         </div>
     );
@@ -271,7 +271,7 @@ function FeatureStat({ icon, label, value }: any) {
     return (
         <div className="flex flex-col p-4 bg-[#112240] border border-[#233554] hover:border-amber-500/50 transition-colors rounded-sm">
             <div className="text-amber-400 mb-2">{icon}</div>
-            <div className="text-white font-bold text-lg">{value}</div>
+            <div className="text-nexus-linen font-bold text-lg">{value}</div>
             <div className="text-slate-400 text-xs uppercase tracking-wide">{label}</div>
         </div>
     );
@@ -281,7 +281,7 @@ function ActivityRow({ title, desc, type }: any) {
     return (
         <div className="pb-4 border-b border-[#233554] last:border-0 last:pb-0">
             <div className="flex justify-between items-baseline mb-1">
-                <h4 className="font-bold text-white">{title}</h4>
+                <h4 className="font-bold text-nexus-linen">{title}</h4>
                 <span className="text-[10px] font-mono text-amber-400 border border-amber-400/30 px-1 rounded">{type}</span>
             </div>
             <p className="text-sm text-slate-400">{desc}</p>
@@ -299,7 +299,7 @@ function EventCard({ title, type, date, desc, highlight }: any) {
                 <span className={`text-[10px] font-bold uppercase px-2 py-1 rounded ${highlight ? 'bg-amber-500 text-[#0a192f]' : 'bg-[#233554] text-slate-400'}`}>{date}</span>
             </div>
 
-            <h3 className="text-2xl font-bold text-white mb-1">{title}</h3>
+            <h3 className="text-2xl font-bold text-nexus-linen mb-1">{title}</h3>
             <div className="text-sm text-emerald-400 font-mono mb-4">{type}</div>
             <p className="text-slate-400 text-sm leading-relaxed">{desc}</p>
         </div>
@@ -318,7 +318,7 @@ function ExecutiveProfile({ name, role, initial, image }: any) {
                     )}
                 </div>
             </div>
-            <h3 className="text-xl font-bold text-white mb-1">{name}</h3>
+            <h3 className="text-xl font-bold text-nexus-linen mb-1">{name}</h3>
             <p className="text-amber-400 text-xs font-bold uppercase tracking-widest">{role}</p>
         </div>
     );

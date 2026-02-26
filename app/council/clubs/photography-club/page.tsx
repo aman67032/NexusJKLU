@@ -96,7 +96,7 @@ export default function PhotographyClubPage() {
                         transition={{ delay: 0.3, duration: 0.8 }}
                     >
                         <span className="text-teal-500 font-mono text-xs md:text-sm tracking-[0.3em] uppercase mb-4 block">JKLU Photography Club</span>
-                        <h1 className="text-6xl md:text-9xl font-bold tracking-tighter mb-4 text-white mix-blend-overlay">
+                        <h1 className="text-6xl md:text-9xl font-bold tracking-tighter mb-4 text-nexus-linen mix-blend-overlay">
                             THE SHADE
                         </h1>
                         <p className="text-xl md:text-2xl font-light text-neutral-400 max-w-2xl mx-auto leading-relaxed">
@@ -141,15 +141,15 @@ export default function PhotographyClubPage() {
                         <div className="grid grid-cols-2 grid-rows-2 gap-2 h-full">
                             <div className="bg-neutral-800 rounded-sm relative overflow-hidden group">
                                 <div className="absolute inset-0 bg-teal-900/20 group-hover:bg-transparent transition-colors"></div>
-                                <div className="absolute bottom-2 left-2 text-[10px] bg-black/50 px-2 py-1 text-white backdrop-blur-md">PORTRAIT</div>
+                                <div className="absolute bottom-2 left-2 text-[10px] bg-nexus-black/50 px-2 py-1 text-nexus-linen backdrop-blur-md">PORTRAIT</div>
                             </div>
                             <div className="bg-neutral-800 rounded-sm relative overflow-hidden group">
                                 <div className="absolute inset-0 bg-teal-900/20 group-hover:bg-transparent transition-colors"></div>
-                                <div className="absolute bottom-2 left-2 text-[10px] bg-black/50 px-2 py-1 text-white backdrop-blur-md">STREET</div>
+                                <div className="absolute bottom-2 left-2 text-[10px] bg-nexus-black/50 px-2 py-1 text-nexus-linen backdrop-blur-md">STREET</div>
                             </div>
                             <div className="bg-neutral-800 rounded-sm relative overflow-hidden group col-span-2">
                                 <div className="absolute inset-0 bg-teal-900/20 group-hover:bg-transparent transition-colors"></div>
-                                <div className="absolute bottom-2 left-2 text-[10px] bg-black/50 px-2 py-1 text-white backdrop-blur-md">LANDSCAPE</div>
+                                <div className="absolute bottom-2 left-2 text-[10px] bg-nexus-black/50 px-2 py-1 text-nexus-linen backdrop-blur-md">LANDSCAPE</div>
                             </div>
                         </div>
                     </div>
@@ -233,7 +233,7 @@ function SectionTitle({ number, title, subtitle, center }: any) {
         <div className={`mb-8 ${center ? 'flex flex-col items-center' : ''}`}>
             <div className="flex items-baseline gap-4 mb-2">
                 <span className="text-teal-500 font-mono text-sm font-bold">0{number}</span>
-                <h2 className="text-3xl md:text-4xl font-bold text-white uppercase tracking-tight">{title}</h2>
+                <h2 className="text-3xl md:text-4xl font-bold text-nexus-linen uppercase tracking-tight">{title}</h2>
             </div>
             {subtitle && <p className="text-neutral-500 uppercase tracking-widest text-xs ml-10">{subtitle}</p>}
         </div>
@@ -245,7 +245,7 @@ function StatBlock({ icon, label, value }: any) {
         <div className="p-4 bg-neutral-900 border border-neutral-800/50 rounded-lg flex items-center gap-4">
             <div className="p-3 bg-teal-500/10 text-teal-500 rounded-full">{icon}</div>
             <div>
-                <div className="text-white font-bold">{value}</div>
+                <div className="text-nexus-linen font-bold">{value}</div>
                 <div className="text-neutral-500 text-xs uppercase tracking-wide">{label}</div>
             </div>
         </div>
@@ -265,7 +265,7 @@ function EventItem({ date, title, desc, status, highlight }: any) {
                         {status}
                     </span>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">{title}</h3>
+                <h3 className="text-xl font-bold text-nexus-linen mb-2 group-hover:text-teal-200 transition-colors">{title}</h3>
                 <p className="text-neutral-400 text-sm leading-relaxed">{desc}</p>
             </div>
         </div>
@@ -284,7 +284,7 @@ function LeaderCard({ role, name, email, image }: any) {
             </div>
             <div>
                 <span className="text-teal-500 text-xs font-bold uppercase tracking-widest block mb-1">{role}</span>
-                <h3 className="text-xl font-bold text-white mb-1">{name}</h3>
+                <h3 className="text-xl font-bold text-nexus-linen mb-1">{name}</h3>
                 <a href={`mailto:${email}`} className="text-neutral-500 text-sm hover:text-teal-400 transition-colors flex items-center gap-2">
                     <Mail className="w-3 h-3" /> {email}
                 </a>

@@ -33,13 +33,13 @@ export default function CoordinatorsPage() {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
                 <div className="text-center mb-16">
-                    <div className="inline-block mb-4 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-sm font-bold tracking-widest uppercase text-[var(--primary)]">
+                    <div className="inline-block mb-4 px-4 py-1.5 rounded-full border border-nexus-camel/20 bg-white/5 text-sm font-bold tracking-widest uppercase text-[var(--primary)]">
                         Student Council 2025-26
                     </div>
-                    <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight text-white">
+                    <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight text-nexus-linen">
                         Our <span className="gradient-text-orange">Coordinators</span>
                     </h1>
-                    <p className="max-w-2xl mx-auto text-lg text-white/40 leading-relaxed mb-10">
+                    <p className="max-w-2xl mx-auto text-lg text-nexus-camel leading-relaxed mb-10">
                         The dedicated individuals who ensure smooth operations across every aspect of campus life.
                     </p>
 
@@ -56,7 +56,7 @@ export default function CoordinatorsPage() {
                                             href={item.href}
                                             className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${isActive
                                                 ? 'bg-orange-500/15 text-orange-400 font-bold'
-                                                : 'text-white/40 hover:text-white/70 hover:bg-white/[0.04]'
+                                                : 'text-nexus-camel hover:text-nexus-khaki hover:bg-white/[0.04]'
                                                 }`}
                                         >
                                             <Icon className="w-4 h-4" />
@@ -79,7 +79,7 @@ export default function CoordinatorsPage() {
                             className="group glass-card p-6 hover:border-[var(--primary)]/30 transition-all duration-500 hover:shadow-xl hover:shadow-[var(--primary)]/5"
                         >
                             <div className="flex items-start gap-4 mb-4">
-                                <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden shrink-0 group-hover:scale-105 transition-transform duration-500">
+                                <div className="w-16 h-16 rounded-2xl bg-white/5 border border-nexus-camel/20 flex items-center justify-center overflow-hidden shrink-0 group-hover:scale-105 transition-transform duration-500">
                                     {coordinator.image ? (
                                         <img src={coordinator.image} alt={coordinator.name} className="w-full h-full object-cover" />
                                     ) : (
@@ -87,7 +87,7 @@ export default function CoordinatorsPage() {
                                     )}
                                 </div>
                                 <div>
-                                    <h3 className="text-lg font-bold text-white group-hover:text-[var(--primary)] transition-colors">{coordinator.name}</h3>
+                                    <h3 className="text-lg font-bold text-nexus-linen group-hover:text-[var(--primary)] transition-colors">{coordinator.name}</h3>
                                     <p className="text-xs font-bold uppercase tracking-widest text-[var(--primary)]/70">{coordinator.role}</p>
                                     <p className="text-xs text-white/20 font-mono mt-1">{coordinator.studentId}</p>
                                 </div>

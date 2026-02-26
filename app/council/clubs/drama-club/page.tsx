@@ -129,7 +129,7 @@ export default function DramaClubPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div className="relative">
                         <div className="absolute -inset-4 bg-gradient-to-r from-red-900/20 to-yellow-900/20 blur-xl rounded-full"></div>
-                        <h2 className="relative text-4xl md:text-5xl font-serif font-bold mb-6 text-white">
+                        <h2 className="relative text-4xl md:text-5xl font-serif font-bold mb-6 text-nexus-linen">
                             <span className="text-red-600 text-6xl block mb-2">"</span>
                             To inspire students to explore emotions, stories, and perspectives.
                         </h2>
@@ -167,7 +167,7 @@ export default function DramaClubPage() {
 
                     <div className="flex flex-wrap justify-center gap-10">
                         {/* Chair */}
-                        <div className="bg-black/40 border border-red-900/50 p-6 rounded-xl flex flex-col items-center text-center group hover:bg-red-900/10 transition-colors">
+                        <div className="bg-nexus-black/40 border border-red-900/50 p-6 rounded-xl flex flex-col items-center text-center group hover:bg-red-900/10 transition-colors">
                             <div className="w-24 h-24 rounded-full bg-slate-900 mb-4 border-2 border-red-700 overflow-hidden">
                                 <img
                                     src="/Photoes ID CARD Student Council/Madhav Garg (Drama Club Chair).jpeg"
@@ -175,16 +175,16 @@ export default function DramaClubPage() {
                                     className="w-full h-full object-cover"
                                 />
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-1">Madhav Garg</h3>
+                            <h3 className="text-xl font-bold text-nexus-linen mb-1">Madhav Garg</h3>
                             <p className="text-red-500 text-xs font-bold uppercase tracking-widest">Chairperson</p>
                         </div>
 
                         {/* Co-Chair */}
-                        <div className="bg-black/40 border border-red-900/50 p-6 rounded-xl flex flex-col items-center text-center group hover:bg-red-900/10 transition-colors">
+                        <div className="bg-nexus-black/40 border border-red-900/50 p-6 rounded-xl flex flex-col items-center text-center group hover:bg-red-900/10 transition-colors">
                             <div className="w-24 h-24 rounded-full bg-slate-900 mb-4 border-2 border-red-700 flex items-center justify-center">
                                 <User className="w-10 h-10 text-red-600" />
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-1">Gauri Singhi</h3>
+                            <h3 className="text-xl font-bold text-nexus-linen mb-1">Gauri Singhi</h3>
                             <p className="text-red-500 text-xs font-bold uppercase tracking-widest">Co-Chairperson</p>
                         </div>
                     </div>
@@ -194,7 +194,7 @@ export default function DramaClubPage() {
             {/* --- ACT III: SHOWTIME (Events) --- */}
             <section className="relative z-10 py-24 max-w-6xl mx-auto px-4">
                 <div className="flex items-end justify-between mb-12 border-b border-red-900/30 pb-4">
-                    <h2 className="text-4xl font-serif font-bold text-white">UPCOMING SHOWS</h2>
+                    <h2 className="text-4xl font-serif font-bold text-nexus-linen">UPCOMING SHOWS</h2>
                     <span className="text-red-500 font-mono text-sm tracking-widest">SEASON 2026</span>
                 </div>
 
@@ -257,13 +257,13 @@ function PosterCard({ title, color }: any) {
     };
 
     return (
-        <div className={`aspect-[3/4] rounded-lg bg-gradient-to-br ${bgColors[color]} border border-white/5 p-4 flex flex-col justify-end relative overflow-hidden group hover:-translate-y-2 transition-transform duration-500 shadow-xl`}>
-            <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+        <div className={`aspect-[3/4] rounded-lg bg-gradient-to-br ${bgColors[color]} border border-nexus-camel/10 p-4 flex flex-col justify-end relative overflow-hidden group hover:-translate-y-2 transition-transform duration-500 shadow-xl`}>
+            <div className="absolute inset-0 bg-nexus-black/20 group-hover:bg-transparent transition-colors"></div>
             <Drama className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 text-white/10 group-hover:scale-125 transition-transform duration-700" />
 
             <div className="relative z-10">
-                <span className="text-[10px] uppercase tracking-widest text-white/60 mb-1 block">Production</span>
-                <h4 className="text-lg font-serif font-bold text-white leading-tight">{title}</h4>
+                <span className="text-[10px] uppercase tracking-widest text-nexus-khaki mb-1 block">Production</span>
+                <h4 className="text-lg font-serif font-bold text-nexus-linen leading-tight">{title}</h4>
             </div>
         </div>
     );
@@ -278,14 +278,14 @@ function LeaderCard({ role, name, quote, color }: any) {
             <div className={`absolute inset-0 bg-gradient-to-b ${color === 'red' ? 'from-red-600/20' : 'from-yellow-500/20'} to-transparent rounded-t-full opacity-0 group-hover:opacity-100 transition-opacity blur-xl`}></div>
 
             <div className={`relative h-96 border-x border-t ${border} rounded-t-full bg-[#0a0202] flex flex-col items-center justify-end pb-8 overflow-hidden`}>
-                <div className="absolute top-12 inset-x-8 bottom-0 border border-white/5 rounded-t-full"></div>
+                <div className="absolute top-12 inset-x-8 bottom-0 border border-nexus-camel/10 rounded-t-full"></div>
 
                 {/* Silhouette Placeholder */}
                 <User className={`w-32 h-32 ${text} opacity-80 mb-6`} />
 
-                <h3 className="text-2xl font-serif font-bold text-white mb-1">{name}</h3>
+                <h3 className="text-2xl font-serif font-bold text-nexus-linen mb-1">{name}</h3>
                 <p className={`text-xs font-bold tracking-[0.2em] uppercase ${text} mb-4`}>{role}</p>
-                <p className="text-white/40 italic text-sm px-8 text-center">"{quote}"</p>
+                <p className="text-nexus-camel italic text-sm px-8 text-center">"{quote}"</p>
             </div>
             <div className={`h-1 w-full bg-gradient-to-r from-transparent via-${color === 'red' ? 'red-600' : 'yellow-500'} to-transparent`}></div>
         </div>
@@ -304,7 +304,7 @@ function EventTicket({ title, date, desc, type }: any) {
             {/* Right Content */}
             <div className="flex-1 p-6 flex flex-col justify-center">
                 <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-xl font-bold text-white group-hover:text-yellow-500 transition-colors">{title}</h3>
+                    <h3 className="text-xl font-bold text-nexus-linen group-hover:text-yellow-500 transition-colors">{title}</h3>
                     <span className="px-2 py-1 bg-red-900/50 text-[10px] uppercase tracking-widest text-red-200 border border-red-800">{type}</span>
                 </div>
                 <p className="text-red-200/50 text-sm">{desc}</p>

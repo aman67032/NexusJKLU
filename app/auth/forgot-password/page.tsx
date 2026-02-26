@@ -109,12 +109,12 @@ export default function ForgotPassword() {
     };
 
     return (
-        <div className="min-h-screen bg-[#050505] flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div className="min-h-screen bg-nexus-black flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
             {/* Background elements (matching login) */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-transparent" />
                 <div className="absolute top-0 right-0 -mr-40 w-96 h-96 rounded-full bg-emerald-500/10 blur-[120px]" />
-                <div className="absolute bottom-0 left-0 -ml-40 w-96 h-96 rounded-full bg-indigo-500/10 blur-[120px]" />
+                <div className="absolute bottom-0 left-0 -ml-40 w-96 h-96 rounded-full bg-nexus-coffee/10 blur-[120px]" />
             </div>
 
             <div className="relative z-10 sm:mx-auto sm:w-full sm:max-w-md">
@@ -141,12 +141,12 @@ export default function ForgotPassword() {
                     transition={{ delay: 0.1 }}
                     className="mt-6 text-center"
                 >
-                    <h2 className="text-3xl font-extrabold text-white tracking-tight">
+                    <h2 className="text-3xl font-extrabold text-nexus-linen tracking-tight">
                         {step === 'email' && 'Forgot Password'}
                         {step === 'otp' && 'Verify OTP'}
                         {step === 'reset' && 'Reset Password'}
                     </h2>
-                    <p className="mt-2 text-sm text-gray-400">
+                    <p className="mt-2 text-sm text-nexus-khaki">
                         {step === 'email' && 'Enter your email to receive a password reset code'}
                         {step === 'otp' && 'Enter the 6-digit code sent to your email'}
                         {step === 'reset' && 'Create your new password'}
@@ -188,12 +188,12 @@ export default function ForgotPassword() {
                                 {step === 'email' && (
                                     <form onSubmit={handleSendOTP} className="space-y-6">
                                         <div>
-                                            <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+                                            <label htmlFor="email" className="block text-sm font-medium text-nexus-khaki">
                                                 Email Address
                                             </label>
                                             <div className="mt-2 relative">
                                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                                    <Mail className="h-5 w-5 text-gray-500" />
+                                                    <Mail className="h-5 w-5 text-nexus-camel" />
                                                 </div>
                                                 <input
                                                     id="email"
@@ -203,7 +203,7 @@ export default function ForgotPassword() {
                                                     required
                                                     value={email}
                                                     onChange={(e) => setEmail(e.target.value)}
-                                                    className="appearance-none block w-full pl-10 pr-3 py-2.5 border border-zinc-700 bg-zinc-800/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all sm:text-sm"
+                                                    className="appearance-none block w-full pl-10 pr-3 py-2.5 border border-zinc-700 bg-zinc-800/50 rounded-xl text-nexus-linen placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all sm:text-sm"
                                                     placeholder="student@jklu.edu.in"
                                                 />
                                             </div>
@@ -229,14 +229,14 @@ export default function ForgotPassword() {
                                     <form onSubmit={handleVerifyOTP} className="space-y-6">
                                         <div>
                                             <div className="flex justify-between items-center mb-2">
-                                                <label htmlFor="otp" className="block text-sm font-medium text-gray-300">
+                                                <label htmlFor="otp" className="block text-sm font-medium text-nexus-khaki">
                                                     Enter OTP
                                                 </label>
-                                                <span className="text-xs text-gray-500">Sent to {email}</span>
+                                                <span className="text-xs text-nexus-camel">Sent to {email}</span>
                                             </div>
                                             <div className="mt-2 relative">
                                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                                    <Shield className="h-5 w-5 text-gray-500" />
+                                                    <Shield className="h-5 w-5 text-nexus-camel" />
                                                 </div>
                                                 <input
                                                     id="otp"
@@ -245,7 +245,7 @@ export default function ForgotPassword() {
                                                     required
                                                     value={otp}
                                                     onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                                                    className="appearance-none block w-full pl-10 pr-3 py-3 border border-zinc-700 bg-zinc-800/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all text-center text-2xl tracking-[0.2em] font-mono sm:text-sm"
+                                                    className="appearance-none block w-full pl-10 pr-3 py-3 border border-zinc-700 bg-zinc-800/50 rounded-xl text-nexus-linen placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all text-center text-2xl tracking-[0.2em] font-mono sm:text-sm"
                                                     placeholder="000000"
                                                 />
                                             </div>
@@ -261,7 +261,7 @@ export default function ForgotPassword() {
                                             <button
                                                 type="button"
                                                 onClick={handleBack}
-                                                className="flex-1 py-2.5 px-4 border border-zinc-700 rounded-xl text-sm font-medium text-gray-300 hover:bg-zinc-800 transition-colors"
+                                                className="flex-1 py-2.5 px-4 border border-zinc-700 rounded-xl text-sm font-medium text-nexus-khaki hover:bg-zinc-800 transition-colors"
                                             >
                                                 Back
                                             </button>
@@ -279,19 +279,19 @@ export default function ForgotPassword() {
                                 {step === 'reset' && (
                                     <form onSubmit={handleResetPassword} className="space-y-6">
                                         <div>
-                                            <label className="block text-sm font-medium text-gray-300">
+                                            <label className="block text-sm font-medium text-nexus-khaki">
                                                 New Password
                                             </label>
                                             <div className="mt-2 relative">
                                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                                    <Lock className="h-5 w-5 text-gray-500" />
+                                                    <Lock className="h-5 w-5 text-nexus-camel" />
                                                 </div>
                                                 <input
                                                     type="password"
                                                     required
                                                     value={newPassword}
                                                     onChange={(e) => setNewPassword(e.target.value)}
-                                                    className="appearance-none block w-full pl-10 pr-3 py-2.5 border border-zinc-700 bg-zinc-800/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all sm:text-sm"
+                                                    className="appearance-none block w-full pl-10 pr-3 py-2.5 border border-zinc-700 bg-zinc-800/50 rounded-xl text-nexus-linen placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all sm:text-sm"
                                                     placeholder="Must be at least 6 characters"
                                                     minLength={6}
                                                 />
@@ -299,19 +299,19 @@ export default function ForgotPassword() {
                                         </div>
 
                                         <div>
-                                            <label className="block text-sm font-medium text-gray-300">
+                                            <label className="block text-sm font-medium text-nexus-khaki">
                                                 Confirm New Password
                                             </label>
                                             <div className="mt-2 relative">
                                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                                    <Lock className="h-5 w-5 text-gray-500" />
+                                                    <Lock className="h-5 w-5 text-nexus-camel" />
                                                 </div>
                                                 <input
                                                     type="password"
                                                     required
                                                     value={confirmPassword}
                                                     onChange={(e) => setConfirmPassword(e.target.value)}
-                                                    className="appearance-none block w-full pl-10 pr-3 py-2.5 border border-zinc-700 bg-zinc-800/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all sm:text-sm"
+                                                    className="appearance-none block w-full pl-10 pr-3 py-2.5 border border-zinc-700 bg-zinc-800/50 rounded-xl text-nexus-linen placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all sm:text-sm"
                                                     placeholder="Confirm your password"
                                                     minLength={6}
                                                 />
@@ -328,7 +328,7 @@ export default function ForgotPassword() {
                                             <button
                                                 type="button"
                                                 onClick={handleBack}
-                                                className="flex-1 py-2.5 px-4 border border-zinc-700 rounded-xl text-sm font-medium text-gray-300 hover:bg-zinc-800 transition-colors"
+                                                className="flex-1 py-2.5 px-4 border border-zinc-700 rounded-xl text-sm font-medium text-nexus-khaki hover:bg-zinc-800 transition-colors"
                                             >
                                                 Back
                                             </button>

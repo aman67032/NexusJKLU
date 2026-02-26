@@ -48,8 +48,8 @@ export default function AdminOverview() {
             title: 'Total Users',
             value: stats?.users || 0,
             icon: Users,
-            color: 'from-blue-500/20 to-indigo-500/5',
-            textColor: 'text-indigo-400',
+            color: 'from-blue-500/20 to-nexus-coffee/5',
+            textColor: 'text-nexus-brass',
             borderColor: 'border-indigo-500/20',
         },
         {
@@ -80,8 +80,8 @@ export default function AdminOverview() {
             title: 'In Progress Complaints',
             value: stats?.inProgressComplaints || 0,
             icon: ShieldAlert,
-            color: 'from-purple-500/20 to-fuchsia-500/5',
-            textColor: 'text-purple-400',
+            color: 'from-nexus-cocoa/20 to-fuchsia-500/5',
+            textColor: 'text-nexus-brass',
             borderColor: 'border-purple-500/20',
         }
     ];
@@ -89,10 +89,10 @@ export default function AdminOverview() {
     return (
         <div className="p-6 md:p-8 w-full max-w-7xl mx-auto min-h-screen">
             <header className="mb-8">
-                <h1 className="text-3xl font-bold text-white tracking-tight mb-2">
+                <h1 className="text-3xl font-bold text-nexus-linen tracking-tight mb-2">
                     Admin Overview
                 </h1>
-                <p className="text-white/60">
+                <p className="text-nexus-khaki">
                     Welcome back, {user?.name}. Here's what's happening across NexusJKLU today.
                 </p>
             </header>
@@ -112,17 +112,17 @@ export default function AdminOverview() {
 
                             <div className="flex items-start justify-between relative z-10">
                                 <div>
-                                    <p className="text-sm font-medium text-white/50 mb-1">
+                                    <p className="text-sm font-medium text-nexus-camel mb-1">
                                         {stat.title}
                                     </p>
                                     <div className="flex items-baseline gap-2">
-                                        <h3 className="text-4xl font-bold text-white tracking-tight">
+                                        <h3 className="text-4xl font-bold text-nexus-linen tracking-tight">
                                             {stat.value}
                                         </h3>
                                         <TrendingUp className={`w-4 h-4 ${stat.textColor} opacity-80`} />
                                     </div>
                                 </div>
-                                <div className={`p-3 rounded-2xl bg-black/20 backdrop-blur-sm border border-white/5`}>
+                                <div className={`p-3 rounded-2xl bg-nexus-black/20 backdrop-blur-sm border border-nexus-camel/10`}>
                                     <Icon className={`w-6 h-6 ${stat.textColor}`} />
                                 </div>
                             </div>
@@ -131,15 +131,15 @@ export default function AdminOverview() {
                 })}
             </div>
 
-            <div className="mt-12 bg-white/[0.02] border border-white/10 rounded-3xl p-8 text-center max-w-2xl mx-auto shadow-2xl">
-                <ShieldAlert className="w-12 h-12 text-indigo-400 mx-auto mb-4 opacity-80" />
-                <h3 className="text-xl font-semibold text-white mb-2">Need to manage something specific?</h3>
-                <p className="text-white/60 mb-6">
+            <div className="mt-12 bg-white/[0.02] border border-nexus-camel/20 rounded-3xl p-8 text-center max-w-2xl mx-auto shadow-2xl">
+                <ShieldAlert className="w-12 h-12 text-nexus-brass mx-auto mb-4 opacity-80" />
+                <h3 className="text-xl font-semibold text-nexus-linen mb-2">Need to manage something specific?</h3>
+                <p className="text-nexus-khaki mb-6">
                     Use the sidebar navigation to dive deeper into Users, Review Papers, Manage Events, or Handle Complaints. Your available actions depend on your assigned administrative roles.
                 </p>
                 <div className="inline-flex gap-2">
                     {user?.roles?.map((role: string) => (
-                        <span key={role} className="px-3 py-1 rounded-full bg-white/10 border border-white/5 text-xs font-medium text-white/80 capitalize">
+                        <span key={role} className="px-3 py-1 rounded-full bg-white/10 border border-nexus-camel/10 text-xs font-medium text-nexus-khaki capitalize">
                             {role.replace('_', ' ')}
                         </span>
                     ))}

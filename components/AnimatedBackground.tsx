@@ -10,10 +10,10 @@ const ReliableBackground: React.FC = () => {
         setMounted(true);
     }, []);
 
-    if (!mounted) return <div className="fixed inset-0 bg-[#050505] -z-10" />;
+    if (!mounted) return <div className="fixed inset-0 bg-nexus-black -z-10" />;
 
     return (
-        <div className="fixed inset-0 -z-10 overflow-hidden bg-[#050505] pointer-events-none">
+        <div className="fixed inset-0 -z-10 overflow-hidden bg-nexus-black pointer-events-none">
             
             {/* BLOB 1: Top Left - Bright Orange (Matches Nexus logo) */}
             <motion.div

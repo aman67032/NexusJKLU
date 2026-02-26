@@ -45,7 +45,7 @@ export default function MediaClubPage() {
     if (!mounted) return null;
 
     return (
-        <div className="min-h-screen bg-[#0f172a] text-slate-50 font-sans selection:bg-red-600 selection:text-white overflow-x-hidden relative">
+        <div className="min-h-screen bg-[#0f172a] text-slate-50 font-sans selection:bg-red-600 selection:text-nexus-linen overflow-x-hidden relative">
             {/* Background Texture - Dot Grid */}
             <div className="fixed inset-0 z-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#94a3b8 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
 
@@ -72,10 +72,10 @@ export default function MediaClubPage() {
                 >
                     <div className="relative inline-flex items-center gap-2 px-4 py-1 bg-red-600 rounded-sm mb-4">
                         <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
-                        <span className="text-xs font-bold uppercase tracking-wider text-white">On Air</span>
+                        <span className="text-xs font-bold uppercase tracking-wider text-nexus-linen">On Air</span>
                     </div>
 
-                    <h1 className="text-6xl md:text-9xl font-black tracking-tighter mb-2 text-white leading-none">
+                    <h1 className="text-6xl md:text-9xl font-black tracking-tighter mb-2 text-nexus-linen leading-none">
                         SOCIAMA
                     </h1>
                     <div className="h-2 w-full bg-gradient-to-r from-blue-600 via-purple-600 to-red-600 mb-6"></div>
@@ -98,7 +98,7 @@ export default function MediaClubPage() {
                 >
                     <button
                         onClick={handleJoin}
-                        className={`group relative px-8 py-3 rounded-sm border-2 ${joined ? 'bg-green-600 border-green-600 text-white' : 'border-slate-200 text-slate-200 hover:bg-white hover:text-slate-900'} font-bold tracking-widest uppercase transition-all duration-300`}
+                        className={`group relative px-8 py-3 rounded-sm border-2 ${joined ? 'bg-green-600 border-green-600 text-nexus-linen' : 'border-slate-200 text-slate-200 hover:bg-white hover:text-slate-900'} font-bold tracking-widest uppercase transition-all duration-300`}
                     >
                         {joined ? 'Subscribed' : 'Join the Newsroom'}
                     </button>
@@ -127,10 +127,10 @@ export default function MediaClubPage() {
                     </div>
 
                     {/* Live Feed Placeholder */}
-                    <div className="relative aspect-video bg-black rounded-lg border border-slate-800 overflow-hidden shadow-2xl">
+                    <div className="relative aspect-video bg-nexus-black rounded-lg border border-slate-800 overflow-hidden shadow-2xl">
                         <div className="absolute top-4 left-4 flex gap-2">
-                            <div className="bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 uppercase rounded-sm">Live</div>
-                            <div className="bg-black/50 text-white text-[10px] font-bold px-2 py-0.5 uppercase rounded-sm backdrop-blur-md">Cam 1</div>
+                            <div className="bg-red-600 text-nexus-linen text-[10px] font-bold px-2 py-0.5 uppercase rounded-sm">Live</div>
+                            <div className="bg-nexus-black/50 text-nexus-linen text-[10px] font-bold px-2 py-0.5 uppercase rounded-sm backdrop-blur-md">Cam 1</div>
                         </div>
                         <div className="absolute inset-0 flex items-center justify-center">
                             <div className="text-center">
@@ -141,7 +141,7 @@ export default function MediaClubPage() {
                         {/* Overlay Elements */}
                         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
                             <div className="h-1 w-full bg-red-600 mb-2"></div>
-                            <div className="text-white font-bold uppercase truncate">Breaking: Upcoming Media House Visit Announced</div>
+                            <div className="text-nexus-linen font-bold uppercase truncate">Breaking: Upcoming Media House Visit Announced</div>
                         </div>
                     </div>
                 </div>
@@ -168,7 +168,7 @@ export default function MediaClubPage() {
                                     imageUrl={event.image_url}
                                     status={event.status}
                                     desc={event.description}
-                                    color="text-white"
+                                    color="text-nexus-linen"
                                     bg="bg-slate-900"
                                     border="group-hover:border-red-600/50"
                                     is_enrolled={event.is_enrolled}
@@ -235,7 +235,7 @@ function SectionHeader({ title, subtitle, center }: any) {
     return (
         <div className={`mb-10 ${center ? 'text-center' : ''}`}>
             <span className="inline-block px-2 py-1 bg-slate-800 text-slate-300 text-[10px] font-bold uppercase tracking-widest rounded-sm mb-3 border border-slate-700">{subtitle}</span>
-            <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight">{title}</h2>
+            <h2 className="text-3xl md:text-5xl font-black text-nexus-linen uppercase tracking-tight">{title}</h2>
         </div>
     );
 }
@@ -253,7 +253,7 @@ function ProgramCard({ title, category, status, desc, color }: any) {
     const colorClasses: any = {
         red: "border-red-500/50 text-red-400",
         blue: "border-blue-500/50 text-blue-400",
-        purple: "border-purple-500/50 text-purple-400"
+        purple: "border-purple-500/50 text-nexus-brass"
     };
 
     return (
@@ -261,16 +261,16 @@ function ProgramCard({ title, category, status, desc, color }: any) {
             <div className={`absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-transparent via-${color}-500 to-transparent opacity-50`}></div>
 
             <div className="flex justify-between items-start mb-4">
-                <span className={`text-[10px] uppercase font-bold px-2 py-1 rounded-sm border ${colorClasses[color]} bg-black/20`}>{category}</span>
+                <span className={`text-[10px] uppercase font-bold px-2 py-1 rounded-sm border ${colorClasses[color]} bg-nexus-black/20`}>{category}</span>
                 <span className="text-slate-500 text-[10px] font-mono">{status}</span>
             </div>
 
-            <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-red-500 transition-colors">{title}</h3>
+            <h3 className="text-2xl font-bold text-nexus-linen mb-3 group-hover:text-red-500 transition-colors">{title}</h3>
             <p className="text-slate-400 text-sm leading-relaxed">{desc}</p>
 
             <div className="mt-6 flex justify-end">
                 <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-red-600 transition-colors">
-                    <Play className="w-3 h-3 text-white fill-current" />
+                    <Play className="w-3 h-3 text-nexus-linen fill-current" />
                 </div>
             </div>
         </div>
@@ -286,11 +286,11 @@ function ProfileCard({ name, role, color, image }: any) {
                 {image ? (
                     <img src={image} alt={name} className="w-full h-full object-cover" />
                 ) : (
-                    <Users className="w-8 h-8 text-slate-500 group-hover:text-white transition-colors" />
+                    <Users className="w-8 h-8 text-slate-500 group-hover:text-nexus-linen transition-colors" />
                 )}
             </div>
             <div className="relative z-10">
-                <h3 className="text-xl font-bold text-white mb-1 uppercase tracking-tight">{name}</h3>
+                <h3 className="text-xl font-bold text-nexus-linen mb-1 uppercase tracking-tight">{name}</h3>
                 <div className={`text-${color}-500 text-xs font-bold uppercase tracking-widest`}>{role}</div>
             </div>
         </div>
@@ -302,7 +302,7 @@ function CoordinatorRow({ name, role, icon }: any) {
         <div className="flex items-center gap-4 p-4 border border-slate-800 hover:bg-slate-800 transition-colors">
             <div className="text-slate-500">{icon}</div>
             <div>
-                <h4 className="font-bold text-white text-sm uppercase">{name}</h4>
+                <h4 className="font-bold text-nexus-linen text-sm uppercase">{name}</h4>
                 <p className="text-slate-500 text-[10px] uppercase tracking-wide">{role}</p>
             </div>
         </div>
@@ -315,7 +315,7 @@ function SocialLink({ href, icon, label }: any) {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-slate-500 hover:text-white transition-colors font-bold text-sm uppercase tracking-wide"
+            className="flex items-center gap-2 text-slate-500 hover:text-nexus-linen transition-colors font-bold text-sm uppercase tracking-wide"
         >
             {icon} {label}
         </a>

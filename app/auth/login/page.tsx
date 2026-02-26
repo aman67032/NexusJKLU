@@ -44,10 +44,10 @@ export default function LoginPage() {
                 <div className="glass-card p-8">
                     <div className="text-center mb-8">
                         <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--primary)] to-[var(--primary-dark)] flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[var(--primary)]/20">
-                            <LogIn className="w-7 h-7 text-white" />
+                            <LogIn className="w-7 h-7 text-nexus-linen" />
                         </div>
-                        <h1 className="text-2xl font-bold text-white">Welcome Back</h1>
-                        <p className="text-white/40 text-sm mt-1">Sign in to NexusJKLU</p>
+                        <h1 className="text-2xl font-bold text-nexus-linen">Welcome Back</h1>
+                        <p className="text-nexus-camel text-sm mt-1">Sign in to NexusJKLU</p>
                     </div>
 
                     {error && (
@@ -59,7 +59,7 @@ export default function LoginPage() {
 
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
-                            <label className="text-sm text-white/50 mb-1.5 block">Email</label>
+                            <label className="text-sm text-nexus-camel mb-1.5 block">Email</label>
                             <input
                                 type="email"
                                 value={email}
@@ -72,7 +72,7 @@ export default function LoginPage() {
 
                         <div>
                             <div className="flex justify-between items-center mb-1.5">
-                                <label className="text-sm text-white/50 block">Password</label>
+                                <label className="text-sm text-nexus-camel block">Password</label>
                                 <Link href="/auth/forgot-password" className="text-sm text-[var(--primary)] hover:text-[var(--primary-light)] font-medium transition-colors">
                                     Forgot password?
                                 </Link>
@@ -89,7 +89,7 @@ export default function LoginPage() {
                                 <button
                                     type="button"
                                     onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60"
+                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-nexus-khaki"
                                 >
                                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                                 </button>

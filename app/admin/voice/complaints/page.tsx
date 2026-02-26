@@ -97,7 +97,7 @@ export default function ReviewComplaints() {
         return (
             <div className="flex flex-col items-center justify-center p-8 min-h-screen">
                 <ShieldAlert className="w-16 h-16 text-red-500 mb-4" />
-                <h1 className="text-2xl font-bold text-white mb-2">Access Denied</h1>
+                <h1 className="text-2xl font-bold text-nexus-linen mb-2">Access Denied</h1>
             </div>
         );
     }
@@ -106,23 +106,23 @@ export default function ReviewComplaints() {
         <div className="p-6 md:p-8 w-full max-w-7xl mx-auto min-h-screen">
             <header className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
-                    <h1 className="text-3xl font-bold text-white tracking-tight mb-2 flex items-center gap-3">
+                    <h1 className="text-3xl font-bold text-nexus-linen tracking-tight mb-2 flex items-center gap-3">
                         <MessageSquare className="w-8 h-8 text-rose-500" />
                         Complaints Inbox
                     </h1>
-                    <p className="text-white/60">
+                    <p className="text-nexus-khaki">
                         Review, investigate, and respond to student complaints and issues.
                     </p>
                 </div>
 
-                <div className="flex bg-[#111] p-1 rounded-xl border border-white/10 overflow-x-auto">
+                <div className="flex bg-nexus-green p-1 rounded-xl border border-nexus-camel/20 overflow-x-auto">
                     {['all', 'open', 'in_progress', 'resolved', 'closed'].map(status => (
                         <button
                             key={status}
                             onClick={() => setStatusFilter(status)}
                             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors capitalize whitespace-nowrap ${statusFilter === status
-                                ? 'bg-white/10 text-white'
-                                : 'text-white/40 hover:text-white/80 hover:bg-white/5'
+                                ? 'bg-white/10 text-nexus-linen'
+                                : 'text-nexus-camel hover:text-nexus-khaki hover:bg-white/5'
                                 }`}
                         >
                             {status.replace('_', ' ')}
@@ -137,20 +137,20 @@ export default function ReviewComplaints() {
                         <div className="w-8 h-8 rounded-full border-2 border-rose-500/20 border-t-rose-500 animate-spin" />
                     </div>
                 ) : complaints.length === 0 ? (
-                    <div className="text-center py-20 bg-[#111] border border-white/5 rounded-2xl">
+                    <div className="text-center py-20 bg-nexus-green border border-nexus-camel/10 rounded-2xl">
                         <ShieldCheck className="w-12 h-12 text-white/20 mx-auto mb-4" />
-                        <h3 className="text-lg font-medium text-white mb-1">Inbox Clear</h3>
-                        <p className="text-white/50">No {statusFilter.replace('_', ' ')} complaints found.</p>
+                        <h3 className="text-lg font-medium text-nexus-linen mb-1">Inbox Clear</h3>
+                        <p className="text-nexus-camel">No {statusFilter.replace('_', ' ')} complaints found.</p>
                     </div>
                 ) : (
                     complaints.map(complaint => (
-                        <div key={complaint._id} className="bg-[#111] border border-white/5 rounded-2xl p-6 transition-all hover:border-white/10">
+                        <div key={complaint._id} className="bg-nexus-green border border-nexus-camel/10 rounded-2xl p-6 transition-all hover:border-nexus-camel/20">
                             <div className="flex flex-col md:flex-row gap-6 items-start justify-between">
                                 <div className="flex-1 space-y-4 w-full">
                                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                                         <div>
                                             <div className="flex items-center gap-3 mb-2">
-                                                <h3 className="text-lg font-bold text-white">{complaint.title}</h3>
+                                                <h3 className="text-lg font-bold text-nexus-linen">{complaint.title}</h3>
                                                 <span className={`px-2.5 py-1 rounded-full text-xs font-medium capitalize border ${complaint.priority === 'high' ? 'bg-red-500/10 text-red-400 border-red-500/20' :
                                                     complaint.priority === 'medium' ? 'bg-orange-500/10 text-orange-400 border-orange-500/20' :
                                                         'bg-blue-500/10 text-blue-400 border-blue-500/20'
@@ -164,7 +164,7 @@ export default function ReviewComplaints() {
                                                     {complaint.status.replace('_', ' ')}
                                                 </span>
                                             </div>
-                                            <p className="text-white/60 text-sm flex gap-3 flex-wrap">
+                                            <p className="text-nexus-khaki text-sm flex gap-3 flex-wrap">
                                                 <span><strong>ID:</strong> {complaint.ticketId}</span>
                                                 <span>• <strong>Cat:</strong> {complaint.category}</span>
                                                 <span>• <strong>By:</strong> {complaint.isAnonymous ? 'Anonymous' : complaint.userId?.name || 'Unknown'}</span>
@@ -174,13 +174,13 @@ export default function ReviewComplaints() {
                                         </div>
                                     </div>
 
-                                    <div className="bg-white/[0.03] p-4 rounded-xl border border-white/5 font-mono text-sm text-white/80">
+                                    <div className="bg-white/[0.03] p-4 rounded-xl border border-nexus-camel/10 font-mono text-sm text-nexus-khaki">
                                         {complaint.description}
                                     </div>
 
                                     {complaint.response && (
-                                        <div className="bg-indigo-500/5 p-4 rounded-xl border border-indigo-500/10 mt-4">
-                                            <p className="text-xs text-indigo-400/80 uppercase font-bold tracking-wider mb-2">
+                                        <div className="bg-nexus-coffee/5 p-4 rounded-xl border border-indigo-500/10 mt-4">
+                                            <p className="text-xs text-nexus-brass/80 uppercase font-bold tracking-wider mb-2">
                                                 Admin Response (from {complaint.respondedBy?.name || 'Admin'})
                                             </p>
                                             <p className="text-sm text-indigo-100/90">{complaint.response}</p>
@@ -195,16 +195,16 @@ export default function ReviewComplaints() {
                                                 value={responseText}
                                                 onChange={(e) => setResponseText(e.target.value)}
                                                 rows={3}
-                                                className="w-full bg-black/50 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500/50 resize-y"
+                                                className="w-full bg-nexus-black/50 border border-nexus-camel/20 rounded-lg px-3 py-2 text-sm text-nexus-linen focus:outline-none focus:border-rose-500/50 resize-y"
                                                 autoFocus
                                             />
                                             <div className="flex flex-col sm:flex-row gap-3 items-center justify-between">
                                                 <div className="flex items-center gap-2 w-full sm:w-auto">
-                                                    <span className="text-sm text-white/50">Set Status:</span>
+                                                    <span className="text-sm text-nexus-camel">Set Status:</span>
                                                     <select
                                                         value={responseStatus}
                                                         onChange={(e) => setResponseStatus(e.target.value)}
-                                                        className="bg-[#111] border border-white/10 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none"
+                                                        className="bg-nexus-green border border-nexus-camel/20 rounded-lg px-3 py-1.5 text-sm text-nexus-linen focus:outline-none"
                                                     >
                                                         <option value="in_progress">In Progress</option>
                                                         <option value="resolved">Resolved</option>
@@ -214,7 +214,7 @@ export default function ReviewComplaints() {
                                                 <div className="flex gap-2 w-full sm:w-auto">
                                                     <button
                                                         onClick={() => setRespondingId(null)}
-                                                        className="flex-1 sm:flex-none px-4 py-2 bg-white/5 hover:bg-white/10 text-white/70 text-sm font-medium rounded-lg transition-colors border border-white/10"
+                                                        className="flex-1 sm:flex-none px-4 py-2 bg-white/5 hover:bg-white/10 text-nexus-khaki text-sm font-medium rounded-lg transition-colors border border-nexus-camel/20"
                                                     >
                                                         Cancel
                                                     </button>
@@ -230,13 +230,13 @@ export default function ReviewComplaints() {
                                     )}
 
                                     {transferringId === complaint._id && (
-                                        <div className="flex flex-col gap-3 mt-4 p-4 border border-indigo-500/20 bg-indigo-500/5 rounded-xl animate-in fade-in zoom-in duration-200">
+                                        <div className="flex flex-col gap-3 mt-4 p-4 border border-indigo-500/20 bg-nexus-coffee/5 rounded-xl animate-in fade-in zoom-in duration-200">
                                             <p className="text-sm font-medium text-indigo-300">Transfer Complaint</p>
                                             <div className="flex flex-col sm:flex-row gap-3 items-center justify-between">
                                                 <select
                                                     value={transferCategory}
                                                     onChange={(e) => setTransferCategory(e.target.value)}
-                                                    className="w-full sm:w-auto flex-1 bg-black/50 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500/50"
+                                                    className="w-full sm:w-auto flex-1 bg-nexus-black/50 border border-nexus-camel/20 rounded-lg px-3 py-2 text-sm text-nexus-linen focus:outline-none focus:border-indigo-500/50"
                                                 >
                                                     <option value="">Select New Category</option>
                                                     {['academic', 'infrastructure', 'hostel', 'food', 'transportation', 'administration', 'other']
@@ -247,13 +247,13 @@ export default function ReviewComplaints() {
                                                 <div className="flex gap-2 w-full sm:w-auto">
                                                     <button
                                                         onClick={() => setTransferringId(null)}
-                                                        className="flex-1 sm:flex-none px-4 py-2 bg-white/5 hover:bg-white/10 text-white/70 text-sm font-medium rounded-lg transition-colors border border-white/10"
+                                                        className="flex-1 sm:flex-none px-4 py-2 bg-white/5 hover:bg-white/10 text-nexus-khaki text-sm font-medium rounded-lg transition-colors border border-nexus-camel/20"
                                                     >
                                                         Cancel
                                                     </button>
                                                     <button
                                                         onClick={() => handleTransfer(complaint._id)}
-                                                        className="flex-1 sm:flex-none px-4 py-2 bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-400 text-sm font-medium rounded-lg transition-colors border border-indigo-500/30"
+                                                        className="flex-1 sm:flex-none px-4 py-2 bg-nexus-coffee/20 hover:bg-nexus-coffee/30 text-nexus-brass text-sm font-medium rounded-lg transition-colors border border-indigo-500/30"
                                                     >
                                                         Transfer
                                                     </button>
@@ -312,7 +312,7 @@ export default function ReviewComplaints() {
                                                 setRespondingId(null);
                                                 setTransferCategory('');
                                             }}
-                                            className="w-full flex items-center justify-center gap-2 py-2.5 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400 text-sm font-medium rounded-xl transition-colors border border-indigo-500/20"
+                                            className="w-full flex items-center justify-center gap-2 py-2.5 bg-nexus-coffee/10 hover:bg-nexus-coffee/20 text-nexus-brass text-sm font-medium rounded-xl transition-colors border border-indigo-500/20"
                                         >
                                             <ArrowRightLeft className="w-4 h-4" /> Transfer
                                         </button>

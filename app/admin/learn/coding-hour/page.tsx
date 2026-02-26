@@ -371,7 +371,7 @@ export default function CodingHourAdmin() {
 
     if (loading && contests.length === 0) {
         return (
-            <div className="min-h-screen bg-black flex flex-col items-center justify-center gap-4">
+            <div className="min-h-screen bg-nexus-black flex flex-col items-center justify-center gap-4">
                 <Loader2 className="animate-spin text-green-500 w-12 h-12" />
                 <p className="text-green-400 font-mono text-sm animate-pulse">Wait... Accessing System...</p>
             </div>
@@ -379,19 +379,19 @@ export default function CodingHourAdmin() {
     }
 
     return (
-        <div className="min-h-screen relative bg-black text-gray-200 font-sans overflow-hidden">
+        <div className="min-h-screen relative bg-nexus-black text-gray-200 font-sans overflow-hidden">
             <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full opacity-20 pointer-events-none z-0" />
 
             {/* Header */}
             <motion.div
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                className="relative z-10 bg-black/40 backdrop-blur-md border-b border-green-500/30 shadow-lg shadow-green-900/20"
+                className="relative z-10 bg-nexus-black/40 backdrop-blur-md border-b border-green-500/30 shadow-lg shadow-green-900/20"
             >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-16">
                         <div className="flex items-center gap-4">
-                            <Link href="/admin" className="text-gray-400 hover:text-white transition-colors">
+                            <Link href="/admin" className="text-nexus-khaki hover:text-nexus-linen transition-colors">
                                 <ArrowLeft className="w-5 h-5" />
                             </Link>
                             <div>
@@ -415,11 +415,11 @@ export default function CodingHourAdmin() {
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
                     <div>
-                        <h2 className="text-3xl font-bold text-white mb-2 flex items-center gap-3">
+                        <h2 className="text-3xl font-bold text-nexus-linen mb-2 flex items-center gap-3">
                             <Terminal className="text-green-500 w-8 h-8" />
                             Active Contests
                         </h2>
-                        <p className="text-gray-400">Manage weekly coding problems for students.</p>
+                        <p className="text-nexus-khaki">Manage weekly coding problems for students.</p>
                     </div>
                     <div className="flex-1 flex justify-end gap-3 self-end md:self-auto">
                         <button
@@ -431,7 +431,7 @@ export default function CodingHourAdmin() {
                         </button>
                         <button
                             onClick={() => setShowCreateModal(true)}
-                            className="px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded-lg shadow-lg shadow-green-900/40 transition-all flex items-center gap-2 font-medium"
+                            className="px-4 py-2 bg-green-600 hover:bg-green-500 text-nexus-linen rounded-lg shadow-lg shadow-green-900/40 transition-all flex items-center gap-2 font-medium"
                         >
                             <Plus size={18} />
                             New Contest
@@ -456,14 +456,14 @@ export default function CodingHourAdmin() {
                                 <div className="flex gap-2">
                                     <button
                                         onClick={() => handleEdit(contest)}
-                                        className="p-1.5 text-gray-500 hover:text-green-400 transition-colors bg-gray-800 rounded-md"
+                                        className="p-1.5 text-nexus-camel hover:text-green-400 transition-colors bg-gray-800 rounded-md"
                                         title="Edit"
                                     >
                                         <Edit size={16} />
                                     </button>
                                     <button
                                         onClick={() => handleDelete(contest._id)}
-                                        className="p-1.5 text-gray-500 hover:text-red-400 transition-colors bg-gray-800 rounded-md"
+                                        className="p-1.5 text-nexus-camel hover:text-red-400 transition-colors bg-gray-800 rounded-md"
                                         title="Delete"
                                     >
                                         <Trash2 size={16} />
@@ -471,23 +471,23 @@ export default function CodingHourAdmin() {
                                 </div>
                             </div>
 
-                            <h3 className="text-lg font-bold text-white mb-2 line-clamp-1">
+                            <h3 className="text-lg font-bold text-nexus-linen mb-2 line-clamp-1">
                                 {contest.title || contest.date}
                             </h3>
 
                             <div className="mb-4">
-                                <div className="text-sm text-gray-400 mb-2">
+                                <div className="text-sm text-nexus-khaki mb-2">
                                     {contest.questions?.length || 0} Question{(contest.questions?.length !== 1) ? 's' : ''}
                                 </div>
                                 {contest.questions?.slice(0, 2).map((q, i) => (
-                                    <div key={i} className="text-xs text-gray-500 mb-1 flex items-center gap-2">
+                                    <div key={i} className="text-xs text-nexus-camel mb-1 flex items-center gap-2">
                                         <Code className="w-3 h-3 text-gray-600" />
                                         <span className="line-clamp-1">{q.title}</span>
                                     </div>
                                 ))}
                             </div>
 
-                            <div className="text-xs text-gray-500 border-t border-white/5 pt-4">
+                            <div className="text-xs text-nexus-camel border-t border-nexus-camel/10 pt-4">
                                 ID: {contest._id.substring(0, 8)}...
                             </div>
                         </motion.div>
@@ -497,7 +497,7 @@ export default function CodingHourAdmin() {
                 {/* Announcements */}
                 {announcements.length > 0 && (
                     <div className="mt-12 mb-12">
-                        <h3 className="text-xl font-bold text-white flex items-center gap-2 mb-6">
+                        <h3 className="text-xl font-bold text-nexus-linen flex items-center gap-2 mb-6">
                             <Megaphone className="text-blue-500" />
                             Active Announcements
                         </h3>
@@ -505,12 +505,12 @@ export default function CodingHourAdmin() {
                             {announcements.map((ann) => (
                                 <div key={ann._id} className="bg-gray-800/50 border border-blue-500/20 rounded-xl p-6 relative">
                                     <div className="flex justify-between items-start mb-2">
-                                        <h4 className="text-lg font-bold text-white">{ann.title}</h4>
-                                        <button onClick={() => handleDeleteAnnouncement(ann._id)} className="text-gray-500 hover:text-red-400">
+                                        <h4 className="text-lg font-bold text-nexus-linen">{ann.title}</h4>
+                                        <button onClick={() => handleDeleteAnnouncement(ann._id)} className="text-nexus-camel hover:text-red-400">
                                             <Trash2 size={16} />
                                         </button>
                                     </div>
-                                    <p className="text-gray-400 text-sm mb-4 line-clamp-3">{ann.content}</p>
+                                    <p className="text-nexus-khaki text-sm mb-4 line-clamp-3">{ann.content}</p>
                                     {ann.attachmentUrl && (
                                         <a href={ann.attachmentUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs text-blue-400 bg-blue-900/20 px-3 py-1.5 rounded-lg w-fit hover:bg-blue-900/40">
                                             <FileText size={14} /> View Link
@@ -525,7 +525,7 @@ export default function CodingHourAdmin() {
                 {/* Create Modal */}
                 <AnimatePresence>
                     {showCreateModal && (
-                        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto">
+                        <div className="fixed inset-0 bg-nexus-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto">
                             <motion.div
                                 initial={{ scale: 0.95, y: 20 }}
                                 animate={{ scale: 1, y: 0 }}
@@ -533,11 +533,11 @@ export default function CodingHourAdmin() {
                                 className="bg-gray-900 border border-green-500/30 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 shadow-2xl"
                             >
                                 <div className="sticky top-0 bg-gray-900/95 backdrop-blur border-b border-green-500/20 p-6 flex justify-between items-center z-10">
-                                    <h2 className="text-2xl font-bold text-white flex items-center gap-3">
+                                    <h2 className="text-2xl font-bold text-nexus-linen flex items-center gap-3">
                                         <Terminal className="text-green-500" />
                                         {editingContestId ? 'Edit Contest' : 'Initialize Contest'}
                                     </h2>
-                                    <button onClick={() => { setShowCreateModal(false); resetForm(); }} className="text-gray-400 hover:text-white">
+                                    <button onClick={() => { setShowCreateModal(false); resetForm(); }} className="text-nexus-khaki hover:text-nexus-linen">
                                         <X size={24} />
                                     </button>
                                 </div>
@@ -549,7 +549,7 @@ export default function CodingHourAdmin() {
                                             <select
                                                 value={contestForm.courseId}
                                                 onChange={(e) => setContestForm({ ...contestForm, courseId: e.target.value })}
-                                                className="w-full px-4 py-3 bg-black/40 border border-green-500/20 rounded-lg text-white focus:outline-none focus:border-green-500 font-mono"
+                                                className="w-full px-4 py-3 bg-nexus-black/40 border border-green-500/20 rounded-lg text-nexus-linen focus:outline-none focus:border-green-500 font-mono"
                                                 required
                                             >
                                                 <option value="">SELECT COURSE...</option>
@@ -564,7 +564,7 @@ export default function CodingHourAdmin() {
                                                 type="text"
                                                 value={contestForm.date}
                                                 onChange={(e) => setContestForm({ ...contestForm, date: e.target.value })}
-                                                className="w-full px-4 py-3 bg-black/40 border border-green-500/20 rounded-lg text-white focus:outline-none focus:border-green-500 font-mono"
+                                                className="w-full px-4 py-3 bg-nexus-black/40 border border-green-500/20 rounded-lg text-nexus-linen focus:outline-none focus:border-green-500 font-mono"
                                                 placeholder="Week 1 - Day 1"
                                                 required
                                             />
@@ -577,7 +577,7 @@ export default function CodingHourAdmin() {
                                             type="text"
                                             value={contestForm.title}
                                             onChange={(e) => setContestForm({ ...contestForm, title: e.target.value })}
-                                            className="w-full px-4 py-3 bg-black/40 border border-green-500/20 rounded-lg text-white focus:outline-none focus:border-green-500 font-mono"
+                                            className="w-full px-4 py-3 bg-nexus-black/40 border border-green-500/20 rounded-lg text-nexus-linen focus:outline-none focus:border-green-500 font-mono"
                                             placeholder="Introduction to C"
                                         />
                                     </div>
@@ -585,7 +585,7 @@ export default function CodingHourAdmin() {
                                     {/* Questions List */}
                                     <div className="border-t border-green-500/20 pt-6">
                                         <div className="flex justify-between items-center mb-4">
-                                            <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                                            <h3 className="text-xl font-bold text-nexus-linen flex items-center gap-2">
                                                 <Code className="text-green-500" />
                                                 Questions ({questions.length})
                                             </h3>
@@ -596,15 +596,15 @@ export default function CodingHourAdmin() {
 
                                         <div className="space-y-4">
                                             {questions.map((q, qIndex) => (
-                                                <div key={qIndex} className="border border-green-500/20 rounded-lg bg-black/20 overflow-hidden">
+                                                <div key={qIndex} className="border border-green-500/20 rounded-lg bg-nexus-black/20 overflow-hidden">
                                                     <div className="flex justify-between items-center p-4 bg-green-900/10 cursor-pointer" onClick={() => setExpandedQuestion(expandedQuestion === qIndex ? null : qIndex)}>
                                                         <div className="flex items-center gap-3">
                                                             <span className="text-green-400 font-mono font-bold">Q{qIndex + 1}</span>
-                                                            <span className="text-white text-sm">{q.title || 'Untitled'}</span>
+                                                            <span className="text-nexus-linen text-sm">{q.title || 'Untitled'}</span>
                                                         </div>
                                                         <div className="flex items-center gap-2">
                                                             {questions.length > 1 && (
-                                                                <button type="button" onClick={(e) => { e.stopPropagation(); removeQuestion(qIndex); }} className="p-1.5 text-gray-500 hover:text-red-400">
+                                                                <button type="button" onClick={(e) => { e.stopPropagation(); removeQuestion(qIndex); }} className="p-1.5 text-nexus-camel hover:text-red-400">
                                                                     <Trash2 size={16} />
                                                                 </button>
                                                             )}
@@ -618,14 +618,14 @@ export default function CodingHourAdmin() {
                                                                 type="text"
                                                                 value={q.title}
                                                                 onChange={(e) => updateQuestion(qIndex, 'title', e.target.value)}
-                                                                className="w-full px-4 py-2 bg-black/40 border border-green-500/20 rounded-lg text-white text-sm focus:border-green-500"
+                                                                className="w-full px-4 py-2 bg-nexus-black/40 border border-green-500/20 rounded-lg text-nexus-linen text-sm focus:border-green-500"
                                                                 placeholder="Question Title"
                                                                 required
                                                             />
                                                             <textarea
                                                                 value={q.question}
                                                                 onChange={(e) => updateQuestion(qIndex, 'question', e.target.value)}
-                                                                className="w-full px-4 py-2 bg-black/40 border border-green-500/20 rounded-lg text-white text-sm min-h-[100px] focus:border-green-500"
+                                                                className="w-full px-4 py-2 bg-nexus-black/40 border border-green-500/20 rounded-lg text-nexus-linen text-sm min-h-[100px] focus:border-green-500"
                                                                 placeholder="Problem Statement"
                                                                 required
                                                             />
@@ -635,7 +635,7 @@ export default function CodingHourAdmin() {
                                                                 <label className="block text-xs text-green-400 mb-2 uppercase tracking-wider">Languages</label>
                                                                 <div className="flex flex-wrap gap-2">
                                                                     {SUPPORTED_LANGUAGES.map(lang => (
-                                                                        <label key={lang} className={`px-3 py-1.5 rounded-lg border cursor-pointer text-xs uppercase ${q.codeSnippets[lang] !== undefined ? 'bg-green-600/30 border-green-500 text-green-300' : 'bg-gray-800/50 border-gray-600 text-gray-400'}`}>
+                                                                        <label key={lang} className={`px-3 py-1.5 rounded-lg border cursor-pointer text-xs uppercase ${q.codeSnippets[lang] !== undefined ? 'bg-green-600/30 border-green-500 text-green-300' : 'bg-gray-800/50 border-gray-600 text-nexus-khaki'}`}>
                                                                             <input type="checkbox" className="sr-only" checked={q.codeSnippets[lang] !== undefined} onChange={() => toggleLanguage(qIndex, lang)} />
                                                                             {lang}
                                                                         </label>
@@ -662,7 +662,7 @@ export default function CodingHourAdmin() {
                                                             <textarea
                                                                 value={q.explanation}
                                                                 onChange={(e) => updateQuestion(qIndex, 'explanation', e.target.value)}
-                                                                className="w-full px-4 py-2 bg-black/40 border border-green-500/20 rounded-lg text-white text-sm focus:border-green-500"
+                                                                className="w-full px-4 py-2 bg-nexus-black/40 border border-green-500/20 rounded-lg text-nexus-linen text-sm focus:border-green-500"
                                                                 placeholder="Explanation..."
                                                                 required
                                                             />
@@ -674,7 +674,7 @@ export default function CodingHourAdmin() {
                                     </div>
 
                                     <div className="flex gap-4 pt-4 border-t border-green-500/20">
-                                        <button type="submit" disabled={actionLoading} className="flex-1 py-3 bg-green-600 hover:bg-green-500 text-white rounded-lg font-mono font-bold flex justify-center items-center gap-2">
+                                        <button type="submit" disabled={actionLoading} className="flex-1 py-3 bg-green-600 hover:bg-green-500 text-nexus-linen rounded-lg font-mono font-bold flex justify-center items-center gap-2">
                                             {actionLoading ? <Loader2 className="animate-spin" size={18} /> : (editingContestId ? 'UPDATE' : 'DEPLOY CONTEST')}
                                         </button>
                                     </div>
@@ -687,34 +687,34 @@ export default function CodingHourAdmin() {
                 {/* Announcement Modal */}
                 <AnimatePresence>
                     {showAnnouncementModal && (
-                        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                        <div className="fixed inset-0 bg-nexus-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
                             <motion.div initial={{ scale: 0.95, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.95, y: 20 }} className="bg-gray-900 border border-blue-500/30 rounded-2xl max-w-lg w-full p-6 shadow-2xl">
                                 <div className="flex justify-between items-center mb-6">
-                                    <h2 className="text-xl font-bold text-white flex items-center gap-2"><Megaphone className="text-blue-500" /> Post Announcement</h2>
-                                    <button onClick={() => setShowAnnouncementModal(false)} className="text-gray-400 hover:text-white"><X size={20} /></button>
+                                    <h2 className="text-xl font-bold text-nexus-linen flex items-center gap-2"><Megaphone className="text-blue-500" /> Post Announcement</h2>
+                                    <button onClick={() => setShowAnnouncementModal(false)} className="text-nexus-khaki hover:text-nexus-linen"><X size={20} /></button>
                                 </div>
                                 <form onSubmit={handleAnnouncementSubmit} className="space-y-4">
                                     <input
                                         type="text"
                                         value={announcementForm.title}
                                         onChange={(e) => setAnnouncementForm({ ...announcementForm, title: e.target.value })}
-                                        className="w-full px-4 py-2 bg-black/40 border border-blue-500/20 rounded-lg text-white text-sm focus:border-blue-500"
+                                        className="w-full px-4 py-2 bg-nexus-black/40 border border-blue-500/20 rounded-lg text-nexus-linen text-sm focus:border-blue-500"
                                         required placeholder="Announcement Title"
                                     />
                                     <textarea
                                         value={announcementForm.content}
                                         onChange={(e) => setAnnouncementForm({ ...announcementForm, content: e.target.value })}
-                                        className="w-full px-4 py-2 bg-black/40 border border-blue-500/20 rounded-lg text-white text-sm min-h-[100px] focus:border-blue-500"
+                                        className="w-full px-4 py-2 bg-nexus-black/40 border border-blue-500/20 rounded-lg text-nexus-linen text-sm min-h-[100px] focus:border-blue-500"
                                         required placeholder="Content details..."
                                     />
                                     <input
                                         type="text"
                                         value={announcementForm.attachmentUrl}
                                         onChange={(e) => setAnnouncementForm({ ...announcementForm, attachmentUrl: e.target.value })}
-                                        className="w-full px-4 py-2 bg-black/40 border border-blue-500/20 rounded-lg text-white text-sm focus:border-blue-500"
+                                        className="w-full px-4 py-2 bg-nexus-black/40 border border-blue-500/20 rounded-lg text-nexus-linen text-sm focus:border-blue-500"
                                         placeholder="Attachment Link (Optional URLs like Drive/Docs)"
                                     />
-                                    <button type="submit" disabled={actionLoading} className="w-full py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium flex justify-center mt-4">
+                                    <button type="submit" disabled={actionLoading} className="w-full py-2 bg-blue-600 hover:bg-blue-500 text-nexus-linen rounded-lg font-medium flex justify-center mt-4">
                                         {actionLoading ? <Loader2 className="animate-spin" size={18} /> : 'Post Announcement'}
                                     </button>
                                 </form>

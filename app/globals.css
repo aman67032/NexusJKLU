@@ -1,46 +1,71 @@
 @import "tailwindcss";
 
 :root {
-  /* Brand Colors — JKLU Orange & Blue */
-  --primary: #FF6600;
-  --primary-light: #FF8533;
-  --primary-dark: #CC5200;
-  --secondary: #3B82F6;
-  --secondary-light: #60A5FA;
-  --secondary-dark: #2563EB;
-  --accent: #8B5CF6;
-  --accent-light: #A78BFA;
+  /* Earthy Coffee Theme Mappings */
 
-  /* UI Colors - Dark Mode Default */
-  --background: #050505;
-  --background-secondary: #0a0a0a;
-  --foreground: #ededed;
-  --card-bg: rgba(255, 255, 255, 0.03);
-  --card-border: rgba(255, 255, 255, 0.08);
-  --card-hover: rgba(255, 255, 255, 0.06);
-  --text-primary: #f9fafb;
-  --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
-  --nav-bg: rgba(5, 5, 5, 0.8);
-  --glass-bg: rgba(255, 255, 255, 0.04);
-  --glass-border: rgba(255, 255, 255, 0.08);
+  /* Palette 1 (Dark Bases & Accents) */
+  --chinese-black: #0C1519;
+  --dark-jungle-green: #162127;
+  --jet: #3A3534;
+  --coffee: #724B39;
+  --antique-brass: #CF9D7B;
 
-  /* Module Colors */
-  --learn-color: #10B981;
-  --council-color: #FF6600;
-  --voice-color: #8B5CF6;
-  --transport-color: #F59E0B;
-  --portfolio-color: #EC4899;
+  /* Palette 2 (Lights & Typography) */
+  --linen: #F5F1EA;
+  --khaki: #D7C9B8;
+  --camel: #B2967D;
+  --cocoa: #7D5A44;
+  --espresso: #4A342A;
+
+  /* Abstracted UI Colors */
+  --background: var(--chinese-black);
+  --background-secondary: var(--dark-jungle-green);
+  --foreground: var(--linen);
+
+  --card-bg: var(--dark-jungle-green);
+  --card-border: var(--jet);
+  --card-hover: rgba(22, 33, 39, 0.8);
+
+  --text-primary: var(--linen);
+  --text-secondary: var(--khaki);
+  --text-muted: var(--camel);
+
+  --nav-bg: rgba(12, 21, 25, 0.85);
+  /* Chinese Black transparent */
+  --glass-bg: rgba(22, 33, 39, 0.6);
+  /* Dark Jungle transparent */
+  --glass-border: rgba(178, 150, 125, 0.15);
+  /* Camel transparent */
+
+  /* Module Colors (mapped to warm tones) */
+  --learn-color: #6d8e62;
+  /* Forest warm tint */
+  --council-color: var(--antique-brass);
+  --voice-color: var(--coffee);
+  --transport-color: var(--cocoa);
+  --portfolio-color: var(--espresso);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @theme inline {
+  --color-nexus-black: var(--chinese-black);
+  --color-nexus-green: var(--dark-jungle-green);
+  --color-nexus-jet: var(--jet);
+  --color-nexus-coffee: var(--coffee);
+  --color-nexus-brass: var(--antique-brass);
+
+  --color-nexus-linen: var(--linen);
+  --color-nexus-khaki: var(--khaki);
+  --color-nexus-camel: var(--camel);
+  --color-nexus-cocoa: var(--cocoa);
+  --color-nexus-espresso: var(--espresso);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
-  --color-secondary: var(--secondary);
+  --color-primary: var(--antique-brass);
+  --color-secondary: var(--coffee);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

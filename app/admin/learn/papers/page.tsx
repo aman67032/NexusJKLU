@@ -97,7 +97,7 @@ export default function ReviewPapers() {
         return (
             <div className="flex flex-col items-center justify-center p-8 min-h-screen">
                 <ShieldAlert className="w-16 h-16 text-red-500 mb-4" />
-                <h1 className="text-2xl font-bold text-white mb-2">Access Denied</h1>
+                <h1 className="text-2xl font-bold text-nexus-linen mb-2">Access Denied</h1>
             </div>
         );
     }
@@ -106,23 +106,23 @@ export default function ReviewPapers() {
         <div className="p-6 md:p-8 w-full max-w-7xl mx-auto min-h-screen">
             <header className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
-                    <h1 className="text-3xl font-bold text-white tracking-tight mb-2 flex items-center gap-3">
+                    <h1 className="text-3xl font-bold text-nexus-linen tracking-tight mb-2 flex items-center gap-3">
                         <BookOpen className="w-8 h-8 text-emerald-500" />
                         Paper Review Queue
                     </h1>
-                    <p className="text-white/60">
+                    <p className="text-nexus-khaki">
                         Review uploaded notes, assignments, and past papers before they go live.
                     </p>
                 </div>
 
-                <div className="flex bg-[#111] p-1 rounded-xl border border-white/10">
+                <div className="flex bg-nexus-green p-1 rounded-xl border border-nexus-camel/20">
                     {['pending', 'approved', 'rejected'].map(status => (
                         <button
                             key={status}
                             onClick={() => { setStatusFilter(status); setCurrentPage(1); }}
                             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors capitalize ${statusFilter === status
-                                ? 'bg-white/10 text-white'
-                                : 'text-white/40 hover:text-white/80 hover:bg-white/5'
+                                ? 'bg-white/10 text-nexus-linen'
+                                : 'text-nexus-camel hover:text-nexus-khaki hover:bg-white/5'
                                 }`}
                         >
                             {status}
@@ -137,24 +137,24 @@ export default function ReviewPapers() {
                         <div className="w-8 h-8 rounded-full border-2 border-emerald-500/20 border-t-emerald-500 animate-spin" />
                     </div>
                 ) : papers.length === 0 ? (
-                    <div className="text-center py-20 bg-[#111] border border-white/5 rounded-2xl">
+                    <div className="text-center py-20 bg-nexus-green border border-nexus-camel/10 rounded-2xl">
                         <FileText className="w-12 h-12 text-white/20 mx-auto mb-4" />
-                        <h3 className="text-lg font-medium text-white mb-1">Queue Empty</h3>
-                        <p className="text-white/50">No {statusFilter} papers found.</p>
+                        <h3 className="text-lg font-medium text-nexus-linen mb-1">Queue Empty</h3>
+                        <p className="text-nexus-camel">No {statusFilter} papers found.</p>
                     </div>
                 ) : (
                     papers.map(paper => (
-                        <div key={paper._id} className="bg-[#111] border border-white/5 rounded-2xl p-6 transition-all hover:border-white/10">
+                        <div key={paper._id} className="bg-nexus-green border border-nexus-camel/10 rounded-2xl p-6 transition-all hover:border-nexus-camel/20">
                             <div className="flex flex-col md:flex-row gap-6 items-start justify-between">
                                 <div className="flex-1 space-y-4">
                                     <div>
                                         <div className="flex items-center gap-3 mb-2">
-                                            <h3 className="text-lg font-bold text-white">{paper.title}</h3>
-                                            <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-white/5 text-white/70 capitalize border border-white/10">
+                                            <h3 className="text-lg font-bold text-nexus-linen">{paper.title}</h3>
+                                            <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-white/5 text-nexus-khaki capitalize border border-nexus-camel/20">
                                                 {paper.paperType}
                                             </span>
                                         </div>
-                                        <p className="text-white/60 text-sm flex gap-3">
+                                        <p className="text-nexus-khaki text-sm flex gap-3">
                                             <span><strong>Course:</strong> {paper.courseId?.code}</span>
                                             <span>•</span>
                                             <span><strong>Year:</strong> {paper.year}</span>
@@ -164,7 +164,7 @@ export default function ReviewPapers() {
                                     </div>
 
                                     {paper.description && (
-                                        <p className="text-white/70 text-sm bg-white/5 p-3 rounded-xl border border-white/5">
+                                        <p className="text-nexus-khaki text-sm bg-white/5 p-3 rounded-xl border border-nexus-camel/10">
                                             {paper.description}
                                         </p>
                                     )}
@@ -191,7 +191,7 @@ export default function ReviewPapers() {
                                         <a
                                             href={`/learn/papers`}
                                             target="_blank"
-                                            className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors px-3 py-1.5 rounded-lg hover:bg-white/5"
+                                            className="inline-flex items-center gap-2 text-sm text-nexus-camel hover:text-nexus-linen transition-colors px-3 py-1.5 rounded-lg hover:bg-white/5"
                                         >
                                             <ExternalLink className="w-4 h-4" /> View in Learn
                                         </a>
@@ -207,13 +207,13 @@ export default function ReviewPapers() {
                                                     placeholder="Reason for rejection..."
                                                     value={rejectionReason}
                                                     onChange={(e) => setRejectionReason(e.target.value)}
-                                                    className="w-full bg-black/50 border border-red-500/30 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-red-500"
+                                                    className="w-full bg-nexus-black/50 border border-red-500/30 rounded-lg px-3 py-2 text-sm text-nexus-linen focus:outline-none focus:border-red-500"
                                                     autoFocus
                                                 />
                                                 <div className="flex gap-2">
                                                     <button
                                                         onClick={() => setRejectingId(null)}
-                                                        className="flex-1 py-2 bg-white/5 hover:bg-white/10 text-white/70 text-sm font-medium rounded-lg transition-colors border border-white/10"
+                                                        className="flex-1 py-2 bg-white/5 hover:bg-white/10 text-nexus-khaki text-sm font-medium rounded-lg transition-colors border border-nexus-camel/20"
                                                     >
                                                         Cancel
                                                     </button>
@@ -257,7 +257,7 @@ export default function ReviewPapers() {
                         <button
                             onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                             disabled={currentPage === 1}
-                            className="px-4 py-2 rounded-lg bg-white/5 text-white/70 font-semibold border border-white/10 disabled:opacity-30 hover:bg-white/10 transition-colors"
+                            className="px-4 py-2 rounded-lg bg-white/5 text-nexus-khaki font-semibold border border-nexus-camel/20 disabled:opacity-30 hover:bg-white/10 transition-colors"
                         >
                             Previous
                         </button>
@@ -267,8 +267,8 @@ export default function ReviewPapers() {
                                     key={page}
                                     onClick={() => setCurrentPage(page)}
                                     className={`w-10 h-10 rounded-lg text-sm font-bold flex items-center justify-center transition-colors ${currentPage === page
-                                            ? 'bg-gradient-to-tr from-emerald-500 to-teal-500 text-white shadow-lg'
-                                            : 'bg-[#111] text-white/50 border border-white/5 hover:bg-white/10'
+                                            ? 'bg-gradient-to-tr from-emerald-500 to-teal-500 text-nexus-linen shadow-lg'
+                                            : 'bg-nexus-green text-nexus-camel border border-nexus-camel/10 hover:bg-white/10'
                                         }`}
                                 >
                                     {page}
@@ -278,7 +278,7 @@ export default function ReviewPapers() {
                         <button
                             onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                             disabled={currentPage === totalPages}
-                            className="px-4 py-2 rounded-lg bg-white/5 text-white/70 font-semibold border border-white/10 disabled:opacity-30 hover:bg-white/10 transition-colors"
+                            className="px-4 py-2 rounded-lg bg-white/5 text-nexus-khaki font-semibold border border-nexus-camel/20 disabled:opacity-30 hover:bg-white/10 transition-colors"
                         >
                             Next
                         </button>
@@ -293,7 +293,7 @@ export default function ReviewPapers() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-12 bg-black/80 backdrop-blur-sm"
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-12 bg-nexus-black/80 backdrop-blur-sm"
                         onClick={() => setPreviewUrl(null)}
                     >
                         <motion.div
@@ -301,23 +301,23 @@ export default function ReviewPapers() {
                             animate={{ scale: 1, opacity: 1, y: 0 }}
                             exit={{ scale: 0.95, opacity: 0, y: 20 }}
                             onClick={(e) => e.stopPropagation()}
-                            className="bg-[#111] border border-white/10 rounded-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl relative"
+                            className="bg-nexus-green border border-nexus-camel/20 rounded-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl relative"
                         >
-                            <div className="flex items-center justify-between p-4 border-b border-white/10 bg-white/5 shrink-0">
-                                <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                                    <FileText className="w-5 h-5 text-indigo-400" /> Document Preview
+                            <div className="flex items-center justify-between p-4 border-b border-nexus-camel/20 bg-white/5 shrink-0">
+                                <h3 className="text-lg font-bold text-nexus-linen flex items-center gap-2">
+                                    <FileText className="w-5 h-5 text-nexus-brass" /> Document Preview
                                 </h3>
                                 <div className="flex items-center gap-2">
                                     <button
                                         onClick={() => window.open(previewUrl, '_blank')}
-                                        className="p-2 hover:bg-white/10 rounded-lg text-white/70 hover:text-white transition-colors"
+                                        className="p-2 hover:bg-white/10 rounded-lg text-nexus-khaki hover:text-nexus-linen transition-colors"
                                         title="Open in new tab"
                                     >
                                         <Maximize2 className="w-5 h-5" />
                                     </button>
                                     <button
                                         onClick={() => setPreviewUrl(null)}
-                                        className="p-2 hover:bg-red-500/20 rounded-lg text-white/70 hover:text-red-400 transition-colors"
+                                        className="p-2 hover:bg-red-500/20 rounded-lg text-nexus-khaki hover:text-red-400 transition-colors"
                                     >
                                         <X className="w-5 h-5" />
                                     </button>

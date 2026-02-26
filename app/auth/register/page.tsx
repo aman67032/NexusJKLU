@@ -55,10 +55,10 @@ export default function RegisterPage() {
                 <div className="glass-card p-8">
                     <div className="text-center mb-8">
                         <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--secondary)] to-[var(--secondary-dark)] flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[var(--secondary)]/20">
-                            <UserPlus className="w-7 h-7 text-white" />
+                            <UserPlus className="w-7 h-7 text-nexus-linen" />
                         </div>
-                        <h1 className="text-2xl font-bold text-white">Create Account</h1>
-                        <p className="text-white/40 text-sm mt-1">Join NexusJKLU community</p>
+                        <h1 className="text-2xl font-bold text-nexus-linen">Create Account</h1>
+                        <p className="text-nexus-camel text-sm mt-1">Join NexusJKLU community</p>
                     </div>
 
                     {error && (
@@ -70,24 +70,24 @@ export default function RegisterPage() {
 
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
-                            <label className="text-sm text-white/50 mb-1.5 block">Full Name</label>
+                            <label className="text-sm text-nexus-camel mb-1.5 block">Full Name</label>
                             <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="input-field" placeholder="Your Name" required />
                         </div>
                         <div>
-                            <label className="text-sm text-white/50 mb-1.5 block">Email</label>
+                            <label className="text-sm text-nexus-camel mb-1.5 block">Email</label>
                             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="input-field" placeholder="your@jklu.edu.in" required />
                         </div>
                         <div>
-                            <label className="text-sm text-white/50 mb-1.5 block">Password</label>
+                            <label className="text-sm text-nexus-camel mb-1.5 block">Password</label>
                             <div className="relative">
                                 <input type={showPassword ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} className="input-field pr-10" placeholder="••••••••" required />
-                                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60">
+                                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-nexus-khaki">
                                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                                 </button>
                             </div>
                         </div>
                         <div>
-                            <label className="text-sm text-white/50 mb-1.5 block">Confirm Password</label>
+                            <label className="text-sm text-nexus-camel mb-1.5 block">Confirm Password</label>
                             <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="input-field" placeholder="••••••••" required />
                         </div>
 

@@ -50,7 +50,7 @@ export default function ArtClubPage() {
     };
 
     return (
-        <div className="min-h-screen font-sans selection:bg-pink-500 selection:text-white overflow-x-hidden relative bg-[#FAF9F6] text-slate-800">
+        <div className="min-h-screen font-sans selection:bg-pink-500 selection:text-nexus-linen overflow-x-hidden relative bg-[#FAF9F6] text-slate-800">
             {/* Fixed Background */}
             <ArtClubBg />
 
@@ -100,7 +100,7 @@ export default function ArtClubPage() {
                     <div className="flex flex-wrap justify-center gap-4">
                         <button
                             onClick={handleJoin}
-                            className={`px-10 py-4 ${joined ? 'bg-green-500' : 'bg-gradient-to-r from-pink-500 to-purple-600'} text-white font-bold text-lg rounded-full hover:scale-105 transition-all shadow-xl shadow-pink-500/30 flex items-center gap-2`}
+                            className={`px-10 py-4 ${joined ? 'bg-green-500' : 'bg-gradient-to-r from-pink-500 to-purple-600'} text-nexus-linen font-bold text-lg rounded-full hover:scale-105 transition-all shadow-xl shadow-pink-500/30 flex items-center gap-2`}
                         >
                             {joined ? <Heart className="w-5 h-5 fill-white" /> : <Brush className="w-5 h-5" />}
                             {joined ? 'Family Member' : 'Join the Family'}
@@ -271,15 +271,15 @@ export default function ArtClubPage() {
                             <div className="relative h-64 rounded-3xl overflow-hidden shadow-lg group cursor-pointer border-4 border-white">
                                 <Image src="/Clubs/Art_club/event_photos/Picture8.jpg" alt="Sketch Walk" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
-                                    <h4 className="text-white text-2xl font-bold mb-2">Sketch Walk 2025</h4>
-                                    <p className="text-white/80 text-sm">Capturing the soul of nature and architecture.</p>
+                                    <h4 className="text-nexus-linen text-2xl font-bold mb-2">Sketch Walk 2025</h4>
+                                    <p className="text-nexus-khaki text-sm">Capturing the soul of nature and architecture.</p>
                                 </div>
                             </div>
                             <div className="relative h-64 rounded-3xl overflow-hidden shadow-lg group cursor-pointer border-4 border-white">
                                 <Image src="/Clubs/Art_club/event_photos/Picture9.jpg" alt="Cafeteria" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
-                                    <h4 className="text-white text-2xl font-bold mb-2">Cafeteria Revamp</h4>
-                                    <p className="text-white/80 text-sm">Adding colors to our daily dining.</p>
+                                    <h4 className="text-nexus-linen text-2xl font-bold mb-2">Cafeteria Revamp</h4>
+                                    <p className="text-nexus-khaki text-sm">Adding colors to our daily dining.</p>
                                 </div>
                             </div>
                         </div>
@@ -329,7 +329,7 @@ function LeaderCard({ role, name, color, imageSrc }: any) {
             </div>
 
             <div className="relative z-20 mt-6 text-center">
-                <h3 className="text-3xl font-black text-slate-900 mb-2 drop-shadow-lg shadow-white bg-white/60 backdrop-blur-sm px-4 py-1 rounded-2xl border border-white/50">{name}</h3>
+                <h3 className="text-3xl font-black text-slate-900 mb-2 drop-shadow-lg shadow-white bg-white/60 backdrop-blur-sm px-4 py-1 rounded-2xl border border-nexus-camel/100">{name}</h3>
                 <span className={`inline-block px-5 py-2 rounded-full bg-white border-2 border-${color}-200 text-${color}-600 font-bold uppercase tracking-widest text-sm shadow-md`}>
                     {role}
                 </span>

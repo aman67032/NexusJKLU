@@ -49,7 +49,7 @@ export default function TechnologyClubPage() {
     if (!mounted) return null;
 
     return (
-        <div className="min-h-screen text-white font-sans selection:bg-orange-500 selection:text-black overflow-x-hidden relative bg-[#050510]">
+        <div className="min-h-screen text-nexus-linen font-sans selection:bg-orange-500 selection:text-black overflow-x-hidden relative bg-[#050510]">
             {/* Fixed Background for entire page */}
             <div className="fixed inset-0 z-0 pointer-events-none opacity-40">
                 <Hyperspeed
@@ -65,7 +65,7 @@ export default function TechnologyClubPage() {
 
                 <div className="relative z-10 text-center px-4 max-w-6xl mx-auto flex flex-col items-center">
                     {/* Tech Club Logo */}
-                    <div className="relative w-32 h-32 md:w-40 md:h-40 mb-8 rounded-full overflow-hidden border-4 border-orange-500/50 shadow-[0_0_30px_rgba(249,115,22,0.4)] animate-fade-in-up hover:scale-105 transition-transform duration-500 bg-black">
+                    <div className="relative w-32 h-32 md:w-40 md:h-40 mb-8 rounded-full overflow-hidden border-4 border-orange-500/50 shadow-[0_0_30px_rgba(249,115,22,0.4)] animate-fade-in-up hover:scale-105 transition-transform duration-500 bg-nexus-black">
                         <Image
                             src="/logos/TechClub (With BG).png"
                             alt="Tech Club Logo"
@@ -94,7 +94,7 @@ export default function TechnologyClubPage() {
                     <div className="flex flex-wrap justify-center gap-4 animate-fade-in-up delay-300">
                         <button
                             onClick={handleJoin}
-                            className={`group relative px-8 py-4 ${joined ? 'bg-green-600' : 'bg-gradient-to-r from-blue-600 to-blue-500'} text-white font-bold text-lg rounded-full hover:scale-105 transition-all shadow-[0_0_20px_rgba(59,130,246,0.4)] overflow-hidden`}
+                            className={`group relative px-8 py-4 ${joined ? 'bg-green-600' : 'bg-gradient-to-r from-blue-600 to-blue-500'} text-nexus-linen font-bold text-lg rounded-full hover:scale-105 transition-all shadow-[0_0_20px_rgba(59,130,246,0.4)] overflow-hidden`}
                         >
                             <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:animate-shine"></div>
                             <span className="relative z-10">{joined ? 'Joined Community' : 'Join Community'}</span>
@@ -186,7 +186,7 @@ export default function TechnologyClubPage() {
                         </div>
 
                         <div className="relative z-10">
-                            <h3 className="text-3xl font-bold mb-6 flex items-center gap-3 text-white">
+                            <h3 className="text-3xl font-bold mb-6 flex items-center gap-3 text-nexus-linen">
                                 <span className="p-3 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20"><Cpu size={28} /></span>
                                 Our Vision
                             </h3>
@@ -204,7 +204,7 @@ export default function TechnologyClubPage() {
                         </div>
 
                         <div className="relative z-10">
-                            <h3 className="text-3xl font-bold mb-6 flex items-center gap-3 text-white">
+                            <h3 className="text-3xl font-bold mb-6 flex items-center gap-3 text-nexus-linen">
                                 <span className="p-3 rounded-xl bg-orange-500/10 text-orange-400 border border-orange-500/20"><Terminal size={28} /></span>
                                 Our Mission
                             </h3>
@@ -227,7 +227,7 @@ export default function TechnologyClubPage() {
             </section>
 
             {/* --- EVENTS SECTION --- */}
-            <section id="events-section" className="py-24 bg-[#02050e] relative border-t border-white/5">
+            <section id="events-section" className="py-24 bg-[#02050e] relative border-t border-nexus-camel/10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                         <div>
@@ -267,7 +267,7 @@ export default function TechnologyClubPage() {
                     ) : (
                         <div className="text-center py-12 bg-gray-900/30 rounded-2xl border border-gray-800 border-dashed">
                             <Calendar className="w-12 h-12 text-gray-700 mx-auto mb-4" />
-                            <p className="text-gray-500 font-medium">No active events found. Stay tuned!</p>
+                            <p className="text-nexus-camel font-medium">No active events found. Stay tuned!</p>
                         </div>
                     )}
                 </div>
@@ -285,33 +285,33 @@ function EventCard({ title, icon, color, bg, border, desc, date, imageUrl, venue
             <div className={`absolute -right-10 -top-10 w-40 h-40 ${bg} opacity-50 blur-3xl rounded-full group-hover:scale-150 transition-transform duration-700`}></div>
 
             <div className="flex items-start justify-between mb-4 relative z-10">
-                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center bg-black border border-gray-800 shadow-lg ${color}`}>
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center bg-nexus-black border border-gray-800 shadow-lg ${color}`}>
                     {icon}
                 </div>
                 {date && (
-                    <div className="text-xs font-mono text-slate-500 bg-black/50 px-3 py-1 rounded-full border border-gray-800">
+                    <div className="text-xs font-mono text-slate-500 bg-nexus-black/50 px-3 py-1 rounded-full border border-gray-800">
                         {format(new Date(date), 'MMM d, yyyy')}
                     </div>
                 )}
             </div>
 
             {imageUrl && (
-                <div className="relative w-full h-40 mb-4 rounded-xl overflow-hidden shadow-lg border border-white/5">
+                <div className="relative w-full h-40 mb-4 rounded-xl overflow-hidden shadow-lg border border-nexus-camel/10">
                     <Image src={imageUrl} alt={title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 </div>
             )}
 
-            <h3 className="text-xl font-bold mb-2 text-slate-100 group-hover:text-white transition-colors line-clamp-2">{title}</h3>
+            <h3 className="text-xl font-bold mb-2 text-slate-100 group-hover:text-nexus-linen transition-colors line-clamp-2">{title}</h3>
 
             <p className="text-slate-400 text-sm leading-relaxed mb-6 line-clamp-3 flex-grow">{desc}</p>
 
-            <div className="pt-4 border-t border-white/5 flex items-center justify-between mt-auto">
+            <div className="pt-4 border-t border-nexus-camel/10 flex items-center justify-between mt-auto">
                 {venue && (
                     <span className="text-xs font-medium text-slate-500 flex items-center gap-1">
                         <MapPin className="w-3 h-3" /> {venue}
                     </span>
                 )}
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 transform group-hover:translate-x-1 border border-white/10 ${color}`}>
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 transform group-hover:translate-x-1 border border-nexus-camel/20 ${color}`}>
                     <span className="text-lg">â†’</span>
                 </div>
             </div>
@@ -349,7 +349,7 @@ function LeaderCardHighPriority({ role, name, color, imageSrc }: { role: string,
                         </div>
                     ) : (
                         <div className="flex items-center justify-center w-full h-full">
-                            <User className="w-20 h-20 text-slate-600 group-hover:text-white transition-colors" />
+                            <User className="w-20 h-20 text-slate-600 group-hover:text-nexus-linen transition-colors" />
                         </div>
                     )}
 
@@ -359,7 +359,7 @@ function LeaderCardHighPriority({ role, name, color, imageSrc }: { role: string,
                 </div>
             </div>
 
-            <h3 className={`text-2xl font-bold uppercase tracking-widest mb-1 text-white`}>{name}</h3>
+            <h3 className={`text-2xl font-bold uppercase tracking-widest mb-1 text-nexus-linen`}>{name}</h3>
             <p className={`text-sm font-bold uppercase tracking-[0.2em] mb-2 ${textColor}`}>{role}</p>
             <p className="text-slate-500 text-xs font-mono tracking-widest">2025-26</p>
         </div>
@@ -390,7 +390,7 @@ function LeaderCard({ role, name, imageSrc, icon }: { role: string, name?: strin
             {/* Content Overlay */}
             <div className="absolute bottom-0 left-0 w-full p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                 <div className="w-10 h-1 bg-blue-500 mb-3 rounded-full group-hover:w-20 transition-all duration-300"></div>
-                <h4 className="text-white text-xl font-bold mb-1 leading-tight group-hover:text-blue-400 transition-colors">{name || 'Member Name'}</h4>
+                <h4 className="text-nexus-linen text-xl font-bold mb-1 leading-tight group-hover:text-blue-400 transition-colors">{name || 'Member Name'}</h4>
                 <p className="text-blue-200/70 text-xs font-bold uppercase tracking-widest">{role}</p>
             </div>
 

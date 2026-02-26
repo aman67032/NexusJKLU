@@ -98,7 +98,7 @@ export default function RoboticsClubPage() {
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.3, duration: 0.8 }}
-                    className="text-5xl md:text-7xl font-black tracking-tight mb-4 text-white uppercase"
+                    className="text-5xl md:text-7xl font-black tracking-tight mb-4 text-nexus-linen uppercase"
                 >
                     Applied <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-600">Robotics</span> Club
                 </motion.h1>
@@ -239,7 +239,7 @@ function SectionHeader({ title, subtitle, center }: any) {
     return (
         <div className={`mb-12 ${center ? 'text-center' : ''}`}>
             <span className="text-amber-500 font-mono text-sm tracking-widest uppercase mb-2 block">// {subtitle}</span>
-            <h2 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tight">{title}</h2>
+            <h2 className="text-4xl md:text-5xl font-black text-nexus-linen uppercase tracking-tight">{title}</h2>
             <div className={`h-1 w-24 bg-amber-500 mt-4 ${center ? 'mx-auto' : ''}`}></div>
         </div>
     );
@@ -257,7 +257,7 @@ function FeatureItem({ text }: any) {
 function StatCard({ value, label, highlight }: any) {
     return (
         <div className={`p-6 border ${highlight ? 'border-amber-500 bg-amber-500/10' : 'border-slate-700 bg-slate-800/50'} text-center`}>
-            <div className={`text-3xl font-black ${highlight ? 'text-amber-500' : 'text-white'}`}>{value}</div>
+            <div className={`text-3xl font-black ${highlight ? 'text-amber-500' : 'text-nexus-linen'}`}>{value}</div>
             <div className="text-xs text-slate-500 uppercase tracking-widest mt-1">{label}</div>
         </div>
     );
@@ -283,7 +283,7 @@ function LeaderCard({ role, name, image, color, techId }: any) {
                 </div>
 
                 <div className="absolute bottom-0 inset-x-0 p-6 bg-slate-900/90 backdrop-blur-sm border-t border-slate-700">
-                    <h3 className="text-xl font-bold text-white uppercase group-hover:text-amber-500 transition-colors">{name}</h3>
+                    <h3 className="text-xl font-bold text-nexus-linen uppercase group-hover:text-amber-500 transition-colors">{name}</h3>
                     <p className="text-slate-500 text-xs font-bold tracking-widest uppercase mt-1">{role}</p>
                 </div>
             </div>

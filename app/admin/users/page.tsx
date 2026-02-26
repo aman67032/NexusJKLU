@@ -81,8 +81,8 @@ export default function UserManagement() {
         return (
             <div className="flex flex-col items-center justify-center p-8 min-h-screen text-center">
                 <ShieldAlert className="w-16 h-16 text-red-500 mb-4" />
-                <h1 className="text-2xl font-bold text-white mb-2">Access Denied</h1>
-                <p className="text-white/60">Only Super Admins can manage users and assign roles.</p>
+                <h1 className="text-2xl font-bold text-nexus-linen mb-2">Access Denied</h1>
+                <p className="text-nexus-khaki">Only Super Admins can manage users and assign roles.</p>
             </div>
         );
     }
@@ -91,31 +91,31 @@ export default function UserManagement() {
         <div className="p-6 md:p-8 w-full max-w-7xl mx-auto min-h-screen">
             <header className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
-                    <h1 className="text-3xl font-bold text-white tracking-tight mb-2 flex items-center gap-3">
-                        <Users className="w-8 h-8 text-indigo-500" />
+                    <h1 className="text-3xl font-bold text-nexus-linen tracking-tight mb-2 flex items-center gap-3">
+                        <Users className="w-8 h-8 text-nexus-coffee" />
                         User Management
                     </h1>
-                    <p className="text-white/60">
+                    <p className="text-nexus-khaki">
                         View all registered users and assign administrative roles.
                     </p>
                 </div>
 
                 <div className="relative max-w-sm w-full">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-nexus-camel" />
                     <input
                         type="text"
                         placeholder="Search users by name or email..."
                         value={searchTerm}
                         onChange={(e) => { setSearchTerm(e.target.value); setPage(1); }}
-                        className="w-full bg-[#111] border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder-white/40 focus:outline-none focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/50 transition-all"
+                        className="w-full bg-nexus-green border border-nexus-camel/20 rounded-xl py-3 pl-12 pr-4 text-nexus-linen placeholder-white/40 focus:outline-none focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/50 transition-all"
                     />
                 </div>
             </header>
 
-            <div className="bg-[#111] border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
+            <div className="bg-nexus-green border border-nexus-camel/20 rounded-2xl overflow-hidden shadow-2xl">
                 <div className="overflow-x-auto">
-                    <table className="w-full text-left bg-[#111]">
-                        <thead className="bg-[#151515] border-b border-white/10 text-white/50 text-xs uppercase tracking-wider">
+                    <table className="w-full text-left bg-nexus-green">
+                        <thead className="bg-nexus-green border-b border-nexus-camel/20 text-nexus-camel text-xs uppercase tracking-wider">
                             <tr>
                                 <th className="px-6 py-4 font-medium">User</th>
                                 <th className="px-6 py-4 font-medium">Student ID</th>
@@ -129,12 +129,12 @@ export default function UserManagement() {
                                 const isEditing = editingUserId === user._id;
 
                                 return (
-                                    <tr key={user._id} className="hover:bg-white/[0.02] border-b border-white/5 last:border-0 transition-colors">
+                                    <tr key={user._id} className="hover:bg-white/[0.02] border-b border-nexus-camel/10 last:border-0 transition-colors">
                                         <td className="px-6 py-4">
                                             <p className="font-semibold text-white/90">{user.name}</p>
-                                            <p className="text-sm text-white/50">{user.email}</p>
+                                            <p className="text-sm text-nexus-camel">{user.email}</p>
                                         </td>
-                                        <td className="px-6 py-4 text-white/70 text-sm">
+                                        <td className="px-6 py-4 text-nexus-khaki text-sm">
                                             {user.profile?.studentId || user.profile?.rollNo || <span className="text-white/30 italic">Not provided</span>}
                                         </td>
                                         <td className="px-6 py-4 max-w-md">
@@ -145,8 +145,8 @@ export default function UserManagement() {
                                                             key={role}
                                                             onClick={() => toggleRole(role)}
                                                             className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${editedRoles.includes(role)
-                                                                ? 'bg-indigo-500/20 text-indigo-300 border-indigo-500/50'
-                                                                : 'bg-black/20 text-white/40 border-white/10 hover:border-white/20'
+                                                                ? 'bg-nexus-coffee/20 text-indigo-300 border-indigo-500/50'
+                                                                : 'bg-nexus-black/20 text-nexus-camel border-nexus-camel/20 hover:border-nexus-camel/30'
                                                                 }`}
                                                         >
                                                             {role.replace('_', ' ')}
@@ -158,10 +158,10 @@ export default function UserManagement() {
                                                     {user.roles.map(role => (
                                                         <span key={role} className={`px-2 py-1 rounded-md text-xs font-medium border ${role === 'super_admin' ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' :
                                                                 role === 'admin' ? 'bg-rose-500/10 text-rose-400 border-rose-500/20' :
-                                                                    ['council_president', 'head_student_affairs'].includes(role) ? 'bg-purple-500/10 text-purple-400 border-purple-500/20' :
-                                                                        role.includes('council') ? 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20' :
+                                                                    ['council_president', 'head_student_affairs'].includes(role) ? 'bg-purple-500/10 text-nexus-brass border-purple-500/20' :
+                                                                        role.includes('council') ? 'bg-nexus-coffee/10 text-nexus-brass border-indigo-500/20' :
                                                                             role.includes('club') ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' :
-                                                                                role === 'student' ? 'bg-white/5 text-white/50 border-white/10' :
+                                                                                role === 'student' ? 'bg-white/5 text-nexus-camel border-nexus-camel/20' :
                                                                                     'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
                                                             }`}>
                                                             {role.replace(/_/g, ' ')}
@@ -170,7 +170,7 @@ export default function UserManagement() {
                                                 </div>
                                             )}
                                         </td>
-                                        <td className="px-6 py-4 text-white/50 text-sm whitespace-nowrap">
+                                        <td className="px-6 py-4 text-nexus-camel text-sm whitespace-nowrap">
                                             {new Date(user.createdAt).toLocaleDateString()}
                                         </td>
                                         <td className="px-6 py-4 text-right">
@@ -178,7 +178,7 @@ export default function UserManagement() {
                                                 <div className="flex justify-end gap-2">
                                                     <button
                                                         onClick={() => setEditingUserId(null)}
-                                                        className="p-2 text-white/50 hover:bg-white/10 rounded-lg transition-colors"
+                                                        className="p-2 text-nexus-camel hover:bg-white/10 rounded-lg transition-colors"
                                                         title="Cancel"
                                                     >
                                                         <X className="w-5 h-5" />
@@ -197,7 +197,7 @@ export default function UserManagement() {
                                                         setEditingUserId(user._id);
                                                         setEditedRoles(user.roles);
                                                     }}
-                                                    className="p-2 text-indigo-400 hover:bg-indigo-500/10 rounded-lg transition-colors"
+                                                    className="p-2 text-nexus-brass hover:bg-nexus-coffee/10 rounded-lg transition-colors"
                                                     disabled={currentUser.email === user.email} // prevent editing own roles here
                                                     title={currentUser.email === user.email ? "Cannot edit own roles here" : "Edit Roles"}
                                                 >
@@ -212,7 +212,7 @@ export default function UserManagement() {
                     </table>
 
                     {!loading && users.length === 0 && (
-                        <div className="text-center py-12 text-white/50">
+                        <div className="text-center py-12 text-nexus-camel">
                             No users found matching "{searchTerm}"
                         </div>
                     )}
@@ -226,11 +226,11 @@ export default function UserManagement() {
 
                 {/* Pagination */}
                 {totalPages > 1 && (
-                    <div className="bg-[#151515] border-t border-white/10 p-4 flex justify-between items-center text-sm text-white/60">
+                    <div className="bg-nexus-green border-t border-nexus-camel/20 p-4 flex justify-between items-center text-sm text-nexus-khaki">
                         <button
                             disabled={page === 1}
                             onClick={() => setPage(p => p - 1)}
-                            className="px-4 py-2 bg-[#222] hover:bg-[#333] disabled:opacity-50 rounded-lg transition-colors"
+                            className="px-4 py-2 bg-nexus-jet hover:bg-[#333] disabled:opacity-50 rounded-lg transition-colors"
                         >
                             Previous
                         </button>
@@ -238,7 +238,7 @@ export default function UserManagement() {
                         <button
                             disabled={page === totalPages}
                             onClick={() => setPage(p => p + 1)}
-                            className="px-4 py-2 bg-[#222] hover:bg-[#333] disabled:opacity-50 rounded-lg transition-colors"
+                            className="px-4 py-2 bg-nexus-jet hover:bg-[#333] disabled:opacity-50 rounded-lg transition-colors"
                         >
                             Next
                         </button>

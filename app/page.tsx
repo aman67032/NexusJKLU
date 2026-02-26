@@ -105,10 +105,10 @@ export default function Home() {
 
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-6">
               <span className="gradient-text-orange">Nexus</span>
-              <span className="text-white">JKLU</span>
+              <span className="text-nexus-linen">JKLU</span>
             </h1>
 
-            <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto leading-relaxed mb-4">
+            <p className="text-lg md:text-xl text-nexus-camel max-w-2xl mx-auto leading-relaxed mb-4">
               Everything JKLU — academics, events, clubs, and campus life — unified in one powerful platform.
             </p>
 
@@ -180,7 +180,7 @@ function ModuleCard({ module, Icon, isLive }: { module: typeof modules[0]; Icon:
           <span
             className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${isLive
               ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-              : 'bg-white/5 text-white/30 border border-white/10'
+              : 'bg-white/5 text-white/30 border border-nexus-camel/20'
               }`}
           >
             {module.status}
@@ -188,10 +188,10 @@ function ModuleCard({ module, Icon, isLive }: { module: typeof modules[0]; Icon:
         </div>
 
         {/* Content */}
-        <h3 className="text-lg font-bold text-white mb-2 group-hover:text-white transition-colors">
+        <h3 className="text-lg font-bold text-nexus-linen mb-2 group-hover:text-nexus-linen transition-colors">
           {module.title}
         </h3>
-        <p className="text-sm text-white/40 leading-relaxed mb-4">
+        <p className="text-sm text-nexus-camel leading-relaxed mb-4">
           {module.description}
         </p>
 
