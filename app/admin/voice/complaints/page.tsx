@@ -93,7 +93,7 @@ export default function ReviewComplaints() {
         }
     };
 
-    if (!user?.roles?.some((r: string) => ['admin', 'voice_admin'].includes(r))) {
+    if (!user?.roles?.some((r: string) => ['super_admin', 'admin', 'voice_admin'].includes(r))) {
         return (
             <div className="flex flex-col items-center justify-center p-8 min-h-screen">
                 <ShieldAlert className="w-16 h-16 text-red-500 mb-4" />

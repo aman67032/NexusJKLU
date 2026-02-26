@@ -46,7 +46,7 @@ export default function ReviewEvents() {
         }
     };
 
-    if (!user?.roles?.some((r: string) => ['admin', 'council_admin'].includes(r))) {
+    if (!user?.roles?.some((r: string) => ['super_admin', 'admin', 'head_student_affairs', 'executive_student_affairs', 'council_admin', 'council_president', 'club_chair', 'club_co_chair', 'club_secretary', 'club_general_secretary'].includes(r))) {
         return (
             <div className="flex flex-col items-center justify-center p-8 min-h-screen">
                 <ShieldAlert className="w-16 h-16 text-red-500 mb-4" />
@@ -74,8 +74,8 @@ export default function ReviewEvents() {
                             key={status}
                             onClick={() => setStatusFilter(status)}
                             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors capitalize ${statusFilter === status
-                                    ? 'bg-white/10 text-nexus-linen'
-                                    : 'text-nexus-camel hover:text-nexus-khaki hover:bg-white/5'
+                                ? 'bg-white/10 text-nexus-linen'
+                                : 'text-nexus-camel hover:text-nexus-khaki hover:bg-white/5'
                                 }`}
                         >
                             {status}

@@ -14,7 +14,8 @@ import {
     Menu,
     X,
     Shield,
-    Terminal
+    Terminal,
+    Building2
 } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -61,6 +62,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             name: 'Users',
             href: '/admin/users',
             icon: Users,
+            roles: ['super_admin', 'admin']
+        },
+        {
+            name: 'Organizations',
+            href: '/admin/organizations',
+            icon: Building2,
             roles: ['super_admin', 'admin']
         },
         {

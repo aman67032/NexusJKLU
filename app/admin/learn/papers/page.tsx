@@ -93,7 +93,7 @@ export default function ReviewPapers() {
         }
     };
 
-    if (!user?.roles?.some((r: string) => ['admin', 'learn_admin'].includes(r))) {
+    if (!user?.roles?.some((r: string) => ['super_admin', 'admin', 'learn_admin'].includes(r))) {
         return (
             <div className="flex flex-col items-center justify-center p-8 min-h-screen">
                 <ShieldAlert className="w-16 h-16 text-red-500 mb-4" />
@@ -267,8 +267,8 @@ export default function ReviewPapers() {
                                     key={page}
                                     onClick={() => setCurrentPage(page)}
                                     className={`w-10 h-10 rounded-lg text-sm font-bold flex items-center justify-center transition-colors ${currentPage === page
-                                            ? 'bg-gradient-to-tr from-emerald-500 to-teal-500 text-nexus-linen shadow-lg'
-                                            : 'bg-nexus-green text-nexus-camel border border-nexus-camel/10 hover:bg-white/10'
+                                        ? 'bg-gradient-to-tr from-emerald-500 to-teal-500 text-nexus-linen shadow-lg'
+                                        : 'bg-nexus-green text-nexus-camel border border-nexus-camel/10 hover:bg-white/10'
                                         }`}
                                 >
                                     {page}
