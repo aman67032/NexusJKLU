@@ -45,7 +45,7 @@ export default function PapersPage() {
                 ...(typeFilter && { paperType: typeFilter }),
                 ...(searchTerm && { search: searchTerm })
             });
-            const res = await api.get(`/api/learn/papers?${params}`);
+            const res = await api.get(`/learn/papers?${params}`);
             setPapers(res.data.items || []);
             setTotalPages(res.data.pages || 1);
             setCurrentPage(res.data.page || 1);
@@ -78,14 +78,14 @@ export default function PapersPage() {
             const fd = new FormData();
             Object.entries(uploadForm).forEach(([k, v]) => fd.append(k, v));
             fd.append('file', file);
-            await api.post('/api/learn/papers', fd, { headers: { 'Content-Type': 'multipart/form-data' } });
+            await api.post('/learn/papers', fd, { headers: { 'Content-Type': 'multipart/form-data' } });
             setShowUpload(false); setFile(null); setUploadForm({ title: '', description: '', paper_type: 'exam', course_id: '', year: '', semester: '' });
         } catch { } finally { setUploading(false); }
     };
 
     const handleDownload = async (paperId: string, fileName: string) => {
         try {
-            const res = await api.get(`/api/learn/papers/${paperId}/download`, { responseType: 'blob' });
+            const res = await api.get(`/learn/papers/${paperId}/download`, { responseType: 'blob' });
             const url = window.URL.createObjectURL(new Blob([res.data]));
             const a = document.createElement('a'); a.href = url; a.download = fileName; a.click();
         } catch { }
@@ -93,7 +93,7 @@ export default function PapersPage() {
 
     const handlePreview = async (paperId: string) => {
         try {
-            const res = await api.get(`/api/learn/papers/${paperId}/download`, { responseType: 'blob' });
+            const res = await api.get(`/learn/papers/${paperId}/download`, { responseType: 'blob' });
             const file = new Blob([res.data], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(file);
             setPreviewUrl(url);

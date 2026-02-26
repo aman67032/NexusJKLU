@@ -10,9 +10,14 @@ const api = axios.create({
     },
 });
 
-// Request interceptor — attach JWT token
+// Request interceptor — attach JWT token and normalize API paths
 api.interceptors.request.use(
     (config) => {
+        // Normalize URLs to always include the `/api` prefix
+        if (config.url && !config.url.startsWith('/api/')) {
+            config.url = config.url.startsWith('/') ? `/api${config.url}` : `/api/${config.url}`;
+        }
+
         if (typeof window !== 'undefined') {
             const token = localStorage.getItem('nexus_token');
             if (token) {

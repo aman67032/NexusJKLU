@@ -26,7 +26,7 @@ export default function ClubDetailPage() {
     const [theme, setTheme] = useState<any>({ primary: '#3B82F6', gradient: 'from-blue-600 to-indigo-600' });
 
     useEffect(() => {
-        api.get(`/api/council/clubs/${params.slug}`)
+        api.get(`/council/clubs/${params.slug}`)
             .then(res => {
                 const c = res.data.club || res.data;
                 setClub(c);

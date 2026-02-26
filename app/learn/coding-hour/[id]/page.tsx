@@ -22,7 +22,7 @@ export default function ChallengePage() {
     const [copied, setCopied] = useState(false);
 
     useEffect(() => {
-        api.get(`/api/learn/contests/${params.id}`)
+        api.get(`/learn/contests/${params.id}`)
             .then(res => {
                 const c = res.data.contest || res.data;
                 setContest(c);

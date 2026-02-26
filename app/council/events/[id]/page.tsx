@@ -20,7 +20,7 @@ export default function EventDetailPage() {
 
     const fetchEvent = async () => {
         try {
-            const res = await api.get(`/api/council/events/${params.id}`);
+            const res = await api.get(`/council/events/${params.id}`);
             setEvent(res.data.event || res.data);
         } catch { } finally { setLoading(false); }
     };
@@ -28,7 +28,7 @@ export default function EventDetailPage() {
     const handleEnroll = async () => {
         if (!user) { router.push('/auth/login'); return; }
         setEnrolling(true);
-        try { await api.post(`/api/council/events/${params.id}/enroll`); fetchEvent(); }
+        try { await api.post(`/council/events/${params.id}/enroll`); fetchEvent(); }
         catch (err: any) { alert(err.response?.data?.error || 'Failed to enroll'); }
         finally { setEnrolling(false); }
     };

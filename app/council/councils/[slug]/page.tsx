@@ -34,7 +34,7 @@ export default function CouncilDetailPage() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        api.get(`/api/council/councils/${slug}`).then(res => setCouncil(res.data.council || res.data)).catch(console.error).finally(() => setLoading(false));
+        api.get(`/council/councils/${slug}`).then(res => setCouncil(res.data.council || res.data)).catch(console.error).finally(() => setLoading(false));
     }, [slug]);
 
     if (loading) return (<div className="min-h-screen flex items-center justify-center"><div className="flex gap-2"><div className="w-3 h-3 bg-[var(--primary)] rounded-full animate-bounce" /><div className="w-3 h-3 bg-[var(--primary)] rounded-full animate-bounce [animation-delay:100ms]" /><div className="w-3 h-3 bg-[var(--primary)] rounded-full animate-bounce [animation-delay:200ms]" /></div></div>);
