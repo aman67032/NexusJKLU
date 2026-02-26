@@ -19,7 +19,12 @@ import {
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const ADMIN_ROLES = ['admin', 'council_admin', 'voice_admin', 'learn_admin', 'coding_ta'];
+const ADMIN_ROLES = [
+    'super_admin', 'admin',
+    'council_admin', 'council_president', 'head_student_affairs', 'executive_student_affairs',
+    'club_chair', 'club_co_chair', 'club_secretary', 'club_general_secretary',
+    'voice_admin', 'learn_admin', 'coding_ta'
+];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
     const { user, loading, logout } = useAuth();
@@ -46,12 +51,42 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     }
 
     const navigation = [
-        { name: 'Overview', href: '/admin', icon: LayoutDashboard, roles: ['admin', 'council_admin', 'voice_admin', 'learn_admin'] },
-        { name: 'Users', href: '/admin/users', icon: Users, roles: ['admin'] },
-        { name: 'Learn (Papers)', href: '/admin/learn/papers', icon: BookOpen, roles: ['admin', 'learn_admin'] },
-        { name: 'Council (Events)', href: '/admin/council/events', icon: Calendar, roles: ['admin', 'council_admin'] },
-        { name: 'Voice (Complaints)', href: '/admin/voice/complaints', icon: MessageSquare, roles: ['admin', 'voice_admin'] },
-        { name: 'Learn (Coding Hour)', href: '/admin/learn/coding-hour', icon: Terminal, roles: ['admin', 'learn_admin', 'coding_ta'] },
+        {
+            name: 'Overview',
+            href: '/admin',
+            icon: LayoutDashboard,
+            roles: ['super_admin', 'admin', 'council_admin', 'council_president', 'head_student_affairs', 'executive_student_affairs', 'club_chair', 'club_co_chair', 'voice_admin', 'learn_admin']
+        },
+        {
+            name: 'Users',
+            href: '/admin/users',
+            icon: Users,
+            roles: ['super_admin', 'admin']
+        },
+        {
+            name: 'Learn (Papers)',
+            href: '/admin/learn/papers',
+            icon: BookOpen,
+            roles: ['super_admin', 'admin', 'learn_admin']
+        },
+        {
+            name: 'Council (Events)',
+            href: '/admin/council/events',
+            icon: Calendar,
+            roles: ['super_admin', 'admin', 'head_student_affairs', 'executive_student_affairs', 'council_admin', 'council_president', 'club_chair', 'club_co_chair', 'club_secretary', 'club_general_secretary']
+        },
+        {
+            name: 'Voice (Complaints)',
+            href: '/admin/voice/complaints',
+            icon: MessageSquare,
+            roles: ['super_admin', 'admin', 'voice_admin']
+        },
+        {
+            name: 'Learn (Coding Hour)',
+            href: '/admin/learn/coding-hour',
+            icon: Terminal,
+            roles: ['super_admin', 'admin', 'learn_admin', 'coding_ta']
+        },
     ];
 
     const authorizedNavigation = navigation.filter(item =>

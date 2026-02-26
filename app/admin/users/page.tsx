@@ -30,8 +30,12 @@ export default function UserManagement() {
     const [editingUserId, setEditingUserId] = useState<string | null>(null);
     const [editedRoles, setEditedRoles] = useState<string[]>([]);
 
-    const ALL_ROLES = ['student', 'admin', 'council_admin', 'voice_admin', 'learn_admin', 'coordinator', 'coding_ta'];
-
+    const ALL_ROLES = [
+        'student', 'super_admin', 'admin',
+        'council_admin', 'council_president', 'head_student_affairs', 'executive_student_affairs',
+        'club_chair', 'club_co_chair', 'club_secretary', 'club_general_secretary',
+        'voice_admin', 'learn_admin', 'coding_ta'
+    ];
     const fetchUsers = async () => {
         setLoading(true);
         try {
@@ -73,7 +77,7 @@ export default function UserManagement() {
         );
     };
 
-    if (!currentUser?.roles?.includes('admin')) {
+    if (!currentUser?.roles?.some((r: string) => ['super_admin', 'admin'].includes(r))) {
         return (
             <div className="flex flex-col items-center justify-center p-8 min-h-screen text-center">
                 <ShieldAlert className="w-16 h-16 text-red-500 mb-4" />
@@ -152,11 +156,15 @@ export default function UserManagement() {
                                             ) : (
                                                 <div className="flex flex-wrap gap-2">
                                                     {user.roles.map(role => (
-                                                        <span key={role} className={`px-2 py-1 rounded-md text-xs font-medium border ${role === 'admin' ? 'bg-rose-500/10 text-rose-400 border-rose-500/20' :
-                                                            role.includes('admin') ? 'bg-purple-500/10 text-purple-400 border-purple-500/20' :
-                                                                'bg-white/5 text-white/70 border-white/10'
+                                                        <span key={role} className={`px-2 py-1 rounded-md text-xs font-medium border ${role === 'super_admin' ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' :
+                                                                role === 'admin' ? 'bg-rose-500/10 text-rose-400 border-rose-500/20' :
+                                                                    ['council_president', 'head_student_affairs'].includes(role) ? 'bg-purple-500/10 text-purple-400 border-purple-500/20' :
+                                                                        role.includes('council') ? 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20' :
+                                                                            role.includes('club') ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' :
+                                                                                role === 'student' ? 'bg-white/5 text-white/50 border-white/10' :
+                                                                                    'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
                                                             }`}>
-                                                            {role.replace('_', ' ')}
+                                                            {role.replace(/_/g, ' ')}
                                                         </span>
                                                     ))}
                                                 </div>
