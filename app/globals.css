@@ -1,73 +1,76 @@
 @import "tailwindcss";
 
 :root {
-  /* Earthy Coffee Theme Mappings */
-
-  /* Palette 1 (Dark Bases & Accents) */
-  --chinese-black: #0C1519;
-  --dark-jungle-green: #162127;
-  --jet: #3A3534;
-  --coffee: #724B39;
-  --antique-brass: #CF9D7B;
-
-  /* Palette 2 (Lights & Typography) */
-  --linen: #F5F1EA;
-  --khaki: #D7C9B8;
-  --camel: #B2967D;
-  --cocoa: #7D5A44;
-  --espresso: #4A342A;
+  /* Brand Palette (70% Ivory, 20% Oxford Blue, 7% Vista Blue, 3% Orange) */
+  --warm-ivory: #FAF0DD;
+  --surface-white: #FFFFFF;
+  
+  --oxford-blue: #0B0828;
+  --vista-blue: #8FA0D8;
+  --brand-orange: #FF8400;
 
   /* Abstracted UI Colors */
-  --background: var(--chinese-black);
-  --background-secondary: var(--dark-jungle-green);
-  --foreground: var(--linen);
+  --background: var(--warm-ivory);
+  --background-secondary: var(--surface-white);
+  --foreground: var(--oxford-blue);
 
-  --card-bg: var(--dark-jungle-green);
-  --card-border: var(--jet);
-  --card-hover: rgba(22, 33, 39, 0.8);
+  /* Typography Colors */
+  --text-primary: var(--oxford-blue);
+  --text-secondary: #5B6077;
+  --text-muted: #8E92A6;
 
-  --text-primary: var(--linen);
-  --text-secondary: var(--khaki);
-  --text-muted: var(--camel);
+  /* Card base style (Editorial style, soft shadow, minimal border) */
+  --card-bg: var(--surface-white);
+  --card-border: rgba(11, 8, 40, 0.05);
+  --card-shadow: 0 4px 20px rgba(11, 8, 40, 0.02);
+  --card-hover-shadow: 0 8px 30px rgba(11, 8, 40, 0.04);
 
-  --nav-bg: rgba(12, 21, 25, 0.85);
-  /* Chinese Black transparent */
-  --glass-bg: rgba(22, 33, 39, 0.6);
-  /* Dark Jungle transparent */
-  --glass-border: rgba(178, 150, 125, 0.15);
-  /* Camel transparent */
+  /* Status Colors */
+  --color-success: #67C587;
+  --color-warning: #E8B24C;
+  --color-error: #E76F51;
 
-  /* Module Colors (mapped to warm tones) */
-  --learn-color: #6d8e62;
-  /* Forest warm tint */
-  --council-color: var(--antique-brass);
-  --voice-color: var(--coffee);
-  --transport-color: var(--cocoa);
-  --portfolio-color: var(--espresso);
+  /* Module Colors */
+  --module-bus: var(--vista-blue);
+  --module-events: var(--brand-orange);
+  --module-papers: #A4BCE8; /* Soft blue */
+  --module-complaints: #E76F51; /* Muted coral */
+  --module-profile: var(--oxford-blue);
+  --module-home: var(--warm-ivory);
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Fonts */
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-sora);
 }
 
 @theme inline {
-  --color-nexus-black: var(--chinese-black);
-  --color-nexus-green: var(--dark-jungle-green);
-  --color-nexus-jet: var(--jet);
-  --color-nexus-coffee: var(--coffee);
-  --color-nexus-brass: var(--antique-brass);
-
-  --color-nexus-linen: var(--linen);
-  --color-nexus-khaki: var(--khaki);
-  --color-nexus-camel: var(--camel);
-  --color-nexus-cocoa: var(--cocoa);
-  --color-nexus-espresso: var(--espresso);
+  --color-oxford-blue: var(--oxford-blue);
+  --color-vista-blue: var(--vista-blue);
+  --color-brand-orange: var(--brand-orange);
+  --color-warm-ivory: var(--warm-ivory);
+  --color-surface-white: var(--surface-white);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-primary: var(--antique-brass);
-  --color-secondary: var(--coffee);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--oxford-blue);
+  --color-secondary: var(--vista-blue);
+  --color-accent: var(--brand-orange);
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-sora);
+
+  /* Legacy token mapping overrides to ensure light academic theme propagation */
+  --color-nexus-black: var(--background);
+  --color-nexus-green: var(--background-secondary);
+  --color-nexus-jet: rgba(11, 8, 40, 0.06);
+  --color-nexus-coffee: var(--color-pastel-pink-bg);
+  --color-nexus-brass: var(--color-pastel-blue-bg);
+
+  --color-nexus-linen: var(--text-primary);
+  --color-nexus-khaki: var(--text-secondary);
+  --color-nexus-camel: var(--text-muted);
+  --color-nexus-cocoa: var(--color-pastel-orange-bg);
+  --color-nexus-espresso: var(--color-pastel-purple-bg);
 }
 
 * {
@@ -82,9 +85,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Typography Headings Classes */
+.font-display {
+  font-family: var(--font-display), 'Sora', sans-serif;
+}
+
+.font-sans {
+  font-family: var(--font-sans), 'Inter', sans-serif;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -92,112 +105,131 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(11, 8, 40, 0.08);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(11, 8, 40, 0.15);
 }
 
-/* Glass Card */
+/* Cards System - Large 20px Radius, Soft shadows, Minimal borders */
 .glass-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 1.25rem;
+  background: var(--background-secondary);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  border-radius: 20px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-card:hover {
-  background: var(--card-hover);
-  border-color: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  transform: translateY(-2px);
+  background: var(--background-secondary);
+  border-color: rgba(11, 8, 40, 0.08);
+  box-shadow: var(--card-hover-shadow);
+  transform: translateY(-1.5px);
 }
 
-/* Module Card Glow */
-.module-card-learn:hover {
-  border-color: var(--learn-color);
-  box-shadow: 0 0 30px rgba(16, 185, 129, 0.15), 0 8px 32px rgba(0, 0, 0, 0.3);
+/* Module Identity Cards */
+.bento-bus {
+  background: #FFFFFF;
+  color: var(--oxford-blue);
+  border: 1px solid rgba(143, 160, 216, 0.3); /* Vista blue transparent outline */
+}
+.bento-events {
+  background: #FFFFFF;
+  color: var(--oxford-blue);
+  border: 1px solid rgba(255, 132, 0, 0.25); /* Orange outline */
+}
+.bento-papers {
+  background: #FFFFFF;
+  color: var(--oxford-blue);
+  border: 1px solid rgba(164, 188, 232, 0.4); /* Soft blue outline */
+}
+.bento-complaints {
+  background: #FFFFFF;
+  color: var(--oxford-blue);
+  border: 1px solid rgba(231, 111, 81, 0.3); /* Muted coral outline */
+}
+.bento-profile {
+  background: #FFFFFF;
+  color: var(--oxford-blue);
+  border: 1px solid rgba(11, 8, 40, 0.1); /* Oxford Blue outline */
 }
 
-.module-card-council:hover {
-  border-color: var(--council-color);
-  box-shadow: 0 0 30px rgba(255, 102, 0, 0.15), 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
-.module-card-voice:hover {
-  border-color: var(--voice-color);
-  box-shadow: 0 0 30px rgba(139, 92, 246, 0.15), 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.gradient-text-orange {
-  background: linear-gradient(135deg, #FF6600, #FF8533, #FFA366);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Animated background grid */
-.bg-grid {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-}
-
-/* Glow orb */
-.glow-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.3;
-  pointer-events: none;
-}
-
-/* Button styles */
+/* Button system (14px Border Radius) */
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: white;
+  background: var(--oxford-blue);
+  color: #ffffff;
   padding: 0.75rem 1.5rem;
-  border-radius: 0.75rem;
+  border-radius: 14px;
   font-weight: 600;
-  transition: all 0.3s ease;
+  font-family: var(--font-display), sans-serif;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   border: none;
   cursor: pointer;
+  box-shadow: 0 2px 10px rgba(11, 8, 40, 0.1);
 }
 
 .btn-primary:hover {
+  background: rgba(11, 8, 40, 0.9);
   transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(255, 102, 0, 0.4);
+  box-shadow: 0 4px 15px rgba(11, 8, 40, 0.15);
 }
 
-/* Input styles */
+.btn-secondary {
+  background: #ffffff;
+  color: var(--oxford-blue);
+  border: 1px solid var(--oxford-blue);
+  padding: 0.75rem 1.5rem;
+  border-radius: 14px;
+  font-weight: 600;
+  font-family: var(--font-display), sans-serif;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: rgba(11, 8, 40, 0.03);
+  transform: translateY(-1px);
+}
+
+.btn-orange-cta {
+  background: var(--brand-orange);
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 14px;
+  font-weight: 600;
+  font-family: var(--font-display), sans-serif;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(255, 132, 0, 0.15);
+}
+
+.btn-orange-cta:hover {
+  background: #e07400;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(255, 132, 0, 0.2);
+}
+
+/* Input styles (14px Border Radius) */
 .input-field {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0.75rem;
+  background: #ffffff;
+  border: 1px solid rgba(11, 8, 40, 0.08);
+  border-radius: 14px;
   padding: 0.75rem 1rem;
   color: var(--text-primary);
   font-size: 0.95rem;
   width: 100%;
-  transition: all 0.3s ease;
+  font-family: var(--font-sans), sans-serif;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(11, 8, 40, 0.01);
 }
 
 .input-field:focus {
   outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.1);
+  border-color: var(--oxford-blue);
+  box-shadow: 0 0 0 3px rgba(11, 8, 40, 0.05);
 }
 
 .input-field::placeholder {
@@ -209,28 +241,9 @@ body {
   display: none;
 }
 
-/* Horizontal Scroll Indicator Fade */
-.scroll-fade-right {
-  position: relative;
-}
-
-.scroll-fade-right::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 40px;
-  background: linear-gradient(to right, transparent, rgba(5, 5, 5, 0.8));
-  pointer-events: none;
-  z-index: 10;
-}
-
 .no-scrollbar {
   -ms-overflow-style: none;
-  /* IE and Edge */
   scrollbar-width: none;
-  /* Firefox */
 }
 
 .scrollbar-hide::-webkit-scrollbar {

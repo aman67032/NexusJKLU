@@ -9,11 +9,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 
 const NAV_ITEMS = [
-    { label: 'Home', href: '/', icon: Home, color: '#ff6600' },
-    { label: 'Bus', href: '/bus', icon: Bus, color: '#eab308' },
-    { label: 'Events', href: '/events', icon: Calendar, color: '#3b82f6' },
-    { label: 'Papers', href: '/learn/papers', icon: FileText, color: '#10b981' },
-    { label: 'Profile', href: '/profile', icon: UserCircle, color: '#a855f7' }
+    { label: 'Home', href: '/', icon: Home, color: '#0B0828' },
+    { label: 'Bus', href: '/bus', icon: Bus, color: '#8FA0D8' },
+    { label: 'Events', href: '/events', icon: Calendar, color: '#FF8400' },
+    { label: 'Papers', href: '/learn/papers', icon: FileText, color: '#4A85D6' },
+    { label: 'Profile', href: '/profile', icon: UserCircle, color: '#0B0828' }
 ];
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
@@ -35,7 +35,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     if (!mounted) return null;
 
     if (isAuthPage || isAdminPage) {
-        return <div className="min-h-screen bg-nexus-black text-nexus-linen">{children}</div>;
+        return <div className="min-h-screen bg-background text-foreground">{children}</div>;
     }
 
     const activeItem = NAV_ITEMS.find(item => {
@@ -52,14 +52,14 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
     // Render inner content of the app
     const appContent = (
-        <div className="flex flex-col h-full bg-nexus-black text-nexus-linen relative overflow-hidden select-none">
+        <div className="flex flex-col h-full bg-background text-foreground relative overflow-hidden select-none">
             {/* Top Bar / Header */}
-            <header className="h-14 shrink-0 flex items-center justify-between px-4 border-b border-nexus-camel/10 bg-nexus-black/80 backdrop-blur-md z-30 sticky top-0">
-                <div className="flex items-center gap-2">
-                    <img src="/white_jklu_logo.png" alt="JKLU" className="w-7 h-7" />
+            <header className="h-14 shrink-0 flex items-center justify-between px-4 border-b border-[#0B0828]/5 bg-background/90 backdrop-blur-md z-30 sticky top-0">
+                <div className="flex items-center gap-2.5">
+                    <img src="/logos/JKLU Coloured.png" alt="JKLU" className="w-8 h-8 object-contain" />
                     <div>
-                        <p className="text-[10px] text-white/30 font-bold uppercase tracking-wider leading-none">Nexus JKLU</p>
-                        <p className="text-sm font-bold text-nexus-linen mt-0.5 leading-none">
+                        <p className="text-[9px] text-[#0B0828]/45 font-black uppercase tracking-wider leading-none font-display">Nexus JKLU</p>
+                        <p className="text-xs font-bold text-[#0B0828] mt-0.5 leading-none">
                             {user ? `${getGreeting()}, ${user.name.split(' ')[0]}` : 'Welcome, Guest'}
                         </p>
                     </div>
@@ -67,19 +67,19 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 
                 <div className="flex items-center gap-2">
                     {user?.roles?.some((r: string) => ['admin', 'super_admin', 'learn_admin', 'voice_admin'].includes(r)) && (
-                        <Link href="/admin" className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-nexus-camel hover:text-nexus-linen transition-colors">
-                            <ShieldAlert className="w-4 h-4 text-orange-500" />
+                        <Link href="/admin" className="p-2 rounded-xl bg-[#0B0828]/5 hover:bg-[#0B0828]/10 text-[#0B0828] transition-colors">
+                            <ShieldAlert className="w-4 h-4 text-rose-600" />
                         </Link>
                     )}
-                    <button className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-nexus-camel hover:text-nexus-linen transition-colors relative">
+                    <button className="p-2 rounded-xl bg-[#0B0828]/5 hover:bg-[#0B0828]/10 text-[#0B0828] transition-colors relative">
                         <Bell className="w-4 h-4" />
-                        <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-orange-500" />
+                        <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#FF8400]" />
                     </button>
                 </div>
             </header>
 
             {/* Main scrollable section */}
-            <main className="flex-1 overflow-y-auto pb-20 relative scrollbar-hide no-scrollbar">
+            <main className="flex-1 overflow-y-auto pb-24 relative scrollbar-hide no-scrollbar">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={pathname}
@@ -94,8 +94,8 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 </AnimatePresence>
             </main>
 
-            {/* Bottom Nav Bar */}
-            <nav className="fixed bottom-0 left-0 right-0 h-16 shrink-0 border-t border-nexus-camel/10 bg-nexus-black/90 backdrop-blur-xl z-40 flex items-center justify-around px-2 pb-safe">
+            {/* Bottom Nav Bar - Floating Capsule from Reference Design */}
+            <nav className="fixed bottom-4 left-4 right-4 h-16 shrink-0 bg-white/95 shadow-[0_8px_30px_rgba(11,8,40,0.03)] border border-[#0B0828]/5 rounded-[20px] z-40 flex items-center justify-around px-2">
                 {NAV_ITEMS.map((item) => {
                     const Icon = item.icon;
                     const isActive = pathname === item.href || (item.href !== '/' && pathname?.startsWith(item.href));
@@ -103,26 +103,26 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                         <Link
                             key={item.label}
                             href={item.href}
-                            className="flex flex-col items-center justify-center flex-1 h-full relative group"
+                            className="flex flex-col items-center justify-center flex-1 h-full relative group cursor-pointer"
                         >
                             <div className="relative py-1 flex flex-col items-center">
                                 <Icon 
-                                    className={`w-5 h-5 transition-transform duration-300 ${isActive ? 'scale-110' : 'text-nexus-camel group-hover:scale-105'}`}
+                                    className={`w-5 h-5 transition-all duration-300 ${isActive ? 'scale-110' : 'text-[#0B0828]/40 group-hover:scale-105'}`}
                                     style={{ color: isActive ? item.color : undefined }}
                                 />
                                 <span 
-                                    className={`text-[10px] mt-1 font-bold tracking-tight transition-colors duration-200 ${isActive ? 'text-nexus-linen font-extrabold' : 'text-white/30'}`}
+                                    className={`text-[10px] mt-1 font-bold tracking-tight transition-colors duration-200 ${isActive ? 'font-extrabold font-display' : 'text-[#0B0828]/35 font-sans'}`}
                                     style={isActive ? { color: item.color } : {}}
                                 >
                                     {item.label}
                                 </span>
                                 
-                                {/* Background glow indicator */}
+                                {/* Active Indicator Dot */}
                                 {isActive && (
                                     <motion.div 
                                         layoutId="navGlow"
-                                        className="absolute -top-1 w-8 h-1 rounded-full opacity-80"
-                                        style={{ backgroundColor: item.color, filter: 'blur(1px)' }}
+                                        className="absolute -bottom-1.5 w-1.5 h-1.5 rounded-full"
+                                        style={{ backgroundColor: item.color }}
                                     />
                                 )}
                             </div>
@@ -133,10 +133,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         </div>
     );
 
-    // Desktop centered layout
+    // Desktop centered layout with a warm academic background
     return (
-        <div className="min-h-screen bg-[#070b0d] text-nexus-linen flex flex-col items-center justify-center relative select-none">
-            <div className="w-full max-w-md min-h-screen bg-nexus-black relative border-x border-nexus-camel/10 shadow-2xl flex flex-col">
+        <div className="min-h-screen bg-[#EAE4DC] text-foreground flex flex-col items-center justify-center relative select-none">
+            <div className="w-full max-w-md min-h-screen bg-background relative border-x border-[#0B0828]/5 shadow-2xl flex flex-col">
                 {appContent}
             </div>
         </div>

@@ -10,7 +10,6 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-
 interface CampusEvent {
     _id: string;
     title: string;
@@ -143,30 +142,28 @@ export default function EventsPortal() {
 
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-nexus-black">
-                <div className="w-8 h-8 rounded-full border-2 border-nexus-camel/20 border-t-blue-500 animate-spin" />
+            <div className="min-h-screen flex items-center justify-center bg-background">
+                <div className="w-8 h-8 rounded-full border-2 border-black/10 border-t-[#FF8400] animate-spin" />
             </div>
         );
     }
 
     return (
-        <div className="min-h-full pb-10 bg-nexus-black relative overflow-x-hidden p-4 space-y-6">
-            <div className="glow-orb w-[300px] h-[300px] -top-20 -right-20 bg-blue-500" style={{ opacity: 0.05 }} />
-
+        <div className="min-h-full pb-10 bg-background relative overflow-x-hidden p-4 space-y-6 font-sans">
             {/* Header */}
-            <div>
-                <h1 className="text-2xl font-black tracking-tight text-nexus-linen">Events Hub</h1>
-                <p className="text-xs text-nexus-camel font-medium mt-0.5">Explore campus events, club activities, and register online</p>
+            <div className="mt-2">
+                <h1 className="text-2xl font-bold tracking-tight text-[#0B0828] font-display">Events Hub</h1>
+                <p className="text-xs text-[#5B6077] font-semibold mt-0.5">Explore campus events, club activities, and register online</p>
             </div>
 
             {/* Search */}
             <div className="relative group">
-                <div className="relative flex items-center bg-white/5 border border-nexus-camel/10 hover:border-nexus-camel/20 focus-within:border-blue-500/30 rounded-2xl px-4 py-2.5 backdrop-blur-xl transition-all">
-                    <Search className="w-4 h-4 text-white/30 shrink-0" />
+                <div className="relative flex items-center bg-white border border-[#0B0828]/10 hover:border-[#0B0828]/20 focus-within:border-[#0B0828]/35 rounded-[14px] px-4 py-2.5 shadow-[0_2px_8px_rgba(11,8,40,0.01)] transition-all">
+                    <Search className="w-4 h-4 text-[#0B0828]/35 shrink-0" />
                     <input
                         type="text"
                         placeholder="Search by event title, host club..."
-                        className="w-full bg-transparent border-none text-sm text-nexus-linen placeholder-white/20 focus:ring-0 focus:outline-none px-3"
+                        className="w-full bg-transparent border-none text-sm text-[#0B0828] placeholder-[#5B6077]/40 focus:ring-0 focus:outline-none px-3 font-semibold"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -183,8 +180,8 @@ export default function EventsPortal() {
                             key={cat.id}
                             onClick={() => setActiveCategory(cat.id)}
                             className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap border ${isActive 
-                                ? 'bg-blue-500/10 text-blue-400 border-blue-500/20 shadow-md' 
-                                : 'bg-white/5 text-nexus-camel border-white/5 hover:border-white/10'}`}
+                                ? 'bg-[#FF8400]/10 text-[#FF8400] border-[#FF8400]/25 shadow-sm font-display' 
+                                : 'bg-white text-[#5B6077] border-black/5 hover:border-black/10 hover:bg-black/[0.01]'}`}
                         >
                             <Icon className="w-3.5 h-3.5" />
                             {cat.label}
@@ -196,29 +193,29 @@ export default function EventsPortal() {
             {/* Featured Events (Carousel Slider) */}
             {featuredEvents.length > 0 && activeCategory === 'all' && (
                 <section className="space-y-3">
-                    <h3 className="text-xs font-black uppercase tracking-wider text-white/30">Featured Events</h3>
+                    <h3 className="text-xs font-black uppercase tracking-wider text-[#0B0828]/40 font-display">Featured Events</h3>
                     <div className="overflow-x-auto flex gap-4 pb-2 -mx-4 px-4 scrollbar-hide no-scrollbar snap-x">
                         {featuredEvents.map((evt) => (
                             <div 
                                 key={evt._id} 
                                 onClick={() => router.push(`/events/${evt._id}`)}
-                                className="snap-center shrink-0 w-[280px] glass-card overflow-hidden border border-nexus-camel/5 hover:border-blue-500/20 hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                                className="snap-center shrink-0 w-[280px] bg-white rounded-[20px] overflow-hidden border border-[#0B0828]/5 hover:border-[#0B0828]/10 hover:-translate-y-0.5 shadow-[0_2px_8px_rgba(11,8,40,0.01)] transition-all duration-300 cursor-pointer flex flex-col justify-between"
                             >
-                                <div className="h-32 w-full relative">
+                                <div className="h-32 w-full relative bg-black/5">
                                     <img 
-                                        src={evt.image_url || "/white_jklu_logo.png"} 
+                                        src={evt.image_url || "/logos/JKLU Coloured.png"} 
                                         alt={evt.title} 
                                         className="w-full h-full object-cover" 
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                                    <span className="absolute top-3 left-3 px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-wider bg-blue-500 text-white shadow-lg">
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                                    <span className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-wider bg-[#FF8400] text-white shadow-sm font-display">
                                         {evt.category}
                                     </span>
                                 </div>
-                                <div className="p-4 space-y-2">
-                                    <h4 className="font-bold text-nexus-linen text-sm leading-tight line-clamp-1">{evt.title}</h4>
-                                    <p className="text-[11px] text-white/30 flex items-center gap-1">
-                                        <Clock className="w-3 h-3 text-blue-400" />
+                                <div className="p-4 space-y-1.5">
+                                    <h4 className="font-bold text-[#0B0828] text-sm leading-tight line-clamp-1 font-display">{evt.title}</h4>
+                                    <p className="text-[11px] text-[#5B6077] font-semibold flex items-center gap-1">
+                                        <Clock className="w-3.5 h-3.5 text-[#FF8400]" />
                                         {new Date(evt.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })} • {evt.venue}
                                     </p>
                                 </div>
@@ -231,27 +228,27 @@ export default function EventsPortal() {
             {/* Today's Schedule */}
             {todayEvents.length > 0 && (
                 <section className="space-y-3">
-                    <h3 className="text-xs font-black uppercase tracking-wider text-orange-500 flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-ping" /> Today's Highlights
+                    <h3 className="text-xs font-black uppercase tracking-wider text-[#FF8400] flex items-center gap-1.5 font-display">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#FF8400] animate-ping" /> Today's Highlights
                     </h3>
                     <div className="space-y-3">
                         {todayEvents.map((evt) => (
                             <div 
                                 key={evt._id} 
                                 onClick={() => router.push(`/events/${evt._id}`)}
-                                className="glass-card p-4 border border-orange-500/20 bg-orange-500/[0.01] hover:border-orange-500/30 transition-all cursor-pointer flex gap-4"
+                                className="bg-white border border-[#FF8400]/25 p-4 rounded-[20px] shadow-[0_2px_8px_rgba(11,8,40,0.01)] hover:scale-[1.005] transition-all cursor-pointer flex gap-4"
                             >
-                                <div className="w-20 h-20 rounded-2xl overflow-hidden shrink-0 relative bg-nexus-black/40 border border-white/5">
-                                    <img src={evt.image_url || "/white_jklu_logo.png"} alt={evt.title} className="w-full h-full object-cover" />
+                                <div className="w-20 h-20 rounded-[14px] overflow-hidden shrink-0 relative bg-background border border-black/5">
+                                    <img src={evt.image_url || "/logos/JKLU Coloured.png"} alt={evt.title} className="w-full h-full object-cover" />
                                 </div>
                                 <div className="flex-1 min-w-0 flex flex-col justify-between">
                                     <div>
-                                        <span className="text-[8px] font-black uppercase tracking-wider text-orange-400">{evt.club_name}</span>
-                                        <h4 className="font-bold text-nexus-linen text-sm leading-tight truncate">{evt.title}</h4>
+                                        <span className="text-[8px] font-bold uppercase tracking-wider text-[#FF8400] font-display">{evt.club_name}</span>
+                                        <h4 className="font-bold text-[#0B0828] text-sm leading-tight truncate font-display">{evt.title}</h4>
                                     </div>
-                                    <div className="flex items-center justify-between text-[10px] text-white/30 mt-2">
-                                        <span className="flex items-center gap-1"><MapPin className="w-3 h-3 text-orange-400" />{evt.venue}</span>
-                                        <span className="font-bold text-nexus-linen">Today</span>
+                                    <div className="flex items-center justify-between text-[10px] mt-2 font-bold opacity-80">
+                                        <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5 text-[#FF8400]" />{evt.venue}</span>
+                                        <span className="text-[#FF8400] uppercase font-black tracking-widest text-[8px] font-display">Today</span>
                                     </div>
                                 </div>
                             </div>
@@ -262,25 +259,25 @@ export default function EventsPortal() {
 
             {/* Upcoming Events List */}
             <section className="space-y-3">
-                <h3 className="text-xs font-black uppercase tracking-wider text-white/30">Upcoming Campus Events</h3>
+                <h3 className="text-xs font-black uppercase tracking-wider text-[#0B0828]/40 font-display">Upcoming Campus Events</h3>
                 <div className="space-y-3">
                     {upcomingEvents.map((evt) => (
                         <div 
                             key={evt._id} 
                             onClick={() => router.push(`/events/${evt._id}`)}
-                            className="glass-card p-4 border border-nexus-camel/5 hover:border-blue-500/20 hover:bg-white/[0.01] transition-all cursor-pointer flex gap-4"
+                            className="glass-card p-4 border border-black/5 hover:border-[#0B0828]/10 shadow-[0_2px_8px_rgba(11,8,40,0.01)] transition-all cursor-pointer flex gap-4"
                         >
-                            <div className="w-20 h-20 rounded-2xl overflow-hidden shrink-0 relative bg-nexus-black/40 border border-white/5">
-                                <img src={evt.image_url || "/white_jklu_logo.png"} alt={evt.title} className="w-full h-full object-cover" />
+                            <div className="w-20 h-20 rounded-[14px] overflow-hidden shrink-0 relative bg-black/5 border border-black/5">
+                                <img src={evt.image_url || "/logos/JKLU Coloured.png"} alt={evt.title} className="w-full h-full object-cover" />
                             </div>
                             <div className="flex-1 min-w-0 flex flex-col justify-between">
                                 <div>
-                                    <span className="text-[8px] font-black uppercase tracking-wider text-nexus-camel">{evt.club_name || evt.category}</span>
-                                    <h4 className="font-bold text-nexus-linen text-sm leading-tight truncate">{evt.title}</h4>
+                                    <span className="text-[8px] font-bold uppercase tracking-wider text-[#5B6077] font-display">{evt.club_name || evt.category}</span>
+                                    <h4 className="font-bold text-[#0B0828] text-sm leading-tight truncate font-display">{evt.title}</h4>
                                 </div>
-                                <div className="flex items-center justify-between text-[10px] text-white/30 mt-2">
-                                    <span className="flex items-center gap-1"><MapPin className="w-3 h-3 text-blue-400" />{evt.venue}</span>
-                                    <span className="font-bold text-nexus-khaki">
+                                <div className="flex items-center justify-between text-[10px] text-[#5B6077] mt-2 font-semibold">
+                                    <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5 text-[#FF8400]" />{evt.venue}</span>
+                                    <span className="font-bold text-[#0B0828] font-display">
                                         {new Date(evt.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
                                     </span>
                                 </div>
@@ -288,7 +285,7 @@ export default function EventsPortal() {
                         </div>
                     ))}
                     {upcomingEvents.length === 0 && (
-                        <div className="glass-card p-6 text-center text-nexus-camel text-xs font-bold border border-nexus-camel/5">
+                        <div className="glass-card p-6 text-center text-[#5B6077] text-xs font-bold border border-black/5 shadow-[0_2px_8px_rgba(11,8,40,0.01)]">
                             No upcoming events listed
                         </div>
                     )}
@@ -298,19 +295,19 @@ export default function EventsPortal() {
             {/* Club Pages shortcuts */}
             {clubs.length > 0 && (
                 <section className="space-y-3">
-                    <h3 className="text-xs font-black uppercase tracking-wider text-white/30">Explore Clubs</h3>
+                    <h3 className="text-xs font-black uppercase tracking-wider text-[#0B0828]/40 font-display">Explore Clubs</h3>
                     <div className="overflow-x-auto flex gap-3 pb-2 -mx-4 px-4 scrollbar-hide no-scrollbar">
                         {clubs.slice(0, 5).map((club, idx) => (
                             <Link 
                                 key={club.slug || idx} 
                                 href={`/council/clubs/${club.slug}`}
-                                className="glass-card px-4 py-3 border border-nexus-camel/5 hover:border-white/10 transition-all flex items-center gap-2.5 shrink-0"
+                                className="glass-card px-4 py-3 border border-black/5 hover:border-[#0B0828]/10 shadow-[0_2px_6px_rgba(11,8,40,0.01)] transition-all flex items-center gap-2.5 shrink-0"
                             >
-                                <div className="w-6 h-6 rounded-lg bg-blue-500/10 flex items-center justify-center text-[10px] font-bold text-blue-400">
+                                <div className="w-6 h-6 rounded-lg bg-[#FF8400]/10 flex items-center justify-center text-[10px] font-bold text-[#FF8400] font-display">
                                     {club.name.charAt(0)}
                                 </div>
-                                <span className="text-xs font-bold text-nexus-khaki">{club.name}</span>
-                                <ChevronRight className="w-3.5 h-3.5 text-white/10" />
+                                <span className="text-xs font-bold text-[#5B6077] font-display">{club.name}</span>
+                                <ChevronRight className="w-3.5 h-3.5 text-black/20" />
                             </Link>
                         ))}
                     </div>
