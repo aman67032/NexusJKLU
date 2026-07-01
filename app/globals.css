@@ -1,76 +1,84 @@
 @import "tailwindcss";
 
 :root {
-  /* Brand Palette (70% Ivory, 20% Oxford Blue, 7% Vista Blue, 3% Orange) */
-  --warm-ivory: #FAF0DD;
-  --surface-white: #FFFFFF;
+  /* Redesigned Palette (Foundation Base Colors) */
+  --tortila-glow: #FDEADB; /* Buttercream background */
+  --midnight-taco-run: #34446D; /* Primary Text/Brand Base */
+  --mango-loco: #FBB940; /* Mango/Yellow - Bus */
+  --pink-paloma: #F57EA3; /* Pink - Events */
+  --aqua-fresca: #85D2FF; /* Light Blue - Papers */
+  --complaints-color: #9B365A; /* Crimson/Dark Red - Complaints */
+
+  --warm-ivory: var(--tortila-glow);
+  --surface-white: #FFFFFF; /* White surfaces */
   
-  --oxford-blue: #0B0828;
-  --vista-blue: #8FA0D8;
-  --brand-orange: #FF8400;
+  --oxford-blue: var(--midnight-taco-run);
+  --slate-gray: rgba(52, 68, 109, 0.85); /* Slate Gray secondary text */
+  --border-color: rgba(52, 68, 109, 0.12); /* Border lines and dividers */
 
   /* Abstracted UI Colors */
   --background: var(--warm-ivory);
   --background-secondary: var(--surface-white);
-  --foreground: var(--oxford-blue);
+  --foreground: var(--midnight-taco-run);
 
   /* Typography Colors */
-  --text-primary: var(--oxford-blue);
-  --text-secondary: #5B6077;
-  --text-muted: #8E92A6;
+  --text-primary: var(--midnight-taco-run);
+  --text-secondary: var(--slate-gray);
+  --text-muted: rgba(52, 68, 109, 0.6);
 
   /* Card base style (Editorial style, soft shadow, minimal border) */
-  --card-bg: var(--surface-white);
-  --card-border: rgba(11, 8, 40, 0.05);
-  --card-shadow: 0 4px 20px rgba(11, 8, 40, 0.02);
-  --card-hover-shadow: 0 8px 30px rgba(11, 8, 40, 0.04);
+  --card-bg: rgba(255, 255, 255, 0.35);
+  --card-border: rgba(255, 255, 255, 0.25);
+  --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  --card-hover-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 
   /* Status Colors */
-  --color-success: #67C587;
-  --color-warning: #E8B24C;
-  --color-error: #E76F51;
+  --color-success: var(--pink-paloma);
+  --color-warning: var(--mango-loco);
+  --color-error: var(--complaints-color);
 
-  /* Module Colors */
-  --module-bus: var(--vista-blue);
-  --module-events: var(--brand-orange);
-  --module-papers: #A4BCE8; /* Soft blue */
-  --module-complaints: #E76F51; /* Muted coral */
-  --module-profile: var(--oxford-blue);
-  --module-home: var(--warm-ivory);
+  /* Module Feature Colors */
+  --module-bus: var(--mango-loco);
+  --module-events: var(--pink-paloma);
+  --module-papers: var(--aqua-fresca);
+  --module-complaints: var(--complaints-color);
+  --module-profile: var(--midnight-taco-run);
+  --module-home: var(--tortila-glow);
 
   /* Fonts */
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-sora);
+  --font-sans: var(--font-manrope), 'Manrope', system-ui, -apple-system, sans-serif;
+  --font-display: 'Cabinet Grotesk', var(--font-sora), 'Sora', sans-serif;
 }
 
 @theme inline {
-  --color-oxford-blue: var(--oxford-blue);
-  --color-vista-blue: var(--vista-blue);
-  --color-brand-orange: var(--brand-orange);
-  --color-warm-ivory: var(--warm-ivory);
+  --color-oxford-blue: var(--midnight-taco-run);
+  --color-slate-gray: var(--slate-gray);
+  --color-border-color: var(--border-color);
+  --color-warm-ivory: var(--tortila-glow);
   --color-surface-white: var(--surface-white);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-primary: var(--oxford-blue);
-  --color-secondary: var(--vista-blue);
-  --color-accent: var(--brand-orange);
+  --color-primary: var(--midnight-taco-run);
+  --color-secondary: var(--slate-gray);
+  --color-accent: var(--pink-paloma);
 
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-sora);
+  /* Feature Colors */
+  --color-brand-marigold: var(--mango-loco);
+  --color-brand-emerald: var(--pink-paloma);
+  --color-brand-academic: var(--aqua-fresca);
+  --color-brand-maroon: var(--complaints-color);
 
-  /* Legacy token mapping overrides to ensure light academic theme propagation */
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+
+  /* Legacy overrides for older components */
   --color-nexus-black: var(--background);
   --color-nexus-green: var(--background-secondary);
-  --color-nexus-jet: rgba(11, 8, 40, 0.06);
-  --color-nexus-coffee: var(--color-pastel-pink-bg);
-  --color-nexus-brass: var(--color-pastel-blue-bg);
-
+  --color-nexus-jet: var(--border-color);
   --color-nexus-linen: var(--text-primary);
   --color-nexus-khaki: var(--text-secondary);
   --color-nexus-camel: var(--text-muted);
-  --color-nexus-cocoa: var(--color-pastel-orange-bg);
-  --color-nexus-espresso: var(--color-pastel-purple-bg);
 }
 
 * {
@@ -113,47 +121,49 @@ body {
   background: rgba(11, 8, 40, 0.15);
 }
 
-/* Cards System - Large 20px Radius, Soft shadows, Minimal borders */
+/* Cards System - Redesigned Glassmorphism settings */
 .glass-card {
-  background: var(--background-secondary);
-  border: 1px solid var(--card-border);
-  box-shadow: var(--card-shadow);
-  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-card:hover {
-  background: var(--background-secondary);
-  border-color: rgba(11, 8, 40, 0.08);
-  box-shadow: var(--card-hover-shadow);
+  background: rgba(255, 255, 255, 0.45);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
   transform: translateY(-1.5px);
 }
 
 /* Module Identity Cards */
 .bento-bus {
   background: #FFFFFF;
-  color: var(--oxford-blue);
-  border: 1px solid rgba(143, 160, 216, 0.3); /* Vista blue transparent outline */
+  color: var(--midnight-taco-run);
+  border: 1px solid rgba(251, 185, 64, 0.25); /* Mango outline */
 }
 .bento-events {
   background: #FFFFFF;
-  color: var(--oxford-blue);
-  border: 1px solid rgba(255, 132, 0, 0.25); /* Orange outline */
+  color: var(--midnight-taco-run);
+  border: 1px solid rgba(245, 126, 163, 0.25); /* Paloma outline */
 }
 .bento-papers {
   background: #FFFFFF;
-  color: var(--oxford-blue);
-  border: 1px solid rgba(164, 188, 232, 0.4); /* Soft blue outline */
+  color: var(--midnight-taco-run);
+  border: 1px solid rgba(133, 210, 255, 0.25); /* Aqua outline */
 }
 .bento-complaints {
   background: #FFFFFF;
-  color: var(--oxford-blue);
-  border: 1px solid rgba(231, 111, 81, 0.3); /* Muted coral outline */
+  color: var(--midnight-taco-run);
+  border: 1px solid rgba(155, 54, 90, 0.25); /* Complaints outline */
 }
 .bento-profile {
   background: #FFFFFF;
-  color: var(--oxford-blue);
-  border: 1px solid rgba(11, 8, 40, 0.1); /* Oxford Blue outline */
+  color: var(--midnight-taco-run);
+  border: 1px solid var(--border-color);
 }
 
 /* Button system (14px Border Radius) */
@@ -194,7 +204,7 @@ body {
 }
 
 .btn-orange-cta {
-  background: var(--brand-orange);
+  background: #22C55E; /* Emerald Green is now the primary action accent */
   color: #ffffff;
   padding: 0.75rem 1.5rem;
   border-radius: 14px;
@@ -203,19 +213,19 @@ body {
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   border: none;
   cursor: pointer;
-  box-shadow: 0 2px 10px rgba(255, 132, 0, 0.15);
+  box-shadow: 0 2px 10px rgba(34, 197, 94, 0.15);
 }
 
 .btn-orange-cta:hover {
-  background: #e07400;
+  background: #1eb053;
   transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(255, 132, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.2);
 }
 
 /* Input styles (14px Border Radius) */
 .input-field {
   background: #ffffff;
-  border: 1px solid rgba(11, 8, 40, 0.08);
+  border: 1px solid var(--border-color);
   border-radius: 14px;
   padding: 0.75rem 1rem;
   color: var(--text-primary);
