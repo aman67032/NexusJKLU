@@ -239,19 +239,19 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
                             {/* User Profile Avatar */}
                             <Link href="/profile" className="flex items-center gap-2.5 hover:opacity-85 transition-opacity">
-                                <div className="w-10 h-10 rounded-full bg-[#34446D]/10 border border-[#34446D]/10 overflow-hidden flex items-center justify-center">
-                                    {(user as any)?.avatar ? (
-                                        <img src={(user as any).avatar} alt="Profile" className="w-full h-full object-cover" />
-                                    ) : (
-                                        <User className="w-5 h-5 text-[#34446D]" />
-                                    )}
+                                <div className="w-10 h-10 rounded-full border border-[#34446D]/15 overflow-hidden flex items-center justify-center bg-white shadow-sm shrink-0">
+                                    <img 
+                                        src={user?.profile?.gender === 'male' ? '/avatars/male.png' : '/avatars/female.png'} 
+                                        alt="Profile Avatar" 
+                                        className="w-full h-full object-contain mix-blend-multiply" 
+                                    />
                                 </div>
                             </Link>
                         </div>
                     </header>
 
                     {/* Dashboard/Page Scroll View */}
-                    <main className="flex-1 overflow-y-auto p-8 bg-[#FDEADB] scrollbar-hide no-scrollbar relative">
+                    <main className="flex-1 overflow-y-auto p-8 bg-background scrollbar-hide no-scrollbar relative">
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={pathname}

@@ -39,7 +39,7 @@ export default function ProfilePortal() {
     const [saving, setSaving] = useState(false);
 
     // Profile form states
-    const [form, setForm] = useState({ name: '', rollNo: '', studentId: '', department: '' });
+    const [form, setForm] = useState({ name: '', rollNo: '', studentId: '', department: '', gender: 'female' });
     
     // Lists states
     const [savedEvents, setSavedEvents] = useState<any[]>([]);
@@ -58,7 +58,8 @@ export default function ProfilePortal() {
                         name: p.name || '',
                         rollNo: p.profile?.rollNo || p.roll_no || '',
                         studentId: p.profile?.studentId || p.student_id || '',
-                        department: p.profile?.department || p.department || ''
+                        department: p.profile?.department || p.department || '',
+                        gender: p.profile?.gender || 'female'
                     });
                 } else if (user) {
                     setProfile(user);
@@ -66,7 +67,8 @@ export default function ProfilePortal() {
                         name: user.name || '',
                         rollNo: user.profile?.rollNo || '',
                         studentId: user.profile?.studentId || '',
-                        department: user.profile?.department || ''
+                        department: user.profile?.department || '',
+                        gender: user.profile?.gender || 'female'
                     });
                 }
 
@@ -106,7 +108,8 @@ export default function ProfilePortal() {
                 profile: {
                     rollNo: form.rollNo,
                     studentId: form.studentId,
-                    department: form.department
+                    department: form.department,
+                    gender: form.gender
                 }
             });
             setProfile({
@@ -116,7 +119,8 @@ export default function ProfilePortal() {
                     ...profile?.profile,
                     rollNo: form.rollNo,
                     studentId: form.studentId,
-                    department: form.department
+                    department: form.department,
+                    gender: form.gender
                 }
             });
             setEditing(false);
@@ -159,8 +163,12 @@ export default function ProfilePortal() {
             {/* Header / Student Avatar card */}
             <div className="glass-card p-5 border border-black/5 flex items-center gap-4 relative overflow-hidden shadow-[0_2px_8px_rgba(11,8,40,0.01)] mt-2">
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#0B0828]/5 to-transparent pointer-events-none" />
-                <div className="w-16 h-16 rounded-[18px] bg-gradient-to-br from-[#0B0828] to-indigo-900 flex items-center justify-center text-white text-2xl font-bold shrink-0 shadow-sm font-display">
-                    {profile?.name?.charAt(0)?.toUpperCase() || 'U'}
+                <div className="w-20 h-20 flex items-center justify-center shrink-0 overflow-hidden relative">
+                    <img 
+                        src={profile?.profile?.gender === 'male' ? '/avatars/male.png' : '/avatars/female.png'} 
+                        alt="Profile Avatar" 
+                        className="w-full h-full object-contain mix-blend-multiply"
+                    />
                 </div>
                 <div className="min-w-0 flex-1">
                     <h2 className="text-base font-bold text-[#0B0828] truncate font-display">{profile?.name || 'JKLU Student'}</h2>
@@ -236,6 +244,17 @@ export default function ProfilePortal() {
                                         <label className="text-[10px] font-bold uppercase tracking-wider text-[#0B0828]/45 font-display">Department</label>
                                         <input value={form.department} onChange={e => setForm({ ...form, department: e.target.value })} className="input-field py-2 text-sm" placeholder="e.g. Computer Science" />
                                     </div>
+                                    <div className="space-y-1.5">
+                                        <label className="text-[10px] font-bold uppercase tracking-wider text-[#34446D]/45 font-display">Gender</label>
+                                        <select 
+                                            value={form.gender} 
+                                            onChange={e => setForm({ ...form, gender: e.target.value })} 
+                                            className="w-full rounded-xl border border-black/10 bg-white p-2.5 text-xs font-semibold focus:outline-none"
+                                        >
+                                            <option value="female">Female (Default)</option>
+                                            <option value="male">Male</option>
+                                        </select>
+                                    </div>
                                     <div className="flex gap-2 pt-2">
                                         <button type="submit" disabled={saving} className="btn-primary flex-1 py-2.5 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 disabled:opacity-50 transition-all active:scale-[0.98] cursor-pointer">
                                             <Save className="w-3.5 h-3.5" /> Save
@@ -254,9 +273,10 @@ export default function ProfilePortal() {
                                             { icon: <Mail className="w-3.5 h-3.5 text-[#0B0828]" />, label: 'Email', value: profile?.email },
                                             { icon: <IdCard className="w-3.5 h-3.5 text-[#0B0828]" />, label: 'Roll No', value: profile?.profile?.rollNo || profile?.roll_no || 'Not set' },
                                             { icon: <IdCard className="w-3.5 h-3.5 text-[#0B0828]" />, label: 'Student ID', value: profile?.profile?.studentId || profile?.student_id || 'Not set' },
-                                            { icon: <Compass className="w-3.5 h-3.5 text-[#0B0828]" />, label: 'Dept', value: profile?.profile?.department || profile?.department || 'Not set', span: true },
+                                            { icon: <Compass className="w-3.5 h-3.5 text-[#0B0828]" />, label: 'Dept', value: profile?.profile?.department || profile?.department || 'Not set' },
+                                            { icon: <User className="w-3.5 h-3.5 text-[#0B0828]" />, label: 'Gender', value: profile?.profile?.gender ? (profile.profile.gender === 'male' ? 'Male' : 'Female') : 'Female (Default)' },
                                         ].map((field, idx) => (
-                                            <div key={idx} className={`flex items-center gap-3 p-3 rounded-[20px] bg-white border border-[#0B0828]/5 shadow-[0_2px_6px_rgba(11,8,40,0.01)] ${field.span ? 'col-span-2' : ''}`}>
+                                            <div key={idx} className="flex items-center gap-3 p-3 rounded-[20px] bg-white border border-[#0B0828]/5 shadow-[0_2px_6px_rgba(11,8,40,0.01)]">
                                                 <div className="p-2 rounded-xl bg-black/5 shrink-0">{field.icon}</div>
                                                 <div className="min-w-0 flex-1">
                                                     <p className="text-[8px] font-bold uppercase tracking-wider text-black/35 font-display">{field.label}</p>

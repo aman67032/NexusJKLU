@@ -16,6 +16,7 @@ interface User {
         department?: string;
         rollNo?: string;
         studentId?: string;
+        gender?: string;
     };
 }
 

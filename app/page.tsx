@@ -256,12 +256,7 @@ export default function Home() {
                         >
                             {/* Top Icon container */}
                             <div className="flex items-center justify-between mb-4">
-                                <div 
-                                    style={{ backgroundColor: `${srv.color}15` }} 
-                                    className="w-10 h-10 rounded-xl flex items-center justify-center"
-                                >
-                                    <srv.icon className="w-5 h-5" style={{ color: srv.color }} />
-                                </div>
+                                <srv.icon className="w-8 h-8" style={{ color: srv.color }} />
                             </div>
                             
                             {/* Card Content details */}
@@ -329,11 +324,11 @@ export default function Home() {
             <div className="lg:hidden p-4 space-y-6 font-sans w-full">
                 {/* Personalized Greeting with Illustration */}
                 <div className="flex items-center justify-between mt-2 gap-4">
-                    <div className="w-[38%] shrink-0 aspect-[4/3] flex items-center justify-center">
+                    <div className="w-24 h-24 flex items-center justify-center shrink-0 overflow-hidden relative">
                         <img 
-                            src="/illustrations/student-greeting.svg" 
+                            src={user?.profile?.gender === 'male' ? '/avatars/male.png' : '/avatars/female.png'} 
                             alt="Nexus Student Greeting" 
-                            className="w-full h-full object-contain"
+                            className="w-full h-full object-contain mix-blend-multiply"
                         />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -349,16 +344,16 @@ export default function Home() {
                 {/* Universal Search */}
                 <form onSubmit={handleSearch} className="relative group">
                     <div className="absolute inset-0 bg-[#34446D]/5 rounded-[14px] blur opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                    <div className="relative flex items-center bg-white border border-[#34446D]/10 hover:border-[#34446D]/20 focus-within:border-[#34446D]/30 rounded-[14px] px-4 py-3 shadow-[0_2px_8px_rgba(52,68,109,0.01)] transition-all">
-                        <Search className="w-4 h-4 text-[#34446D]/35 shrink-0" />
+                    <div className="relative flex items-center bg-transparent border-2 border-[#34446D]/15 hover:border-[#34446D]/30 focus-within:border-[#34446D]/50 rounded-[14px] px-4 py-2.5 transition-all">
+                        <Search className="w-4 h-4 text-[#34446D] shrink-0" />
                         <input
                             type="text"
                             placeholder="Find bus timings, papers, events..."
-                            className="w-full bg-transparent border-none text-sm text-[#34446D] placeholder-[#666A7A]/40 focus:ring-0 focus:outline-none px-3 font-semibold"
+                            className="w-full bg-transparent border-none text-sm text-[#34446D] placeholder-[#34446D]/45 focus:ring-0 focus:outline-none px-3 font-semibold"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
-                        <button type="submit" className="text-xs font-bold text-[#F57EA3] hover:text-[#F57EA3]/80 shrink-0 transition-colors uppercase tracking-wider font-display">
+                        <button type="submit" className="text-xs font-bold text-[#34446D] hover:text-[#34446D]/80 shrink-0 transition-colors uppercase tracking-wider font-display">
                             Search
                         </button>
                     </div>
@@ -379,9 +374,7 @@ export default function Home() {
                                 href={srv.href}
                                 className={`flex flex-col items-center justify-center pt-4 pb-3 px-2 text-center bg-white border-2 ${srv.borderColor} rounded-[24px] shadow-[0_4px_16px_rgba(52,68,109,0.015)] hover:shadow-[0_8px_24px_rgba(52,68,109,0.03)] hover:scale-[1.02] active:scale-95 transition-all cursor-pointer`}
                             >
-                                <div className="w-14 h-14 rounded-[20px] bg-background flex items-center justify-center mb-1">
-                                    <srv.icon className={`w-7 h-7 ${srv.iconColor} stroke-[1.8]`} />
-                                </div>
+                                <srv.icon className={`w-10 h-10 ${srv.iconColor} stroke-[1.8] mb-2 mt-1`} />
                                 <span className="text-[11px] font-bold text-[#34446D] font-display tracking-tight mt-1 leading-tight">{srv.label}</span>
                             </Link>
                         ))}
@@ -393,7 +386,7 @@ export default function Home() {
                     <h3 className="text-xs font-black uppercase tracking-wider text-[#34446D]/40 font-display">Today's Highlights</h3>
                     <div className="space-y-2.5">
                         {nextBus && (
-                            <Link href="/bus" className="glass-card p-3.5 flex items-center justify-between border-2 border-[#FBB940] transition-all">
+                            <Link href="/bus" className="bg-white rounded-[16px] shadow-[0_4px_16px_rgba(52,68,109,0.015)] hover:scale-[1.02] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(52,68,109,0.05)] active:scale-98 duration-200 p-3.5 flex items-center justify-between border-2 border-[#FBB940] transition-all cursor-pointer">
                                 <div className="flex items-center gap-3">
                                     <div className="w-8 h-8 rounded-lg bg-[#FBB940]/10 flex items-center justify-center text-[#FBB940]">
                                         <Bus className="w-4 h-4" />
@@ -410,7 +403,7 @@ export default function Home() {
                         )}
 
                         {announcement && (
-                            <div className="glass-card p-3.5 flex items-center justify-between border-2 border-[#9B365A] transition-all">
+                            <div className="bg-white rounded-[16px] shadow-[0_4px_16px_rgba(52,68,109,0.015)] hover:scale-[1.02] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(52,68,109,0.05)] active:scale-98 duration-200 p-3.5 flex items-center justify-between border-2 border-[#9B365A] transition-all cursor-pointer">
                                 <div className="flex items-center gap-3">
                                     <div className="w-8 h-8 rounded-lg bg-[#9B365A]/10 flex items-center justify-center text-[#9B365A]">
                                         <AlertCircle className="w-4 h-4" />
@@ -429,7 +422,7 @@ export default function Home() {
                         )}
 
                         {upcomingEvent && (
-                            <Link href="/events" className="glass-card p-3.5 flex items-center justify-between border-2 border-[#F57EA3] transition-all">
+                            <Link href="/events" className="bg-white rounded-[16px] shadow-[0_4px_16px_rgba(52,68,109,0.015)] hover:scale-[1.02] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(52,68,109,0.05)] active:scale-98 duration-200 p-3.5 flex items-center justify-between border-2 border-[#F57EA3] transition-all cursor-pointer">
                                 <div className="flex items-center gap-3">
                                     <div className="w-8 h-8 rounded-lg bg-[#F57EA3]/10 flex items-center justify-center text-[#F57EA3]">
                                         <PartyPopper className="w-4 h-4" />
@@ -446,7 +439,7 @@ export default function Home() {
                         )}
 
                         {recentPaper && (
-                            <Link href="/learn/papers" className="glass-card p-3.5 flex items-center justify-between border-2 border-[#85D2FF] transition-all">
+                            <Link href="/learn/papers" className="bg-white rounded-[16px] shadow-[0_4px_16px_rgba(52,68,109,0.015)] hover:scale-[1.02] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(52,68,109,0.05)] active:scale-98 duration-200 p-3.5 flex items-center justify-between border-2 border-[#85D2FF] transition-all cursor-pointer">
                                 <div className="flex items-center gap-3">
                                     <div className="w-8 h-8 rounded-lg bg-[#85D2FF]/10 flex items-center justify-center text-[#85D2FF]">
                                         <FileText className="w-4 h-4" />
