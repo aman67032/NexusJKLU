@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import api from '@/lib/api';
 import { 
-    Search, Bus, FileText, PartyPopper, ArrowRight, AlertCircle, ChevronRight, MessageSquare
+    Search, Bus, FileText, Megaphone, ArrowRight, AlertCircle, ChevronRight, ShieldAlert
 } from 'lucide-react';
 
 const CalendarWidget = () => {
@@ -47,7 +47,7 @@ const CalendarWidget = () => {
                             if (dayObj.isHighlighted) {
                                 return (
                                     <div key={dIndex} className="flex justify-center">
-                                        <div className="w-7 h-7 rounded-full bg-white text-[#34446D] font-black flex items-center justify-center text-xs shadow-md">
+                                        <div className="w-7 h-7 rounded-full bg-[#FBB940] text-[#34446D] font-black flex items-center justify-center text-xs shadow-md">
                                             {dayObj.day}
                                         </div>
                                     </div>
@@ -194,51 +194,60 @@ export default function Home() {
     const desktopServices = [
         { 
             label: 'Bus Status', 
+            category: 'Bus Status',
             title: 'Next Bus Arrival', 
-            value: nextBus?.routeName || 'JKLU ➔ Mansarovar', 
+            value: nextBus?.routeName || 'Mansarovar Metro', 
             time: nextBus?.timings?.[0] || '10 min', 
             href: '/bus', 
             icon: Bus, 
             color: busColor, 
+            textColor: '#D97706',
             btnText: 'Track Bus',
-            bgGradient: 'from-[#FBB940]/10 to-transparent',
-            borderColor: 'border-[#FBB940]/30'
+            bgClass: 'bg-[#FFF9F2] bg-gradient-to-b from-[#FFF9F2] to-[#FFFBF7]',
+            borderColor: 'border-2 border-[#FBB940]/40',
+            buttonStyle: 'solid'
         },
         { 
             label: 'Events Hub', 
-            title: 'Upcoming Events', 
-            value: upcomingEvent?.title || 'AI Workshop', 
-            time: upcomingEvent?.start_date ? new Date(upcomingEvent.start_date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : 'Today, 5:00 PM', 
+            category: 'Events Hub',
+            title: upcomingEvent?.title || 'AI Workshop', 
+            value: upcomingEvent?.start_date ? new Date(upcomingEvent.start_date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : 'Today, 5:00 PM', 
             href: '/events', 
-            icon: PartyPopper, 
+            icon: Megaphone, 
             color: eventColor, 
+            textColor: '#E11D48',
             btnText: 'Explore Events',
-            bgGradient: 'from-[#F57EA3]/10 to-transparent',
-            borderColor: 'border-[#F57EA3]/30'
+            bgClass: 'bg-[#FFF5F7] bg-gradient-to-b from-[#FFF5F7] to-[#FFFBFD]',
+            borderColor: 'border-2 border-[#F57EA3]/40',
+            buttonStyle: 'solid'
         },
         { 
             label: 'Exam Papers', 
-            title: 'Recent Papers', 
-            value: recentPaper?.title.split(' - ')[0] || 'Design Thinking', 
-            time: 'Uploaded', 
+            category: 'Exam Papers',
+            title: recentPaper?.title.split(' - ')[0] || 'DBMS Notes', 
+            value: 'Uploaded', 
             href: '/learn/papers', 
             icon: FileText, 
-            color: paperColor, 
+            color: '#3B82F6', 
+            textColor: '#1D4ED8',
             btnText: 'View Papers',
-            bgGradient: 'from-[#85D2FF]/10 to-transparent',
-            borderColor: 'border-[#85D2FF]/30'
+            bgClass: 'bg-[#F0F8FF] bg-gradient-to-b from-[#F0F8FF] to-[#F8FCFF]',
+            borderColor: 'border-2 border-[#3B82F6]/35',
+            buttonStyle: 'solid'
         },
         { 
             label: 'Complaints', 
-            title: 'Your Complaint', 
-            value: '#C-2451', 
-            time: 'In Progress', 
+            category: 'Complaints',
+            title: '#C-2451', 
+            value: 'In Progress', 
             href: '/complaints', 
-            icon: MessageSquare, 
+            icon: ShieldAlert, 
             color: complaintColor, 
+            textColor: '#9B365A',
             btnText: 'Track Status',
-            bgGradient: 'from-[#9B365A]/10 to-transparent',
-            borderColor: 'border-[#9B365A]/30'
+            bgClass: 'bg-[#FAF0F3] bg-gradient-to-b from-[#FAF0F3] to-[#FDF8FA]',
+            borderColor: 'border-2 border-[#9B365A]/40',
+            buttonStyle: 'solid'
         }
     ];
 
@@ -252,28 +261,51 @@ export default function Home() {
                         <Link 
                             key={srv.label}
                             href={srv.href}
-                            className={`glass-card p-5 flex flex-col min-h-[200px] border ${srv.borderColor} bg-gradient-to-b ${srv.bgGradient} relative overflow-hidden active:scale-98 transition-all duration-200 cursor-pointer group`}
+                            className={`p-6 flex flex-col justify-between min-h-[220px] border ${srv.borderColor} ${srv.bgClass} rounded-[24px] shadow-[0_8px_30px_rgba(52,68,109,0.02)] hover:shadow-[0_12px_40px_rgba(52,68,109,0.05)] hover:-translate-y-0.5 active:scale-98 transition-all duration-300 cursor-pointer group relative overflow-hidden`}
                         >
-                            {/* Top Icon container */}
-                            <div className="flex items-center justify-between mb-4">
-                                <srv.icon className="w-8 h-8" style={{ color: srv.color }} />
-                            </div>
-                            
-                            {/* Card Content details */}
-                            <div className="space-y-1 select-none">
-                                <p className="text-[10px] font-bold text-[#666A7A]/70 uppercase tracking-wider">{srv.title}</p>
-                                <h4 className="text-sm font-black text-[#34446D] font-display line-clamp-1 leading-snug">{srv.value}</h4>
-                                <p className="text-lg font-black text-[#34446D] leading-none mt-1">{srv.time}</p>
+                            <div>
+                                {/* Top Icon and Category Header */}
+                                <div className="flex flex-col gap-3 mb-4">
+                                    <srv.icon className="w-8 h-8 stroke-[1.8]" style={{ color: srv.color }} />
+                                    <h3 className="font-display font-black text-sm tracking-wide" style={{ color: srv.textColor }}>
+                                        {srv.category}
+                                    </h3>
+                                </div>
+                                
+                                {/* Card Content details */}
+                                <div className="space-y-1 select-none">
+                                    {srv.label === 'Bus Status' ? (
+                                        <>
+                                            <p className="text-[10px] font-bold text-[#666A7A] uppercase tracking-wider leading-none">{srv.title}</p>
+                                            <h4 className="text-sm font-black text-[#34446D] font-display line-clamp-1 leading-snug">{srv.value}</h4>
+                                            <p className="text-xl font-black text-[#34446D] leading-none mt-1">{srv.time}</p>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <h4 className="text-sm font-black text-[#34446D] font-display line-clamp-1 leading-snug">{srv.title}</h4>
+                                            <p className="text-[11px] font-bold text-[#666A7A] leading-none mt-1">{srv.value}</p>
+                                        </>
+                                    )}
+                                </div>
                             </div>
                             
                             {/* Bottom Action Pill */}
-                            <div className="mt-auto pt-3 flex items-center">
-                                <span 
-                                    style={{ color: srv.color, backgroundColor: `${srv.color}12` }}
-                                    className="text-[10px] font-black uppercase tracking-wider px-3.5 py-1.5 rounded-full flex items-center gap-1 group-hover:opacity-90 group-hover:translate-x-0.5 transition-all"
-                                >
-                                    {srv.btnText} <span className="text-[10px] leading-none font-sans">→</span>
-                                </span>
+                            <div className="mt-5 flex items-center">
+                                {srv.buttonStyle === 'solid' ? (
+                                    <span 
+                                        style={{ backgroundColor: srv.color }}
+                                        className="text-[10px] font-black uppercase tracking-wider px-4 py-2 rounded-full text-white flex items-center gap-1.5 shadow-sm group-hover:opacity-90 transition-all duration-200"
+                                    >
+                                        {srv.btnText} <ChevronRight className="w-3.5 h-3.5" />
+                                    </span>
+                                ) : (
+                                    <span 
+                                        style={{ color: srv.color, backgroundColor: `${srv.color}15`, borderColor: `${srv.color}25` }}
+                                        className="text-[10px] font-black uppercase tracking-wider px-4 py-2 rounded-full border flex items-center gap-1.5 group-hover:opacity-95 transition-all duration-200"
+                                    >
+                                        {srv.btnText} <ChevronRight className="w-3.5 h-3.5" style={{ color: srv.color }} />
+                                    </span>
+                                )}
                             </div>
                         </Link>
                     ))}
@@ -282,7 +314,7 @@ export default function Home() {
                 {/* Highlights and Calendar Rows */}
                 <div className="grid grid-cols-3 gap-6">
                     {/* Today's Highlights (2 columns) */}
-                    <div className="col-span-2 glass-card p-6 flex flex-col bg-white">
+                    <div className="col-span-2 p-6 flex flex-col bg-white rounded-[24px] border border-[#34446D]/12 shadow-[0_15px_45px_rgba(52,68,109,0.08)]">
                         <div className="flex items-center justify-between mb-5">
                             <h3 className="font-display font-black text-base text-[#34446D]">Today's Highlights</h3>
                             <Link href="/events" className="text-xs font-bold text-[#F57EA3] hover:underline flex items-center gap-0.5 font-display">
@@ -294,7 +326,7 @@ export default function Home() {
                         <div className="divide-y divide-[#34446D]/5">
                             {[
                                 { text: 'Bus 4 arriving in 10 minutes at JKLU Gate', time: '9:10 AM', icon: Bus, color: busColor },
-                                { text: 'Design Club Meeting at Creative Lab', time: '11:30 AM', icon: PartyPopper, color: eventColor },
+                                { text: 'Design Club Meeting at Creative Lab', time: '11:30 AM', icon: Megaphone, color: eventColor },
                                 { text: 'Operating Systems Notes uploaded', time: '8:45 AM', icon: FileText, color: paperColor }
                             ].map((item, idx) => (
                                 <div key={idx} className="flex items-center justify-between py-4 first:pt-0 last:pb-0 group">
@@ -365,9 +397,9 @@ export default function Home() {
                     <div className="grid grid-cols-4 gap-2.5">
                         {[
                             { label: 'Bus Status', icon: Bus, href: '/bus', borderColor: 'border-[#FBB940]', iconColor: 'text-[#FBB940]' },
-                            { label: 'Events Hub', icon: PartyPopper, href: '/events', borderColor: 'border-[#F57EA3]', iconColor: 'text-[#F57EA3]' },
+                            { label: 'Events Hub', icon: Megaphone, href: '/events', borderColor: 'border-[#F57EA3]', iconColor: 'text-[#F57EA3]' },
                             { label: 'Exam Papers', icon: FileText, href: '/learn/papers', borderColor: 'border-[#85D2FF]', iconColor: 'text-[#85D2FF]' },
-                            { label: 'Complaints', icon: MessageSquare, href: '/complaints', borderColor: 'border-[#9B365A]', iconColor: 'text-[#9B365A]' }
+                            { label: 'Complaints', icon: ShieldAlert, href: '/complaints', borderColor: 'border-[#9B365A]', iconColor: 'text-[#9B365A]' }
                         ].map((srv) => (
                             <Link 
                                 key={srv.label} 
@@ -425,7 +457,7 @@ export default function Home() {
                             <Link href="/events" className="bg-white rounded-[16px] shadow-[0_4px_16px_rgba(52,68,109,0.015)] hover:scale-[1.02] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(52,68,109,0.05)] active:scale-98 duration-200 p-3.5 flex items-center justify-between border-2 border-[#F57EA3] transition-all cursor-pointer">
                                 <div className="flex items-center gap-3">
                                     <div className="w-8 h-8 rounded-lg bg-[#F57EA3]/10 flex items-center justify-center text-[#F57EA3]">
-                                        <PartyPopper className="w-4 h-4" />
+                                        <Megaphone className="w-4 h-4" />
                                     </div>
                                     <div>
                                         <p className="text-xs font-bold text-[#34446D] leading-snug line-clamp-1 font-display">{upcomingEvent.title}</p>

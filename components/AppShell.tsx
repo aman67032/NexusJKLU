@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { 
-    Home, Bus, PartyPopper, FileText, UserCircle, ShieldAlert, Bell, User, MessageSquare, Settings
+    Home, Bus, Megaphone, FileText, UserCircle, ShieldAlert, Bell, User, MessageSquare, Settings, Search
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -13,7 +13,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const NAV_ITEMS = [
     { label: 'Home', href: '/', icon: Home, color: '#34446D' },
     { label: 'Bus', href: '/bus', icon: Bus, color: '#FBB940' },
-    { label: 'Events', href: '/events', icon: PartyPopper, color: '#F57EA3' },
+    { label: 'Events', href: '/events', icon: Megaphone, color: '#F57EA3' },
     { label: 'Papers', href: '/learn/papers', icon: FileText, color: '#85D2FF' },
     { label: 'Profile', href: '/profile', icon: UserCircle, color: '#34446D' }
 ];
@@ -22,9 +22,9 @@ const NAV_ITEMS = [
 const SIDEBAR_ITEMS = [
     { label: 'Home', href: '/', icon: Home, color: '#F57EA3', activeBg: 'bg-[#F57EA3]/10' },
     { label: 'Bus', href: '/bus', icon: Bus, color: '#FBB940', activeBg: 'bg-[#FBB940]/10' },
-    { label: 'Events', href: '/events', icon: PartyPopper, color: '#F57EA3', activeBg: 'bg-[#F57EA3]/10' },
+    { label: 'Events', href: '/events', icon: Megaphone, color: '#F57EA3', activeBg: 'bg-[#F57EA3]/10' },
     { label: 'Papers', href: '/learn/papers', icon: FileText, color: '#85D2FF', activeBg: 'bg-[#85D2FF]/10' },
-    { label: 'Complaints', href: '/complaints', icon: MessageSquare, color: '#9B365A', activeBg: 'bg-[#9B365A]/10' }
+    { label: 'Complaints', href: '/complaints', icon: ShieldAlert, color: '#9B365A', activeBg: 'bg-[#9B365A]/10' }
 ];
 
 const SIDEBAR_SECONDARY_ITEMS = [
@@ -145,17 +145,17 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
     // Responsive Desktop and Mobile wrapper
     return (
-        <div className="min-h-screen bg-[#FDEADB] text-[#34446D] relative select-none overflow-x-hidden font-sans">
+        <div className="min-h-screen bg-white text-[#34446D] relative select-none overflow-x-hidden font-sans">
             {/* Desktop Layout (lg screens) */}
             <div className="hidden lg:flex min-h-screen">
                 {/* Sidebar */}
                 <aside className="w-64 bg-white border-r border-[#34446D]/10 flex flex-col justify-between p-6 shrink-0 z-20">
                     <div className="space-y-8">
                         {/* Logo header */}
-                        <div className="flex items-center gap-3 px-2 mt-2">
-                            <div className="w-8 h-8 rounded-lg bg-[#34446D] flex items-center justify-center text-white shrink-0">
-                                <img src="/logos/JKLU Coloured.png" alt="Logo" className="w-6 h-6 object-contain invert brightness-200" />
-                            </div>
+                        <div className="flex items-center gap-2.5 px-2 mt-2">
+                            <svg className="w-6 h-6 text-[#F57EA3] fill-current shrink-0" viewBox="0 0 24 24">
+                                <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9Z" />
+                            </svg>
                             <div>
                                 <h1 className="font-display font-black text-xl tracking-tight leading-none text-[#34446D]">NEXUS</h1>
                                 <p className="text-[9px] font-bold text-[#666A7A] tracking-wider uppercase mt-0.5">Campus Companion</p>
@@ -179,7 +179,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                                     >
                                         <Icon 
                                             className="w-5 h-5 transition-transform duration-200 group-hover:scale-105" 
-                                            style={{ color: isActive ? item.color : '#666A7A' }}
+                                            style={{ color: item.color }}
                                         />
                                         <span className="text-sm font-semibold tracking-tight">{item.label}</span>
                                     </Link>
@@ -209,6 +209,28 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                             );
                         })}
                     </div>
+
+                    {/* Nexus Brand Card */}
+                    <div className="mt-8 p-5 rounded-[24px] bg-[#1E294B] text-white relative overflow-hidden flex flex-col justify-between min-h-[110px] shadow-sm select-none shrink-0">
+                        {/* Background subtle star glow */}
+                        <div className="absolute -right-3 -bottom-3 opacity-20 pointer-events-none">
+                            <svg className="w-24 h-24 text-[#F57EA3] fill-current" viewBox="0 0 100 100">
+                                <path d="M50 0 C60 40, 100 50, 60 60 C50 100, 40 60, 0 50 C40 40, 50 0, 50 0 Z" />
+                            </svg>
+                        </div>
+                        
+                        <div className="z-10 space-y-1">
+                            <div className="flex items-center gap-1.5">
+                                <span className="font-display font-black text-sm tracking-wider uppercase">NEXUS</span>
+                                <svg className="w-3.5 h-3.5 text-[#F57EA3] fill-current" viewBox="0 0 24 24">
+                                    <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9Z" />
+                                </svg>
+                            </div>
+                            <p className="text-[11px] text-white/80 font-bold leading-normal">
+                                Stay Connected.<br />Stay Ahead.
+                            </p>
+                        </div>
+                    </div>
                 </aside>
 
                 {/* Content Area */}
@@ -231,10 +253,22 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                         </div>
                         
                         <div className="flex items-center gap-5">
+                            {/* Search bar */}
+                            <div className="relative w-48 xl:w-60">
+                                <input
+                                    type="text"
+                                    placeholder="Search..."
+                                    className="w-full bg-[#F4F5F7] border border-transparent focus:border-[#34446D]/10 focus:bg-white rounded-xl py-2 pl-4 pr-10 text-xs font-semibold text-[#34446D] placeholder-[#34446D]/45 outline-none transition-all"
+                                />
+                                <Search className="w-4 h-4 text-[#34446D]/45 absolute right-3.5 top-1/2 -translate-y-1/2" />
+                            </div>
+
                             {/* Notification Bell */}
                             <button className="p-2.5 rounded-xl bg-[#34446D]/5 hover:bg-[#34446D]/10 text-[#34446D] transition-colors relative">
                                 <Bell className="w-4.5 h-4.5" />
-                                <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#F57EA3]" />
+                                <span className="absolute -top-1.5 -right-1.5 bg-[#EF4444] text-white text-[9px] font-black w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-sm">
+                                    3
+                                </span>
                             </button>
 
                             {/* User Profile Avatar */}
