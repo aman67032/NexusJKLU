@@ -264,3 +264,10 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Mobile background override */
+@media (max-width: 1023px) {
+  :root {
+    --background: #F6EFE9;
+  }
+}

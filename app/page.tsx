@@ -20,7 +20,7 @@ const CalendarWidget = () => {
     ];
     
     return (
-        <div className="bg-[#34446D] text-white p-5 rounded-[20px] shadow-[0_8px_30px_rgba(52,68,109,0.12)] flex flex-col h-full select-none">
+        <div className="bg-[#0B172C] text-white p-5 rounded-[20px] shadow-[0_8px_30px_rgba(11,23,44,0.15)] border border-white/5 flex flex-col h-full select-none">
             {/* Calendar Header */}
             <div className="flex items-center justify-between mb-4">
                 <button className="p-1 hover:bg-white/10 rounded transition-colors text-white/70 hover:text-white">
@@ -38,6 +38,9 @@ const CalendarWidget = () => {
                     <div key={i}>{d}</div>
                 ))}
             </div>
+
+            {/* Divider line */}
+            <div className="border-t border-white/10 mb-3" />
             
             {/* Days grid */}
             <div className="grid grid-rows-5 gap-y-2 flex-1">
@@ -47,7 +50,7 @@ const CalendarWidget = () => {
                             if (dayObj.isHighlighted) {
                                 return (
                                     <div key={dIndex} className="flex justify-center">
-                                        <div className="w-7 h-7 rounded-full bg-[#FBB940] text-[#34446D] font-black flex items-center justify-center text-xs shadow-md">
+                                        <div className="w-7 h-7 rounded-full bg-[#FBB940] text-[#0B172C] font-black flex items-center justify-center text-xs shadow-md">
                                             {dayObj.day}
                                         </div>
                                     </div>
@@ -540,6 +543,14 @@ export default function Home() {
                                 </div>
                             );
                         })}
+                    </div>
+                </section>
+
+                {/* Calendar Widget */}
+                <section className="space-y-3">
+                    <h3 className="text-xs font-black uppercase tracking-wider text-[#34446D]/40 font-display">Calendar</h3>
+                    <div className="w-full">
+                        <CalendarWidget />
                     </div>
                 </section>
             </div>
