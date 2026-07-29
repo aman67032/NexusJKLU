@@ -9,45 +9,6 @@ import { Code, Calendar, Sparkles, Clock, Megaphone, FileText, ChevronRight, Dow
 interface Contest { _id?: string; id?: string; course_id?: string; date: string; title?: string; description?: string; questions?: any[]; }
 interface Announcement { _id?: string; id?: string; title: string; content: string; attachment_url?: string; created_at: string; }
 
-const DEFAULT_CONTESTS: Contest[] = [
-    {
-        _id: 'c1',
-        title: 'Weekly Coding Challenge #12: Dynamic Programming & Arrays',
-        date: new Date().toISOString(),
-        description: 'Solve 3 algorithmic problems on arrays, sliding window, and memoization in C++, Python, or Java.',
-        questions: [{ id: 1 }, { id: 2 }, { id: 3 }]
-    },
-    {
-        _id: 'c2',
-        title: 'Graph Traversal & BFS / DFS Sprint',
-        date: new Date(Date.now() - 86400000 * 2).toISOString(),
-        description: 'Practice shortest paths, cycle detection in graphs, and topological sort algorithms.',
-        questions: [{ id: 1 }, { id: 2 }]
-    },
-    {
-        _id: 'c3',
-        title: 'Recursion & Backtracking Marathon',
-        date: new Date(Date.now() - 86400000 * 5).toISOString(),
-        description: 'N-Queens, Sudoku Solver, and Subsets generation problems with optimal time complexity.',
-        questions: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]
-    }
-];
-
-const DEFAULT_ANNOUNCEMENTS: Announcement[] = [
-    {
-        _id: 'a1',
-        title: 'Inter-College Coding Contest 2026',
-        content: 'Registration is now open for the annual JKLU Inter-College Coding League. Prizes worth ₹25,000!',
-        created_at: new Date().toISOString()
-    },
-    {
-        _id: 'a2',
-        title: 'System Design Workshop Series',
-        content: 'Join us every Saturday at 4 PM in Lab 3 for hands-on sessions on distributed systems and microservices.',
-        created_at: new Date(Date.now() - 86400000 * 3).toISOString()
-    }
-];
-
 const subNav = [
     { href: '/learn', label: 'Overview', icon: BookOpen },
     { href: '/learn/papers', label: 'Papers', icon: FileText },
@@ -56,24 +17,18 @@ const subNav = [
 ];
 
 export default function CodingHourPage() {
-    const [contests, setContests] = useState<Contest[]>(DEFAULT_CONTESTS);
-    const [announcements, setAnnouncements] = useState<Announcement[]>(DEFAULT_ANNOUNCEMENTS);
+    const [contests, setContests] = useState<Contest[]>([]);
+    const [announcements, setAnnouncements] = useState<Announcement[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         Promise.all([
             api.get('/api/learn/contests')
-                .then(r => {
-                    const fetched = r.data.contests || r.data || [];
-                    if (fetched.length > 0) setContests(fetched);
-                })
-                .catch(() => { }),
+                .then(r => setContests(r.data.contests || r.data || []))
+                .catch(() => setContests([])),
             api.get('/api/learn/contests/announcements')
-                .then(r => {
-                    const fetched = r.data.announcements || r.data || [];
-                    if (fetched.length > 0) setAnnouncements(fetched);
-                })
-                .catch(() => { }),
+                .then(r => setAnnouncements(r.data.announcements || r.data || []))
+                .catch(() => setAnnouncements([])),
         ]).finally(() => setLoading(false));
     }, []);
 

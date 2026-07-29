@@ -100,68 +100,43 @@ export default function CouncilPage() {
     });
 
     return (
-        <div className="min-h-screen bg-[var(--background)] transition-colors duration-300 relative overflow-hidden">
-            {/* Interactive Floating Lines Background */}
-            <div className="fixed inset-0 z-0">
-                <FloatingLines
-                    isLightMode={false}
-                    linesGradient={['#ff6600', '#ff9933', '#aa00ff', '#2f4fa2']}
-                    bendStrength={-1.5}
-                    bendRadius={20.0}
-                    topWavePosition={{ x: 10.0, y: 0.5, rotate: -0.4 }}
-                    middleWavePosition={{ x: 5.0, y: 0.0, rotate: 0.2 }}
-                    bottomWavePosition={{ x: 2.0, y: -0.7, rotate: -1 }}
-                    lineCount={[8, 5, 12]}
-                />
-            </div>
-
-            {/* Subtle overlay */}
-            <div className="fixed inset-0 z-[1] pointer-events-none bg-nexus-black/30"></div>
-
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
-                <div className="flex flex-col items-center pt-8 pb-16">
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center w-full">
-                        <h1 className="text-5xl md:text-7xl font-extrabold text-[var(--text-primary)] tracking-tight mb-4 drop-shadow-xl">
-                            JKLU <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)]">Council & Clubs</span>
+        <div className="min-h-full pb-16 bg-background relative overflow-x-hidden p-4 space-y-6 font-sans">
+            <div className="max-w-7xl mx-auto space-y-8 relative z-10">
+                {/* Header */}
+                <div className="flex flex-col items-center text-center space-y-4 pt-4">
+                    <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} className="space-y-2">
+                        <span className="px-3 py-1 rounded-full bg-[#0B0828]/5 border border-[#0B0828]/10 text-[10px] font-bold text-[#0B0828] uppercase tracking-wider font-display inline-block">
+                            Student Affairs & Affairs Body
+                        </span>
+                        <h1 className="text-4xl sm:text-6xl font-extrabold text-[#0B0828] font-display tracking-tight">
+                            JKLU <span className="text-[#FF8400]">Council & Clubs</span>
                         </h1>
-                        <p className="text-xl md:text-2xl text-[var(--text-secondary)] font-medium max-w-2xl mx-auto drop-shadow-md">
-                            The heartbeat of student life. Explore councils, join clubs, attend events.
+                        <p className="text-sm sm:text-base text-[#5B6077] font-semibold max-w-xl mx-auto">
+                            The heartbeat of campus life. Explore student councils, join clubs, and discover upcoming events.
                         </p>
-                    </motion.div>
-
-                    {/* 3D Council Logo */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.2, duration: 0.8 }}
-                        className="mt-2 w-full max-w-3xl mx-auto flex justify-center h-[200px] md:h-auto"
-                    >
-                        <CouncilLogo3D />
                     </motion.div>
                 </div>
 
                 {/* Sub Navigation */}
-                <div className="mb-10 z-20 relative">
-                    <div className="overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide no-scrollbar">
-                        <div className="flex items-center gap-2 p-1.5 bg-white/[0.03] border border-white/[0.06] rounded-2xl w-max min-w-full md:min-w-0 md:justify-center backdrop-blur-md">
-                            {subNav.map((item) => {
-                                const Icon = item.icon;
-                                const isActive = item.href === '/council';
-                                return (
-                                    <Link
-                                        key={item.href}
-                                        href={item.href}
-                                        className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${isActive
-                                            ? 'bg-[var(--primary)]/15 text-[var(--primary)] font-bold'
-                                            : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/[0.04]'
-                                            }`}
-                                    >
-                                        <Icon className="w-4 h-4" />
-                                        {item.label}
-                                    </Link>
-                                );
-                            })}
-                        </div>
+                <div>
+                    <div className="flex items-center justify-center gap-2 p-1.5 bg-black/[0.02] border border-black/[0.04] rounded-2xl overflow-x-auto scrollbar-hide no-scrollbar">
+                        {subNav.map((item) => {
+                            const Icon = item.icon;
+                            const isActive = item.href === '/council';
+                            return (
+                                <Link
+                                    key={item.href}
+                                    href={item.href}
+                                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${isActive
+                                        ? 'bg-[#0B0828] text-white shadow-sm font-display'
+                                        : 'text-[#5B6077] hover:text-[#0B0828] hover:bg-black/5'
+                                        }`}
+                                >
+                                    <Icon className="w-4 h-4" />
+                                    {item.label}
+                                </Link>
+                            );
+                        })}
                     </div>
                 </div>
 

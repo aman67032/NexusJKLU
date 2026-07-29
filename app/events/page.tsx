@@ -50,65 +50,9 @@ export default function EventsPortal() {
                 // Fetch events
                 const eventsRes = await api.get('/api/council/events?status=approved').catch(() => null);
                 const items = eventsRes?.data?.items || eventsRes?.data?.events || eventsRes?.data || [];
-                
-                if (items.length > 0) {
-                    setEvents(items);
-                } else {
-                    throw new Error("No events returned, fallback to mock");
-                }
+                setEvents(items);
             } catch (error) {
-                // Fallback mock events
-                const mockEvents: CampusEvent[] = [
-                    {
-                        _id: "evt-1",
-                        title: "SABRANG 2026: Cultural Gala Night",
-                        description: "Experience the grand cultural event of the year, featuring folk dances, rock bands, and visual arts installations by students of JKLU.",
-                        longDescription: "Sabrang is the annual flagship socio-cultural fest of JK Lakshmipat University. It provides a unique showcase for music, theatrical arts, modern choreography, and digital crafts.",
-                        date: new Date(Date.now() + 86400000).toISOString(), // Tomorrow
-                        venue: "JKLU Amphitheatre",
-                        club_name: "Spic Macay & Music Club",
-                        council_name: "Cultural Council",
-                        image_url: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop&q=80",
-                        category: "cultural"
-                    },
-                    {
-                        _id: "evt-2",
-                        title: "Inter-University Basketball Championship",
-                        description: "Cheer for the JKLU Titans in the tournament finals against state-level universities. Energy, sportsmanship, and action guaranteed.",
-                        longDescription: "The JKLU basketball tournament invites regional engineering and design schools to play in an all-out tournament to earn the annual champion trophy.",
-                        date: new Date().toISOString(), // Today
-                        venue: "JKLU Sports Arena",
-                        club_name: "Sports Committee",
-                        council_name: "Sports Council",
-                        image_url: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600&auto=format&fit=crop&q=80",
-                        category: "sports"
-                    },
-                    {
-                        _id: "evt-3",
-                        title: "Cyber Security Bootcamp & CTF",
-                        description: "An intensive 24-hour ethical hacking workshop followed by a Capture the Flag contest. Perfect for beginners and advanced coders.",
-                        longDescription: "Learn web vulnerability assessment, security scanning, penetration testing, and flags retrieval techniques in a gamified arena led by cybersecurity professionals.",
-                        date: new Date(Date.now() + 86400000 * 5).toISOString(),
-                        venue: "Block-I Auditorium",
-                        club_name: "Robotix & Code Club",
-                        council_name: "Technical Council",
-                        image_url: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&auto=format&fit=crop&q=80",
-                        category: "technical"
-                    },
-                    {
-                        _id: "evt-4",
-                        title: "Design Thinking Exhibition",
-                        description: "Discover innovative product mockups and UI research portfolios crafted by the B.Des batch of JKLU. Open critique sessions.",
-                        longDescription: "Students present their design solutions to real-world social and industrial challenges. Industry leads will join for critiques.",
-                        date: new Date(Date.now() + 86400000 * 10).toISOString(),
-                        venue: "Institute of Design Studio",
-                        club_name: "Design Club",
-                        council_name: "Technical Council",
-                        image_url: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=600&auto=format&fit=crop&q=80",
-                        category: "design"
-                    }
-                ];
-                setEvents(mockEvents);
+                setEvents([]);
             } finally {
                 setLoading(false);
             }

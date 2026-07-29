@@ -9,22 +9,6 @@ import { BookOpen, Code, FileText, Download, Search, Filter, FolderOpen, Chevron
 interface Course { _id?: string; id?: string; code: string; name: string; description?: string; }
 interface Paper { _id?: string; id?: string; title: string; course_code?: string; course_name?: string; paper_type: string; year?: number; semester?: string; file_name: string; uploaded_at?: string; uploader_name?: string; status?: string; }
 
-const DEFAULT_COURSES: Course[] = [
-    { code: 'CS2001', name: 'Advanced Data Structures & Algorithms', description: 'Trees, Graphs, Dynamic Programming' },
-    { code: 'DE2022', name: 'Design Thinking & Human Centered Design', description: 'Prototyping & UX Systems' },
-    { code: 'AI3004', name: 'Machine Learning & Neural Networks', description: 'Supervised Learning & Deep Nets' },
-    { code: 'EC1002', name: 'Digital Electronics & Logic Circuit Design', description: 'Logic Gates, Flip Flops, Verilog' },
-    { code: 'MA1001', name: 'Linear Algebra & Multivariable Calculus', description: 'Matrices, Vectors, Differential Calculus' },
-    { code: 'CS3005', name: 'Full Stack Web Development & Cloud', description: 'React, Node, Express, MongoDB' }
-];
-
-const DEFAULT_PAPERS: Paper[] = [
-    { _id: 'p1', title: 'Advanced Data Structures — Mid Term 2025', course_code: 'CS2001', paper_type: 'exam', year: 2025, semester: 'Spring', file_name: 'CS2001_Midterm.pdf', uploader_name: 'Exam Cell' },
-    { _id: 'p2', title: 'Design Thinking — PyQuestion Paper 2025', course_code: 'DE2022', paper_type: 'pyq', year: 2025, semester: 'Fall', file_name: 'DE2022_PYQ.pdf', uploader_name: 'JKLU Library' },
-    { _id: 'p3', title: 'Machine Learning — Endterm Question Bank', course_code: 'AI3004', paper_type: 'notes', year: 2025, semester: 'Spring', file_name: 'AI3004_Endterm.pdf', uploader_name: 'CSE Dept' },
-    { _id: 'p4', title: 'Digital Electronics — Quiz 1 & Solutions', course_code: 'EC1002', paper_type: 'quiz', year: 2025, semester: 'Fall', file_name: 'EC1002_Quiz1.pdf', uploader_name: 'ECE Dept' }
-];
-
 const subNav = [
     { href: '/learn', label: 'Overview', icon: BookOpen },
     { href: '/learn/papers', label: 'Papers', icon: FileText },
@@ -33,8 +17,8 @@ const subNav = [
 ];
 
 export default function LearnPage() {
-    const [courses, setCourses] = useState<Course[]>(DEFAULT_COURSES);
-    const [papers, setPapers] = useState<Paper[]>(DEFAULT_PAPERS);
+    const [courses, setCourses] = useState<Course[]>([]);
+    const [papers, setPapers] = useState<Paper[]>([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCourse, setSelectedCourse] = useState<string>('');
@@ -43,17 +27,11 @@ export default function LearnPage() {
     useEffect(() => {
         Promise.all([
             api.get('/api/learn/courses')
-                .then(r => {
-                    const fetched = r.data.courses || r.data || [];
-                    if (fetched.length > 0) setCourses(fetched);
-                })
-                .catch(() => { }),
+                .then(r => setCourses(r.data.courses || r.data || []))
+                .catch(() => setCourses([])),
             api.get('/api/learn/papers?status=approved&limit=100')
-                .then(r => {
-                    const fetched = r.data.items || [];
-                    if (fetched.length > 0) setPapers(fetched);
-                })
-                .catch(() => { }),
+                .then(r => setPapers(r.data.items || []))
+                .catch(() => setPapers([])),
         ]).finally(() => setLoading(false));
     }, []);
 
