@@ -161,6 +161,31 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         </div>
     );
 
+    const [searchQuery, setSearchQuery] = useState('');
+    const [showNotifications, setShowNotifications] = useState(false);
+
+    const handleSearchSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!searchQuery.trim()) return;
+        const q = searchQuery.toLowerCase();
+        if (q.includes('bus') || q.includes('route') || q.includes('shuttle')) {
+            router.push(`/bus?search=${encodeURIComponent(searchQuery)}`);
+        } else if (q.includes('paper') || q.includes('exam') || q.includes('pyq')) {
+            router.push(`/learn/papers?search=${encodeURIComponent(searchQuery)}`);
+        } else if (q.includes('club') || q.includes('council')) {
+            router.push(`/council/clubs?search=${encodeURIComponent(searchQuery)}`);
+        } else {
+            router.push(`/events?search=${encodeURIComponent(searchQuery)}`);
+        }
+        setSearchQuery('');
+    };
+
+    const mockNotifications = [
+        { id: 1, title: 'Bus Schedule Active', text: 'Daily bus routes 1-12 operating on schedule.', time: '10 mins ago', type: 'bus' },
+        { id: 2, title: 'Exam Papers Approved', text: 'New Midterm & PYQs available in Papers hub.', time: '1 hour ago', type: 'learn' },
+        { id: 3, title: 'Campus Fest Approaching', text: 'Sabrang 2026 registration is live under Events.', time: '3 hours ago', type: 'event' }
+    ];
+
     // Responsive Desktop and Mobile wrapper
     return (
         <div className="min-h-screen bg-white text-[#34446D] relative select-none overflow-x-hidden font-sans">
@@ -206,35 +231,38 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
                     {/* Secondary menu items */}
                     <div className="space-y-1 border-t border-[#34446D]/5 pt-6">
-                        {SIDEBAR_SECONDARY_ITEMS.map((item) => {
-                            const Icon = item.icon;
-                            const isActive = pathname === item.href;
-                            return (
-                                <Link
-                                    key={item.label}
-                                    href={item.href}
-                                    className={`flex items-center gap-3.5 px-4 py-3.5 rounded-2xl transition-all duration-200 group ${
-                                        isActive 
-                                            ? 'bg-[#34446D]/5 font-bold text-[#34446D]' 
-                                            : 'hover:bg-[#34446D]/5 text-[#666A7A] hover:text-[#34446D]'
-                                    }`}
-                                >
-                                    <Icon className="w-5 h-5 text-[#666A7A] group-hover:scale-105 transition-transform" />
-                                    <span className="text-sm font-semibold tracking-tight">{item.label}</span>
-                                </Link>
-                            );
-                        })}
+                        <button
+                            onClick={() => setShowNotifications(prev => !prev)}
+                            className="w-full flex items-center gap-3.5 px-4 py-3.5 rounded-2xl transition-all duration-200 text-[#666A7A] hover:bg-[#34446D]/5 hover:text-[#34446D] font-semibold text-sm"
+                        >
+                            <Bell className="w-5 h-5 text-[#666A7A]" />
+                            <span>Notices</span>
+                        </button>
+                        <Link
+                            href="/profile"
+                            className={`flex items-center gap-3.5 px-4 py-3.5 rounded-2xl transition-all duration-200 group ${
+                                pathname === '/profile' ? 'bg-[#34446D]/5 font-bold text-[#34446D]' : 'hover:bg-[#34446D]/5 text-[#666A7A] hover:text-[#34446D]'
+                            }`}
+                        >
+                            <User className="w-5 h-5 text-[#666A7A]" />
+                            <span className="text-sm font-semibold tracking-tight">Profile</span>
+                        </Link>
+                        <Link
+                            href="/profile"
+                            className="flex items-center gap-3.5 px-4 py-3.5 rounded-2xl transition-all duration-200 text-[#666A7A] hover:bg-[#34446D]/5 hover:text-[#34446D] font-semibold text-sm"
+                        >
+                            <Settings className="w-5 h-5 text-[#666A7A]" />
+                            <span>Settings</span>
+                        </Link>
                     </div>
 
                     {/* Nexus Brand Card */}
                     <div className="mt-8 p-5 rounded-[24px] bg-[#1E294B] text-white relative overflow-hidden flex flex-col justify-between min-h-[110px] shadow-sm select-none shrink-0">
-                        {/* Background subtle star glow */}
                         <div className="absolute -right-3 -bottom-3 opacity-20 pointer-events-none">
                             <svg className="w-24 h-24 text-[#F57EA3] fill-current" viewBox="0 0 100 100">
                                 <path d="M50 0 C60 40, 100 50, 60 60 C50 100, 40 60, 0 50 C40 40, 50 0, 50 0 Z" />
                             </svg>
                         </div>
-                        
                         <div className="z-10 space-y-1">
                             <div className="flex items-center gap-1.5">
                                 <span className="font-display font-black text-sm tracking-wider uppercase">NEXUS</span>
@@ -252,7 +280,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 {/* Content Area */}
                 <div className="flex-1 flex flex-col min-h-screen overflow-hidden">
                     {/* Topbar Header */}
-                    <header className="h-20 bg-white border-b border-[#34446D]/10 flex items-center justify-between px-8 shrink-0 z-10">
+                    <header className="h-20 bg-white border-b border-[#34446D]/10 flex items-center justify-between px-8 shrink-0 z-30 relative">
                         <div>
                             <h2 className="font-display font-black text-xl text-[#34446D]">
                                 {pathname === '/' ? (() => {
@@ -273,25 +301,55 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                             </p>
                         </div>
                         
-                        <div className="flex items-center gap-5">
+                        <div className="flex items-center gap-5 relative">
                             <img src="/JKLU Logo.png" alt="JKLU Logo" className="w-8 h-8 object-contain opacity-90 hover:opacity-100 transition-opacity" />
+                            
                             {/* Search bar */}
-                            <div className="relative w-48 xl:w-60">
+                            <form onSubmit={handleSearchSubmit} className="relative w-48 xl:w-60">
                                 <input
                                     type="text"
-                                    placeholder="Search..."
-                                    className="w-full bg-[#F4F5F7] border border-transparent focus:border-[#34446D]/10 focus:bg-white rounded-xl py-2 pl-4 pr-10 text-xs font-semibold text-[#34446D] placeholder-[#34446D]/45 outline-none transition-all"
+                                    placeholder="Search events, papers, bus..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    className="w-full bg-[#F4F5F7] border border-transparent focus:border-[#34446D]/20 focus:bg-white rounded-xl py-2 pl-4 pr-10 text-xs font-semibold text-[#34446D] placeholder-[#34446D]/45 outline-none transition-all shadow-sm"
                                 />
-                                <Search className="w-4 h-4 text-[#34446D]/45 absolute right-3.5 top-1/2 -translate-y-1/2" />
-                            </div>
+                                <button type="submit" className="absolute right-3.5 top-1/2 -translate-y-1/2">
+                                    <Search className="w-4 h-4 text-[#34446D]/45 hover:text-[#34446D] transition-colors" />
+                                </button>
+                            </form>
 
-                            {/* Notification Bell */}
-                            <button className="p-2.5 rounded-xl bg-[#34446D]/5 hover:bg-[#34446D]/10 text-[#34446D] transition-colors relative">
-                                <Bell className="w-4.5 h-4.5" />
-                                <span className="absolute -top-1.5 -right-1.5 bg-[#EF4444] text-white text-[9px] font-black w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-sm">
-                                    3
-                                </span>
-                            </button>
+                            {/* Notification Bell & Dropdown Popover */}
+                            <div className="relative">
+                                <button 
+                                    onClick={() => setShowNotifications(prev => !prev)}
+                                    className="p-2.5 rounded-xl bg-[#34446D]/5 hover:bg-[#34446D]/10 text-[#34446D] transition-colors relative cursor-pointer"
+                                >
+                                    <Bell className="w-4.5 h-4.5" />
+                                    <span className="absolute -top-1.5 -right-1.5 bg-[#EF4444] text-white text-[9px] font-black w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-sm">
+                                        3
+                                    </span>
+                                </button>
+
+                                {showNotifications && (
+                                    <div className="absolute right-0 mt-3 w-80 bg-white rounded-2xl shadow-2xl border border-black/10 p-4 z-50 animate-fadeIn">
+                                        <div className="flex items-center justify-between border-b border-black/5 pb-3 mb-3">
+                                            <h3 className="font-bold text-xs text-[#0B0828]">Campus Notices & Alerts</h3>
+                                            <span className="text-[10px] font-extrabold text-[#FF8400] bg-[#FF8400]/10 px-2 py-0.5 rounded-full">3 New</span>
+                                        </div>
+                                        <div className="space-y-3">
+                                            {mockNotifications.map(n => (
+                                                <div key={n.id} className="p-2.5 rounded-xl bg-[#F4F5F7] hover:bg-[#EAE4DC]/40 transition-colors">
+                                                    <div className="flex items-center justify-between text-[10px] font-bold text-[#0B0828] mb-1">
+                                                        <span>{n.title}</span>
+                                                        <span className="text-[#5B6077] font-normal">{n.time}</span>
+                                                    </div>
+                                                    <p className="text-[11px] text-[#5B6077] leading-snug">{n.text}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
 
                             {/* User Profile Avatar */}
                             <Link href="/profile" className="flex items-center gap-2.5 hover:opacity-85 transition-opacity">
