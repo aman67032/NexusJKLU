@@ -96,25 +96,16 @@ export default function Home() {
                 if (annRes?.data && annRes.data.length > 0) {
                     setAnnouncement(annRes.data[0]);
                 } else {
-                    setAnnouncement({
-                        title: "Mid-Term Examination Schedule",
-                        content: "The mid-term exam schedule for all B.Tech and B.Design courses has been released. Check details under your profile.",
-                        createdAt: new Date().toISOString()
-                    });
+                    setAnnouncement(null);
                 }
 
                 // 2. Fetch nearest upcoming event
                 const eventRes = await api.get('/api/council/events?upcoming=true&limit=1').catch(() => null);
-                const eventsList = eventRes?.data?.items || eventRes?.data?.events || [];
+                const eventsList = eventRes?.data?.items || eventRes?.data?.events || eventRes?.data || [];
                 if (eventsList.length > 0) {
                     setUpcomingEvent(eventsList[0]);
                 } else {
-                    setUpcomingEvent({
-                        title: "SABRANG 2026: Annual Fest",
-                        start_date: new Date(Date.now() + 86400000 * 3).toISOString(),
-                        venue: "JKLU Central Lawn",
-                        club_name: "Cultural Council"
-                    });
+                    setUpcomingEvent(null);
                 }
 
                 // 3. Fetch next available bus
@@ -124,35 +115,24 @@ export default function Home() {
                 if (activeRoute) {
                     setNextBus(activeRoute);
                 } else {
-                    setNextBus({
-                        routeNumber: "B101",
-                        routeName: "JKLU ➔ Mansarovar",
-                        timings: ["05:30 PM"],
-                        eta: "12 mins",
-                        status: "active"
-                    });
+                    setNextBus(null);
                 }
 
                 // 4. Fetch recent paper
                 const paperRes = await api.get('/api/learn/papers?status=approved&limit=1').catch(() => null);
-                const papersList = paperRes?.data?.items || [];
+                const papersList = paperRes?.data?.items || paperRes?.data || [];
                 if (papersList.length > 0) {
                     setRecentPaper(papersList[0]);
                 } else {
-                    setRecentPaper({
-                        title: "Design Thinking & Innovation - PyQuestion",
-                        course_code: "DE2022",
-                        paper_type: "exam",
-                        year: 2025
-                    });
+                    setRecentPaper(null);
                 }
 
-                // 5. Populate recent updates
-                setRecentUpdates([
-                    { id: 1, type: 'event', title: 'Cyber Security registrations open', time: '2 hours ago' },
-                    { id: 2, type: 'paper', title: 'Physics-II Endterm paper uploaded', time: '5 hours ago' },
-                    { id: 3, type: 'announcement', title: 'Summer mess timings adjusted', time: '1 day ago' },
-                ]);
+                // 5. Populate recent updates from real database responses
+                const updates: any[] = [];
+                if (eventsList[0]) updates.push({ id: 'evt', type: 'event', title: eventsList[0].title, time: 'Upcoming Event' });
+                if (papersList[0]) updates.push({ id: 'ppr', type: 'paper', title: papersList[0].title, time: 'Recently Uploaded' });
+                if (routes[0]) updates.push({ id: 'bus', type: 'bus', title: `${routes[0].routeNumber}: ${routes[0].routeName}`, time: 'Departs 5:00 PM' });
+                setRecentUpdates(updates);
 
             } catch (error) {
                 console.warn('Dashboard fetch error handled');
@@ -199,8 +179,8 @@ export default function Home() {
             label: 'Bus Status', 
             category: 'Bus Status',
             title: 'NEXT BUS ARRIVAL', 
-            value: nextBus?.routeName || (user?.studentType === 'dayscholar' ? 'JKLU Bus Schedule' : '12 Campus Routes Active'), 
-            time: nextBus?.departureFromJKLU ? `Departs: ${nextBus.departureFromJKLU}` : 'Departs: 5:00 PM', 
+            value: nextBus ? `${nextBus.routeNumber}: ${nextBus.routeName}` : 'Live Campus Bus Routes', 
+            time: nextBus?.departureFromJKLU ? `Departs: ${nextBus.departureFromJKLU}` : 'Daily Schedule Active', 
             href: '/bus', 
             icon: Bus, 
             color: busColor, 
@@ -213,8 +193,8 @@ export default function Home() {
         { 
             label: 'Events Hub', 
             category: 'Events Hub',
-            title: upcomingEvent?.title || 'Sabrang 2026', 
-            value: upcomingEvent?.venue ? `Venue: ${upcomingEvent.venue}` : 'JKLU Campus Lawn', 
+            title: upcomingEvent?.title || 'Campus Events & Fests', 
+            value: upcomingEvent?.venue ? `Venue: ${upcomingEvent.venue}` : (upcomingEvent?.council_name || 'Explore Student Events'), 
             href: '/events', 
             icon: Megaphone, 
             color: eventColor, 
@@ -227,8 +207,8 @@ export default function Home() {
         { 
             label: 'Exam Papers', 
             category: 'Exam Papers',
-            title: recentPaper?.title ? recentPaper.title.split(' - ')[0] : 'Engineering & Design PYQs', 
-            value: '24+ Papers Available', 
+            title: recentPaper?.title || 'Academic Papers & PYQs', 
+            value: recentPaper?.course_code ? `Course: ${recentPaper.course_code}` : 'Midterms, Endterms & PYQs', 
             href: '/learn/papers', 
             icon: FileText, 
             color: '#3B82F6', 
