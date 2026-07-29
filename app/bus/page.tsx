@@ -19,7 +19,7 @@ export default function TransportPortal() {
     const [mainTab, setMainTab] = useState<'bus' | 'shuttle'>('bus');
     
     // Bus Sub-tabs
-    const [busTab, setBusTab] = useState<'my_route' | 'all_routes' | 'attendance'>('my_route');
+    const [busTab, setBusTab] = useState<'my_route' | 'all_routes' | 'attendance'>('all_routes');
     
     // Shuttle Sub-tabs
     const [shuttleTab, setShuttleTab] = useState<'schedules' | 'my_bookings'>('schedules');
@@ -204,8 +204,15 @@ const DEFAULT_BUS_ROUTES = [
                                         </div>
                                     </div>
                                 ) : (
-                                    <div className="text-center p-8 bg-white rounded-[20px] border border-black/5">
-                                        <p className="text-sm text-[#5B6077] font-semibold">No assigned route found.</p>
+                                    <div className="text-center p-8 bg-white rounded-[20px] border border-black/5 flex flex-col items-center gap-3 shadow-sm">
+                                        <Bus className="w-10 h-10 text-[#8FA0D8]/60" />
+                                        <div>
+                                            <h4 className="text-sm font-bold text-[#0B0828]">No Assigned Route</h4>
+                                            <p className="text-xs text-[#5B6077] mt-0.5 font-medium">Browse all 12 JKLU bus routes to view complete timings and pickup points.</p>
+                                        </div>
+                                        <button onClick={() => setBusTab('all_routes')} className="mt-1 px-5 py-2.5 bg-[#2A3B3C] text-white text-xs font-bold rounded-xl hover:opacity-90 transition-opacity">
+                                            View All 12 Routes
+                                        </button>
                                     </div>
                                 )}
                             </div>
