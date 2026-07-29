@@ -151,7 +151,7 @@ export default function CouncilPage() {
                         <div className="h-1.5 w-24 bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] mx-auto rounded-full"></div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 items-start">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto items-start">
                         {/* Leader Card 1 - Deepak Sogani */}
                         <motion.div
                             whileHover={{ y: -5 }}
@@ -193,29 +193,6 @@ export default function CouncilPage() {
                                     <h3 className="text-2xl font-bold mb-1 tracking-tight">Anushka Pathak</h3>
                                     <p className="text-[var(--primary)] font-bold uppercase tracking-[0.2em] text-[10px] bg-white/10 backdrop-blur-md px-3 py-1 rounded-full w-fit border border-nexus-camel/20">
                                         Executive - Student Affairs
-                                    </p>
-                                </div>
-                            </div>
-                        </motion.div>
-
-                        {/* Leader Card 3 - Shubham Jain */}
-                        <motion.div
-                            whileHover={{ y: -5 }}
-                            className="group relative"
-                        >
-                            <div className="aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-3xl bg-white/5 backdrop-blur-xl shadow-2xl border border-nexus-camel/30 relative transition-all duration-300 hover:shadow-[var(--primary)]/20">
-                                <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-br from-[var(--primary)]/20 via-transparent to-transparent opacity-50"></div>
-                                <img
-                                    src="/Council head/President_ShubhamJain.png"
-                                    alt="Shubham Jain"
-                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
-
-                                <div className="absolute bottom-0 left-0 right-0 p-6 text-nexus-linen translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                                    <h3 className="text-2xl font-bold mb-1 tracking-tight">Shubham Jain</h3>
-                                    <p className="text-[var(--primary)] font-bold uppercase tracking-[0.2em] text-[10px] bg-white/10 backdrop-blur-md px-3 py-1 rounded-full w-fit border border-nexus-camel/20">
-                                        President
                                     </p>
                                 </div>
                             </div>
