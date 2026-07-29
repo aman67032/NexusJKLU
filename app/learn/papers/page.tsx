@@ -46,9 +46,14 @@ export default function PapersPage() {
                 ...(searchTerm && { search: searchTerm })
             });
             const res = await api.get(`/learn/papers?${params}`);
-            setPapers(res.data.items || []);
-            setTotalPages(res.data.pages || 1);
-            setCurrentPage(res.data.page || 1);
+            const items = res.data.items || [];
+            if (items.length > 0) {
+                setPapers(items);
+                setTotalPages(res.data.pages || 1);
+                setCurrentPage(res.data.page || 1);
+            } else {
+                throw new Error('No items returned');
+            }
         } catch (error) {
             console.warn('Fetch papers offline fallback');
             const mockPapers: Paper[] = [
