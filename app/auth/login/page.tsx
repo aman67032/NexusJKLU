@@ -105,6 +105,7 @@ export default function LoginPage() {
             {/* Main Form container */}
             <div className="w-full max-w-sm flex-1 flex flex-col justify-center py-4">
                 {/* SVG Illustration */}
+                <img src="/JKLU Logo.png" alt="JKLU Logo" className="w-16 h-16 object-contain mx-auto mb-2" />
                 <LoginIllustration />
 
                 <div className="text-center mb-6">

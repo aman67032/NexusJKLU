@@ -52,6 +52,21 @@ const SignUpIllustration = () => (
     </svg>
 );
 
+const DEFAULT_BUS_ROUTES = [
+    { _id: 'r1', routeNumber: 'Route 1', routeName: 'VT Road - Patrakar Colony - Narayan Vihar', stops: [{ name: 'V.T. Road New Sanganer Road' }, { name: 'Bharat Mata Circle' }, { name: 'New Patrakar Colony' }, { name: 'Kharbas Circle' }, { name: 'Hotel Hayyat' }, { name: 'Kesar Circle' }, { name: 'Anukampa Platina Circle' }, { name: 'Choudhary Paradise' }, { name: 'Garden 41' }, { name: 'Koteja Building' }, { name: 'Nakoda Glass' }, { name: 'Narayan Vihar' }, { name: 'Taru Chaaya Residency' }] },
+    { _id: 'r2', routeNumber: 'Route 2', routeName: 'Mansarovar', stops: [{ name: 'Maharani Farm - D Mart' }, { name: 'Dwarkadas Park' }, { name: 'Vijay Path' }, { name: 'Patel Marg' }, { name: 'Paramhansh Marg' }, { name: 'Modern School' }, { name: 'Neerja Modi School' }, { name: 'Swarn Path Madhyam Marg' }, { name: 'Swarnpath New Sanganer Road' }, { name: 'Kisan Dharam Kanta' }, { name: 'Nivik Hospital' }, { name: 'Kamla Nehru Phuliya' }] },
+    { _id: 'r3', routeNumber: 'Route 3', routeName: 'Sanganer - Jagatpura - Malviya Nagar', stops: [{ name: 'Airport Circle Sanganer' }, { name: 'Pinjrapole Gaushala' }, { name: 'Pratap Dwar' }, { name: 'Khumbha Marg' }, { name: 'India Gate' }, { name: 'Sitapura' }, { name: 'Dwarkapuri' }, { name: 'Jagatpura Police Station' }, { name: 'Akshay Patra' }, { name: '7 no. Chouraha' }, { name: 'SKIT College Circle' }, { name: 'Jagatpura Flyover' }, { name: 'Model Town' }, { name: 'Balaji Mod' }, { name: 'Apex Circle' }, { name: 'Calgiri Road' }, { name: 'Malviya Nagar Police Station' }, { name: 'Hari Marg' }, { name: 'Nandpuri Underpass' }, { name: 'EHCC' }, { name: 'Jawahar Circle' }, { name: 'Clarks Amer' }, { name: 'WTP' }, { name: 'Jaipuria Hospital' }, { name: 'Milap Nagar' }, { name: 'Lalsingh Judo Colony' }, { name: 'GopalPura Police Chowki' }, { name: 'Bhandari Hospital' }, { name: 'Ganga Jamuna Petrol Pump' }, { name: 'Mansarovar Metro Station' }] },
+    { _id: 'r4', routeNumber: 'Route 4', routeName: 'Tonk Road - 22 Godown - Nirman Nagar', stops: [{ name: 'Kamal and Company Tonk Road' }, { name: 'Pinkcity Honda' }, { name: 'Tonk Pulia' }, { name: 'Laxmi Mandir Tiraha' }, { name: 'JP Phatak' }, { name: 'Imliwala Phatak' }, { name: 'Sahakar Road' }, { name: '22 Godam Puliya' }, { name: 'Nandpuri MJRP' }, { name: 'Swez Farm' }, { name: 'Vivek Vihar Metro Station' }, { name: 'Devi Nagar Mod' }, { name: 'Katewa Nagar Mod' }, { name: 'Laziz Restaurant' }, { name: 'Shyam Nagar' }, { name: 'Dana Pani Restaurant' }, { name: 'Kings Road' }, { name: 'Chaabra Restaurant' }, { name: 'Rani Sati Nagar' }, { name: '200 ft Bypass' }] },
+    { _id: 'r5', routeNumber: 'Route 5', routeName: 'Ajmeri Gate - Rajapark - C-Scheme', stops: [{ name: 'Ajmeri Gate' }, { name: 'Saganeri Gate' }, { name: 'Ghat Gate' }, { name: 'Pink Square' }, { name: 'Ramada Hotel' }, { name: 'Parnami Mandir' }, { name: 'Moti Dungri Road' }, { name: 'Trimurti Circle' }, { name: 'Birla Mandir' }, { name: 'Rambagh Circle' }, { name: 'RBI' }, { name: 'Narayan Singh Circle' }, { name: 'Statue Circle' }, { name: 'Chomu House Circle' }, { name: 'Hathroi' }, { name: 'Mission Compound' }, { name: 'Ajmeri Pulia' }, { name: '200ft Bypass' }] },
+    { _id: 'r6', routeNumber: 'Route 6', routeName: 'Benar Road - Murlipura - Railway Station', stops: [{ name: 'Benar Railway Station' }, { name: 'Sitawali Phatak' }, { name: 'Shyam Nagar (Benar)' }, { name: '5 no. Bypass' }, { name: 'Budania Chouraha - Murlipura' }, { name: 'Kedia Chouraha - Murlipura' }, { name: 'Path No. 07' }, { name: 'Khetan Hospital' }, { name: 'Dher Ka Balaji' }, { name: 'Bansal Furniture' }, { name: 'Amba Bari Circle' }, { name: 'Panipatch Tiraha' }, { name: 'Chinkara Canteen' }, { name: 'Railway Station' }, { name: 'Ganpathi Nagar' }, { name: 'Hasanpura Pulia' }, { name: '4 Number Dispensary' }, { name: 'Sodala' }, { name: '200 Feet Bypass' }] },
+    { _id: 'r7', routeNumber: 'Route 7', routeName: 'Shastri Nagar - Vidhydhar Nagar - VKI', stops: [{ name: 'RPA Shastri Nagar' }, { name: 'Kanwatia Circle' }, { name: 'Mandir Mod Circle' }, { name: 'National Handloom - Vidhyadhar Nagar' }, { name: 'VDN Police Station' }, { name: 'Parshuram Circle' }, { name: 'Alka Cinema' }, { name: 'VKI Road No. 01 to 14' }, { name: 'Loha Mandi' }, { name: '5 no. Express Highway' }] },
+    { _id: 'r8', routeNumber: 'Route 8', routeName: 'Jhotwara - Khirni Phatak', stops: [{ name: 'Jhotwara Police Station' }, { name: 'Dadi ka Phatak' }, { name: 'Nagal Jaisa Bohra Mod' }, { name: 'Niwaru Mod' }, { name: 'Kanta Chourha - Jhotwara' }, { name: 'Joshi Marg - Jhotwara' }, { name: 'Manohar Palace Hotel' }, { name: 'Kalwar Police Station' }, { name: 'Rood Mahal Marriage Garden' }, { name: 'Khirni Phatak' }, { name: 'Panchyawala Mod (Lalra Petrol Pump)' }, { name: 'Bajari Mandi Mod' }, { name: 'Gandhi Path Mod' }, { name: 'Dhawas Mod' }, { name: 'Karni Palace' }, { name: 'Hotel Highway Kings' }] },
+    { _id: 'r9', routeNumber: 'Route 9', routeName: 'Niwaru - Kalwar - Bad Ka Balaji', stops: [{ name: 'Niwaru Army Cantt.' }, { name: 'Vaidh ji Ka Chouraha (Niwaru)' }, { name: 'Shekawat Marg' }, { name: 'Rawan Gate (Kalwar Road)' }, { name: 'Kardhani' }, { name: 'Govindpura' }, { name: 'Hathoj' }, { name: 'Manchwa - Sushant City' }, { name: 'Siwar Mod' }, { name: 'Bad Ka Balaji (Near Toll Tax)' }] },
+    { _id: 'r10', routeNumber: 'Route 10', routeName: 'Chitrakoot - Vaishali Nagar - Khatipura', stops: [{ name: 'Chitrakoot Stadium' }, { name: 'Akshardham' }, { name: 'Amrapali Circle - Vaishali Nagar' }, { name: 'Jharkhand Mod' }, { name: 'Khatipura Tiraha' }, { name: 'Deep Hospital' }, { name: 'Jain Medical Store - Jhotwara' }, { name: 'Chand Bihari Nagar' }, { name: 'Jaswant Nagar' }, { name: 'Vaishali Circle' }, { name: 'Tagore Public School' }, { name: 'Nursary Circle' }, { name: 'Global Hospital - Gandhi Path' }, { name: 'Malls of Jaipur' }, { name: 'Chitrakoot Sector-03' }, { name: 'JPS High School' }, { name: 'Karni Vihar Thana' }] },
+    { _id: 'r11', routeNumber: 'Route 11', routeName: 'Sirsi Road - Rangoli Garden', stops: [{ name: 'Panchyawala - Sirsi Road' }, { name: 'Kanakpura Railway Station' }, { name: 'Royal Green Residency - Sirsi Road' }, { name: 'Teolar School - Lalarpura' }, { name: 'Rangoli Garden' }, { name: 'Jaipur Bagh - Gandhi Path' }, { name: 'Dhawas' }, { name: 'Heerapura Power House' }, { name: 'Jagdamba Nagar' }, { name: 'Girdharipura' }, { name: 'Kamla Nehru Nagar' }, { name: 'Bhankrota' }] },
+    { _id: 'r12', routeNumber: 'Route 12', routeName: 'Triveni - Mahesh Nagar', stops: [{ name: 'Mahesh Nagar Phatak' }, { name: 'Arjun Nagar Phatak' }, { name: 'Triveni Chouraha' }, { name: '10-B Scheme' }, { name: 'Riddhi Siddhi' }, { name: 'Mahesh Nagar Mod' }, { name: 'Gurjar Ki Thadi' }, { name: 'New Sanganer Road' }, { name: 'Sodala' }, { name: 'Shyam Nagar Sabji Mandi' }, { name: 'Sevayatan Hospital' }, { name: 'Purani Chungi' }, { name: 'Queens Road' }, { name: 'Vijay Dwar' }] }
+];
+
 export default function RegisterPage() {
     const { signup, verifyOtp, resendOtp } = useAuth();
     const router = useRouter();
@@ -71,7 +86,7 @@ export default function RegisterPage() {
     const [studentType, setStudentType] = useState<'dayscholar' | 'hosteler'>('dayscholar');
     
     // Day Scholar details
-    const [busRoutes, setBusRoutes] = useState<any[]>([]);
+    const [busRoutes, setBusRoutes] = useState<any[]>(DEFAULT_BUS_ROUTES);
     const [selectedRoute, setSelectedRoute] = useState<string>('');
     const [selectedStop, setSelectedStop] = useState<string>('');
 
@@ -95,11 +110,15 @@ export default function RegisterPage() {
     const [otpSent, setOtpSent] = useState(false);
 
     useEffect(() => {
-        // Fetch bus routes if they are dayscholar
-        if (studentType === 'dayscholar' && busRoutes.length === 0) {
-            api.get('/api/bus/routes').then(res => setBusRoutes(res.data)).catch(console.error);
-        }
-    }, [studentType]);
+        // Fetch live bus routes from backend API
+        api.get('/api/bus/routes')
+            .then(res => {
+                if (res.data && res.data.length > 0) {
+                    setBusRoutes(res.data);
+                }
+            })
+            .catch(() => console.log('Using default routes fallback'));
+    }, []);
 
     useEffect(() => {
         let interval: NodeJS.Timeout;
@@ -239,7 +258,10 @@ export default function RegisterPage() {
                                 {selectedRoute && (
                                     <select value={selectedStop} onChange={e => setSelectedStop(e.target.value)} className="w-full border border-[#0B0828]/10 focus:border-[#0B0828]/30 rounded-[22px] px-5 py-3.5 text-sm font-bold text-[#0B0828] outline-none bg-[#FDFDFD] appearance-none">
                                         <option value="">Select Pickup Point</option>
-                                        {busRoutes.find(r => r._id === selectedRoute)?.stops.map((s: string) => <option key={s} value={s}>{s}</option>)}
+                                        {busRoutes.find(r => r._id === selectedRoute)?.stops.map((s: any, idx: number) => {
+                                            const stopName = typeof s === 'string' ? s : s.name;
+                                            return <option key={idx} value={stopName}>{stopName}</option>;
+                                        })}
                                     </select>
                                 )}
                             </div>
@@ -358,6 +380,7 @@ export default function RegisterPage() {
             </div>
 
             <div className="w-full max-w-sm flex-1 flex flex-col justify-center py-4">
+                <img src="/JKLU Logo.png" alt="JKLU Logo" className="w-16 h-16 object-contain mx-auto mb-2" />
                 <SignUpIllustration />
 
                 <div className="text-center mb-6">
