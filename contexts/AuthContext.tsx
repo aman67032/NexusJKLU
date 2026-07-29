@@ -9,6 +9,14 @@ interface User {
     name: string;
     roles: string[];
     emailVerified: boolean;
+    rollNumber?: string;
+    jkluEmail?: string;
+    studentType?: 'dayscholar' | 'hosteler';
+    busRoute?: any;
+    pickupPoint?: string;
+    hostelName?: string;
+    roomNumber?: string;
+    priorityMatrix?: string[];
     profile?: {
         age?: number;
         year?: string;
@@ -20,11 +28,27 @@ interface User {
     };
 }
 
+export interface SignupData {
+    name: string;
+    rollNumber: string;
+    email: string;
+    password: string;
+    studentType: 'dayscholar' | 'hosteler';
+    busRoute?: string;
+    pickupPoint?: string;
+    hostelName?: string;
+    roomNumber?: string;
+    priorityMatrix?: string[];
+}
+
 interface AuthContextType {
     user: User | null;
     loading: boolean;
     login: (email: string, password: string) => Promise<void>;
     register: (email: string, name: string, password: string) => Promise<void>;
+    signup: (data: SignupData) => Promise<{ userId: string }>;
+    verifyOtp: (email: string, otp: string) => Promise<void>;
+    resendOtp: (email: string) => Promise<void>;
     logout: () => void;
     isAdmin: boolean;
     token: string | null;
@@ -72,6 +96,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setToken(access_token);
     };
 
+    const signup = async (data: SignupData): Promise<{ userId: string }> => {
+        const response = await api.post('/api/auth/register', data);
+        return response.data;
+    };
+
+    const verifyOtp = async (email: string, otp: string): Promise<void> => {
+        const response = await api.post('/api/auth/verify-otp', { email, otp });
+        const { access_token, user: userData } = response.data;
+        localStorage.setItem('nexus_token', access_token);
+        localStorage.setItem('nexus_user', JSON.stringify(userData));
+        setUser(userData);
+        setToken(access_token);
+    };
+
+    const resendOtp = async (email: string): Promise<void> => {
+        await api.post('/api/auth/resend-otp', { email });
+    };
+
     const logout = () => {
         localStorage.removeItem('nexus_token');
         localStorage.removeItem('nexus_user');
@@ -82,7 +124,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const isAdmin = user?.roles?.includes('admin') || false;
 
     return (
-        <AuthContext.Provider value={{ user, loading, login, register, logout, isAdmin, token }}>
+        <AuthContext.Provider value={{ user, loading, login, register, signup, verifyOtp, resendOtp, logout, isAdmin, token }}>
             {children}
         </AuthContext.Provider>
     );

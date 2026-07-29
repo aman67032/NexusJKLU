@@ -1,45 +1,66 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuth, SignupData } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { AlertCircle } from 'lucide-react';
-
-// Static illustration from assets
+import { AlertCircle, ArrowUp, ArrowDown, User, Bus, MapPin, Building, Home, CheckCircle2, Trophy } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import api from '@/lib/api';
 
 export default function RegisterPage() {
-    const { register } = useAuth();
+    const { signup, verifyOtp, resendOtp } = useAuth();
     const router = useRouter();
     
     const [step, setStep] = useState(1);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
-    // Step 1: Phone Verification states
-    const [phone, setPhone] = useState('');
-    const [otp, setOtp] = useState(['', '', '', '', '']);
+    // Step 1: Basic Info
+    const [name, setName] = useState('');
+    const [rollNumber, setRollNumber] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+    // Step 2: Student Type
+    const [studentType, setStudentType] = useState<'dayscholar' | 'hosteler'>('dayscholar');
+    
+    // Day Scholar details
+    const [busRoutes, setBusRoutes] = useState<any[]>([]);
+    const [selectedRoute, setSelectedRoute] = useState<string>('');
+    const [selectedStop, setSelectedStop] = useState<string>('');
+
+    // Hosteler details
+    const [hostelName, setHostelName] = useState('Boys Hostel 1');
+    const [roomNumber, setRoomNumber] = useState('');
+    const hostelOptions = ['Boys Hostel 1', 'Boys Hostel 2', 'Girls Hostel 1', 'Girls Hostel 2', 'Girls Hostel 3'];
+
+    // Step 3: Priority Matrix
+    const [priorities, setPriorities] = useState([
+        { id: 'academic', label: 'Academic' },
+        { id: 'events', label: 'Events' },
+        { id: 'clubs', label: 'Clubs' },
+        { id: 'sports', label: 'Sports' }
+    ]);
+
+    // Step 5: OTP
+    const [otp, setOtp] = useState(['', '', '', '', '', '']);
     const otpRefs = useRef<HTMLInputElement[]>([]);
     const [timer, setTimer] = useState(240);
     const [otpSent, setOtpSent] = useState(false);
 
-    // Step 2: Personal Details states
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [dob, setDob] = useState('');
-    const [about, setAbout] = useState('');
+    useEffect(() => {
+        // Fetch bus routes if they are dayscholar
+        if (studentType === 'dayscholar' && busRoutes.length === 0) {
+            api.get('/api/bus/routes').then(res => setBusRoutes(res.data)).catch(console.error);
+        }
+    }, [studentType]);
 
-    // Step 3: Password states
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-
-    // OTP timer effect
     useEffect(() => {
         let interval: NodeJS.Timeout;
         if (otpSent && timer > 0) {
-            interval = setInterval(() => {
-                setTimer((prev) => prev - 1);
-            }, 1000);
+            interval = setInterval(() => setTimer(p => p - 1), 1000);
         }
         return () => clearInterval(interval);
     }, [otpSent, timer]);
@@ -49,10 +70,7 @@ export default function RegisterPage() {
         const newOtp = [...otp];
         newOtp[index] = value;
         setOtp(newOtp);
-
-        if (value && index < 4) {
-            otpRefs.current[index + 1]?.focus();
-        }
+        if (value && index < 5) otpRefs.current[index + 1]?.focus();
     };
 
     const handleOtpKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -61,60 +79,56 @@ export default function RegisterPage() {
         }
     };
 
-    const sendMockOtp = () => {
-        if (!phone || phone.length < 10) {
-            setError('Enter a valid phone number');
-            return;
+    const movePriority = (index: number, direction: 'up' | 'down') => {
+        if (direction === 'up' && index > 0) {
+            const newP = [...priorities];
+            [newP[index - 1], newP[index]] = [newP[index], newP[index - 1]];
+            setPriorities(newP);
+        } else if (direction === 'down' && index < priorities.length - 1) {
+            const newP = [...priorities];
+            [newP[index + 1], newP[index]] = [newP[index], newP[index + 1]];
+            setPriorities(newP);
         }
-        setError('');
-        setOtpSent(true);
-        setTimer(240);
     };
 
     const handleNextStep = () => {
         setError('');
         if (step === 1) {
-            if (!otpSent) {
-                sendMockOtp();
-                return;
-            }
-            const otpString = otp.join('');
-            if (otpString.length < 5) {
-                setError('Enter the 5-digit OTP sent to your phone');
-                return;
-            }
+            if (!name || !rollNumber || !email || !password || !confirmPassword) return setError('Fill all fields');
+            if (!email.endsWith('@jklu.edu.in')) return setError('Must use @jklu.edu.in email');
+            if (password !== confirmPassword) return setError('Passwords do not match');
+            if (password.length < 6) return setError('Password must be at least 6 characters');
             setStep(2);
         } else if (step === 2) {
-            if (!name || !email || !dob || !about) {
-                setError('Please fill in all details');
-                return;
-            }
-            if (!email.includes('@')) {
-                setError('Enter a valid email address');
-                return;
+            if (studentType === 'dayscholar') {
+                if (!selectedRoute || !selectedStop) return setError('Select a route and pickup point');
+            } else {
+                if (!hostelName || !roomNumber) return setError('Provide hostel and room number');
             }
             setStep(3);
+        } else if (step === 3) {
+            setStep(4);
         }
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleSubmit = async () => {
         setError('');
-
-        if (password !== confirmPassword) {
-            setError('Passwords do not match');
-            return;
-        }
-        if (password.length < 6) {
-            setError('Password must be at least 6 characters');
-            return;
-        }
-
         setLoading(true);
         try {
-            // Live registration on backend
-            await register(email, name, password);
-            router.push('/');
+            const data: SignupData = {
+                name, rollNumber, email, password, studentType,
+                priorityMatrix: priorities.map(p => p.id)
+            };
+            if (studentType === 'dayscholar') {
+                data.busRoute = selectedRoute;
+                data.pickupPoint = selectedStop;
+            } else {
+                data.hostelName = hostelName;
+                data.roomNumber = roomNumber;
+            }
+            await signup(data);
+            setOtpSent(true);
+            setStep(5);
         } catch (err: any) {
             setError(err.response?.data?.error || err.response?.data?.errors?.[0]?.msg || 'Registration failed');
         } finally {
@@ -122,240 +136,204 @@ export default function RegisterPage() {
         }
     };
 
+    const handleVerifyOtp = async () => {
+        const otpStr = otp.join('');
+        if (otpStr.length < 6) return setError('Enter 6 digit OTP');
+        setLoading(true);
+        try {
+            await verifyOtp(email, otpStr);
+            router.push('/');
+        } catch (err: any) {
+            setError(err.response?.data?.error || 'Invalid OTP');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleResendOtp = async () => {
+        try {
+            await resendOtp(email);
+            setTimer(240);
+        } catch (err: any) {
+            setError(err.response?.data?.error || 'Failed to resend OTP');
+        }
+    };
+
+    const renderStepContent = () => {
+        switch (step) {
+            case 1:
+                return (
+                    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-4">
+                        <input type="text" placeholder="Full Name" value={name} onChange={e => setName(e.target.value)} className="w-full border border-[#0B0828]/10 focus:border-[#0B0828]/30 rounded-[22px] px-5 py-3 text-sm font-bold placeholder-[#0B0828]/40 outline-none bg-[#FDFDFD]" />
+                        <input type="text" placeholder="Roll Number (e.g. 2021BTCS001)" value={rollNumber} onChange={e => setRollNumber(e.target.value)} className="w-full border border-[#0B0828]/10 focus:border-[#0B0828]/30 rounded-[22px] px-5 py-3 text-sm font-bold placeholder-[#0B0828]/40 outline-none bg-[#FDFDFD]" />
+                        <input type="email" placeholder="JKLU Email (@jklu.edu.in)" value={email} onChange={e => setEmail(e.target.value)} className="w-full border border-[#0B0828]/10 focus:border-[#0B0828]/30 rounded-[22px] px-5 py-3 text-sm font-bold placeholder-[#0B0828]/40 outline-none bg-[#FDFDFD]" />
+                        <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} className="w-full border border-[#0B0828]/10 focus:border-[#0B0828]/30 rounded-[22px] px-5 py-3 text-sm font-bold placeholder-[#0B0828]/40 outline-none bg-[#FDFDFD]" />
+                        <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} className="w-full border border-[#0B0828]/10 focus:border-[#0B0828]/30 rounded-[22px] px-5 py-3 text-sm font-bold placeholder-[#0B0828]/40 outline-none bg-[#FDFDFD]" />
+                        <button onClick={handleNextStep} className="w-full py-3.5 bg-[#2A3B3C] text-white text-xs font-black uppercase tracking-wider rounded-[20px] hover:opacity-90 transition-all mt-4">Next Step</button>
+                    </motion.div>
+                );
+            case 2:
+                return (
+                    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-5">
+                        <div className="flex gap-4">
+                            <button onClick={() => setStudentType('dayscholar')} className={`flex-1 p-4 rounded-[20px] border-2 transition-all flex flex-col items-center gap-2 ${studentType === 'dayscholar' ? 'border-[#8FA0D8] bg-[#8FA0D8]/10' : 'border-[#0B0828]/5 hover:border-[#0B0828]/10'}`}>
+                                <Bus className={`w-8 h-8 ${studentType === 'dayscholar' ? 'text-[#8FA0D8]' : 'text-[#5B6077]'}`} />
+                                <span className="font-bold text-sm text-[#0B0828]">Day Scholar</span>
+                            </button>
+                            <button onClick={() => setStudentType('hosteler')} className={`flex-1 p-4 rounded-[20px] border-2 transition-all flex flex-col items-center gap-2 ${studentType === 'hosteler' ? 'border-[#FF8400] bg-[#FF8400]/10' : 'border-[#0B0828]/5 hover:border-[#0B0828]/10'}`}>
+                                <Home className={`w-8 h-8 ${studentType === 'hosteler' ? 'text-[#FF8400]' : 'text-[#5B6077]'}`} />
+                                <span className="font-bold text-sm text-[#0B0828]">Hosteler</span>
+                            </button>
+                        </div>
+                        
+                        {studentType === 'dayscholar' ? (
+                            <div className="space-y-4">
+                                <select value={selectedRoute} onChange={e => { setSelectedRoute(e.target.value); setSelectedStop(''); }} className="w-full border border-[#0B0828]/10 focus:border-[#0B0828]/30 rounded-[22px] px-5 py-3.5 text-sm font-bold text-[#0B0828] outline-none bg-[#FDFDFD] appearance-none">
+                                    <option value="">Select Bus Route</option>
+                                    {busRoutes.map(r => <option key={r._id} value={r._id}>{r.routeNumber} - {r.routeName}</option>)}
+                                </select>
+                                {selectedRoute && (
+                                    <select value={selectedStop} onChange={e => setSelectedStop(e.target.value)} className="w-full border border-[#0B0828]/10 focus:border-[#0B0828]/30 rounded-[22px] px-5 py-3.5 text-sm font-bold text-[#0B0828] outline-none bg-[#FDFDFD] appearance-none">
+                                        <option value="">Select Pickup Point</option>
+                                        {busRoutes.find(r => r._id === selectedRoute)?.stops.map((s: string) => <option key={s} value={s}>{s}</option>)}
+                                    </select>
+                                )}
+                            </div>
+                        ) : (
+                            <div className="space-y-4">
+                                <select value={hostelName} onChange={e => setHostelName(e.target.value)} className="w-full border border-[#0B0828]/10 focus:border-[#0B0828]/30 rounded-[22px] px-5 py-3.5 text-sm font-bold text-[#0B0828] outline-none bg-[#FDFDFD] appearance-none">
+                                    {hostelOptions.map(h => <option key={h} value={h}>{h}</option>)}
+                                </select>
+                                <input type="text" placeholder="Room Number (e.g. 101)" value={roomNumber} onChange={e => setRoomNumber(e.target.value)} className="w-full border border-[#0B0828]/10 focus:border-[#0B0828]/30 rounded-[22px] px-5 py-3 text-sm font-bold placeholder-[#0B0828]/40 outline-none bg-[#FDFDFD]" />
+                            </div>
+                        )}
+                        <div className="flex gap-3 mt-4">
+                            <button onClick={() => setStep(1)} className="flex-1 py-3.5 bg-black/5 text-[#0B0828] text-xs font-black uppercase tracking-wider rounded-[20px] hover:bg-black/10 transition-all">Back</button>
+                            <button onClick={handleNextStep} className="flex-[2] py-3.5 bg-[#2A3B3C] text-white text-xs font-black uppercase tracking-wider rounded-[20px] hover:opacity-90 transition-all">Next</button>
+                        </div>
+                    </motion.div>
+                );
+            case 3:
+                return (
+                    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-3">
+                        <p className="text-xs text-[#5B6077] font-semibold text-center mb-4">Rank your campus interests to personalize your feed.</p>
+                        {priorities.map((p, idx) => (
+                            <div key={p.id} className="flex items-center justify-between p-4 bg-white border border-[#0B0828]/10 rounded-[20px] shadow-[0_2px_8px_rgba(11,8,40,0.01)]">
+                                <div className="flex items-center gap-3">
+                                    <span className="w-6 h-6 rounded-full bg-[#8FA0D8]/10 text-[#8FA0D8] flex items-center justify-center text-xs font-bold">{idx + 1}</span>
+                                    <span className="font-bold text-[#0B0828] text-sm">{p.label}</span>
+                                </div>
+                                <div className="flex flex-col gap-1">
+                                    <button onClick={() => movePriority(idx, 'up')} disabled={idx === 0} className="p-1 rounded hover:bg-black/5 disabled:opacity-30"><ArrowUp className="w-4 h-4 text-[#0B0828]" /></button>
+                                    <button onClick={() => movePriority(idx, 'down')} disabled={idx === priorities.length - 1} className="p-1 rounded hover:bg-black/5 disabled:opacity-30"><ArrowDown className="w-4 h-4 text-[#0B0828]" /></button>
+                                </div>
+                            </div>
+                        ))}
+                        <div className="flex gap-3 mt-6">
+                            <button onClick={() => setStep(2)} className="flex-1 py-3.5 bg-black/5 text-[#0B0828] text-xs font-black uppercase tracking-wider rounded-[20px] hover:bg-black/10 transition-all">Back</button>
+                            <button onClick={handleNextStep} className="flex-[2] py-3.5 bg-[#2A3B3C] text-white text-xs font-black uppercase tracking-wider rounded-[20px] hover:opacity-90 transition-all">Review</button>
+                        </div>
+                    </motion.div>
+                );
+            case 4:
+                return (
+                    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-4">
+                        <div className="p-5 bg-white border border-[#0B0828]/10 rounded-[20px] space-y-4 shadow-[0_2px_8px_rgba(11,8,40,0.01)]">
+                            <div className="flex items-center gap-3 border-b border-black/5 pb-3">
+                                <User className="w-5 h-5 text-[#8FA0D8]" />
+                                <div>
+                                    <p className="text-[10px] text-[#5B6077] font-bold uppercase">Basic Info</p>
+                                    <p className="text-sm font-bold text-[#0B0828]">{name} • {rollNumber}</p>
+                                    <p className="text-xs text-[#5B6077] font-semibold">{email}</p>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-3 border-b border-black/5 pb-3">
+                                {studentType === 'dayscholar' ? <Bus className="w-5 h-5 text-[#8FA0D8]" /> : <Home className="w-5 h-5 text-[#FF8400]" />}
+                                <div>
+                                    <p className="text-[10px] text-[#5B6077] font-bold uppercase">{studentType === 'dayscholar' ? 'Day Scholar' : 'Hosteler'}</p>
+                                    {studentType === 'dayscholar' ? (
+                                        <p className="text-sm font-bold text-[#0B0828]">{busRoutes.find(r => r._id === selectedRoute)?.routeNumber} • {selectedStop}</p>
+                                    ) : (
+                                        <p className="text-sm font-bold text-[#0B0828]">{hostelName} • Room {roomNumber}</p>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-3 pb-1">
+                                <Trophy className="w-5 h-5 text-[#67C587]" />
+                                <div>
+                                    <p className="text-[10px] text-[#5B6077] font-bold uppercase">Top Priorities</p>
+                                    <p className="text-sm font-bold text-[#0B0828]">{priorities[0].label} & {priorities[1].label}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex gap-3 mt-6">
+                            <button onClick={() => setStep(3)} className="flex-1 py-3.5 bg-black/5 text-[#0B0828] text-xs font-black uppercase tracking-wider rounded-[20px] hover:bg-black/10 transition-all">Back</button>
+                            <button onClick={handleSubmit} disabled={loading} className="flex-[2] py-3.5 bg-[#2A3B3C] text-white text-xs font-black uppercase tracking-wider rounded-[20px] hover:opacity-90 transition-all flex items-center justify-center gap-2">
+                                {loading ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <><CheckCircle2 className="w-4 h-4" /> Submit & Verify</>}
+                            </button>
+                        </div>
+                    </motion.div>
+                );
+            case 5:
+                return (
+                    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
+                        <div className="text-center">
+                            <p className="text-sm text-[#5B6077] font-semibold mb-4">Enter the 6-digit OTP sent to {email}</p>
+                            <div className="flex justify-between gap-2 px-1">
+                                {otp.map((digit, idx) => (
+                                    <input
+                                        key={idx}
+                                        ref={(el) => { otpRefs.current[idx] = el as HTMLInputElement; }}
+                                        type="text" maxLength={1} value={digit}
+                                        onChange={(e) => handleOtpChange(idx, e.target.value)}
+                                        onKeyDown={(e) => handleOtpKeyDown(idx, e)}
+                                        className="w-12 h-14 border-2 border-[#0B0828]/10 focus:border-[#8FA0D8] rounded-[16px] text-center font-black text-xl outline-none transition-colors bg-[#FDFDFD] text-[#0B0828]"
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                        <div className="flex items-center justify-between px-2 text-xs font-bold">
+                            <span className="text-[#5B6077]">{timer > 0 ? `Resend in ${timer}s` : ''}</span>
+                            <button onClick={handleResendOtp} disabled={timer > 0} className={`${timer > 0 ? 'text-[#5B6077]/40 cursor-not-allowed' : 'text-[#8FA0D8] hover:underline'}`}>Resend OTP</button>
+                        </div>
+                        <button onClick={handleVerifyOtp} disabled={loading} className="w-full py-3.5 bg-[#2A3B3C] text-white text-xs font-black uppercase tracking-wider rounded-[20px] hover:opacity-90 transition-all flex items-center justify-center">
+                            {loading ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : 'Verify Account'}
+                        </button>
+                    </motion.div>
+                );
+        }
+    };
+
     return (
-        <div className="min-h-screen bg-white text-[#111827] flex flex-col justify-between items-center p-6 relative font-sans">
-            {/* Top Switch Link */}
+        <div className="min-h-screen bg-white text-[#0B0828] flex flex-col justify-between items-center p-6 relative font-sans">
             <div className="w-full flex justify-end max-w-md pt-2">
-                <Link href="/auth/login" className="text-sm font-semibold hover:opacity-80 transition-opacity flex items-center gap-1.5 text-[#111827]">
-                    Log In
-                    <svg className="w-4 h-4 text-[#111827]" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                    </svg>
+                <Link href="/auth/login" className="text-sm font-bold hover:text-[#8FA0D8] transition-colors flex items-center gap-1.5 text-[#0B0828]">
+                    Log In <ArrowUp className="w-4 h-4 rotate-45" />
                 </Link>
             </div>
 
-            {/* Main Form container */}
             <div className="w-full max-w-sm flex-1 flex flex-col justify-center py-4">
-                {/* Verified Illustration */}
-                <img 
-                    src="/login/Screenshot 2026-07-02 165049.svg" 
-                    alt="Sign Up Illustration" 
-                    className="w-full max-w-[260px] h-[190px] mx-auto object-contain mb-4 select-none"
-                />
+                <img src="/login/Screenshot 2026-07-02 165049.svg" alt="Sign Up Illustration" className="w-full max-w-[220px] h-[160px] mx-auto object-contain mb-6 select-none" />
 
                 <div className="text-center mb-6">
-                    <h2 className="text-2xl font-black tracking-tight text-[#111827] font-display">Sign Up</h2>
-                    <p className="text-xs text-[#666A7A] mt-1 font-semibold">
-                        {step === 1 && 'Verify your phone number.'}
-                        {step === 2 && 'Fill up your details.'}
-                        {step === 3 && 'Confirm your password.'}
-                    </p>
+                    <h2 className="text-2xl font-black tracking-tight text-[#0B0828] font-display">Create Account</h2>
+                    <div className="flex justify-center gap-1.5 mt-4">
+                        {[1, 2, 3, 4, 5].map(i => (
+                            <div key={i} className={`h-1.5 rounded-full transition-all ${step >= i ? 'w-8 bg-[#8FA0D8]' : 'w-4 bg-[#0B0828]/10'}`} />
+                        ))}
+                    </div>
                 </div>
 
                 {error && (
-                    <div className="flex items-center gap-2 p-3.5 mb-5 rounded-2xl bg-rose-50 border border-rose-100 text-rose-600 text-xs font-semibold leading-relaxed">
-                        <AlertCircle className="w-4.5 h-4.5 shrink-0" />
+                    <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-2 p-3 mb-5 rounded-xl bg-[#E76F51]/10 border border-[#E76F51]/20 text-[#E76F51] text-xs font-bold">
+                        <AlertCircle className="w-4 h-4 shrink-0" />
                         {error}
-                    </div>
+                    </motion.div>
                 )}
 
-                {step === 1 && (
-                    <div className="space-y-4">
-                        {/* Phone input */}
-                        <div>
-                            <input
-                                type="tel"
-                                placeholder="Phone number"
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value.replace(/[^0-9+]/g, ''))}
-                                className="w-full border-2 border-[#111827]/10 focus:border-[#111827]/30 rounded-[22px] px-5 py-3.5 text-sm font-bold placeholder-[#111827]/40 outline-none transition-colors bg-[#FDFDFD]"
-                                required
-                            />
-                        </div>
-
-                        {otpSent && (
-                            <div className="space-y-2.5">
-                                <div className="flex justify-between items-center px-1">
-                                    <span className="text-[11px] font-bold text-[#666A7A]">{timer}s</span>
-                                    <button 
-                                        type="button"
-                                        disabled={timer > 0} 
-                                        onClick={sendMockOtp}
-                                        className={`text-[11px] font-black ${timer > 0 ? 'text-[#666A7A]/40 cursor-not-allowed' : 'text-[#0D6277] hover:underline'}`}
-                                    >
-                                        Resend
-                                    </button>
-                                </div>
-                                
-                                {/* 5 Digit OTP inputs */}
-                                <div className="flex justify-between gap-3.5 px-0.5">
-                                    {otp.map((digit, idx) => (
-                                        <input
-                                            key={idx}
-                                            ref={(el) => { otpRefs.current[idx] = el as HTMLInputElement; }}
-                                            type="text"
-                                            maxLength={1}
-                                            value={digit}
-                                            onChange={(e) => handleOtpChange(idx, e.target.value)}
-                                            onKeyDown={(e) => handleOtpKeyDown(idx, e)}
-                                            className="w-12 h-12 border-2 border-[#111827]/10 focus:border-[#111827]/30 rounded-2xl text-center font-black text-base outline-none transition-colors bg-[#FDFDFD]"
-                                        />
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Next Button */}
-                        <div className="pt-2">
-                            <button
-                                type="button"
-                                onClick={handleNextStep}
-                                className="w-32 mx-auto flex items-center justify-center py-3 bg-[#2A3B3C] text-white text-xs font-black uppercase tracking-wider rounded-[18px] hover:opacity-90 active:scale-98 transition-all shadow-sm"
-                            >
-                                {otpSent ? 'Next' : 'Send OTP'}
-                            </button>
-                        </div>
-                    </div>
-                )}
-
-                {step === 2 && (
-                    <div className="space-y-4">
-                        {/* Name input */}
-                        <div>
-                            <input
-                                type="text"
-                                placeholder="Name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                className="w-full border-2 border-[#111827]/10 focus:border-[#111827]/30 rounded-[22px] px-5 py-3.5 text-sm font-bold placeholder-[#111827]/40 outline-none transition-colors bg-[#FDFDFD]"
-                                required
-                            />
-                        </div>
-
-                        {/* Email input */}
-                        <div>
-                            <input
-                                type="email"
-                                placeholder="Email Id"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className="w-full border-2 border-[#111827]/10 focus:border-[#111827]/30 rounded-[22px] px-5 py-3.5 text-sm font-bold placeholder-[#111827]/40 outline-none transition-colors bg-[#FDFDFD]"
-                                required
-                            />
-                        </div>
-
-                        {/* DOB input */}
-                        <div>
-                            <input
-                                type="text"
-                                placeholder="Dob"
-                                value={dob}
-                                onChange={(e) => setDob(e.target.value)}
-                                className="w-full border-2 border-[#111827]/10 focus:border-[#111827]/30 rounded-[22px] px-5 py-3.5 text-sm font-bold placeholder-[#111827]/40 outline-none transition-colors bg-[#FDFDFD]"
-                                required
-                            />
-                        </div>
-
-                        {/* About input */}
-                        <div>
-                            <input
-                                type="text"
-                                placeholder="About"
-                                value={about}
-                                onChange={(e) => setAbout(e.target.value)}
-                                className="w-full border-2 border-[#111827]/10 focus:border-[#111827]/30 rounded-[22px] px-5 py-3.5 text-sm font-bold placeholder-[#111827]/40 outline-none transition-colors bg-[#FDFDFD]"
-                                required
-                            />
-                        </div>
-
-                        {/* Next Button */}
-                        <div className="pt-2">
-                            <button
-                                type="button"
-                                onClick={handleNextStep}
-                                className="w-32 mx-auto flex items-center justify-center py-3 bg-[#2A3B3C] text-white text-xs font-black uppercase tracking-wider rounded-[18px] hover:opacity-90 active:scale-98 transition-all shadow-sm"
-                            >
-                                Next
-                            </button>
-                        </div>
-                    </div>
-                )}
-
-                {step === 3 && (
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        {/* Password input */}
-                        <div>
-                            <input
-                                type="password"
-                                placeholder="Password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                className="w-full border-2 border-[#111827]/10 focus:border-[#111827]/30 rounded-[22px] px-5 py-3.5 text-sm font-bold placeholder-[#111827]/40 outline-none transition-colors bg-[#FDFDFD]"
-                                required
-                            />
-                        </div>
-
-                        {/* Confirm Password input */}
-                        <div>
-                            <input
-                                type="password"
-                                placeholder="Confirm Password"
-                                value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
-                                className="w-full border-2 border-[#111827]/10 focus:border-[#111827]/30 rounded-[22px] px-5 py-3.5 text-sm font-bold placeholder-[#111827]/40 outline-none transition-colors bg-[#FDFDFD]"
-                                required
-                            />
-                        </div>
-
-                        {/* Create Button */}
-                        <div className="pt-2">
-                            <button
-                                type="submit"
-                                disabled={loading}
-                                className="w-32 mx-auto flex items-center justify-center py-3 bg-[#2A3B3C] text-white text-xs font-black uppercase tracking-wider rounded-[18px] hover:opacity-90 active:scale-98 transition-all shadow-sm"
-                            >
-                                {loading ? (
-                                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                ) : (
-                                    'Create'
-                                )}
-                            </button>
-                        </div>
-                    </form>
-                )}
-
-                {step === 1 && (
-                    /* Google and Apple login options for Step 1 */
-                    <div className="flex justify-center gap-4 mt-8">
-                        {/* Google Logo Button */}
-                        <button type="button" className="w-11 h-11 rounded-full border-2 border-[#111827]/10 flex items-center justify-center bg-white hover:bg-gray-50 transition-colors shadow-sm">
-                            <svg className="w-5 h-5" viewBox="0 0 24 24">
-                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
-                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
-                            </svg>
-                        </button>
-                        
-                        {/* Apple Logo Button */}
-                        <button type="button" className="w-11 h-11 rounded-full border-2 border-[#111827]/10 flex items-center justify-center bg-white hover:bg-gray-50 transition-colors shadow-sm">
-                            <svg className="w-5 h-5 fill-current text-black" viewBox="0 0 24 24">
-                                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.22.67-2.94 1.5-.62.71-1.16 1.85-1.01 2.96 1.12.09 2.27-.58 2.96-1.4" />
-                            </svg>
-                        </button>
-                    </div>
-                )}
-            </div>
-
-            {/* Bottom Progress Line */}
-            <div className="w-full max-w-xs flex flex-col items-center gap-1.5 pb-2">
-                <div className="w-full h-1 bg-[#111827]/10 rounded-full overflow-hidden">
-                    <div 
-                        className="h-full bg-[#0D6277] transition-all duration-300 rounded-full" 
-                        style={{ width: `${(step / 3) * 100}%` }}
-                    />
-                </div>
-                <span className="text-[10px] font-bold text-[#666A7A]">step {step}</span>
+                <AnimatePresence mode="wait">
+                    {renderStepContent()}
+                </AnimatePresence>
             </div>
         </div>
     );
