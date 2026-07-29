@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { 
-    Home, Bus, Megaphone, FileText, UserCircle, ShieldAlert, Bell, User, MessageSquare, Settings, Search
+    Home, Bus, Megaphone, FileText, UserCircle, ShieldAlert, Bell, User, MessageSquare, Settings, Search, Building2
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -13,6 +13,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const NAV_ITEMS = [
     { label: 'Home', href: '/', icon: Home, color: '#34446D' },
     { label: 'Bus', href: '/bus', icon: Bus, color: '#FBB940' },
+    { label: 'Council', href: '/council', icon: Building2, color: '#FF8400' },
     { label: 'Events', href: '/events', icon: Megaphone, color: '#F57EA3' },
     { label: 'Papers', href: '/learn/papers', icon: FileText, color: '#85D2FF' },
     { label: 'Profile', href: '/profile', icon: UserCircle, color: '#34446D' }
@@ -22,6 +23,7 @@ const NAV_ITEMS = [
 const SIDEBAR_ITEMS = [
     { label: 'Home', href: '/', icon: Home, color: '#F57EA3', activeBg: 'bg-[#F57EA3]/10' },
     { label: 'Bus', href: '/bus', icon: Bus, color: '#FBB940', activeBg: 'bg-[#FBB940]/10' },
+    { label: 'Council', href: '/council', icon: Building2, color: '#FF8400', activeBg: 'bg-[#FF8400]/10' },
     { label: 'Events', href: '/events', icon: Megaphone, color: '#F57EA3', activeBg: 'bg-[#F57EA3]/10' },
     { label: 'Papers', href: '/learn/papers', icon: FileText, color: '#85D2FF', activeBg: 'bg-[#85D2FF]/10' },
     { label: 'Complaints', href: '/complaints', icon: ShieldAlert, color: '#9B365A', activeBg: 'bg-[#9B365A]/10' }
