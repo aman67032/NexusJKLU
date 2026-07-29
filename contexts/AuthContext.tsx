@@ -121,7 +121,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setToken(null);
     };
 
-    const isAdmin = user?.roles?.includes('admin') || false;
+    const isAdmin = user?.roles?.some(role => ['admin', 'super_admin', 'transport_coordinator', 'learn_admin', 'voice_admin', 'head_student_affairs', 'council_president'].includes(role)) || false;
 
     return (
         <AuthContext.Provider value={{ user, loading, login, register, signup, verifyOtp, resendOtp, logout, isAdmin, token }}>
