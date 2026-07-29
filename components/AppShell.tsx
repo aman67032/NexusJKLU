@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { 
     Home, Bus, Megaphone, FileText, UserCircle, ShieldAlert, Bell, User, MessageSquare, Settings, Search
@@ -35,7 +35,8 @@ const SIDEBAR_SECONDARY_ITEMS = [
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
+    const router = useRouter();
     
     const [mounted, setMounted] = useState(false);
 
@@ -47,7 +48,22 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     const isAuthPage = pathname?.startsWith('/auth');
     const isAdminPage = pathname?.startsWith('/admin');
 
-    if (!mounted) return null;
+    useEffect(() => {
+        if (mounted && !loading && !user && !isAuthPage) {
+            router.push('/auth/register');
+        }
+    }, [mounted, loading, user, isAuthPage, router]);
+
+    if (!mounted || loading) return null;
+
+    if (!user && !isAuthPage) {
+        return (
+            <div className="min-h-screen flex flex-col items-center justify-center bg-white text-[#0B0828]">
+                <div className="w-8 h-8 rounded-full border-2 border-black/10 border-t-[#8FA0D8] animate-spin mb-3" />
+                <p className="text-xs font-bold text-[#5B6077]">Redirecting to Sign Up...</p>
+            </div>
+        );
+    }
 
     if (isAuthPage || isAdminPage) {
         return <div className="min-h-screen bg-background text-foreground">{children}</div>;
@@ -66,7 +82,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             {/* Top Bar / Header */}
             <header className="h-14 shrink-0 flex items-center justify-between px-4 border-b border-[#34446D]/5 bg-background/90 backdrop-blur-md z-30 sticky top-0">
                 <div className="flex items-center gap-2.5">
-                    <img src="/JKLU Logo.svg" alt="JKLU" className="w-8 h-8 object-contain" />
+                    <img src="/JKLU Logo.png" alt="JKLU" className="w-8 h-8 object-contain" />
                     <div>
                         <p className="text-[9px] text-[#34446D]/45 font-black uppercase tracking-wider leading-none font-display">Nexus JKLU</p>
                         <p className="text-xs font-bold text-[#34446D] mt-0.5 leading-none">
@@ -153,7 +169,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                     <div className="space-y-8">
                         {/* Logo header */}
                         <div className="flex items-center gap-3 px-2 mt-2">
-                            <img src="/JKLU Logo.svg" alt="JKLU Logo" className="w-9 h-9 object-contain shrink-0" />
+                            <img src="/JKLU Logo.png" alt="JKLU Logo" className="w-9 h-9 object-contain shrink-0" />
                             <div>
                                 <h1 className="font-display font-black text-xl tracking-tight leading-none text-[#34446D]">NEXUS</h1>
                                 <p className="text-[9px] font-bold text-[#666A7A] tracking-wider uppercase mt-0.5">JKLU Companion</p>
@@ -256,7 +272,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                         </div>
                         
                         <div className="flex items-center gap-5">
-                            <img src="/JKLU Logo.svg" alt="JKLU Logo" className="w-8 h-8 object-contain opacity-90 hover:opacity-100 transition-opacity" />
+                            <img src="/JKLU Logo.png" alt="JKLU Logo" className="w-8 h-8 object-contain opacity-90 hover:opacity-100 transition-opacity" />
                             {/* Search bar */}
                             <div className="relative w-48 xl:w-60">
                                 <input
