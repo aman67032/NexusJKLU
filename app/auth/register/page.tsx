@@ -8,6 +8,50 @@ import { AlertCircle, ArrowUp, ArrowDown, User, Bus, MapPin, Building, Home, Che
 import { motion, AnimatePresence } from 'framer-motion';
 import api from '@/lib/api';
 
+const SignUpIllustration = () => (
+    <svg className="w-full max-w-[220px] h-[160px] mx-auto mb-4 select-none" viewBox="0 0 300 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="regBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#F0F4FF" />
+                <stop offset="100%" stopColor="#E6ECFA" />
+            </linearGradient>
+            <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#0B0828" />
+                <stop offset="100%" stopColor="#2A3B3C" />
+            </linearGradient>
+            <linearGradient id="badgeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#8FA0D8" />
+                <stop offset="100%" stopColor="#6776C5" />
+            </linearGradient>
+            <filter id="shadowReg" x="-10%" y="-10%" width="120%" height="120%">
+                <feDropShadow dx="0" dy="6" stdDeviation="8" floodColor="#0B0828" floodOpacity="0.1" />
+            </filter>
+        </defs>
+
+        <circle cx="150" cy="110" r="85" fill="url(#regBg)" />
+        <circle cx="150" cy="110" r="68" stroke="#8FA0D8" strokeWidth="1.5" strokeDasharray="4 4" opacity="0.4" />
+
+        {/* Student ID Card Graphic */}
+        <rect x="95" y="55" width="110" height="110" rx="20" fill="url(#cardGrad)" filter="url(#shadowReg)" />
+        <circle cx="150" cy="95" r="20" fill="url(#badgeGrad)" />
+        {/* User avatar head and shoulders inside card */}
+        <circle cx="150" cy="92" r="7" fill="white" />
+        <path d="M138 108 C138 102 143 100 150 100 C157 100 162 102 162 108 Z" fill="white" />
+
+        {/* Card lines */}
+        <rect x="115" y="125" width="70" height="4" rx="2" fill="#8FA0D8" opacity="0.7" />
+        <rect x="125" y="134" width="50" height="4" rx="2" fill="#8FA0D8" opacity="0.4" />
+
+        {/* Plus / Add Student Badge */}
+        <circle cx="195" cy="65" r="14" fill="#FF8400" filter="url(#shadowReg)" />
+        <path d="M195 59 V 71 M189 65 H 201" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+
+        {/* Sparkles */}
+        <circle cx="75" cy="70" r="4" fill="#8FA0D8" opacity="0.6" />
+        <circle cx="225" cy="155" r="6" fill="#FF8400" opacity="0.5" />
+    </svg>
+);
+
 export default function RegisterPage() {
     const { signup, verifyOtp, resendOtp } = useAuth();
     const router = useRouter();
@@ -313,7 +357,7 @@ export default function RegisterPage() {
             </div>
 
             <div className="w-full max-w-sm flex-1 flex flex-col justify-center py-4">
-                <img src="/login/Screenshot 2026-07-02 165049.svg" alt="Sign Up Illustration" className="w-full max-w-[220px] h-[160px] mx-auto object-contain mb-6 select-none" />
+                <SignUpIllustration />
 
                 <div className="text-center mb-6">
                     <h2 className="text-2xl font-black tracking-tight text-[#0B0828] font-display">Create Account</h2>
