@@ -77,17 +77,8 @@ export default function ProfilePortal() {
                 const compList = compRes?.data?.items || compRes?.data?.complaints || [];
                 setComplaints(compList);
 
-                // Fetch saved events from local storage
-                const mockSaved = [
-                    { _id: "evt-1", title: "SABRANG 2026: Cultural Gala Night", date: new Date(Date.now() + 86400000).toISOString(), venue: "Amphitheatre", club_name: "Music Club" },
-                ];
-                setSavedEvents(mockSaved);
-
-                // Fetch favorite buses
-                const mockBuses = [
-                    { _id: "mock-1", routeNumber: "B101", routeName: "JKLU ➔ Mansarovar Metro", timings: ["05:30 PM"], eta: "8 mins", status: "active" }
-                ];
-                setFavBuses(mockBuses);
+                setSavedEvents([]);
+                setFavBuses([]);
 
             } catch (error) {
                 console.warn('Profile load error handled');
@@ -165,7 +156,7 @@ export default function ProfilePortal() {
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#0B0828]/5 to-transparent pointer-events-none" />
                 <div className="w-20 h-20 flex items-center justify-center shrink-0 overflow-hidden relative">
                     <img 
-                        src={profile?.profile?.gender === 'male' ? '/avatars/male.png' : '/avatars/female.png'} 
+                        src={(profile?.profile?.gender === 'male' || profile?.gender === 'male') ? '/avatars/male.png' : '/avatars/female.png'} 
                         alt="Profile Avatar" 
                         className="w-full h-full object-contain mix-blend-multiply"
                     />
@@ -274,7 +265,7 @@ export default function ProfilePortal() {
                                             { icon: <IdCard className="w-3.5 h-3.5 text-[#0B0828]" />, label: 'Roll No', value: profile?.profile?.rollNo || profile?.roll_no || 'Not set' },
                                             { icon: <IdCard className="w-3.5 h-3.5 text-[#0B0828]" />, label: 'Student ID', value: profile?.profile?.studentId || profile?.student_id || 'Not set' },
                                             { icon: <Compass className="w-3.5 h-3.5 text-[#0B0828]" />, label: 'Dept', value: profile?.profile?.department || profile?.department || 'Not set' },
-                                            { icon: <User className="w-3.5 h-3.5 text-[#0B0828]" />, label: 'Gender', value: profile?.profile?.gender ? (profile.profile.gender === 'male' ? 'Male' : 'Female') : 'Female (Default)' },
+                                            { icon: <User className="w-3.5 h-3.5 text-[#0B0828]" />, label: 'Gender', value: (profile?.profile?.gender === 'male' || profile?.gender === 'male') ? 'Male' : 'Female' },
                                         ].map((field, idx) => (
                                             <div key={idx} className="flex items-center gap-3 p-3 rounded-[20px] bg-white border border-[#0B0828]/5 shadow-[0_2px_6px_rgba(11,8,40,0.01)]">
                                                 <div className="p-2 rounded-xl bg-black/5 shrink-0">{field.icon}</div>

@@ -78,6 +78,7 @@ export default function RegisterPage() {
     // Step 1: Basic Info
     const [name, setName] = useState('');
     const [rollNumber, setRollNumber] = useState('');
+    const [gender, setGender] = useState<'male' | 'female'>('male');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -178,8 +179,13 @@ export default function RegisterPage() {
         setError('');
         setLoading(true);
         try {
-            const data: SignupData = {
-                name, rollNumber, email, password, studentType,
+            const data: any = {
+                name,
+                rollNumber,
+                email,
+                password,
+                studentType,
+                gender,
                 priorityMatrix: priorities.map(p => p.id)
             };
             if (studentType === 'dayscholar') {
@@ -229,6 +235,25 @@ export default function RegisterPage() {
                     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-4">
                         <input type="text" placeholder="Full Name" value={name} onChange={e => setName(e.target.value)} className="w-full border border-[#0B0828]/10 focus:border-[#0B0828]/30 rounded-[22px] px-5 py-3 text-sm font-bold placeholder-[#0B0828]/40 outline-none bg-[#FDFDFD]" />
                         <input type="text" placeholder="Roll Number (e.g. 2021BTCS001)" value={rollNumber} onChange={e => setRollNumber(e.target.value)} className="w-full border border-[#0B0828]/10 focus:border-[#0B0828]/30 rounded-[22px] px-5 py-3 text-sm font-bold placeholder-[#0B0828]/40 outline-none bg-[#FDFDFD]" />
+                        
+                        {/* Gender Selector */}
+                        <div className="flex gap-3 my-1">
+                            <button 
+                                type="button" 
+                                onClick={() => setGender('male')} 
+                                className={`flex-1 py-3 px-4 rounded-[20px] border font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer ${gender === 'male' ? 'border-[#34446D] bg-[#34446D] text-white shadow-sm' : 'border-[#0B0828]/10 bg-[#FDFDFD] text-[#5B6077]'}`}
+                            >
+                                👨 Male
+                            </button>
+                            <button 
+                                type="button" 
+                                onClick={() => setGender('female')} 
+                                className={`flex-1 py-3 px-4 rounded-[20px] border font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer ${gender === 'female' ? 'border-[#F57EA3] bg-[#F57EA3] text-white shadow-sm' : 'border-[#0B0828]/10 bg-[#FDFDFD] text-[#5B6077]'}`}
+                            >
+                                👩 Female
+                            </button>
+                        </div>
+
                         <input type="email" placeholder="JKLU Email (@jklu.edu.in)" value={email} onChange={e => setEmail(e.target.value)} className="w-full border border-[#0B0828]/10 focus:border-[#0B0828]/30 rounded-[22px] px-5 py-3 text-sm font-bold placeholder-[#0B0828]/40 outline-none bg-[#FDFDFD]" />
                         <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} className="w-full border border-[#0B0828]/10 focus:border-[#0B0828]/30 rounded-[22px] px-5 py-3 text-sm font-bold placeholder-[#0B0828]/40 outline-none bg-[#FDFDFD]" />
                         <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} className="w-full border border-[#0B0828]/10 focus:border-[#0B0828]/30 rounded-[22px] px-5 py-3 text-sm font-bold placeholder-[#0B0828]/40 outline-none bg-[#FDFDFD]" />
