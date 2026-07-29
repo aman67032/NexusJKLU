@@ -351,8 +351,9 @@ export default function RegisterPage() {
     return (
         <div className="min-h-screen bg-white text-[#0B0828] flex flex-col justify-between items-center p-6 relative font-sans">
             <div className="w-full flex justify-end max-w-md pt-2">
-                <Link href="/auth/login" className="text-sm font-bold hover:text-[#8FA0D8] transition-colors flex items-center gap-1.5 text-[#0B0828]">
-                    Log In <ArrowUp className="w-4 h-4 rotate-45" />
+                <span className="text-xs text-[#5B6077] font-semibold mr-1.5 self-center">Already have an account?</span>
+                <Link href="/auth/login" className="text-xs font-black text-[#0B0828] hover:text-[#8FA0D8] transition-colors flex items-center gap-1 bg-black/5 px-3 py-1.5 rounded-full">
+                    Log In <ArrowUp className="w-3.5 h-3.5 rotate-45" />
                 </Link>
             </div>
 

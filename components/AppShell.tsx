@@ -66,7 +66,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             {/* Top Bar / Header */}
             <header className="h-14 shrink-0 flex items-center justify-between px-4 border-b border-[#34446D]/5 bg-background/90 backdrop-blur-md z-30 sticky top-0">
                 <div className="flex items-center gap-2.5">
-                    <img src="/logos/JKLU Coloured.png" alt="JKLU" className="w-8 h-8 object-contain" />
+                    <img src="/JKLU Logo.svg" alt="JKLU" className="w-8 h-8 object-contain" />
                     <div>
                         <p className="text-[9px] text-[#34446D]/45 font-black uppercase tracking-wider leading-none font-display">Nexus JKLU</p>
                         <p className="text-xs font-bold text-[#34446D] mt-0.5 leading-none">
@@ -152,13 +152,11 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 <aside className="w-64 bg-white border-r border-[#34446D]/10 flex flex-col justify-between p-6 shrink-0 z-20">
                     <div className="space-y-8">
                         {/* Logo header */}
-                        <div className="flex items-center gap-2.5 px-2 mt-2">
-                            <svg className="w-6 h-6 text-[#F57EA3] fill-current shrink-0" viewBox="0 0 24 24">
-                                <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9Z" />
-                            </svg>
+                        <div className="flex items-center gap-3 px-2 mt-2">
+                            <img src="/JKLU Logo.svg" alt="JKLU Logo" className="w-9 h-9 object-contain shrink-0" />
                             <div>
                                 <h1 className="font-display font-black text-xl tracking-tight leading-none text-[#34446D]">NEXUS</h1>
-                                <p className="text-[9px] font-bold text-[#666A7A] tracking-wider uppercase mt-0.5">Campus Companion</p>
+                                <p className="text-[9px] font-bold text-[#666A7A] tracking-wider uppercase mt-0.5">JKLU Companion</p>
                             </div>
                         </div>
 
@@ -239,7 +237,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                     <header className="h-20 bg-white border-b border-[#34446D]/10 flex items-center justify-between px-8 shrink-0 z-10">
                         <div>
                             <h2 className="font-display font-black text-xl text-[#34446D]">
-                                {pathname === '/' ? `Good Morning, ${user ? user.name.split(' ')[0] : 'Rashi'}! 👋` : (
+                                {pathname === '/' ? (() => {
+                                    const hour = new Date().getHours();
+                                    const period = hour < 12 ? 'Good Morning' : hour < 17 ? 'Good Afternoon' : 'Good Evening';
+                                    const firstName = user?.name ? user.name.split(' ')[0] : 'Student';
+                                    return `${period}, ${firstName}! 👋`;
+                                })() : (
                                     pathname.startsWith('/bus') ? 'Bus Status & Schedules' :
                                     pathname.startsWith('/events') ? 'Campus Events Hub' :
                                     pathname.startsWith('/learn/papers') ? 'Academic Exam Papers' :
@@ -253,6 +256,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                         </div>
                         
                         <div className="flex items-center gap-5">
+                            <img src="/JKLU Logo.svg" alt="JKLU Logo" className="w-8 h-8 object-contain opacity-90 hover:opacity-100 transition-opacity" />
                             {/* Search bar */}
                             <div className="relative w-48 xl:w-60">
                                 <input

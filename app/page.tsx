@@ -86,7 +86,7 @@ export default function Home() {
     const [recentUpdates, setRecentUpdates] = useState<any[]>([]);
     
     const [searchTerm, setSearchTerm] = useState('');
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchDashboardData = async () => {
